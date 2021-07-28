@@ -1,25 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Container from "@material-ui/core/Container";
+import { styled } from "@material-ui/core/styles";
+import Modal from "@material-ui/core/Modal";
+
+import BottomSticky from "./components/BottomSticky";
+import EventModal from "./components/EventModal";
+
+const ContainerWithBorders = styled(Container)({
+  border: "1px solid red",
+  height: "100vh",
+});
 
 function App() {
+  const openModal = () => {};
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ContainerWithBorders maxWidth="xs">
+      <h1>App page</h1>
+      <EventModal />
+      <BottomSticky openModal={openModal} />
+    </ContainerWithBorders>
   );
 }
 
