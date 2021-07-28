@@ -1,9 +1,11 @@
+import { useDispatch } from "react-redux";
+import { toggleDialog } from "./store/dialogReducer";
+
 import Container from "@material-ui/core/Container";
 import { styled } from "@material-ui/core/styles";
-import Modal from "@material-ui/core/Modal";
 
 import BottomSticky from "./components/BottomSticky";
-import EventModal from "./components/EventModal";
+import EventDialog from "./components/EventDialog";
 
 const ContainerWithBorders = styled(Container)({
   border: "1px solid red",
@@ -11,12 +13,16 @@ const ContainerWithBorders = styled(Container)({
 });
 
 function App() {
-  const openModal = () => {};
+  const dispatch = useDispatch();
+
+  const openModal = () => {
+    dispatch(toggleDialog());
+  };
 
   return (
     <ContainerWithBorders maxWidth="xs">
       <h1>App page</h1>
-      <EventModal />
+      <EventDialog />
       <BottomSticky openModal={openModal} />
     </ContainerWithBorders>
   );

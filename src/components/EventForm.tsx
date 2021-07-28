@@ -1,24 +1,28 @@
 import { useRef } from "react";
 
-import { EventFormProps } from "../types_interfaces.tsx/types";
+import { EventFormProps } from "../common/types_interfaces";
 
 import TextField from "@material-ui/core/TextField";
-import FormControl from "@material-ui/core/FormControl";
 import Button from "@material-ui/core/Button";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogActions from "@material-ui/core/DialogActions";
 
 const EventForm = (props: EventFormProps) => {
   return (
-    <FormControl>
+    <DialogContent>
       <label>
-        <TextField id="standard-basic" label="Event Name" />
+        <TextField label="Event Name" autoFocus type="text" fullWidth />
       </label>
       <label>
-        <TextField label="Caption" />
+        <TextField label="Caption" fullWidth />
       </label>
       <Button variant="outlined" onClick={props.addEvent}>
         Add Event
       </Button>
-    </FormControl>
+      <DialogActions>
+        <Button onClick={props.toggleHandler}>Close</Button>
+      </DialogActions>
+    </DialogContent>
   );
 };
 

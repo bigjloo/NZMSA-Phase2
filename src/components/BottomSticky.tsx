@@ -4,7 +4,7 @@ import { styled } from "@material-ui/core/styles";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import ShareIcon from "@material-ui/icons/Share";
 
-import { BottomStickyProps } from "../types_interfaces.tsx/types";
+import { BottomStickyProps } from "../common/types_interfaces";
 
 const StickyBottomNavigation = styled(BottomNavigation)({
   width: "100%",
