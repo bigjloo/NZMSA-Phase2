@@ -1,5 +1,3 @@
-import { useRef } from "react";
-
 import { EventFormProps } from "../common/types_interfaces";
 
 import TextField from "@material-ui/core/TextField";
@@ -10,17 +8,24 @@ import DialogActions from "@material-ui/core/DialogActions";
 const EventForm = (props: EventFormProps) => {
   return (
     <DialogContent>
+      <h1>Add Event</h1>
       <label>
-        <TextField label="Event Name" autoFocus type="text" fullWidth />
+        <TextField
+          inputRef={props.nameRef}
+          label="Event Name"
+          autoFocus
+          type="text"
+          fullWidth
+        />
       </label>
       <label>
-        <TextField label="Caption" fullWidth />
+        <TextField inputRef={props.captionRef} label="Caption" fullWidth />
       </label>
-      <Button variant="outlined" onClick={props.addEvent}>
-        Add Event
-      </Button>
       <DialogActions>
-        <Button onClick={props.toggleHandler}>Close</Button>
+        <Button variant="outlined" onClick={props.onAddEvent}>
+          Add Event
+        </Button>
+        <Button onClick={props.toggleDialogHandler}>Close</Button>
       </DialogActions>
     </DialogContent>
   );

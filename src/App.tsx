@@ -6,10 +6,12 @@ import { styled } from "@material-ui/core/styles";
 
 import BottomSticky from "./components/BottomSticky";
 import EventDialog from "./components/EventDialog";
+import Canvas from "./components/Canvas";
 
 const ContainerWithBorders = styled(Container)({
   border: "1px solid red",
   height: "100vh",
+  maxWidth: "xs",
 });
 
 function App() {
@@ -22,6 +24,7 @@ function App() {
   return (
     <ContainerWithBorders maxWidth="xs">
       <h1>App page</h1>
+      <Canvas />
       <EventDialog />
       <BottomSticky openModal={openModal} />
     </ContainerWithBorders>

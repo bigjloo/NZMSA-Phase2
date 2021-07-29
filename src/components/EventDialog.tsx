@@ -1,24 +1,45 @@
-import { useSelector, useDispatch } from "react-redux";
+import { useRef } from "react";
+
+import { useAppDispatch, useAppSelector } from "../hooks/storeHooks";
 import { toggleDialog } from "../store/dialogReducer";
+import { addEvent } from "../store/eventReducer";
 
 import EventForm from "./EventForm";
+import EventList from "./EventList";
 import Dialog from "@material-ui/core/Dialog";
-import { RootState, AppDispatch } from "../common/types_interfaces";
 
 const EventDialog = () => {
-  const open = useSelector((state: RootState) => state.dialog.isOpen);
+  const nameRef = useRef<HTMLInputElement>();
+  const captionRef = useRef<HTMLInputElement>();
 
-  const dispatch = useDispatch<AppDispatch>();
+  const open = useAppSelector((state) => state.dialog.isOpen);
+  const dispatch = useAppDispatch();
 
   const toggleHandler = () => {
     dispatch(toggleDialog());
   };
 
-  const addEvent = () => {};
+  const onAddEvent = () => {
+    const payload = {
+      name: nameRef.current ? nameRef.current.value : "",
+      caption: captionRef.current ? captionRef.current.value : "",
+    };
+    dispatch(addEvent(payload));
+  };
+
+  const onRemoveEvent = () => {
+    console.log("on remove event");
+  };
 
   return (
-    <Dialog open={open}>
-      <EventForm addEvent={addEvent} toggleHandler={toggleHandler} />;
+    <Dialog open={open} onClose={toggleHandler}>
+      <EventList onRemoveEvent={onRemoveEvent} />
+      <EventForm
+        onAddEvent={onAddEvent}
+        toggleDialogHandler={toggleHandler}
+        nameRef={nameRef}
+        captionRef={captionRef}
+      />
     </Dialog>
   );
 };
