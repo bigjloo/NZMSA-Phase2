@@ -11,15 +11,21 @@ const EventForm = (props: EventFormProps) => {
       <h1>Add Event</h1>
       <label>
         <TextField
-          inputRef={props.nameRef}
+          value={props.nameInput}
           label="Event Name"
           autoFocus
           type="text"
           fullWidth
+          onChange={props.onNameInputChange}
         />
       </label>
       <label>
-        <TextField inputRef={props.captionRef} label="Caption" fullWidth />
+        <TextField
+          value={props.descriptionInput}
+          label="Caption"
+          fullWidth
+          onChange={props.onDescriptionInputChange}
+        />
       </label>
       <DialogActions>
         <Button variant="outlined" onClick={props.onAddEvent}>

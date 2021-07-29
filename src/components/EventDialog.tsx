@@ -1,44 +1,70 @@
-import { useRef } from "react";
+import { ChangeEvent } from "react";
 
 import { useAppDispatch, useAppSelector } from "../hooks/storeHooks";
-import { toggleDialog } from "../store/dialogReducer";
-import { addEvent } from "../store/eventReducer";
+import { toggleEventDialog } from "../store/dialogReducer";
+import { addEvent, removeEvent } from "../store/eventReducer";
+import {
+  handleNameInputChange,
+  handleDescriptionInputChange,
+} from "../store/formInputReducer";
 
 import EventForm from "./EventForm";
 import EventList from "./EventList";
+
 import Dialog from "@material-ui/core/Dialog";
 
 const EventDialog = () => {
-  const nameRef = useRef<HTMLInputElement>();
-  const captionRef = useRef<HTMLInputElement>();
+  const nameInput = useAppSelector((state) => state.formInput.name);
+  const descriptionInput = useAppSelector(
+    (state) => state.formInput.description
+  );
 
-  const open = useAppSelector((state) => state.dialog.isOpen);
+  const openEventDialog = useAppSelector(
+    (state) => state.dialog.isEventDialogOpen
+  );
   const dispatch = useAppDispatch();
 
+  // Opens/closes Dialog
   const toggleHandler = () => {
-    dispatch(toggleDialog());
+    dispatch(toggleEventDialog());
   };
 
+  // Adds event
   const onAddEvent = () => {
     const payload = {
-      name: nameRef.current ? nameRef.current.value : "",
-      caption: captionRef.current ? captionRef.current.value : "",
+      name: nameInput,
+      description: descriptionInput,
     };
     dispatch(addEvent(payload));
+    dispatch(handleNameInputChange(""));
+    dispatch(handleDescriptionInputChange(""));
   };
 
-  const onRemoveEvent = () => {
-    console.log("on remove event");
+  // Removes event
+  const onRemoveEvent = (index: number) => {
+    dispatch(removeEvent(index));
+  };
+
+  // Handle name input change
+  const onNameInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    dispatch(handleNameInputChange(event.target.value));
+  };
+
+  // Handle description input change
+  const onDescriptionInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    dispatch(handleDescriptionInputChange(event.target.value));
   };
 
   return (
-    <Dialog open={open} onClose={toggleHandler}>
+    <Dialog open={openEventDialog} onClose={toggleHandler}>
       <EventList onRemoveEvent={onRemoveEvent} />
       <EventForm
+        nameInput={nameInput}
+        descriptionInput={descriptionInput}
         onAddEvent={onAddEvent}
         toggleDialogHandler={toggleHandler}
-        nameRef={nameRef}
-        captionRef={captionRef}
+        onNameInputChange={onNameInputChange}
+        onDescriptionInputChange={onDescriptionInputChange}
       />
     </Dialog>
   );

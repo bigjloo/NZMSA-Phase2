@@ -10,8 +10,4 @@ const Canvas = () => {
   );
 };
 
-const CanvasStyled = styled(Canvas)({
-  maxWidth: "100%",
-});
-
 export default Canvas;

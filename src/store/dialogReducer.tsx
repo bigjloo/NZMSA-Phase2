@@ -1,18 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { IDialogState } from "../common/types_interfaces";
 
-const initialDialogState: IDialogState = { isOpen: false };
+const initialDialogState: IDialogState = {
+  isEventDialogOpen: false,
+  isShareDialogOpen: true,
+};
 
 const dialogSlice = createSlice({
   name: "dialog",
   initialState: initialDialogState,
   reducers: {
-    toggleDialog(state) {
-      state.isOpen = !state.isOpen;
+    toggleEventDialog(state) {
+      state.isEventDialogOpen = !state.isEventDialogOpen;
+    },
+    toggleShareDialog(state) {
+      state.isShareDialogOpen = !state.isShareDialogOpen;
     },
   },
 });
 
-export const { toggleDialog } = dialogSlice.actions;
+export const { toggleEventDialog, toggleShareDialog } = dialogSlice.actions;
 
 export default dialogSlice.reducer;

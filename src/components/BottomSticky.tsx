@@ -20,9 +20,13 @@ const BottomSticky = (props: BottomStickyProps) => {
     <StickyBottomNavigation showLabels>
       <BottomNavigationAction
         label="Add"
-        icon={<AddCircleOutlineIcon onClick={props.openModal} />}
+        icon={<AddCircleOutlineIcon onClick={props.openEventDialog} />}
       />
-      <BottomNavigationAction label="Share" icon={<ShareIcon />} />
+      <BottomNavigationAction
+        label="Share"
+        icon={<ShareIcon />}
+        onClick={props.openShareDialog}
+      />
     </StickyBottomNavigation>
   );
 };

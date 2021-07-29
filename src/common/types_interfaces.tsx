@@ -1,20 +1,23 @@
 import store from "../store/store";
-import { MutableRefObject } from "react";
+import { ChangeEvent } from "react";
 
 // Component prop types
 export type BottomStickyProps = {
-  openModal: () => void;
+  openEventDialog: () => void;
+  openShareDialog: () => void;
 };
 
 export type EventFormProps = {
+  nameInput: string;
+  descriptionInput: string;
   onAddEvent: () => void;
   toggleDialogHandler: () => void;
-  nameRef: MutableRefObject<HTMLInputElement | null | undefined>;
-  captionRef: MutableRefObject<HTMLInputElement | null | undefined>;
+  onNameInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  onDescriptionInputChange: (input: ChangeEvent<HTMLInputElement>) => void;
 };
 
 export type EventListProps = {
-  onRemoveEvent: () => void;
+  onRemoveEvent: (index: number) => void;
 };
 
 // Store
@@ -23,12 +26,13 @@ export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 
 export interface IDialogState {
-  isOpen: boolean;
+  isEventDialogOpen: boolean;
+  isShareDialogOpen: boolean;
 }
 
 export interface IEvent {
   name: string;
-  caption: string;
+  description: string;
 }
 
 export interface IEventsState {

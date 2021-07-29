@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { toggleDialog } from "./store/dialogReducer";
+import { toggleEventDialog, toggleShareDialog } from "./store/dialogReducer";
 
 import Container from "@material-ui/core/Container";
 import { styled } from "@material-ui/core/styles";
@@ -17,8 +17,12 @@ const ContainerWithBorders = styled(Container)({
 function App() {
   const dispatch = useDispatch();
 
-  const openModal = () => {
-    dispatch(toggleDialog());
+  const openEventDialog = () => {
+    dispatch(toggleEventDialog());
+  };
+
+  const openShareDialog = () => {
+    dispatch(toggleShareDialog());
   };
 
   return (
@@ -26,7 +30,10 @@ function App() {
       <h1>App page</h1>
       <Canvas />
       <EventDialog />
-      <BottomSticky openModal={openModal} />
+      <BottomSticky
+        openEventDialog={openEventDialog}
+        openShareDialog={openShareDialog}
+      />
     </ContainerWithBorders>
   );
 }

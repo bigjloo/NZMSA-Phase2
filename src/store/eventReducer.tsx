@@ -10,7 +10,11 @@ const eventsSlice = createSlice({
     addEvent(state, action: PayloadAction<IEvent>) {
       state.events = [...state.events, action.payload];
     },
-    removeEvent(state, action: PayloadAction<IEvent>) {},
+    removeEvent(state, action: PayloadAction<number>) {
+      state.events.splice(action.payload, 1);
+    },
+    // TODO
+    // Edit event.name or event.description
   },
 });
 
