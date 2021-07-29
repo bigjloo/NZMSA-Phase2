@@ -1,4 +1,3 @@
-import { SatelliteSharp } from "@material-ui/icons";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IEvent } from "../common/types_interfaces";
 

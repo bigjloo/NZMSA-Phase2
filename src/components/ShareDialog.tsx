@@ -1,4 +1,4 @@
-import { useAppSelector } from "../hooks/storeHooks";
+import { useAppSelector, useAppDispatch } from "../hooks/storeHooks";
 import { toggleShareDialog } from "../store/dialogReducer";
 
 import ShareDialogContent from "./ShareDialogContent";
@@ -6,14 +6,18 @@ import ShareDialogContent from "./ShareDialogContent";
 import Dialog from "@material-ui/core/Dialog";
 
 const ShareDialog = () => {
+  const dispatch = useAppDispatch();
   const openShareDialog = useAppSelector(
     (state) => state.dialog.isShareDialogOpen
   );
 
+  const handleToggle = () => {
+    dispatch(toggleShareDialog());
+  };
+
   return (
-    <Dialog open={true} onClose={toggleShareDialog}>
+    <Dialog open={openShareDialog} onClose={handleToggle}>
       <ShareDialogContent />
-      asdasdasd
     </Dialog>
   );
 };

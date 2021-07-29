@@ -1,10 +1,11 @@
+import { useDispatch } from "react-redux";
+import { toggleEventDialog, toggleShareDialog } from "../store/dialogReducer";
+
+import { styled } from "@material-ui/core/styles";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
-import { styled } from "@material-ui/core/styles";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import ShareIcon from "@material-ui/icons/Share";
-
-import { BottomStickyProps } from "../common/types_interfaces";
 
 const StickyBottomNavigation = styled(BottomNavigation)({
   width: "100%",
@@ -15,17 +16,27 @@ const StickyBottomNavigation = styled(BottomNavigation)({
   backgroundColor: "#EEEEEE",
 });
 
-const BottomSticky = (props: BottomStickyProps) => {
+const BottomSticky = () => {
+  const dispatch = useDispatch();
+
+  const openEventDialog = () => {
+    dispatch(toggleEventDialog());
+  };
+
+  const openShareDialog = () => {
+    dispatch(toggleShareDialog());
+  };
+
   return (
     <StickyBottomNavigation showLabels>
       <BottomNavigationAction
         label="Add"
-        icon={<AddCircleOutlineIcon onClick={props.openEventDialog} />}
+        icon={<AddCircleOutlineIcon onClick={openEventDialog} />}
       />
       <BottomNavigationAction
         label="Share"
         icon={<ShareIcon />}
-        onClick={props.openShareDialog}
+        onClick={openShareDialog}
       />
     </StickyBottomNavigation>
   );

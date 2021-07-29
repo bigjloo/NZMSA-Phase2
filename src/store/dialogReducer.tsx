@@ -3,7 +3,7 @@ import { IDialogState } from "../common/types_interfaces";
 
 const initialDialogState: IDialogState = {
   isEventDialogOpen: false,
-  isShareDialogOpen: true,
+  isShareDialogOpen: false,
 };
 
 const dialogSlice = createSlice({

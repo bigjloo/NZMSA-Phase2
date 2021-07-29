@@ -1,12 +1,6 @@
-import store from "../store/store";
 import { ChangeEvent } from "react";
 
 // Component prop types
-export type BottomStickyProps = {
-  openEventDialog: () => void;
-  openShareDialog: () => void;
-};
-
 export type EventFormProps = {
   nameInput: string;
   descriptionInput: string;
@@ -21,10 +15,6 @@ export type EventListProps = {
 };
 
 // Store
-export type RootState = ReturnType<typeof store.getState>;
-
-export type AppDispatch = typeof store.dispatch;
-
 export interface IDialogState {
   isEventDialogOpen: boolean;
   isShareDialogOpen: boolean;
