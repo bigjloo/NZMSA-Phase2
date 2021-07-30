@@ -14,10 +14,17 @@ export type EventListProps = {
   onRemoveEvent: (index: number) => void;
 };
 
+export type LoginDialogContentProps = {
+  githubLogin: () => void;
+  login: () => void;
+  signup: () => void;
+};
+
 // Store
 export interface IDialogState {
   isEventDialogOpen: boolean;
   isShareDialogOpen: boolean;
+  isLoginDialogOpen: boolean;
 }
 
 export interface IEvent {

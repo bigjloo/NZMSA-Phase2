@@ -1,12 +1,12 @@
 import { ChangeEvent } from "react";
 
-import { useAppDispatch, useAppSelector } from "../hooks/storeHooks";
-import { toggleEventDialog } from "../store/dialogReducer";
-import { addEvent, removeEvent } from "../store/eventReducer";
+import { useAppDispatch, useAppSelector } from "../../hooks/storeHooks";
+import { toggleEventDialog } from "../../store/dialogReducer";
+import { addEvent, removeEvent } from "../../store/eventReducer";
 import {
   handleNameInputChange,
   handleDescriptionInputChange,
-} from "../store/formInputReducer";
+} from "../../store/formInputReducer";
 
 import EventForm from "./EventForm";
 import EventList from "./EventList";

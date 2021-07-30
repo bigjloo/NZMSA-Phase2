@@ -1,5 +1,5 @@
-import { useAppSelector, useAppDispatch } from "../hooks/storeHooks";
-import { toggleShareDialog } from "../store/dialogReducer";
+import { useAppSelector, useAppDispatch } from "../../hooks/storeHooks";
+import { toggleShareDialog } from "../../store/dialogReducer";
 
 import ShareDialogContent from "./ShareDialogContent";
 
@@ -13,6 +13,11 @@ const ShareDialog = () => {
 
   const handleToggle = () => {
     dispatch(toggleShareDialog());
+  };
+
+  const generatePublishKey = () => {
+    // TODO
+    // When share dialog is open, generate publishkey
   };
 
   return (

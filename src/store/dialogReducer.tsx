@@ -4,6 +4,7 @@ import { IDialogState } from "../common/types_interfaces";
 const initialDialogState: IDialogState = {
   isEventDialogOpen: false,
   isShareDialogOpen: false,
+  isLoginDialogOpen: false,
 };
 
 const dialogSlice = createSlice({
@@ -16,9 +17,13 @@ const dialogSlice = createSlice({
     toggleShareDialog(state) {
       state.isShareDialogOpen = !state.isShareDialogOpen;
     },
+    toggleLoginDialog(state) {
+      state.isLoginDialogOpen = !state.isLoginDialogOpen;
+    },
   },
 });
 
-export const { toggleEventDialog, toggleShareDialog } = dialogSlice.actions;
+export const { toggleEventDialog, toggleShareDialog, toggleLoginDialog } =
+  dialogSlice.actions;
 
 export default dialogSlice.reducer;
