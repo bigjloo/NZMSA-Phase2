@@ -12,7 +12,7 @@ variables:
   buildDir: ${rootDir}/build
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: windows-latest
 
 steps:
 - task: NodeTool@0
@@ -21,10 +21,10 @@ steps:
   displayName: 'Install Node.js'
   
 - script: 
-    cd $(rootDir)
     npm install
   displayName: 'npm install'
   workingDirectory: ${rootDir}
+
 - script: 
     set "REACT_APP_STAGE=$(stage)" && npm run build
   displayName: 'npm build'
