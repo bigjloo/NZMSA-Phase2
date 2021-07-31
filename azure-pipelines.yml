@@ -6,12 +6,14 @@
 trigger:
 - main
 
-variables:
-  rootDir: 'nzmsa-howsyourday'
-  buildDir: '$(rootDir)/build'
+
 
 pool:
   vmImage: 'ubuntu-latest'
+
+variables:
+  rootDir: 'nzmsa-howsyourday'
+  buildDir: '$(rootDir)/build'
 
 steps:
 - task: NodeTool@0
