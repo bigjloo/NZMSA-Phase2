@@ -1,21 +1,13 @@
+import { useLayoutEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { useAppSelector } from "./hooks/storeHooks";
 
-import Container from "@material-ui/core/Container";
-import { styled } from "@material-ui/core/styles";
-
-import BottomSticky from "./components/UI/BottomSticky";
 import User from "./pages/User";
 import Onboard from "./pages/Onboard";
+import Layout from "./components/UI/Layout";
 
 import { GET_ALL_USERS_DAYS_EVENTS } from "./apollo-client/query";
-
-const ContainerWithBorders = styled(Container)({
-  border: "1px solid red",
-  height: "100vh",
-  maxWidth: "xs",
-});
 
 function App() {
   // const { loading, error, data } = useQuery(GET_ALL_USERS_DAYS_EVENTS);
@@ -28,15 +20,18 @@ function App() {
   //   console.log(data);
   // }
   const isAuth = useAppSelector((store) => store.auth.isAuth);
+  // useLayoutEffect(() => {}, [isAuth]);
+  console.log(isAuth);
   return (
-    <ContainerWithBorders maxWidth="xs">
+    <Layout>
       <Switch>
-        <Route path="/">
+        <Route path="/" exact>
           {isAuth ? <User /> : <Onboard />}
-          <BottomSticky />
+          {console.log(isAuth)}
         </Route>
+        <Route path="/:publishKey"></Route>
       </Switch>
-    </ContainerWithBorders>
+    </Layout>
   );
 }
 

@@ -13,10 +13,17 @@ const formInputSlice = createSlice({
     handleDescriptionInputChange(state, action: PayloadAction<string>) {
       state.description = action.payload;
     },
+    resetInputFields(state) {
+      state.description = "";
+      state.name = "";
+    },
   },
 });
 
-export const { handleNameInputChange, handleDescriptionInputChange } =
-  formInputSlice.actions;
+export const {
+  handleNameInputChange,
+  handleDescriptionInputChange,
+  resetInputFields,
+} = formInputSlice.actions;
 
 export default formInputSlice.reducer;

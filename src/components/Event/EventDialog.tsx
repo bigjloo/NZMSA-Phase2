@@ -6,6 +6,7 @@ import { addEvent, removeEvent } from "../../store/eventReducer";
 import {
   handleNameInputChange,
   handleDescriptionInputChange,
+  resetInputFields,
 } from "../../store/formInputReducer";
 
 import EventForm from "./EventForm";
@@ -36,8 +37,7 @@ const EventDialog = () => {
       description: descriptionInput,
     };
     dispatch(addEvent(payload));
-    dispatch(handleNameInputChange(""));
-    dispatch(handleDescriptionInputChange(""));
+    dispatch(resetInputFields());
   };
 
   // Removes event

@@ -1,11 +1,29 @@
-import { useAppSelector } from "../../hooks/storeHooks";
+import { ReactNode } from "react";
+// import { useAppSelector } from "../../hooks/storeHooks";
 import BottomSticky from "./BottomSticky";
 
-const Layout = () => {
-  const isAuth = useAppSelector((store) => store.auth.isAuth);
-  const bottomNav = isAuth ? <BottomSticky /> : <BottomSticky />;
+import Container from "@material-ui/core/Container";
+import { styled } from "@material-ui/core/styles";
 
-  return { bottomNav };
+type LayoutProps = {
+  children: ReactNode;
+};
+
+const ContainerWithBorders = styled(Container)({
+  border: "1px solid red",
+  height: "100vh",
+  maxWidth: "xs",
+});
+
+const Layout = ({ children }: LayoutProps) => {
+  // const isAuth = useAppSelector((store) => store.auth.isAuth);
+
+  return (
+    <ContainerWithBorders>
+      <main>{children}</main>
+      <BottomSticky />
+    </ContainerWithBorders>
+  );
 };
 
 export default Layout;

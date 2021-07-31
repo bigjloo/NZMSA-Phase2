@@ -1,16 +1,9 @@
-import { useAppDispatch, useAppSelector } from "../../hooks/storeHooks";
-import {
-  toggleEventDialog,
-  toggleShareDialog,
-  toggleLoginDialog,
-} from "../../store/dialogReducer";
+import { useAppSelector } from "../../hooks/storeHooks";
 
 import { styled } from "@material-ui/core/styles";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
-import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
-import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
-import ShareIcon from "@material-ui/icons/Share";
-import SaveAltIcon from "@material-ui/icons/SaveAlt";
+import LoggedInNavigation from "./LoggedInNavigation";
+import NotLoggedInNavigation from "./NotLoggedInNavigation";
 
 const StickyBottomNavigation = styled(BottomNavigation)({
   width: "100%",
@@ -22,50 +15,11 @@ const StickyBottomNavigation = styled(BottomNavigation)({
 });
 
 const BottomSticky = () => {
-  const dispatch = useAppDispatch();
   const isAuth = useAppSelector((store) => store.auth.isAuth);
-
-  const openEventDialog = () => {
-    dispatch(toggleEventDialog());
-  };
-
-  const openShareDialog = () => {
-    dispatch(toggleShareDialog());
-  };
-
-  const openLoginDialog = () => {
-    dispatch(toggleLoginDialog());
-  };
-
-  const saveDay = () => {
-    // Save day
-  };
 
   return (
     <StickyBottomNavigation showLabels>
-      {isAuth ? (
-        
-          <BottomNavigationAction
-            label="Add"
-            icon={<AddCircleOutlineIcon onClick={openEventDialog} />}
-          />
-          <BottomNavigationAction
-            label="Save"
-            icon={<SaveAltIcon />}
-            onClick={saveDay}
-          />
-          <BottomNavigationAction
-            label="Share"
-            icon={<ShareIcon />}
-            onClick={openShareDialog}
-          />
-        
-      ) : (
-        <BottomNavigationAction
-          label="Login/Sign Up"
-          onClick={openLoginDialog}
-        />
-      )}
+      {isAuth ? <LoggedInNavigation /> : <NotLoggedInNavigation />}
     </StickyBottomNavigation>
   );
 };
