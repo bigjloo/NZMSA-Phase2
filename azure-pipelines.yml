@@ -7,8 +7,9 @@ trigger:
 - main
 
 variables:
-  rootDir: 'nzmsa-howsyourday'
-  buildDir: '${rootDir}/build'
+  rootDir: nzmsa-howsyourday
+  stage: development
+  buildDir: ${rootDir}/build
 
 pool:
   vmImage: ubuntu-latest
@@ -19,12 +20,15 @@ steps:
     versionSpec: '10.x'
   displayName: 'Install Node.js'
   
-- script: |
+- script: 
     cd $(rootDir)
     npm install
-    npm run build
-    cd ..
-  displayName: 'npm install and build'
+  displayName: 'npm install'
+  workingDirectory: ${rootDir}
+- script: 
+    set "REACT_APP_STAGE=$(stage)" && npm run build
+  displayName: 'npm build'
+  workingDirectory: $(directory)
 
 - task: CopyFiles@2
   displayName: 'Copy files'
