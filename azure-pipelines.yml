@@ -7,7 +7,7 @@ trigger:
 - main
 
 variables:
-  rootDir: ''
+  rootDir: 'nzmsa-howsyourday'
   stage: development
   buildDir: ${rootDir}/build
 
