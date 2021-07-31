@@ -1,5 +1,5 @@
 import { ChangeEvent } from "react";
-
+import Dialog from "@material-ui/core/Dialog";
 import { useAppDispatch, useAppSelector } from "../../hooks/storeHooks";
 import { toggleEventDialog } from "../../store/dialogReducer";
 import { addEvent, removeEvent } from "../../store/eventReducer";
@@ -8,27 +8,22 @@ import {
   handleDescriptionInputChange,
   resetInputFields,
 } from "../../store/formInputReducer";
-
-import EventForm from "./EventForm";
+import EventDialogContent from "./EventDialogContent";
 import EventList from "./EventList";
 
-import Dialog from "@material-ui/core/Dialog";
-
 const EventDialog = () => {
-  const nameInput = useAppSelector((state) => state.formInput.name);
-  const descriptionInput = useAppSelector(
-    (state) => state.formInput.description
+  const [nameInput, descriptionInput, openEventDialog] = useAppSelector(
+    (state) => [
+      state.formInput.name,
+      state.formInput.description,
+      state.dialog.isEventDialogOpen,
+    ]
   );
 
-  const openEventDialog = useAppSelector(
-    (state) => state.dialog.isEventDialogOpen
-  );
   const dispatch = useAppDispatch();
 
   // Opens/closes Dialog
-  const toggleHandler = () => {
-    dispatch(toggleEventDialog());
-  };
+  const toggleHandler = () => dispatch(toggleEventDialog());
 
   // Adds event
   const onAddEvent = () => {
@@ -41,9 +36,7 @@ const EventDialog = () => {
   };
 
   // Removes event
-  const onRemoveEvent = (index: number) => {
-    dispatch(removeEvent(index));
-  };
+  const onRemoveEvent = (index: number) => dispatch(removeEvent(index));
 
   // Handle name input change
   const onNameInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -58,7 +51,7 @@ const EventDialog = () => {
   return (
     <Dialog open={openEventDialog} onClose={toggleHandler}>
       <EventList onRemoveEvent={onRemoveEvent} />
-      <EventForm
+      <EventDialogContent
         nameInput={nameInput}
         descriptionInput={descriptionInput}
         onAddEvent={onAddEvent}

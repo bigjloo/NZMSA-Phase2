@@ -12,13 +12,9 @@ import SaveAltIcon from "@material-ui/icons/SaveAlt";
 const LoggedInNavigation = () => {
   const dispatch = useAppDispatch();
 
-  const openEventDialog = () => {
-    dispatch(toggleEventDialog());
-  };
+  const openEventDialog = () => dispatch(toggleEventDialog());
 
-  const openShareDialog = () => {
-    dispatch(toggleShareDialog());
-  };
+  const openShareDialog = () => dispatch(toggleShareDialog());
 
   const saveDay = () => {
     // Save day

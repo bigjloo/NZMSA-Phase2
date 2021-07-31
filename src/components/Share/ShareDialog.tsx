@@ -7,15 +7,15 @@ import ShareDialogContent from "./ShareDialogContent";
 import Dialog from "@material-ui/core/Dialog";
 
 const ShareDialog = () => {
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-  // const dispatch = useAppDispatch();
-  // const openShareDialog = useAppSelector(
-  //   (state) => state.dialog.isShareDialogOpen
-  // );
+  // const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const dispatch = useAppDispatch();
+  const openShareDialog = useAppSelector(
+    (state) => state.dialog.isShareDialogOpen
+  );
 
-  // const handleToggle = () => {
-  //   dispatch(toggleShareDialog());
-  // };
+  const toggleHandler = () => {
+    dispatch(toggleShareDialog());
+  };
 
   const generatePublishKey = () => {
     // TODO
@@ -23,7 +23,7 @@ const ShareDialog = () => {
   };
 
   return (
-    <Dialog open={isDialogOpen} onClose={() => setIsDialogOpen(false)}>
+    <Dialog open={openShareDialog} onClose={toggleHandler}>
       <ShareDialogContent />
     </Dialog>
   );

@@ -5,6 +5,7 @@ import { useAppSelector } from "./hooks/storeHooks";
 
 import User from "./pages/User";
 import Onboard from "./pages/Onboard";
+import WithGH from "./pages/WithGH";
 import Layout from "./components/UI/Layout";
 
 import { GET_ALL_USERS_DAYS_EVENTS } from "./apollo-client/query";
@@ -20,16 +21,16 @@ function App() {
   //   console.log(data);
   // }
   const isAuth = useAppSelector((store) => store.auth.isAuth);
-  // useLayoutEffect(() => {}, [isAuth]);
-  console.log(isAuth);
+
   return (
     <Layout>
       <Switch>
         <Route path="/" exact>
           {isAuth ? <User /> : <Onboard />}
-          {console.log(isAuth)}
         </Route>
-        <Route path="/:publishKey"></Route>
+        <Route path="/:code">
+          <WithGH />
+        </Route>
       </Switch>
     </Layout>
   );

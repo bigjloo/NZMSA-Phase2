@@ -1,7 +1,7 @@
 import { ChangeEvent } from "react";
 
 // Component prop types
-export type EventFormProps = {
+export type EventDialogContentProps = {
   nameInput: string;
   descriptionInput: string;
   onAddEvent: () => void;
