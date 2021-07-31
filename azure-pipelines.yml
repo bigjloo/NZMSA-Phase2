@@ -26,9 +26,17 @@ steps:
     cd ..
   displayName: 'npm install and build'
 
+- task: CopyFiles@2
+  displayName: 'Copy files'
+  inputs:
+    sourceFolder: '$(rootDir)/build' 
+    Contents: '**/*'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    cleanTargetFolder: true
+
 - task: ArchiveFiles@2
   inputs:
-      rootFolderOrFile: '$(buildDir)'
+      rootFolderOrFile: '$(Build.ArtifactStagingDirectory)'
       includeRootFolder: false
       archiveType: 'zip'
       archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
