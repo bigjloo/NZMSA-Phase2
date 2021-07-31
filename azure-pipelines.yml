@@ -12,7 +12,7 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  buildDir: '/build'
+  buildDir: 'build'
 
 steps:
 - task: NodeTool@0
