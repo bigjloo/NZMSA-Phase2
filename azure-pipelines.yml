@@ -7,7 +7,7 @@ trigger:
 - main
 
 variables:
-  rootDir: nzmsa-howsyourday
+  rootDir: ''
   stage: development
   buildDir: ${rootDir}/build
 
@@ -30,24 +30,3 @@ steps:
   displayName: 'npm build'
   workingDirectory: $(directory)
 
-- task: CopyFiles@2
-  displayName: 'Copy files'
-  inputs:
-    sourceFolder: '$(rootDir)/build' 
-    Contents: '**/*'
-    TargetFolder: '$(Build.ArtifactStagingDirectory)'
-    cleanTargetFolder: true
-
-- task: ArchiveFiles@2
-  inputs:
-      rootFolderOrFile: '$(Build.ArtifactStagingDirectory)'
-      includeRootFolder: false
-      archiveType: 'zip'
-      archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-      replaceExistingArchive: true
-
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
