@@ -8,7 +8,7 @@ trigger:
 
 variables:
   rootDir: 'nzmsa-howsyourday'
-  buildDir: 'nzmsa-howsyourday/build'
+  buildDir: '${rootDir}/build'
 
 pool:
   vmImage: ubuntu-latest
