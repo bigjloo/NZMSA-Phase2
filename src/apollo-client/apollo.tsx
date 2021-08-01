@@ -5,7 +5,7 @@ import { ApolloClient, InMemoryCache, HttpLink } from "@apollo/client";
 
 export const CONFIGURATION = {
   CLIENT_ID: "b77f552e93db0e271256",
-  BACKEND_URL: "https://localhost:44342/graphql/",
+  BACKEND_URL: "https://nzmsa-backend.azurewebsites.net/graphql/",
 };
 
 const httpLink = new HttpLink({
