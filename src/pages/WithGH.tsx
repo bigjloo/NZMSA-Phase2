@@ -1,12 +1,15 @@
-import { useParams } from "react-router";
+import { useLocation } from "react-router";
+import { useQuery } from "@apollo/client";
+import { LoginWithGitHubCode } from "../hooks/api";
 
 const WithGH = () => {
-  const params = useParams();
-  console.log(params);
+  const search = useLocation().search;
+  const code = search.slice(6, search.length);
 
   return (
     <>
-      <h1>With GH page</h1>;
+      <h1>GH LOGIN</h1>
+      <LoginWithGitHubCode code={code} />
     </>
   );
 };

@@ -1,4 +1,3 @@
-import { useLayoutEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { useAppSelector } from "./hooks/storeHooks";
@@ -28,7 +27,10 @@ function App() {
         <Route path="/" exact>
           {isAuth ? <User /> : <Onboard />}
         </Route>
-        <Route path="/signin/callback" component={WithGH} />
+        {/* Example: /signin/callback/?code=asd123 */}
+        <Route path="/signin/callback/">
+          <WithGH />
+        </Route>
       </Switch>
     </Layout>
   );
@@ -42,3 +44,13 @@ export default App;
 // /:user - User page - loads unfinished timeline for the day
 // /:publishkey Visitor page -
 //    onboarding process for visitors to join
+
+// gh login
+// user click github login
+// user approve request
+// github redirects back to site
+// at the redirect route, create a mutation query to backend with code
+// backend makes an oauth token request with the code + client ID + client secret
+// backend sends back JWT token
+
+// user can use JWT token to verify his identity

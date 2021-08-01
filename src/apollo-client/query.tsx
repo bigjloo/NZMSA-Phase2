@@ -15,3 +15,11 @@ export const GET_ALL_USERS_DAYS_EVENTS = gql`
     }
   }
 `;
+
+export const LOGIN_WITH_GITHUB_CODE = gql`
+  mutation {
+    login(input: { code: $code }) {
+      jwt
+    }
+  }
+`;
