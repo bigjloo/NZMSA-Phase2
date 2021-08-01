@@ -11,14 +11,12 @@ import { GET_ALL_USERS_DAYS_EVENTS } from "./apollo-client/query";
 
 function App() {
   // const { loading, error, data } = useQuery(GET_ALL_USERS_DAYS_EVENTS);
-
   // if (loading) return <h1>Loading...</h1>;
-
   // if (error) return <h1>Error {error.message}</h1>;
-
   // if (data) {
   //   console.log(data);
   // }
+
   const isAuth = useAppSelector((store) => store.auth.isAuth);
 
   return (

@@ -17,9 +17,18 @@ export const GET_ALL_USERS_DAYS_EVENTS = gql`
 `;
 
 export const LOGIN_WITH_GITHUB_CODE = gql`
-  mutation {
+  mutation ($code: String!) {
     login(input: { code: $code }) {
       jwt
+    }
+  }
+`;
+
+export const ADD_DAY = gql`
+  mutation ($USERID: Int!) {
+    addDay(input: { userId: $USERID }) {
+      date
+      userId
     }
   }
 `;
