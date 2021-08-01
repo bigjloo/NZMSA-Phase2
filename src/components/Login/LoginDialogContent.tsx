@@ -10,7 +10,11 @@ const LoginDialogContent = (props: LoginDialogContentProps) => {
 
   return (
     <DialogContent>
-      <Button onClick={githubLogin}>Github LOGIN</Button>
+      <Button onClick={githubLogin}>
+        <a href="https://github.com/login/oauth/authorize?client_id=b77f552e93db0e271256">
+          Github LOGIN
+        </a>
+      </Button>
       <br />
       <TextField label="login" type="text" fullWidth />
       <TextField label="password" type="password" fullWidth />

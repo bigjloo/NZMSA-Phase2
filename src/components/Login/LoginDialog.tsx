@@ -16,9 +16,11 @@ const LoginDialog = () => {
 
   const handleGitHubLogin = () => {
     // Send http request to github with client ID
-    window.open(
+    fetch(
       "https://github.com/login/oauth/authorize?client_id=b77f552e93db0e271256"
-    );
+    )
+      .then((response) => response.json())
+      .then((data) => console.log(data));
   };
 
   const handleSignUp = () => {};

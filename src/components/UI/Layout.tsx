@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-// import { useAppSelector } from "../../hooks/storeHooks";
 import BottomSticky from "./BottomSticky";
 
 import Container from "@material-ui/core/Container";
@@ -16,8 +15,6 @@ const ContainerWithBorders = styled(Container)({
 });
 
 const Layout = ({ children }: LayoutProps) => {
-  // const isAuth = useAppSelector((store) => store.auth.isAuth);
-
   return (
     <ContainerWithBorders>
       <main>{children}</main>

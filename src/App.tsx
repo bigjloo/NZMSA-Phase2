@@ -28,9 +28,7 @@ function App() {
         <Route path="/" exact>
           {isAuth ? <User /> : <Onboard />}
         </Route>
-        <Route path="/:code">
-          <WithGH />
-        </Route>
+        <Route path="/signin/callback" component={WithGH} />
       </Switch>
     </Layout>
   );
