@@ -1,6 +1,6 @@
 import { ChangeEvent } from "react";
 
-// Component prop types
+// Components
 export type EventDialogContentProps = {
   nameInput: string;
   descriptionInput: string;

@@ -7,7 +7,6 @@ import ShareDialogContent from "./ShareDialogContent";
 import Dialog from "@material-ui/core/Dialog";
 
 const ShareDialog = () => {
-  // const [isDialogOpen, setIsDialogOpen] = useState(false);
   const dispatch = useAppDispatch();
   const openShareDialog = useAppSelector(
     (state) => state.dialog.isShareDialogOpen
@@ -20,6 +19,14 @@ const ShareDialog = () => {
   const generatePublishKey = () => {
     // TODO
     // When share dialog is open, generate publishkey
+    const randomHex = () => {
+      // Length == 8
+      [...Array(8)]
+        .map(() => Math.floor(Math.random() * 16).toString(16))
+        .join("");
+    };
+
+    return randomHex;
   };
 
   return (

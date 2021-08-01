@@ -1,5 +1,14 @@
+import { useParams } from "react-router";
+
 const WithGH = () => {
-  return <h1>With GH page</h1>;
+  const params = useParams();
+  console.log(params);
+
+  return (
+    <>
+      <h1>With GH page</h1>;
+    </>
+  );
 };
 
 export default WithGH;

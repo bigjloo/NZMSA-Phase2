@@ -22,10 +22,16 @@ const EventDialog = () => {
 
   const dispatch = useAppDispatch();
 
-  // Opens/closes Dialog
+  const onNameInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    dispatch(handleNameInputChange(event.target.value));
+  };
+
+  const onDescriptionInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    dispatch(handleDescriptionInputChange(event.target.value));
+  };
+
   const toggleHandler = () => dispatch(toggleEventDialog());
 
-  // Adds event
   const onAddEvent = () => {
     const payload = {
       name: nameInput,
@@ -35,18 +41,7 @@ const EventDialog = () => {
     dispatch(resetInputFields());
   };
 
-  // Removes event
   const onRemoveEvent = (index: number) => dispatch(removeEvent(index));
-
-  // Handle name input change
-  const onNameInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    dispatch(handleNameInputChange(event.target.value));
-  };
-
-  // Handle description input change
-  const onDescriptionInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    dispatch(handleDescriptionInputChange(event.target.value));
-  };
 
   return (
     <Dialog open={openEventDialog} onClose={toggleHandler}>
