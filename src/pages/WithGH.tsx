@@ -8,8 +8,10 @@ import {
 } from "../apollo-client/query"
 import { useAppDispatch } from "../hooks/storeHooks"
 import { login } from "../store/authReducer"
+import { useAppSelector } from "../hooks/storeHooks"
 
 const WithGH = () => {
+  const isAuth = useAppSelector((state) => state.auth.isAuth)
   const search = useLocation().search
   const code = search.slice(6, search.length)
   const dispatch = useAppDispatch()
@@ -29,12 +31,16 @@ const WithGH = () => {
       console.log(JWT)
       dispatch(login())
       console.log("success login")
-      return <Redirect to="/" />
     }
     loginWithGitHubOAuth()
   }, [getToken, dispatch, error])
 
-  return <>{loading && <h1>Loading...</h1>}</>
+  return (
+    <>
+      {loading && <h1>Loading...</h1>}
+      {isAuth ?? <Redirect to="/" />}
+    </>
+  )
 }
 
 export default WithGH
