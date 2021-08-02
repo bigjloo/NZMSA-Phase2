@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql } from "@apollo/client"
 
 export const GET_ALL_USERS_DAYS_EVENTS = gql`
   query {
@@ -14,7 +14,7 @@ export const GET_ALL_USERS_DAYS_EVENTS = gql`
       }
     }
   }
-`;
+`
 
 export const LOGIN_WITH_GITHUB_CODE = gql`
   mutation ($code: String!) {
@@ -22,7 +22,7 @@ export const LOGIN_WITH_GITHUB_CODE = gql`
       jwt
     }
   }
-`;
+`
 
 export const ADD_DAY = gql`
   mutation ($USERID: Int!) {
@@ -31,4 +31,13 @@ export const ADD_DAY = gql`
       userId
     }
   }
-`;
+`
+
+export const GET_USER_WITH_JWT = gql`
+  query {
+    self {
+      id
+      name
+    }
+  }
+`

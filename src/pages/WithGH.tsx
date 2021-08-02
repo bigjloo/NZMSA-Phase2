@@ -1,14 +1,20 @@
 import React, { useEffect } from "react"
 import { useLocation } from "react-router-dom"
-import { useMutation } from "@apollo/client"
+import { useMutation, useQuery } from "@apollo/client"
 import { LoginWithGitHubCode } from "../hooks/api"
-import { LOGIN_WITH_GITHUB_CODE } from "../apollo-client/query"
+import {
+  LOGIN_WITH_GITHUB_CODE,
+  GET_USER_WITH_JWT,
+} from "../apollo-client/query"
+import { useAppDispatch } from "../hooks/storeHooks"
+import { login } from "../store/authReducer"
 
 const WithGH = () => {
   const search = useLocation().search
   const code = search.slice(6, search.length)
+  const dispatch = useAppDispatch()
 
-  const [getToken] = useMutation(LOGIN_WITH_GITHUB_CODE, {
+  const [getToken, { error }] = useMutation(LOGIN_WITH_GITHUB_CODE, {
     variables: { code: code },
   })
   console.log(code)
@@ -17,10 +23,15 @@ const WithGH = () => {
     console.log("inside useEffect")
     async function loginWithGitHubOAuth() {
       const response = await getToken()
-      console.log(response)
+      if (error) return
+      const JWT = response.data.login.jwt
+      localStorage.setItem("HYD_JWT", JWT)
+      console.log(JWT)
+      dispatch(login())
+      console.log("success login")
     }
     loginWithGitHubOAuth()
-  }, [getToken])
+  }, [getToken, dispatch, error])
 
   return (
     <>
