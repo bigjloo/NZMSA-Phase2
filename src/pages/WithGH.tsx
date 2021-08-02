@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
 import { useLocation } from "react-router-dom"
-import { useMutation, useQuery } from "@apollo/client"
+import { useMutation } from "@apollo/client"
 import { LoginWithGitHubCode } from "../hooks/api"
 import { LOGIN_WITH_GITHUB_CODE } from "../apollo-client/query"
 
@@ -11,6 +11,7 @@ const WithGH = () => {
   const [getToken] = useMutation(LOGIN_WITH_GITHUB_CODE, {
     variables: { code: code },
   })
+  console.log(code)
 
   useEffect(() => {
     console.log("inside useEffect")
