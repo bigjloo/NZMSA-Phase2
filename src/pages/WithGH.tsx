@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import { useLocation } from "react-router-dom"
+import { useLocation, Redirect } from "react-router-dom"
 import { useMutation, useQuery } from "@apollo/client"
 import { LoginWithGitHubCode } from "../hooks/api"
 import {
@@ -14,7 +14,7 @@ const WithGH = () => {
   const code = search.slice(6, search.length)
   const dispatch = useAppDispatch()
 
-  const [getToken, { error }] = useMutation(LOGIN_WITH_GITHUB_CODE, {
+  const [getToken, { error, loading }] = useMutation(LOGIN_WITH_GITHUB_CODE, {
     variables: { code: code },
   })
   console.log(code)
@@ -29,15 +29,12 @@ const WithGH = () => {
       console.log(JWT)
       dispatch(login())
       console.log("success login")
+      return <Redirect to="/" />
     }
     loginWithGitHubOAuth()
   }, [getToken, dispatch, error])
 
-  return (
-    <>
-      <h1>GH LOGIN</h1>
-    </>
-  )
+  return <>{loading && <h1>Loading...</h1>}</>
 }
 
 export default WithGH
