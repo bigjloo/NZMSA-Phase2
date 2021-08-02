@@ -22,15 +22,12 @@ const WithGH = () => {
   console.log(code)
 
   useEffect(() => {
-    console.log("inside useEffect")
     async function loginWithGitHubOAuth() {
       const response = await getToken()
       if (error) return
       const JWT = response.data.login.jwt
       localStorage.setItem("HYD_JWT", JWT)
-      console.log(JWT)
       dispatch(login())
-      console.log("success login")
     }
     loginWithGitHubOAuth()
   }, [getToken, dispatch, error])
@@ -38,7 +35,7 @@ const WithGH = () => {
   return (
     <>
       {loading && <h1>Loading...</h1>}
-      {isAuth ?? <Redirect to="/" />}
+      {isAuth && <Redirect to="/" />}
     </>
   )
 }
