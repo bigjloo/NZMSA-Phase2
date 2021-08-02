@@ -1,10 +1,11 @@
-import { useLocation } from "react-router";
-import { useQuery } from "@apollo/client";
-import { AddUser, LoginWithGitHubCode } from "../hooks/api";
+import React from "react"
+import { useLocation } from "react-router-dom"
+import { useQuery } from "@apollo/client"
+import { AddUser, LoginWithGitHubCode } from "../hooks/api"
 
 const WithGH = () => {
-  const search = useLocation().search;
-  const code = search.slice(6, search.length);
+  const search = useLocation().search
+  const code = search.slice(6, search.length)
 
   return (
     <>
@@ -12,7 +13,7 @@ const WithGH = () => {
       <AddUser />
       <LoginWithGitHubCode ghcode={code} />
     </>
-  );
-};
+  )
+}
 
-export default WithGH;
+export default WithGH
