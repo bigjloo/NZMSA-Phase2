@@ -13,17 +13,17 @@ const WithGH = () => {
   })
 
   useEffect(() => {
-    async function getTokenFromBackend() {
+    console.log("inside useEffect")
+    async function loginWithGitHubOAuth() {
       const response = await getToken()
       console.log(response)
     }
-    getTokenFromBackend()
+    loginWithGitHubOAuth()
   }, [getToken])
 
   return (
     <>
       <h1>GH LOGIN</h1>
-      <LoginWithGitHubCode ghcode={code} />
     </>
   )
 }
