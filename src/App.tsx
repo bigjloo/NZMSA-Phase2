@@ -1,14 +1,15 @@
-import React from "react";
-import { Route, Switch } from "react-router-dom";
-import { useQuery } from "@apollo/client";
-import { useAppSelector } from "./hooks/storeHooks";
+import React from "react"
+import { Route, Switch } from "react-router-dom"
+import { useQuery } from "@apollo/client"
+import { useAppSelector } from "./hooks/storeHooks"
 
-import User from "./pages/User";
-import Onboard from "./pages/Onboard";
-import WithGH from "./pages/WithGH";
-import Layout from "./components/UI/Layout";
+import User from "./pages/User"
+import Onboard from "./pages/Onboard"
+import WithGH from "./pages/WithGH"
+import PublishedContent from "./pages/PublishedContent"
+import Layout from "./components/UI/Layout"
 
-import { GET_ALL_USERS_DAYS_EVENTS } from "./apollo-client/query";
+import { GET_ALL_USERS_DAYS_EVENTS } from "./apollo-client/query"
 
 function App() {
   // const { loading, error, data } = useQuery(GET_ALL_USERS_DAYS_EVENTS);
@@ -18,7 +19,7 @@ function App() {
   //   console.log(data);
   // }
 
-  const isAuth = useAppSelector((store) => store.auth.isAuth);
+  const isAuth = useAppSelector((store) => store.auth.isAuth)
 
   return (
     <Layout>
@@ -30,12 +31,15 @@ function App() {
         <Route path="/signin/callback/">
           <WithGH />
         </Route>
+        <Route path="/share/:publishKey">
+          <PublishedContent />
+        </Route>
       </Switch>
     </Layout>
-  );
+  )
 }
 
-export default App;
+export default App
 
 // Routes
 //
