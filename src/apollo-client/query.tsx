@@ -51,12 +51,21 @@ export const SAVE_EVENTS = gql`
 
 export const GET_DAY = gql`
   query {
-    day {
+    dayByUser {
       date
+      id
       events {
         name
         description
       }
+    }
+  }
+`
+export const GET_EVENTS_BY_USER_TODAY = gql`
+  query {
+    eventsByUserToday {
+      name
+      description
     }
   }
 `
