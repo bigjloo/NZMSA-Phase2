@@ -13,6 +13,7 @@ import {
   GET_DAY,
   GET_EVENTS_BY_USER_TODAY,
 } from "../apollo-client/query"
+import { addEvent } from "../store/eventReducer"
 
 const User = () => {
   // Change query to retrieve day/event
@@ -33,7 +34,10 @@ const User = () => {
     // add events to state by order
     console.log("inside useEffect")
     if (data) {
-      console.log(data)
+      for (let event of data.eventsForToday) {
+        const { name, description } = event
+        dispatch(addEvent({ name, description }))
+      }
     }
   }, [data])
 
