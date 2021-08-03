@@ -20,6 +20,10 @@ const GithubLoginProcessor = () => {
   const [getToken, { error, loading }] = useMutation(LOGIN_WITH_GITHUB_CODE, {
     variables: { code },
   })
+  // 1) runs 4 times "inside github login process"
+  // 2) inside UseEffect
+  // 3) login success
+  // 4) inside UseEffect
   console.log("inside github login process")
 
   useEffect(() => {

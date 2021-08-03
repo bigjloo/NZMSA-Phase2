@@ -63,7 +63,7 @@ export const GET_DAY = gql`
 `
 export const GET_EVENTS_BY_USER_TODAY = gql`
   query {
-    eventsByUserToday {
+    eventsForToday {
       name
       description
     }

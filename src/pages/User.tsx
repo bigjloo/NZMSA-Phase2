@@ -26,6 +26,8 @@ const User = () => {
     localStorage.removeItem("HYD_JWT")
   }
 
+  console.log(localStorage.getItem("HYD_JWT"))
+
   useEffect(() => {
     // when data is ready
     // add events to state by order
