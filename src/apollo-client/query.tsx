@@ -36,13 +36,9 @@ export const ADD_DAY = gql`
 export const GET_USER_INFO_WITH_JWT = gql`
   query {
     self {
-      days {
-        date
-        events {
-          name
-          description
-        }
-      }
+      id
+      name
+      github
     }
   }
 `
