@@ -1,15 +1,23 @@
-import { ChangeEvent } from "react";
-import Dialog from "@material-ui/core/Dialog";
-import { useAppDispatch, useAppSelector } from "../../hooks/storeHooks";
-import { toggleEventDialog } from "../../store/dialogReducer";
-import { addEvent, removeEvent } from "../../store/eventReducer";
+import { ChangeEvent } from "react"
+
+import Dialog from "@material-ui/core/Dialog"
+
+import { useAppDispatch, useAppSelector } from "../../hooks/storeHooks"
+import { toggleEventDialog } from "../../store/dialogReducer"
+import { addEvent, removeEvent } from "../../store/eventReducer"
 import {
   handleNameInputChange,
   handleDescriptionInputChange,
   resetInputFields,
-} from "../../store/formInputReducer";
-import EventDialogContent from "./EventDialogContent";
-import EventList from "./EventList";
+} from "../../store/formInputReducer"
+
+import EventDialogContent from "./EventDialogContent"
+import EventList from "./EventList"
+
+interface AddEventPayload {
+  name: string
+  description: string
+}
 
 const EventDialog = () => {
   const [nameInput, descriptionInput, openEventDialog] = useAppSelector(
@@ -18,30 +26,30 @@ const EventDialog = () => {
       state.formInput.description,
       state.dialog.isEventDialogOpen,
     ]
-  );
+  )
 
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch()
 
   const onNameInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    dispatch(handleNameInputChange(event.target.value));
-  };
+    dispatch(handleNameInputChange(event.target.value))
+  }
 
   const onDescriptionInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    dispatch(handleDescriptionInputChange(event.target.value));
-  };
+    dispatch(handleDescriptionInputChange(event.target.value))
+  }
 
-  const toggleHandler = () => dispatch(toggleEventDialog());
+  const toggleHandler = () => dispatch(toggleEventDialog())
 
   const onAddEvent = () => {
-    const payload = {
+    const payload: AddEventPayload = {
       name: nameInput,
       description: descriptionInput,
-    };
-    dispatch(addEvent(payload));
-    dispatch(resetInputFields());
-  };
+    }
+    dispatch(addEvent(payload))
+    dispatch(resetInputFields())
+  }
 
-  const onRemoveEvent = (index: number) => dispatch(removeEvent(index));
+  const onRemoveEvent = (index: number) => dispatch(removeEvent(index))
 
   return (
     <Dialog open={openEventDialog} onClose={toggleHandler}>
@@ -55,7 +63,7 @@ const EventDialog = () => {
         onDescriptionInputChange={onDescriptionInputChange}
       />
     </Dialog>
-  );
-};
+  )
+}
 
-export default EventDialog;
+export default EventDialog

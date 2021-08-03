@@ -1,6 +1,4 @@
 import LoginDialog from "../components/Login/LoginDialog"
-import { Link } from "react-router-dom"
-import WithGH from "./WithGH"
 
 const Onboard = () => {
   return (

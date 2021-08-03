@@ -1,16 +1,17 @@
-import Timeline from "@material-ui/lab/Timeline";
-import TimelineItem from "@material-ui/lab/TimelineItem";
-import TimelineOppositeContent from "@material-ui/lab/TimelineOppositeContent";
-import TimelineSeparator from "@material-ui/lab/TimelineSeparator";
-import TimelineConnector from "@material-ui/lab/TimelineConnector";
-import TimelineContent from "@material-ui/lab/TimelineContent";
-import TimelineDot from "@material-ui/lab/TimelineDot";
-import Typography from "@material-ui/core/Typography";
+import Timeline from "@material-ui/lab/Timeline"
+import TimelineItem from "@material-ui/lab/TimelineItem"
+import TimelineOppositeContent from "@material-ui/lab/TimelineOppositeContent"
+import TimelineSeparator from "@material-ui/lab/TimelineSeparator"
+import TimelineConnector from "@material-ui/lab/TimelineConnector"
+import TimelineContent from "@material-ui/lab/TimelineContent"
+import TimelineDot from "@material-ui/lab/TimelineDot"
+import Typography from "@material-ui/core/Typography"
 
-import { useAppSelector } from "../../hooks/storeHooks";
+import { useAppSelector } from "../../hooks/storeHooks"
+import { IEvent } from "../../common/types_interfaces"
 
 const EventTimeline = () => {
-  const events = useAppSelector((store) => store.events.events);
+  const events = useAppSelector<IEvent[]>((store) => store.events.events)
 
   return (
     <Timeline align="alternate">
@@ -29,7 +30,7 @@ const EventTimeline = () => {
         </TimelineItem>
       ))}
     </Timeline>
-  );
-};
+  )
+}
 
-export default EventTimeline;
+export default EventTimeline

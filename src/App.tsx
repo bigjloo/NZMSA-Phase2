@@ -5,20 +5,13 @@ import { useAppSelector } from "./hooks/storeHooks"
 
 import User from "./pages/User"
 import Onboard from "./pages/Onboard"
-import WithGH from "./pages/WithGH"
+import GithubLoginProcessor from "./pages/GithubLoginProcessor"
 import PublishedContent from "./pages/PublishedContent"
 import Layout from "./components/UI/Layout"
 
 import { GET_ALL_USERS_DAYS_EVENTS } from "./apollo-client/query"
 
 function App() {
-  // const { loading, error, data } = useQuery(GET_ALL_USERS_DAYS_EVENTS);
-  // if (loading) return <h1>Loading...</h1>;
-  // if (error) return <h1>Error {error.message}</h1>;
-  // if (data) {
-  //   console.log(data);
-  // }
-
   const isAuth = useAppSelector((store) => store.auth.isAuth)
 
   return (
@@ -27,9 +20,8 @@ function App() {
         <Route path="/" exact>
           {isAuth ? <User /> : <Onboard />}
         </Route>
-        {/* Example: /signin/callback/?code=asd123 */}
         <Route path="/signin/callback/">
-          <WithGH />
+          <GithubLoginProcessor />
         </Route>
         <Route path="/share/:publishKey">
           <PublishedContent />

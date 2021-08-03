@@ -1,39 +1,37 @@
-import { useAppSelector, useAppDispatch } from "../../hooks/storeHooks";
-import { toggleShareDialog } from "../../store/dialogReducer";
-import { useState } from "react";
-
-import ShareDialogContent from "./ShareDialogContent";
-
-import Dialog from "@material-ui/core/Dialog";
+import { useState, useEffect } from "react"
+import Dialog from "@material-ui/core/Dialog"
+import { useAppSelector, useAppDispatch } from "../../hooks/storeHooks"
+import { toggleShareDialog } from "../../store/dialogReducer"
+import ShareDialogContent from "./ShareDialogContent"
 
 const ShareDialog = () => {
-  const dispatch = useAppDispatch();
-  const openShareDialog = useAppSelector(
-    (state) => state.dialog.isShareDialogOpen
-  );
-
-  const toggleHandler = () => {
-    dispatch(toggleShareDialog());
-  };
+  const [publishKey, setPublishKey] = useState("")
 
   const generatePublishKey = () => {
-    // TODO
-    // When share dialog is open, generate publishkey
-    const randomHex = () => {
-      // Length == 8
-      [...Array(8)]
-        .map(() => Math.floor(Math.random() * 16).toString(16))
-        .join("");
-    };
+    return [...Array(8)]
+      .map(() => Math.floor(Math.random() * 16).toString(16))
+      .join("")
+  }
 
-    return randomHex;
-  };
+  useEffect(() => {
+    const key = generatePublishKey()
+    setPublishKey(key)
+  }, [])
+
+  const dispatch = useAppDispatch()
+  const openShareDialog = useAppSelector<boolean>(
+    (state) => state.dialog.isShareDialogOpen
+  )
+
+  const toggleHandler = () => {
+    dispatch(toggleShareDialog())
+  }
 
   return (
     <Dialog open={openShareDialog} onClose={toggleHandler}>
-      <ShareDialogContent />
+      <ShareDialogContent publishKey={publishKey} />
     </Dialog>
-  );
-};
+  )
+}
 
-export default ShareDialog;
+export default ShareDialog

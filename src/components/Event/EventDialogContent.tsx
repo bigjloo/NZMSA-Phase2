@@ -1,12 +1,10 @@
-import React from "react";
+import TextField from "@material-ui/core/TextField"
+import Button from "@material-ui/core/Button"
+import DialogContent from "@material-ui/core/DialogContent"
+import DialogActions from "@material-ui/core/DialogActions"
+import DialogTitle from "@material-ui/core/DialogTitle"
 
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogTitle from "@material-ui/core/DialogTitle";
-
-import { EventDialogContentProps } from "../../common/types_interfaces";
+import { EventDialogContentProps } from "../../common/types_interfaces"
 
 const EventDialogContent = (props: EventDialogContentProps) => {
   const {
@@ -16,7 +14,7 @@ const EventDialogContent = (props: EventDialogContentProps) => {
     onDescriptionInputChange,
     onAddEvent,
     toggleDialogHandler,
-  } = props;
+  } = props
 
   return (
     <DialogContent>
@@ -31,7 +29,7 @@ const EventDialogContent = (props: EventDialogContentProps) => {
       />
       <TextField
         value={descriptionInput}
-        label="Caption"
+        label="Description"
         fullWidth
         onChange={onDescriptionInputChange}
       />
@@ -42,7 +40,7 @@ const EventDialogContent = (props: EventDialogContentProps) => {
         <Button onClick={toggleDialogHandler}>Close</Button>
       </DialogActions>
     </DialogContent>
-  );
-};
+  )
+}
 
-export default EventDialogContent;
+export default EventDialogContent

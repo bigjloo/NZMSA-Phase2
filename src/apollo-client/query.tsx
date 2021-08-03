@@ -33,7 +33,7 @@ export const ADD_DAY = gql`
   }
 `
 
-export const GET_USER_WITH_JWT = gql`
+export const GET_USER_INFO_WITH_JWT = gql`
   query {
     self {
       id
