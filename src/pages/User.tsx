@@ -39,7 +39,7 @@ const User = () => {
         dispatch(addEvent({ name, description }))
       }
     }
-  }, [data])
+  }, [data, dispatch])
 
   if (loading) return <h1>Loading...</h1>
 
