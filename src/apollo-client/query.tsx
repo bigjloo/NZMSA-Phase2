@@ -36,8 +36,31 @@ export const ADD_DAY = gql`
 export const GET_USER_INFO_WITH_JWT = gql`
   query {
     self {
-      id
-      name
+      days {
+        date
+        events {
+          name
+          description
+        }
+      }
+    }
+  }
+`
+// TODO
+export const SAVE_EVENTS = gql`
+  mutation ($EVENTS: ){
+    saveEvent(input: {events: $EVENTS})
+  }
+`
+
+export const GET_DAY = gql`
+  query {
+    day {
+      date
+      events {
+        name
+        description
+      }
     }
   }
 `

@@ -20,7 +20,7 @@ const GithubLoginProcessor = () => {
   const [getToken, { error, loading }] = useMutation(LOGIN_WITH_GITHUB_CODE, {
     variables: { code },
   })
-  console.log(code)
+  console.log("inside github login process")
 
   useEffect(() => {
     async function loginWithGitHubOAuth() {
@@ -29,6 +29,7 @@ const GithubLoginProcessor = () => {
       const jwtToken = response.data.login.jwt
       localStorage.setItem("HYD_JWT", jwtToken)
       dispatch(login())
+      console.log("login success")
     }
     loginWithGitHubOAuth()
   }, [getToken, dispatch, error])

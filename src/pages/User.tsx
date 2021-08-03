@@ -22,17 +22,16 @@ const User = () => {
     localStorage.removeItem("HYD_JWT")
   }
 
-  // useEffect(() => {
-  //   if (data) {
-  //     // setEvent from data
-  //   }
-  // }, [data])
+  useEffect(() => {
+    console.log("inside useEffect")
+    if (data) {
+      console.log(data)
+    }
+  }, [data])
 
   if (loading) return <h1>Loading...</h1>
 
   if (error) return <h1>Error...</h1>
-
-  // if (data) console.log(data)
 
   return (
     <>
