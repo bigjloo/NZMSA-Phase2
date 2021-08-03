@@ -44,8 +44,8 @@ export const GET_USER_INFO_WITH_JWT = gql`
 `
 // TODO
 export const SAVE_EVENTS = gql`
-  mutation ($EVENTS: ){
-    saveEvent(input: {events: $EVENTS})
+  mutation {
+    saveEvent(input: { events: $EVENTS })
   }
 `
 
