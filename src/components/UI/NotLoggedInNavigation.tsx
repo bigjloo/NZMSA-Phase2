@@ -1,12 +1,11 @@
-import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
-
-import { useAppDispatch } from "../../hooks/storeHooks";
-import { toggleLoginDialog } from "../../store/dialogReducer";
+import { useAppDispatch } from "../../hooks/storeHooks"
+import BottomNavigationAction from "@material-ui/core/BottomNavigationAction"
+import { toggleLoginDialog } from "../../store/dialogReducer"
 
 const NotLoggedInNavigation = () => {
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch()
 
-  const openLoginDialog = () => dispatch(toggleLoginDialog());
+  const openLoginDialog = () => dispatch(toggleLoginDialog())
 
   return (
     <BottomNavigationAction
@@ -14,7 +13,7 @@ const NotLoggedInNavigation = () => {
       showLabel
       onClick={openLoginDialog}
     />
-  );
-};
+  )
+}
 
-export default NotLoggedInNavigation;
+export default NotLoggedInNavigation

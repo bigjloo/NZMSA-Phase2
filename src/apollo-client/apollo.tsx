@@ -3,9 +3,9 @@ import { setContext } from "@apollo/client/link/context"
 
 export const CONFIGURATION = {
   BACKEND_URL: "https://nzmsa-backend.azurewebsites.net/graphql/",
-  SITE_URL: "https://nzmsa-react-2021.azurewebsites.net",
-  LOCAL_BACKEND: "https://localhost:44342/graphql",
-  CLIENT_ID: "b77f552e93db0e271256",
+  SITE_URL: "https://nzmsa-react-2021.azurewebsites.net/",
+  LOCAL_FRONTEND: "https://localhost:3000/",
+  LOCAL_BACKEND: "https://localhost:44342/graphql/",
   GITHUB_AUTHORIZE_URL: `https://github.com/login/oauth/authorize?client_id=b77f552e93db0e271256`,
 }
 

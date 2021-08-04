@@ -1,15 +1,13 @@
 import { useEffect } from "react"
 import { useLocation, Redirect } from "react-router-dom"
 import { useMutation } from "@apollo/client"
-import { LOGIN_WITH_GITHUB_CODE } from "../apollo-client/query"
-import { useAppDispatch } from "../hooks/storeHooks"
-import { login } from "../store/authReducer"
-import { useAppSelector } from "../hooks/storeHooks"
 
-// 1) Gets Github authorization code from URL
-// 2) Makes a mutation query to backend server to get JWT token
-// 3) stores the token and sets isAuth
-// 4) redirects to hoempage page
+import { useAppSelector } from "../hooks/storeHooks"
+import { useAppDispatch } from "../hooks/storeHooks"
+
+import { login } from "../store/authReducer"
+import { LOGIN_WITH_GITHUB_CODE } from "../apollo-client/query"
+
 const GithubLoginProcessor = () => {
   const dispatch = useAppDispatch()
   const isAuth = useAppSelector<boolean>((state) => state.auth.isAuth)
@@ -25,9 +23,12 @@ const GithubLoginProcessor = () => {
   // 3) login success
   // 4) inside UseEffect
   console.log("inside github login process")
+  console.log(error)
+  console.log(loading)
 
   useEffect(() => {
-    async function loginWithGitHubOAuth() {
+    // ran once
+    const loginWithGitHubOAuth = async () => {
       const response = await getToken()
       if (error) return
       const jwtToken = response.data.login.jwt

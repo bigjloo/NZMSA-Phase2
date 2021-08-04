@@ -1,25 +1,24 @@
 import { useEffect } from "react"
+import { useQuery } from "@apollo/client"
+import { useAppDispatch } from "../hooks/storeHooks"
 
 import Button from "@material-ui/core/Button"
 
-import { useAppDispatch, useAppSelector } from "../hooks/storeHooks"
 import { logout } from "../store/authReducer"
+import { setEvents } from "../store/eventReducer"
+
+import { GET_EVENTS_BY_USER_TODAY } from "../apollo-client/query"
+
 import EventDialog from "../components/Event/EventDialog"
-import ShareDialog from "../components/Share/ShareDialog"
+import ShareDialogContainer from "../components/Share/ShareDialogContainer"
 import Canvas from "../components/UI/Canvas"
-import { useQuery } from "@apollo/client"
-import {
-  GET_USER_INFO_WITH_JWT,
-  GET_DAY,
-  GET_EVENTS_BY_USER_TODAY,
-} from "../apollo-client/query"
-import { addEvent } from "../store/eventReducer"
+import { IEvent } from "../common/types_interfaces"
 
 const User = () => {
   // Change query to retrieve day/event
   const { loading, data, error } = useQuery(GET_EVENTS_BY_USER_TODAY)
 
-  const isAuth = useAppSelector<boolean>((state) => state.auth.isAuth)
+  // const isAuth = useAppSelector<boolean>((state) => state.auth.isAuth)
   const dispatch = useAppDispatch()
 
   const logoutHandler = () => {
@@ -29,18 +28,23 @@ const User = () => {
 
   console.log(localStorage.getItem("HYD_JWT"))
 
+  // render twice
+  // once when data = null? and once after data returned?
   useEffect(() => {
     // when data is ready
     // add events to state by order
     console.log("inside useEffect")
     if (data) {
+      let events: IEvent[] = []
       for (let event of data.eventsForToday) {
         const { name, description } = event
-        dispatch(addEvent({ name, description }))
+        events = [...events, { name, description }]
       }
+      dispatch(setEvents(events))
     }
   }, [data, dispatch])
 
+  // TODO loading spinner
   if (loading) return <h1>Loading...</h1>
 
   if (error) return <h1>{error.message}</h1>
@@ -51,7 +55,7 @@ const User = () => {
       <Button onClick={logoutHandler}>Log Out</Button>
       <Canvas />
       <EventDialog />
-      <ShareDialog />
+      <ShareDialogContainer />
     </>
   )
 }

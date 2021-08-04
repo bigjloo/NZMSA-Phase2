@@ -1,28 +1,36 @@
+import { Link } from "react-router-dom"
+
 import Dialog from "@material-ui/core/Dialog"
-import LoginDialogContent from "./LoginDialogContent"
-import { useAppSelector, useAppDispatch } from "../../hooks/storeHooks"
-import { toggleLoginDialog } from "../../store/dialogReducer"
-import { login } from "../../store/authReducer"
-import { CONFIGURATION } from "../../apollo-client/apollo"
+import DialogContent from "@material-ui/core/DialogContent"
+import TextField from "@material-ui/core/TextField"
+import Button from "@material-ui/core/Button"
+import DialogActions from "@material-ui/core/DialogActions"
 
-const LoginDialog = () => {
-  const dispatch = useAppDispatch()
-  const openLoginDialog = useAppSelector<boolean>(
-    (state) => state.dialog.isLoginDialogOpen
-  )
-  const toggleHandler = () => dispatch(toggleLoginDialog())
+export type LoginDialogContentProps = {
+  githubAuthURL: string
+  openLoginDialog: boolean
+  login: () => void
+  signup: () => void
+  toggleHandler: () => void
+}
 
-  const handleLogin = () => dispatch(login())
-
-  const handleSignUp = () => {}
+const LoginDialog = (props: LoginDialogContentProps) => {
+  const { githubAuthURL, openLoginDialog, signup, login, toggleHandler } = props
 
   return (
     <Dialog open={openLoginDialog} onClose={toggleHandler}>
-      <LoginDialogContent
-        githubAuthURL={CONFIGURATION.GITHUB_AUTHORIZE_URL}
-        login={handleLogin}
-        signup={handleSignUp}
-      />
+      <DialogContent>
+        <Button>
+          <Link to={githubAuthURL}>GITHUB LOGIN</Link>
+        </Button>
+        <br />
+        <TextField label="login" type="text" fullWidth />
+        <TextField label="password" type="password" fullWidth />
+        <DialogActions>
+          <Button onClick={signup}>Signup</Button>
+          <Button onClick={login}>Login</Button>
+        </DialogActions>
+      </DialogContent>
     </Dialog>
   )
 }

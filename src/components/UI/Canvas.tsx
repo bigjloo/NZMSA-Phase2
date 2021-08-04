@@ -1,13 +1,14 @@
-import EventTimeline from "../Event/EventTimeline";
-import { styled } from "@material-ui/core/styles";
+import EventTimeline from "../Event/EventTimeline"
 
 const Canvas = () => {
+  // TOOD
+  // styling
   return (
     <>
       <h1>Canvas</h1>;
       <EventTimeline />
     </>
-  );
-};
+  )
+}
 
-export default Canvas;
+export default Canvas

@@ -1,67 +1,67 @@
 import { ChangeEvent } from "react"
 
+import TextField from "@material-ui/core/TextField"
+import Button from "@material-ui/core/Button"
 import Dialog from "@material-ui/core/Dialog"
+import DialogContent from "@material-ui/core/DialogContent"
+import DialogActions from "@material-ui/core/DialogActions"
+import DialogTitle from "@material-ui/core/DialogTitle"
 
-import { useAppDispatch, useAppSelector } from "../../hooks/storeHooks"
-import { toggleEventDialog } from "../../store/dialogReducer"
-import { addEvent, removeEvent } from "../../store/eventReducer"
-import {
-  handleNameInputChange,
-  handleDescriptionInputChange,
-  resetInputFields,
-} from "../../store/formInputReducer"
-
-import EventDialogContent from "./EventDialogContent"
 import EventList from "./EventList"
 
-interface AddEventPayload {
-  name: string
-  description: string
+// import { EventDialogContentProps } from "../../common/types_interfaces"
+
+export type EventDialogContentProps = {
+  nameInput: string
+  descriptionInput: string
+  openEventDialog: boolean
+  onAddEvent: () => void
+  toggleDialogHandler: () => void
+  toggleHandler: () => void
+  onNameInputChange: (event: ChangeEvent<HTMLInputElement>) => void
+  onDescriptionInputChange: (input: ChangeEvent<HTMLInputElement>) => void
+  onRemoveEvent: (index: number) => void
 }
 
-const EventDialog = () => {
-  const [nameInput, descriptionInput, openEventDialog] = useAppSelector(
-    (state) => [
-      state.formInput.name,
-      state.formInput.description,
-      state.dialog.isEventDialogOpen,
-    ]
-  )
-
-  const dispatch = useAppDispatch()
-
-  const onNameInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    dispatch(handleNameInputChange(event.target.value))
-  }
-
-  const onDescriptionInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    dispatch(handleDescriptionInputChange(event.target.value))
-  }
-
-  const toggleHandler = () => dispatch(toggleEventDialog())
-
-  const onAddEvent = () => {
-    const payload: AddEventPayload = {
-      name: nameInput,
-      description: descriptionInput,
-    }
-    dispatch(addEvent(payload))
-    dispatch(resetInputFields())
-  }
-
-  const onRemoveEvent = (index: number) => dispatch(removeEvent(index))
+const EventDialog = (props: EventDialogContentProps) => {
+  const {
+    nameInput,
+    descriptionInput,
+    openEventDialog,
+    onNameInputChange,
+    onDescriptionInputChange,
+    onAddEvent,
+    toggleDialogHandler,
+    toggleHandler,
+    onRemoveEvent,
+  } = props
 
   return (
     <Dialog open={openEventDialog} onClose={toggleHandler}>
       <EventList onRemoveEvent={onRemoveEvent} />
-      <EventDialogContent
-        nameInput={nameInput}
-        descriptionInput={descriptionInput}
-        onAddEvent={onAddEvent}
-        toggleDialogHandler={toggleHandler}
-        onNameInputChange={onNameInputChange}
-        onDescriptionInputChange={onDescriptionInputChange}
-      />
+      <DialogContent>
+        <DialogTitle>Add Event</DialogTitle>
+        <TextField
+          value={nameInput}
+          label="Event Name"
+          autoFocus
+          type="text"
+          fullWidth
+          onChange={onNameInputChange}
+        />
+        <TextField
+          value={descriptionInput}
+          label="Description"
+          fullWidth
+          onChange={onDescriptionInputChange}
+        />
+        <DialogActions>
+          <Button variant="outlined" onClick={onAddEvent}>
+            Add Event
+          </Button>
+          <Button onClick={toggleDialogHandler}>Close</Button>
+        </DialogActions>
+      </DialogContent>
     </Dialog>
   )
 }

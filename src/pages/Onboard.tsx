@@ -1,10 +1,11 @@
-import LoginDialog from "../components/Login/LoginDialog"
+import LoginDialogContainer from "../components/Login/LoginDialogContainer"
 
+// Short tutorial or onboarding user front page
 const Onboard = () => {
   return (
     <>
       <h1>Onboard</h1>
-      <LoginDialog />
+      <LoginDialogContainer />
     </>
   )
 }

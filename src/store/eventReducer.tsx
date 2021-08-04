@@ -1,24 +1,31 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IEventsState, IEvent } from "../common/types_interfaces";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { IEvent } from "../common/types_interfaces"
 
-const initialEventState: IEventsState = { events: [] };
+export interface IEventsState {
+  events: IEvent[]
+}
+
+const initialEventState: IEventsState = { events: [] }
 
 const eventsSlice = createSlice({
-  name: "events",
+  name: "Events",
   initialState: initialEventState,
   reducers: {
     addEvent(state, action: PayloadAction<IEvent>) {
-      state.events = [...state.events, action.payload];
+      state.events = [...state.events, action.payload]
     },
     removeEvent(state, action: PayloadAction<number>) {
-      state.events.splice(action.payload, 1);
+      state.events.splice(action.payload, 1)
     },
     editEvent(state, action) {},
     // TODO
     // Edit event.name or event.description
+    setEvents(state, action: PayloadAction<Array<IEvent>>) {
+      state.events = [...action.payload]
+    },
   },
-});
+})
 
-export const { addEvent, removeEvent } = eventsSlice.actions;
+export const { addEvent, removeEvent, setEvents } = eventsSlice.actions
 
-export default eventsSlice.reducer;
+export default eventsSlice.reducer

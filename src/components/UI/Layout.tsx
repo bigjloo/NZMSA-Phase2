@@ -1,25 +1,23 @@
 import { ReactNode } from "react"
-import BottomSticky from "./BottomSticky"
-
 import Container from "@material-ui/core/Container"
 import { styled } from "@material-ui/core/styles"
+import BottomStickyNavigation from "./BottomSticky"
 
 type LayoutProps = {
   children: ReactNode
 }
 
-const ContainerWithBorders = styled(Container)({
-  border: "1px solid red",
+const StyledContainer = styled(Container)({
   height: "100vh",
   maxWidth: "xs",
 })
 
 const Layout = ({ children }: LayoutProps) => {
   return (
-    <ContainerWithBorders>
+    <StyledContainer>
       <main>{children}</main>
-      <BottomSticky />
-    </ContainerWithBorders>
+      <BottomStickyNavigation />
+    </StyledContainer>
   )
 }
 
