@@ -1,4 +1,4 @@
-import { useAppSelector } from "../../hooks/storeHooks"
+import { useAppSelector, useAppDispatch } from "../../hooks/storeHooks"
 
 import { styled } from "@material-ui/core/styles"
 import BottomNavigation from "@material-ui/core/BottomNavigation"
@@ -15,8 +15,11 @@ const StyledBottomNavigation = styled(BottomNavigation)({
   backgroundColor: "#EEEEEE",
 })
 
-const BottomStickyNavigation = () => {
+//TODO move logic to here
+
+const NavigationContainer = () => {
   const isAuth = useAppSelector<boolean>((store) => store.auth.isAuth)
+  const dispatch = useAppDispatch()
 
   return (
     <StyledBottomNavigation showLabels>
@@ -25,4 +28,4 @@ const BottomStickyNavigation = () => {
   )
 }
 
-export default BottomStickyNavigation
+export default NavigationContainer

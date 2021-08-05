@@ -1,4 +1,4 @@
-import EventTimeline from "../Event/EventTimeline"
+import EventTimeline from "../EventTimeline"
 
 const Canvas = () => {
   // TOOD

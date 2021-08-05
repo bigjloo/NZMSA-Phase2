@@ -22,13 +22,11 @@ const ShareDialogContainer = () => {
     setPublishKey(key)
   }, [])
 
-  const publishURL = `${CONFIGURATION.SITE_URL}share/${publishKey}`
+  const publishURL = `${CONFIGURATION.LOCAL_FRONTEND}share/${publishKey}`
 
-  const toggleHandler = () => {
-    dispatch(toggleShareDialog())
-  }
+  const toggleHandler = () => dispatch(toggleShareDialog())
 
-  const copyToClipboard = () => {
+  const onCopyToClipboard = () => {
     navigator.clipboard.writeText(publishURL)
     // TODO
     // show some alert that text have been copied
@@ -39,7 +37,7 @@ const ShareDialogContainer = () => {
     <ShareDialog
       publishURL={publishURL}
       openShareDialog={openShareDialog}
-      copyToClipboard={copyToClipboard}
+      onCopyToClipboard={onCopyToClipboard}
       toggleHandler={toggleHandler}
     />
   )

@@ -1,7 +1,7 @@
 import { ReactNode } from "react"
 import Container from "@material-ui/core/Container"
 import { styled } from "@material-ui/core/styles"
-import BottomStickyNavigation from "./BottomSticky"
+import NavigationContainer from "../Navigation/NavigationContainer"
 
 type LayoutProps = {
   children: ReactNode
@@ -16,7 +16,7 @@ const Layout = ({ children }: LayoutProps) => {
   return (
     <StyledContainer>
       <main>{children}</main>
-      <BottomStickyNavigation />
+      <NavigationContainer />
     </StyledContainer>
   )
 }

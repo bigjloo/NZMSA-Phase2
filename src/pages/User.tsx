@@ -9,7 +9,7 @@ import { setEvents } from "../store/eventReducer"
 
 import { GET_EVENTS_BY_USER_TODAY } from "../apollo-client/query"
 
-import EventDialog from "../components/Event/EventDialog"
+import EventDialogContainer from "../components/Event/EventDialogContainer"
 import ShareDialogContainer from "../components/Share/ShareDialogContainer"
 import Canvas from "../components/UI/Canvas"
 import { IEvent } from "../common/types_interfaces"
@@ -37,8 +37,10 @@ const User = () => {
     if (data) {
       let events: IEvent[] = []
       for (let event of data.eventsForToday) {
-        const { name, description } = event
-        events = [...events, { name, description }]
+        events = [
+          ...events,
+          { name: event.name, description: event.description },
+        ]
       }
       dispatch(setEvents(events))
     }
@@ -54,7 +56,7 @@ const User = () => {
       <h1>App page</h1>
       <Button onClick={logoutHandler}>Log Out</Button>
       <Canvas />
-      <EventDialog />
+      <EventDialogContainer />
       <ShareDialogContainer />
     </>
   )

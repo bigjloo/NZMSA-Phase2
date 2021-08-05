@@ -1,4 +1,4 @@
-import { useAppSelector } from "../../hooks/storeHooks"
+import { useAppSelector } from "../hooks/storeHooks"
 
 import Timeline from "@material-ui/lab/Timeline"
 import TimelineItem from "@material-ui/lab/TimelineItem"
@@ -9,7 +9,7 @@ import TimelineContent from "@material-ui/lab/TimelineContent"
 import TimelineDot from "@material-ui/lab/TimelineDot"
 import Typography from "@material-ui/core/Typography"
 
-import { IEvent } from "../../common/types_interfaces"
+import { IEvent } from "../common/types_interfaces"
 
 const EventTimeline = () => {
   const events = useAppSelector<IEvent[]>((store) => store.events.events)

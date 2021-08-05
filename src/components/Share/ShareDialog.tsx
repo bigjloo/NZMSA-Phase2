@@ -10,12 +10,13 @@ import FileCopyIcon from "@material-ui/icons/FileCopy"
 type ShareDialogProps = {
   publishURL: string
   openShareDialog: boolean
-  copyToClipboard: () => void
+  onCopyToClipboard: () => void
   toggleHandler: () => void
 }
 
 const ShareDialog = (props: ShareDialogProps) => {
-  const { publishURL, openShareDialog, copyToClipboard, toggleHandler } = props
+  const { publishURL, openShareDialog, onCopyToClipboard, toggleHandler } =
+    props
 
   return (
     <Dialog open={openShareDialog} onClose={toggleHandler}>
@@ -23,8 +24,8 @@ const ShareDialog = (props: ShareDialogProps) => {
       <DialogContent>
         <DialogContentText>
           <Typography>
-            <span onDoubleClick={copyToClipboard}>{publishURL}</span>
-            <FileCopyIcon onClick={copyToClipboard} />
+            <span onDoubleClick={onCopyToClipboard}>{publishURL}</span>
+            <FileCopyIcon onClick={onCopyToClipboard} />
           </Typography>
         </DialogContentText>
         <DialogActions>
