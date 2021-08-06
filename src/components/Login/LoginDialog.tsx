@@ -22,9 +22,7 @@ const LoginDialog = ({
   return (
     <Dialog open={openLoginDialog} onClose={toggleHandler}>
       <DialogContent>
-        <Button>
-          <a href={githubAuthURL}>GITHUB LOGIN</a>
-        </Button>
+        <a href={githubAuthURL}>GITHUB LOGIN</a>
         <br />
         <TextField label="login" type="text" fullWidth />
         <TextField label="password" type="password" fullWidth />

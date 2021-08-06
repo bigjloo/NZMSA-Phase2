@@ -20,7 +20,7 @@ export const GET_EVENTS_BY_USER_TODAY = gql`
   }
 `
 
-// TO BE IMPLEMENTED
+// USED
 export const GET_EVENTS_BY_PUBLISH_KEY = gql`
   query ($publishKey: String!) {
     day(publishKey: $publishKey) {

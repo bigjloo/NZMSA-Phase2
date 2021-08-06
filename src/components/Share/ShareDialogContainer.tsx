@@ -11,7 +11,7 @@ const ShareDialogContainer = () => {
     state.events.publishKey,
   ])
 
-  const publishURL = `${CONFIGURATION.LOCAL_FRONTEND}share/${publishKey}`
+  const publishURL = `${CONFIGURATION.FRONTEND}share/${publishKey}`
 
   const dispatch = useAppDispatch()
 
@@ -21,8 +21,6 @@ const ShareDialogContainer = () => {
     navigator.clipboard.writeText(publishURL)
     dispatch(openNotification("Copied to clipboard!"))
   }
-  console.log("inside sharedialogcontainer")
-  console.log(publishKey)
 
   return (
     <ShareDialog

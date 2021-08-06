@@ -14,19 +14,16 @@ import { setPublishKey } from "../../store/eventReducer"
 import { openNotification } from "../../store/notificationReducer"
 
 const LoggedInNavigation = () => {
-  // TODO
-  // const [publish] = useMutation()
   const [events, publishKey] = useAppSelector((state) => [
     state.events.events,
     state.events.publishKey,
   ])
+
   const [saveEvents] = useMutation(SET_EVENTS, {
     variables: { events, publishKey },
   })
 
   const dispatch = useAppDispatch()
-
-  const openEventDialog = () => dispatch(toggleEventDialog())
 
   const key = useMemo(() => {
     return [...Array(8)]
@@ -34,18 +31,20 @@ const LoggedInNavigation = () => {
       .join("")
   }, [])
 
+  const openEventDialog = () => dispatch(toggleEventDialog())
+
+  // Save events to backend when ShareDialog is toggled, after
+  // publishkey is set by redux
   useEffect(() => {
     saveEvents()
   }, [publishKey, saveEvents])
 
-  // publishkey not set before setEvents
-  const openShareDialog = async () => {
+  const openShareDialog = () => {
     dispatch(setPublishKey(key))
     dispatch(toggleShareDialog())
   }
 
-  const saveEventsHandler = async () => {
-    console.log("in saveEventsHandler")
+  const saveEventsHandler = () => {
     saveEvents()
     dispatch(openNotification("Events saved!!!"))
   }

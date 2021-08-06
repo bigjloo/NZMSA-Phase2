@@ -11,11 +11,6 @@ import {
 
 import EventDialog from "./EventDialog"
 
-interface AddEventPayload {
-  name: string
-  description: string
-}
-
 const EventDialogContainer = () => {
   const [nameInput, descriptionInput, openEventDialog] = useAppSelector(
     (state) => [

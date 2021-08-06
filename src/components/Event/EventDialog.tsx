@@ -9,8 +9,6 @@ import DialogTitle from "@material-ui/core/DialogTitle"
 
 import EventList from "./EventList"
 
-// import { EventDialogContentProps } from "../../common/types_interfaces"
-
 export type EventDialogContentProps = {
   nameInput: string
   descriptionInput: string

@@ -6,10 +6,11 @@ import LoginDialog from "./LoginDialog"
 import { CONFIGURATION } from "../../apollo-client/apollo"
 
 const LoginDialogContainer = () => {
-  const dispatch = useAppDispatch()
   const openLoginDialog = useAppSelector<boolean>(
     (state) => state.dialog.isLoginDialogOpen
   )
+
+  const dispatch = useAppDispatch()
 
   const toggleHandler = () => dispatch(toggleLoginDialog())
 
