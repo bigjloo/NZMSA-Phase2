@@ -6,6 +6,7 @@ import Button from "@material-ui/core/Button"
 
 import { logout } from "../../store/authReducer"
 import { setEvents } from "../../store/eventReducer"
+import { openNotification } from "../../store/notificationReducer"
 
 import { GET_EVENTS_BY_USER_TODAY } from "../../apollo-client/query"
 
@@ -24,6 +25,7 @@ const User = () => {
 
   const logoutHandler = () => {
     dispatch(logout())
+    dispatch(openNotification("Logged out"))
     localStorage.removeItem("HYD_JWT")
   }
 

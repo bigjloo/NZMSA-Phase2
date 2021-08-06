@@ -11,6 +11,7 @@ import { IEvent } from "../../common/types_interfaces"
 import { useMutation } from "@apollo/client"
 import { SET_EVENTS } from "../../apollo-client/query"
 import { setPublishKey } from "../../store/eventReducer"
+import { openNotification } from "../../store/notificationReducer"
 
 const LoggedInNavigation = () => {
   // TODO
@@ -19,7 +20,7 @@ const LoggedInNavigation = () => {
     state.events.events,
     state.events.publishKey,
   ])
-  const [setEvents] = useMutation(SET_EVENTS, {
+  const [saveEvents] = useMutation(SET_EVENTS, {
     variables: { events, publishKey },
   })
 
@@ -34,8 +35,8 @@ const LoggedInNavigation = () => {
   }, [])
 
   useEffect(() => {
-    setEvents()
-  }, [publishKey, setEvents])
+    saveEvents()
+  }, [publishKey, saveEvents])
 
   // publishkey not set before setEvents
   const openShareDialog = async () => {
@@ -45,7 +46,8 @@ const LoggedInNavigation = () => {
 
   const saveEventsHandler = async () => {
     console.log("in saveEventsHandler")
-    // await setEvents()
+    saveEvents()
+    dispatch(openNotification("Events saved!!!"))
   }
 
   return (

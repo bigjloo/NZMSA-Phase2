@@ -5,6 +5,7 @@ import { GET_EVENTS_BY_PUBLISH_KEY } from "../apollo-client/query"
 import { setEvents } from "../store/eventReducer"
 import { useAppDispatch } from "../store/storeHooks"
 import EventTimeline from "../components/Event/EventTimeline"
+import BackdropContainer from "../components/UI/BackdropContainer"
 
 type PublishContentParams = {
   publishKey: string
@@ -30,7 +31,7 @@ const PublishContent = () => {
     }
   }, [data, dispatch])
 
-  if (loading) return <h1>Loading...</h1>
+  if (loading) return <BackdropContainer loading={loading} />
 
   if (error) return <h1>{error.message}</h1>
 

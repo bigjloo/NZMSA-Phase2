@@ -3,6 +3,7 @@ import { useAppSelector, useAppDispatch } from "../../store/storeHooks"
 import { toggleShareDialog } from "../../store/dialogReducer"
 import ShareDialog from "./ShareDialog"
 import { CONFIGURATION } from "../../apollo-client/apollo"
+import { openNotification } from "../../store/notificationReducer"
 
 const ShareDialogContainer = () => {
   const [openShareDialog, publishKey] = useAppSelector((state) => [
@@ -18,9 +19,7 @@ const ShareDialogContainer = () => {
 
   const onCopyToClipboard = () => {
     navigator.clipboard.writeText(publishURL)
-    // TODO
-    // show some alert that text have been copied
-    // toggleCopyAlert()
+    dispatch(openNotification("Copied to clipboard!"))
   }
   console.log("inside sharedialogcontainer")
   console.log(publishKey)
