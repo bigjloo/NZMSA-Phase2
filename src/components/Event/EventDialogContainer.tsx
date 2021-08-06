@@ -1,5 +1,5 @@
 import { ChangeEvent } from "react"
-import { useAppDispatch, useAppSelector } from "../../hooks/storeHooks"
+import { useAppDispatch, useAppSelector } from "../../store/storeHooks"
 
 import { toggleEventDialog } from "../../store/dialogReducer"
 import { addEvent, removeEvent } from "../../store/eventReducer"
@@ -38,7 +38,7 @@ const EventDialogContainer = () => {
   const toggleHandler = () => dispatch(toggleEventDialog())
 
   const onAddEvent = () => {
-    const payload: AddEventPayload = {
+    const payload = {
       name: nameInput,
       description: descriptionInput,
     }

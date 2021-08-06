@@ -1,11 +1,11 @@
 import { useEffect } from "react"
 import { Route, Switch } from "react-router-dom"
-import { useAppSelector } from "./hooks/storeHooks"
+import { useAppSelector } from "./store/storeHooks"
 
-import Layout from "./components/UI/Layout"
-import User from "./pages/User"
+import Layout from "./components/Layout/Layout"
+import User from "./components/User/User"
 import Onboard from "./pages/Onboard"
-import GithubLoginProcessor from "./components/GithubLoginProcessor"
+import { GithubLoginProcessor } from "./hooks/api"
 import PublishedContent from "./pages/PublishedContent"
 
 function App() {
@@ -15,15 +15,15 @@ function App() {
     //check and validate user to set isAuth
     const token = localStorage.getItem("HYD_JWT")
     if (token) {
-      // check with backend 
-      // set isAuth to true 
+      // check with backend
+      // set isAuth to true
     }
   }, [])
 
   return (
     <Layout>
       <Switch>
-        <Route path="/" exact>
+        <Route exact path="/">
           {isAuth ? <User /> : <Onboard />}
         </Route>
         <Route path="/signin/callback/">

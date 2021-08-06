@@ -1,4 +1,4 @@
-import { useAppDispatch } from "../../hooks/storeHooks"
+import { useAppDispatch } from "../../store/storeHooks"
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction"
 import { toggleLoginDialog } from "../../store/dialogReducer"
 

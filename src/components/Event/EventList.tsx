@@ -1,4 +1,4 @@
-import { useAppSelector } from "../../hooks/storeHooks"
+import { useAppSelector } from "../../store/storeHooks"
 
 import List from "@material-ui/core/List"
 import ListItem from "@material-ui/core/ListItem"
@@ -23,7 +23,7 @@ const EventList = ({ onRemoveEvent }: EventListProps) => {
             <ListItemText primary={event.name} secondary={event.description} />
             <Button onClick={() => onRemoveEvent(index)}>x</Button>
           </ListItem>
-          <Divider variant="middle" component="li" />
+          <Divider variant="middle" component="li" key={`d-${index}`} />
         </>
       ))}
     </List>

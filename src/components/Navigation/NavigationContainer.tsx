@@ -1,4 +1,4 @@
-import { useAppSelector, useAppDispatch } from "../../hooks/storeHooks"
+import { useAppSelector, useAppDispatch } from "../../store/storeHooks"
 
 import { styled } from "@material-ui/core/styles"
 import BottomNavigation from "@material-ui/core/BottomNavigation"

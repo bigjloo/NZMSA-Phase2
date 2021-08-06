@@ -1,4 +1,4 @@
-import { useAppSelector } from "../hooks/storeHooks"
+import { useAppSelector } from "../../store/storeHooks"
 
 import Timeline from "@material-ui/lab/Timeline"
 import TimelineItem from "@material-ui/lab/TimelineItem"
@@ -9,15 +9,15 @@ import TimelineContent from "@material-ui/lab/TimelineContent"
 import TimelineDot from "@material-ui/lab/TimelineDot"
 import Typography from "@material-ui/core/Typography"
 
-import { IEvent } from "../common/types_interfaces"
+import { IEvent } from "../../common/types_interfaces"
 
 const EventTimeline = () => {
   const events = useAppSelector<IEvent[]>((store) => store.events.events)
 
   return (
     <Timeline align="alternate">
-      {events.map((event) => (
-        <TimelineItem>
+      {events.map((event, index) => (
+        <TimelineItem key={index}>
           <TimelineOppositeContent>
             <Typography variant="subtitle2">{event.name}</Typography>
           </TimelineOppositeContent>

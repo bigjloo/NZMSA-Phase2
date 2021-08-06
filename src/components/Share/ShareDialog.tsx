@@ -14,22 +14,24 @@ type ShareDialogProps = {
   toggleHandler: () => void
 }
 
-const ShareDialog = (props: ShareDialogProps) => {
-  const { publishURL, openShareDialog, onCopyToClipboard, toggleHandler } =
-    props
-
+const ShareDialog = ({
+  publishURL,
+  openShareDialog,
+  onCopyToClipboard,
+  toggleHandler,
+}: ShareDialogProps) => {
   return (
     <Dialog open={openShareDialog} onClose={toggleHandler}>
       <DialogTitle>Share</DialogTitle>
       <DialogContent>
         <DialogContentText>
-          <Typography>
-            <span onDoubleClick={onCopyToClipboard}>{publishURL}</span>
-            <FileCopyIcon onClick={onCopyToClipboard} />
+          <Typography onDoubleClick={onCopyToClipboard}>
+            {publishURL}
           </Typography>
+          {/* <FileCopyIcon onClick={onCopyToClipboard} /> */}
         </DialogContentText>
         <DialogActions>
-          <Button>Share to friends</Button>
+          <Button onClick={onCopyToClipboard}>Copy to clipboard</Button>
         </DialogActions>
       </DialogContent>
     </Dialog>

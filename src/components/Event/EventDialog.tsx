@@ -23,19 +23,17 @@ export type EventDialogContentProps = {
   onRemoveEvent: (index: number) => void
 }
 
-const EventDialog = (props: EventDialogContentProps) => {
-  const {
-    nameInput,
-    descriptionInput,
-    openEventDialog,
-    onNameInputChange,
-    onDescriptionInputChange,
-    onAddEvent,
-    toggleDialogHandler,
-    toggleHandler,
-    onRemoveEvent,
-  } = props
-
+const EventDialog = ({
+  nameInput,
+  descriptionInput,
+  openEventDialog,
+  onNameInputChange,
+  onDescriptionInputChange,
+  onAddEvent,
+  toggleDialogHandler,
+  toggleHandler,
+  onRemoveEvent,
+}: EventDialogContentProps) => {
   return (
     <Dialog open={openEventDialog} onClose={toggleHandler}>
       <EventList onRemoveEvent={onRemoveEvent} />

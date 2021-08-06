@@ -1,6 +1,6 @@
-import EventTimeline from "../EventTimeline"
+import EventTimeline from "../Event/EventTimeline"
 
-const Canvas = () => {
+const UserCanvas = () => {
   // TOOD
   // styling
   return (
@@ -11,4 +11,4 @@ const Canvas = () => {
   )
 }
 
-export default Canvas
+export default UserCanvas

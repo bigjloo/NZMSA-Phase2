@@ -9,30 +9,10 @@ export const LOGIN_WITH_GITHUB_CODE = gql`
   }
 `
 
-// TODO
-export const SAVE_EVENTS = gql`
-  mutation {
-    saveEvent(input: { events: $EVENTS })
-  }
-`
-
-// export const GET_DAY = gql`
-//   query {
-//     dayByUser {
-//       date
-//       id
-//       events {
-//         name
-//         description
-//       }
-//     }
-//   }
-// `
-
 // USED
 export const GET_EVENTS_BY_USER_TODAY = gql`
   query {
-    eventsForToday {
+    todaysEvents: eventsForToday {
       name
       description
       order
@@ -42,10 +22,23 @@ export const GET_EVENTS_BY_USER_TODAY = gql`
 
 // TO BE IMPLEMENTED
 export const GET_EVENTS_BY_PUBLISH_KEY = gql`
-  query ($PUBLISHKEY: String!) {
-    events(input: { publishKey: $PUBLISHKEY }) {
-      name
-      description
+  query ($publishKey: String!) {
+    day(publishKey: $publishKey) {
+      date
+      user {
+        name
+      }
+      events {
+        name
+        description
+      }
     }
+  }
+`
+
+// USED
+export const SET_EVENTS = gql`
+  mutation ($events: [EventInput], $publishKey: String) {
+    addEvents(input: { events: $events, publishKey: $publishKey })
   }
 `

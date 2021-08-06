@@ -3,9 +3,10 @@ import { IEvent } from "../common/types_interfaces"
 
 export interface IEventsState {
   events: IEvent[]
+  publishKey: string
 }
 
-const initialEventState: IEventsState = { events: [] }
+const initialEventState: IEventsState = { events: [], publishKey: "" }
 
 const eventsSlice = createSlice({
   name: "Events",
@@ -20,12 +21,23 @@ const eventsSlice = createSlice({
     editEvent(state, action) {},
     // TODO
     // Edit event.name or event.description
-    setEvents(state, action: PayloadAction<Array<IEvent>>) {
-      state.events = [...action.payload]
+    setEvents(state, action: PayloadAction<any>) {
+      let events: IEvent[] = []
+      for (let event of action.payload) {
+        events = [
+          ...events,
+          { name: event.name, description: event.description },
+        ]
+      }
+      state.events = [...events]
+    },
+    setPublishKey(state, action) {
+      state.publishKey = action.payload
     },
   },
 })
 
-export const { addEvent, removeEvent, setEvents } = eventsSlice.actions
+export const { addEvent, removeEvent, setEvents, setPublishKey } =
+  eventsSlice.actions
 
 export default eventsSlice.reducer

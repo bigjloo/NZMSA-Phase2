@@ -1,60 +1,55 @@
-// import React, { useEffect } from "react"
-// import { useMutation, useQuery } from "@apollo/client"
-// import { CONFIGURATION } from "../apollo-client/apollo"
-// import { LOGIN_WITH_GITHUB_CODE } from "../apollo-client/query"
+import { useEffect } from "react"
+import { useLocation, Redirect } from "react-router-dom"
+import { useMutation } from "@apollo/client"
+import { LOGIN_WITH_GITHUB_CODE } from "../apollo-client/query"
 
-// export const AddUser = () => {
-//   const [addUser, { data }] = useMutation(ADD_DAY)
+import { useAppSelector } from "../store/storeHooks"
+import { useAppDispatch } from "../store/storeHooks"
+import { login } from "../store/authReducer"
 
-//   const add_user = async () => {
-//     const response = await addUser({
-//       variables: {
-//         USERID: 4,
-//       },
-//     })
-//     if (response.errors) return <h1>error</h1>
+import BackdropContainer from "../components/UI/BackdropContainer"
 
-//     if (response.data) console.log(data)
-//   }
+export const GithubLoginProcessor = () => {
+  const dispatch = useAppDispatch()
+  const isAuth = useAppSelector<boolean>((state) => state.auth.isAuth)
 
-//   return <button onClick={add_user}>add user</button>
-// }
+  const search = useLocation().search
+  const code = search.slice(6, search.length)
 
-// export const LoginWithGitHubCode = ({ ghcode }: { ghcode: string }) => {
-//   const [getToken, { data, loading, error }] = useMutation(
-//     LOGIN_WITH_GITHUB_CODE,
-//     {
-//       variables: { code: ghcode },
-//     }
-//   )
+  const [getToken, { error, loading }] = useMutation(LOGIN_WITH_GITHUB_CODE, {
+    variables: { code },
+  })
+  console.log("inside github login process")
+  console.log(error)
+  console.log(loading)
+  console.log(isAuth)
 
-//   async function submitToken() {
-//     const response = await getToken()
-//     console.log(response)
-//     if (response.errors) {
-//       console.log(error)
-//     }
-//   }
+  // 1st time error ==  undefined, loading == false
+  // 2nd time loading == true, error == undefined
+  // 3rd time error ==  undefined, loading == false // data got back ??
+  // 4th time error ==  undefined, loading == false // isAuth == true ??
+  // renders User.tsx
+  // console log success here? useEffect in GHLoginProcessor only runs once
+  // data in User.tsx is returned, rerenders User.tsx. once when promise, another when isAuth = true
 
-//   async function fetchUsers() {}
+  useEffect(() => {
+    // ran once
+    const loginWithGitHubOAuth = async () => {
+      const response = await getToken()
+      console.log("waiting promise")
+      if (error) return
+      const jwtToken = response.data.login.jwt
+      localStorage.setItem("HYD_JWT", jwtToken)
+      dispatch(login())
+      console.log("login success")
+    }
+    loginWithGitHubOAuth()
+  }, [getToken, dispatch, error])
 
-//   if (loading) return <p>Loading...</p>
-
-//   if (error) return <p>Error:</p>
-
-//   if (data) console.log(data)
-
-//   return (
-//     <>
-//       <h1>Login w Github</h1>
-//       <button onClick={submitToken} type="button">
-//         get token
-//       </button>
-//       <button onClick={fetchUsers} type="button">
-//         fetch users
-//       </button>
-//     </>
-//   )
-// }
-
-export {}
+  return (
+    <>
+      {loading && <BackdropContainer loading={loading} />}
+      {isAuth && <Redirect to="/" />}
+    </>
+  )
+}

@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom"
-
 import Dialog from "@material-ui/core/Dialog"
 import DialogContent from "@material-ui/core/DialogContent"
 import TextField from "@material-ui/core/TextField"
@@ -14,14 +12,18 @@ export type LoginDialogContentProps = {
   toggleHandler: () => void
 }
 
-const LoginDialog = (props: LoginDialogContentProps) => {
-  const { githubAuthURL, openLoginDialog, signup, login, toggleHandler } = props
-
+const LoginDialog = ({
+  githubAuthURL,
+  openLoginDialog,
+  signup,
+  login,
+  toggleHandler,
+}: LoginDialogContentProps) => {
   return (
     <Dialog open={openLoginDialog} onClose={toggleHandler}>
       <DialogContent>
         <Button>
-          <Link to={githubAuthURL}>GITHUB LOGIN</Link>
+          <a href={githubAuthURL}>GITHUB LOGIN</a>
         </Button>
         <br />
         <TextField label="login" type="text" fullWidth />

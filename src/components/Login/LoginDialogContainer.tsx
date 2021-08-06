@@ -1,4 +1,4 @@
-import { useAppSelector, useAppDispatch } from "../../hooks/storeHooks"
+import { useAppSelector, useAppDispatch } from "../../store/storeHooks"
 
 import { toggleLoginDialog } from "../../store/dialogReducer"
 import { login } from "../../store/authReducer"
