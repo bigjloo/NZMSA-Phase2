@@ -13,14 +13,10 @@ import { GET_EVENTS_BY_USER_TODAY } from "../../apollo-client/query"
 import EventDialogContainer from "../Event/EventDialogContainer"
 import ShareDialogContainer from "../Share/ShareDialogContainer"
 import UserCanvas from "./UserCanvas"
-import BackdropContainer from "../UI/BackdropContainer"
-import { IEvent } from "../../common/types_interfaces"
 
 const User = () => {
-  // Change query to retrieve day/event
   const { data, error } = useQuery(GET_EVENTS_BY_USER_TODAY)
 
-  // const isAuth = useAppSelector<boolean>((state) => state.auth.isAuth)
   const dispatch = useAppDispatch()
 
   const logoutHandler = () => {
@@ -31,7 +27,6 @@ const User = () => {
 
   console.log(localStorage.getItem("HYD_JWT"))
 
-  // Optimize to verify token and return events for the day
   useEffect(() => {
     console.log("inside USer.tsx useEffect")
     if (data) {

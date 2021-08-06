@@ -5,7 +5,6 @@ import DialogContentText from "@material-ui/core/DialogContentText"
 import DialogTitle from "@material-ui/core/DialogTitle"
 import Button from "@material-ui/core/Button"
 import Typography from "@material-ui/core/Typography"
-import FileCopyIcon from "@material-ui/icons/FileCopy"
 
 type ShareDialogProps = {
   publishURL: string
@@ -28,7 +27,6 @@ const ShareDialog = ({
           <Typography onDoubleClick={onCopyToClipboard}>
             {publishURL}
           </Typography>
-          {/* <FileCopyIcon onClick={onCopyToClipboard} /> */}
         </DialogContentText>
         <DialogActions>
           <Button onClick={onCopyToClipboard}>Copy to clipboard</Button>

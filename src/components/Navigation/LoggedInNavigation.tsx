@@ -33,12 +33,6 @@ const LoggedInNavigation = () => {
 
   const openEventDialog = () => dispatch(toggleEventDialog())
 
-  // Save events to backend when ShareDialog is toggled, after
-  // publishkey is set by redux
-  useEffect(() => {
-    saveEvents()
-  }, [publishKey, saveEvents])
-
   const openShareDialog = () => {
     dispatch(setPublishKey(key))
     dispatch(toggleShareDialog())
@@ -48,6 +42,12 @@ const LoggedInNavigation = () => {
     saveEvents()
     dispatch(openNotification("Events saved!!!"))
   }
+
+  // Save events to backend when ShareDialog is toggled, after
+  // publishkey is set by redux
+  useEffect(() => {
+    saveEvents()
+  }, [publishKey, saveEvents])
 
   return (
     <>
