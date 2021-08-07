@@ -1,6 +1,6 @@
-import { useEffect, useCallback } from "react"
+import { useCallback } from "react"
 import { setAspectRatio } from "../../store/cameraReducer"
-import { useAppDispatch, useAppSelector } from "../../store/storeHooks"
+import { useAppDispatch } from "../../store/storeHooks"
 
 // Credits to: https://blog.logrocket.com/responsive-camera-component-react-hooks/
 export function useCardRatio(initialRatio: number) {
@@ -18,9 +18,9 @@ export function useCardRatio(initialRatio: number) {
     [dispatch]
   )
 
-  useEffect(() => {
-    dispatch(setAspectRatio(initialRatio))
-  }, [initialRatio, dispatch])
+  // useEffect(() => {
+  //   dispatch(setAspectRatio(initialRatio))
+  // }, [initialRatio, dispatch])
 
   return [calculateRatio]
 }
