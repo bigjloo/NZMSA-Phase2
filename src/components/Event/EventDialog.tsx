@@ -8,6 +8,7 @@ import DialogActions from "@material-ui/core/DialogActions"
 import DialogTitle from "@material-ui/core/DialogTitle"
 
 import EventList from "./EventList"
+import CameraContainer from "../MediaCapture/CameraContainer"
 
 export type EventDialogContentProps = {
   nameInput: string
@@ -51,6 +52,7 @@ const EventDialog = ({
           fullWidth
           onChange={onDescriptionInputChange}
         />
+        <CameraContainer />
         <DialogActions>
           <Button variant="outlined" onClick={onAddEvent}>
             Add Event
