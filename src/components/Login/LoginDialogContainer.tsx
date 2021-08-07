@@ -15,7 +15,6 @@ const LoginDialogContainer = () => {
   const toggleHandler = () => dispatch(toggleLoginDialog())
 
   const handleLogin = () => dispatch(login())
-
   // TODO
   const handleSignUp = () => {}
 

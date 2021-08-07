@@ -4,7 +4,6 @@ import { toggleLoginDialog } from "../../store/dialogReducer"
 
 const NotLoggedInNavigation = () => {
   const dispatch = useAppDispatch()
-
   const openLoginDialog = () => dispatch(toggleLoginDialog())
 
   return (

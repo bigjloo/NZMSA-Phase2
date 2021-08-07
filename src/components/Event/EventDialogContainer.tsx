@@ -22,16 +22,16 @@ const EventDialogContainer = () => {
 
   const dispatch = useAppDispatch()
 
+  const toggleHandler = () => dispatch(toggleEventDialog())
+
   const onNameInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     dispatch(handleNameInputChange(event.target.value))
   }
-
   const onDescriptionInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     dispatch(handleDescriptionInputChange(event.target.value))
   }
 
-  const toggleHandler = () => dispatch(toggleEventDialog())
-
+  const onRemoveEvent = (index: number) => dispatch(removeEvent(index))
   const onAddEvent = () => {
     const payload = {
       name: nameInput,
@@ -40,8 +40,6 @@ const EventDialogContainer = () => {
     dispatch(addEvent(payload))
     dispatch(resetInputFields())
   }
-
-  const onRemoveEvent = (index: number) => dispatch(removeEvent(index))
 
   return (
     <EventDialog
