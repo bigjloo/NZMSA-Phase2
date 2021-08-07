@@ -10,6 +10,7 @@ import {
 } from "../../store/formInputReducer"
 
 import EventDialog from "./EventDialog"
+import { setCardImage } from "../../store/cameraReducer"
 
 const EventDialogContainer = () => {
   const [nameInput, descriptionInput, openEventDialog, photo] = useAppSelector(
@@ -23,7 +24,10 @@ const EventDialogContainer = () => {
 
   const dispatch = useAppDispatch()
 
-  const toggleHandler = () => dispatch(toggleEventDialog())
+  const toggleHandler = () => {
+    dispatch(toggleEventDialog())
+    dispatch(setCardImage(undefined))
+  }
 
   const onNameInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     dispatch(handleNameInputChange(event.target.value))

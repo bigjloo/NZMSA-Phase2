@@ -22,12 +22,12 @@ const CameraContainer = () => {
     const onCapture = (blob) => dispatch(setCardImage(blob))
     const onClear = () => dispatch(setCardImage(undefined))
 
+    console.log(cardImage)
     // cardImage  = true after first shot that why it is rendered
     return (
       <>
           {cardImage && (
             <div>
-              {/* <h2>Preview</h2> */}
               <Preview src={cardImage && URL.createObjectURL(cardImage)} />
             </div>
           )}
