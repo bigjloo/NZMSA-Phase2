@@ -75,9 +75,9 @@ export const Wrapper = styled.div`
 export const Container = styled.div`
   position: relative;
   width: 100%;
-  max-width: ${({ maxWidth }: { maxWidth: number }) =>
+  max-width: ${({ maxWidth }) =>
     maxWidth && `${maxWidth}px`};
-  max-height: ${({ maxHeight }: { maxHeight: number }) =>
+  max-height: ${({ maxHeight }) =>
     maxHeight && `${maxHeight}px`};
   overflow: hidden;
 `
@@ -119,7 +119,7 @@ export const Flash = styled.div`
   background-color: #ffffff;
   opacity: 0;
 
-  ${({ flash }: { flash: any }) => {
+  ${({ flash }) => {
     if (flash) {
       return css`
         animation: ${flashAnimation} 750ms ease-out;
