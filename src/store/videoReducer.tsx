@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 const initialVideoState = {
   container: { width: 0, height: 0 },
@@ -11,18 +11,21 @@ const videoSlice = createSlice({
   name: "video",
   initialState: initialVideoState,
   reducers: {
-    setContainer(state, action) {
+    setContainer(
+      state,
+      action: PayloadAction<{ width: number; height: number }>
+    ) {
       state.container.height = action.payload.height
       state.container.width = action.payload.width
     },
-    setIsVideoPlaying(state) {
-      state.isVideoPlaying = !state.isVideoPlaying
+    setIsVideoPlaying(state, action: PayloadAction<boolean>) {
+      state.isVideoPlaying = action.payload
     },
-    setIsCanvasEmpty(state) {
-      state.isCanvasEmpty = !state.isCanvasEmpty
+    setIsCanvasEmpty(state, action: PayloadAction<boolean>) {
+      state.isCanvasEmpty = action.payload
     },
-    setIsFlashing(state) {
-      state.isFlashing = !state.isFlashing
+    setIsFlashing(state, action: PayloadAction<boolean>) {
+      state.isFlashing = action.payload
     },
   },
 })
