@@ -4,9 +4,8 @@ import CameraContainer from "../MediaCapture/CameraContainer"
 const UserCanvas = () => {
   return (
     <>
-      <h1>Canvas</h1>;
+      <h1>Canvas</h1>
       <EventTimeline />
-      <CameraContainer />
     </>
   )
 }

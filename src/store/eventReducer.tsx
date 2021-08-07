@@ -1,9 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { IEvent } from "../common/types_interfaces"
 
 export interface IEventsState {
   events: IEvent[]
   publishKey: string
+}
+
+export interface IEvent {
+  name: string
+  description: string
+  photo: string
 }
 
 const initialEventState: IEventsState = { events: [], publishKey: "" }
@@ -26,7 +31,11 @@ const eventsSlice = createSlice({
       for (let event of action.payload) {
         events = [
           ...events,
-          { name: event.name, description: event.description },
+          {
+            name: event.name,
+            description: event.description,
+            photo: event.photo,
+          },
         ]
       }
       state.events = [...events]

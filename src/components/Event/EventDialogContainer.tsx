@@ -12,11 +12,12 @@ import {
 import EventDialog from "./EventDialog"
 
 const EventDialogContainer = () => {
-  const [nameInput, descriptionInput, openEventDialog] = useAppSelector(
+  const [nameInput, descriptionInput, openEventDialog, photo] = useAppSelector(
     (state) => [
       state.formInput.name,
       state.formInput.description,
       state.dialog.isEventDialogOpen,
+      state.camera.cardImage,
     ]
   )
 
@@ -36,6 +37,7 @@ const EventDialogContainer = () => {
     const payload = {
       name: nameInput,
       description: descriptionInput,
+      photo: URL.createObjectURL(photo),
     }
     dispatch(addEvent(payload))
     dispatch(resetInputFields())

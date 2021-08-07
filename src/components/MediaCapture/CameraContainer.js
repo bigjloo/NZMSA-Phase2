@@ -1,19 +1,26 @@
 import {useState} from 'react'
 import { Camera } from "./Camera"
-import { Root, Preview, Footer, GlobalStyle } from "./styles";
+import {Preview} from "./styles";
 import Button from "@material-ui/core/Button"
 import CameraAltIcon from '@material-ui/icons/CameraAlt';
+import { useAppDispatch, useAppSelector } from '../../store/storeHooks';
+import {setCardImage} from '../../store/cameraReducer'
 
 // Credits to: https://blog.logrocket.com/responsive-camera-component-react-hooks/
 
 const CameraContainer = () => {
     const [isCameraOpen, setIsCameraOpen] = useState(false);
-    const [cardImage, setCardImage] = useState();
-    
+    // const [cardImage, setCardImage] = useState();
+    const cardImage = useAppSelector(state => state.camera.cardImage)
+
+    const dispatch = useAppDispatch()
 
     const handleCameraClick = () => {
         setIsCameraOpen(state => (!state))
     }
+
+    const onCapture = (blob) => dispatch(setCardImage(blob))
+    const onClear = () => dispatch(setCardImage(undefined))
 
     // cardImage  = true after first shot that why it is rendered
     return (
@@ -27,8 +34,8 @@ const CameraContainer = () => {
 
             {isCameraOpen && (
             <Camera
-              onCapture={blob => setCardImage(blob)}
-              onClear={() => setCardImage(undefined)}
+              onCapture={onCapture}
+              onClear={onClear}
               handleCameraClick={handleCameraClick}
             />
           )}

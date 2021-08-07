@@ -6,7 +6,6 @@ const Onboard = () => {
   return (
     <>
       <h1>Onboard</h1>
-      <CameraContainer />
       <LoginDialogContainer />
     </>
   )
