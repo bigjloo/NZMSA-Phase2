@@ -10,15 +10,15 @@ import {
   Container,
   Flash,
   Overlay,
-  Button
 } from "./styles";
+import Button from "@material-ui/core/Button"
 
 const CAPTURE_OPTIONS = {
   audio: false,
   video: { facingMode: "environment" }
 };
 
-export function Camera({ onCapture, onClear }) {
+export function Camera({ onCapture, onClear, handleCameraClick }) {
   const canvasRef = useRef();
   const videoRef = useRef();
 
@@ -71,12 +71,16 @@ export function Camera({ onCapture, onClear }) {
     canvasRef.current.toBlob(blob => onCapture(blob), "image/jpeg", 1);
     setIsCanvasEmpty(false);
     setIsFlashing(true);
+    // handleCameraClick()
+    //
+    // setIsVideoPlaying(false)
   }
 
   function handleClear() {
     const context = canvasRef.current.getContext("2d");
     context.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
     setIsCanvasEmpty(true);
+    // handleCameraClick()
     onClear();
   }
 
@@ -98,7 +102,9 @@ export function Camera({ onCapture, onClear }) {
           >
             <Video
               ref={videoRef}
+            //   display={!isVideoPlaying && "none"}
               hidden={!isVideoPlaying}
+            //   display={!isVideoPlaying ? "none" : "block"}
               onCanPlay={handleCanPlay}
               autoPlay
               playsInline
@@ -115,6 +121,8 @@ export function Camera({ onCapture, onClear }) {
               ref={canvasRef}
               width={container.width}
               height={container.height}
+              // 
+              hidden={!isVideoPlaying}
             />
 
             <Flash
@@ -124,8 +132,8 @@ export function Camera({ onCapture, onClear }) {
           </Container>
 
           {isVideoPlaying && (
-            <Button onClick={isCanvasEmpty ? handleCapture : handleClear}>
-              {isCanvasEmpty ? "Take a picture" : "Take another picture"}
+            <Button style={{width: "100%", margin: "0 5px"}}variant="outlined" onClick={isCanvasEmpty ? handleCapture : handleClear}>
+              {isCanvasEmpty ? "Capture photo" : "Take another picture"}
             </Button>
           )}
         </Wrapper>
@@ -133,3 +141,6 @@ export function Camera({ onCapture, onClear }) {
     </Measure>
   );
 }
+
+
+// isCanvasEmpty
