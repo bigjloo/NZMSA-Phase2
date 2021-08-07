@@ -14,7 +14,7 @@ const CameraContainer = () => {
   const onCapture = (blob: Blob | null) => dispatch(setCardImage(blob))
   const onClear = () => dispatch(setCardImage(undefined))
 
-  const toggleCamera = () => dispatch(setIsCameraOpen())
+  const toggleCamera = () => dispatch(setIsCameraOpen(true))
 
   return (
     <>

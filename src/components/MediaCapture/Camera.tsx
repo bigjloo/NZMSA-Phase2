@@ -86,7 +86,7 @@ export function Camera({ onCapture, onClear }: CameraProps) {
         videoRef.current.videoWidth
       ) &&
       videoRef.current.play()
-    dispatch(setIsVideoPlaying())
+    dispatch(setIsVideoPlaying(true))
   }
 
   function handleCapture() {
@@ -108,8 +108,8 @@ export function Camera({ onCapture, onClear }: CameraProps) {
 
     canvasRef.current &&
       canvasRef.current.toBlob((blob) => onCapture(blob), "image/jpeg", 1)
-    dispatch(setIsCanvasEmpty())
-    dispatch(setIsFlashing())
+    dispatch(setIsCanvasEmpty(false))
+    dispatch(setIsFlashing(true))
   }
 
   function handleClear() {
@@ -117,7 +117,7 @@ export function Camera({ onCapture, onClear }: CameraProps) {
     context &&
       canvasRef.current &&
       context.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height)
-    dispatch(setIsCanvasEmpty())
+    dispatch(setIsCanvasEmpty(true))
     onClear()
   }
 
@@ -160,7 +160,7 @@ export function Camera({ onCapture, onClear }: CameraProps) {
 
             <Flash
               flash={isFlashing}
-              onAnimationEnd={dispatch(setIsFlashing())}
+              onAnimationEnd={dispatch(setIsFlashing(false))}
             />
           </Container>
 

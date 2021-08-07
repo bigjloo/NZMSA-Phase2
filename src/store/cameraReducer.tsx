@@ -20,8 +20,8 @@ const cameraSlice = createSlice({
   name: "camera",
   initialState: initialCameraState,
   reducers: {
-    setIsCameraOpen(state) {
-      state.isCameraOpen = !state.isCameraOpen
+    setIsCameraOpen(state, action: PayloadAction<boolean>) {
+      state.isCameraOpen = action.payload
     },
     setCardImage(state, action: PayloadAction<Blob | undefined | null>) {
       state.cardImage = action.payload
