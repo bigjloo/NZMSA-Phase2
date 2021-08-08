@@ -8,7 +8,7 @@ export interface IEventsState {
 export interface IEvent {
   name: string
   description: string
-  photo: string
+  photoURI: string
 }
 
 const initialEventState: IEventsState = { events: [], publishKey: "" }
@@ -34,7 +34,7 @@ const eventsSlice = createSlice({
           {
             name: event.name,
             description: event.description,
-            photo: event.photo,
+            photoURI: event.photoURI,
           },
         ]
       }

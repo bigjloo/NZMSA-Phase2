@@ -18,6 +18,7 @@ import uploadFileToBlob, {
 } from "../../api/azure-storage-blob"
 import { GET_TOKEN_AND_GITHUB } from "../../apollo-client/query"
 import { setTokenAndContainerName } from "../../store/azureStorageReducer"
+import BackdropContainer from "../UI/BackdropContainer"
 
 const EventDialogContainer = () => {
   const [
@@ -84,6 +85,10 @@ const EventDialogContainer = () => {
       dispatch(setTokenAndContainerName(payload))
     }
   }, [data, dispatch])
+
+  if (loading) return <BackdropContainer loading={loading} />
+
+  if (error) return <h1>{error.message}</h1>
 
   return (
     <EventDialog

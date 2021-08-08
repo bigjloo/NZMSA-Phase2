@@ -8,7 +8,7 @@ const vertical = "top"
 const horizontal = "center"
 
 const Notification = () => {
-  const [open, message] = useAppSelector((state) => [
+  const [open, message] = useAppSelector<[boolean, string]>((state) => [
     state.notification.open,
     state.notification.message,
   ])
@@ -16,8 +16,8 @@ const Notification = () => {
   const dispatch = useAppDispatch()
 
   const closeHandler = () => dispatch(closeNotification)
-  
-  // Closes notification snackbar after 3 seconds
+
+  // Closes notification Snackbar 3 seconds after message is set in reducer
   useEffect(() => {
     setTimeout(() => dispatch(closeNotification()), 3000)
   }, [message, dispatch])

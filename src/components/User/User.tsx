@@ -15,14 +15,16 @@ import ShareDialogContainer from "../Share/ShareDialogContainer"
 import UserCanvas from "./UserCanvas"
 
 const User = () => {
+  // Gets events from backend where date == today
   const { data, error } = useQuery(GET_EVENTS_BY_USER_TODAY)
 
   const dispatch = useAppDispatch()
 
+  // Logouts user and removes JWT Token from local storage
   const logoutHandler = () => {
     dispatch(logout())
-    dispatch(openNotification("Logged out"))
     localStorage.removeItem("HYD_JWT")
+    dispatch(openNotification("Logged out"))
   }
 
   console.log(localStorage.getItem("HYD_JWT"))

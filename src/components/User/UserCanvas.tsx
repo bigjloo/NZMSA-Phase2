@@ -1,5 +1,4 @@
 import EventTimeline from "../Event/EventTimeline"
-import CameraContainer from "../MediaCapture/CameraContainer"
 
 const UserCanvas = () => {
   return (

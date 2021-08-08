@@ -1,11 +1,12 @@
-import { useAppDispatch } from "../../store/storeHooks"
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction"
-import { toggleLoginDialog } from "../../store/dialogReducer"
 
-const NotLoggedInNavigation = () => {
-  const dispatch = useAppDispatch()
-  const openLoginDialog = () => dispatch(toggleLoginDialog())
+type NotLoggedInNavigationProps = {
+  openLoginDialog: () => void
+}
 
+const NotLoggedInNavigation = ({
+  openLoginDialog,
+}: NotLoggedInNavigationProps) => {
   return (
     <BottomNavigationAction
       label="Login/Sign Up"
