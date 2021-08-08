@@ -15,11 +15,12 @@ const Notification = () => {
 
   const dispatch = useAppDispatch()
 
+  const closeHandler = () => dispatch(closeNotification)
+  
+  // Closes notification snackbar after 3 seconds
   useEffect(() => {
     setTimeout(() => dispatch(closeNotification()), 3000)
   }, [message, dispatch])
-
-  const closeHandler = () => dispatch(closeNotification)
 
   return (
     <Snackbar

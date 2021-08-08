@@ -1,6 +1,6 @@
 import { Route, Switch } from "react-router-dom"
 import { useAppSelector } from "./store/storeHooks"
-import { GithubLoginProcessor } from "./hooks/api"
+import { GithubLoginProcessor } from "./api/api"
 import PublishedContent from "./pages/PublishedContent"
 import Onboard from "./pages/Onboard"
 import Layout from "./components/Layout/Layout"

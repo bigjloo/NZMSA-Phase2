@@ -42,3 +42,12 @@ export const SET_EVENTS = gql`
     addEvents(input: { events: $events, publishKey: $publishKey })
   }
 `
+
+export const GET_TOKEN_AND_GITHUB = gql`
+  query {
+    accountSaSToken {
+      token
+      github
+    }
+  }
+`

@@ -7,6 +7,7 @@ import formReducer from "./formInputReducer"
 import notificationReducer from "./notificationReducer"
 import cameraReducer from "./cameraReducer"
 import videoReducer from "./videoReducer"
+import azureStorageReducer from "./azureStorageReducer"
 
 const store = configureStore({
   reducer: {
@@ -17,6 +18,7 @@ const store = configureStore({
     notification: notificationReducer,
     camera: cameraReducer,
     video: videoReducer,
+    azureStorage: azureStorageReducer,
   },
 })
 

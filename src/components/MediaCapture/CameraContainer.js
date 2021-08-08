@@ -24,6 +24,13 @@ const CameraContainer = () => {
 
     console.log(cardImage)
     // cardImage  = true after first shot that why it is rendered
+
+    // if cardimage -> render preview
+
+    // if cameraisOpen render camera
+
+    // button 
+    // if cameraisopen Done else "Take Photo"
     return (
       <>
           {cardImage && (
