@@ -27,13 +27,11 @@ const StyledBottomNavigation = styled(BottomNavigation)({
 })
 
 const NavigationContainer = () => {
-  const [isAuth, events, publishKey] = useAppSelector<
-    [boolean, IEvent[], string]
-  >((state) => [
-    state.auth.isAuth,
-    state.events.events,
-    state.events.publishKey,
-  ])
+  const isAuth = useAppSelector((state) => state.auth.isAuth)
+  const events = useAppSelector((state) => state.events.events)
+  const publishKey = useAppSelector((state) => state.events.publishKey)
+
+  console.log("inside NavigationContainer.tsx")
 
   // Generates 8 random alphanumeric char string
   const key = useMemo(() => {
@@ -63,11 +61,13 @@ const NavigationContainer = () => {
     dispatch(openNotification("Events saved!!!"))
   }
 
+  // Problem. calls saveEvents when app loads even when not logged in
+  // TO FIX
   // Save events to backend when ShareDialog is toggled, after
   // publishkey is set by redux
-  useEffect(() => {
-    saveEvents()
-  }, [publishKey, saveEvents])
+  // useEffect(() => {
+  //   saveEvents()
+  // }, [publishKey, saveEvents])
 
   return (
     <StyledBottomNavigation showLabels>

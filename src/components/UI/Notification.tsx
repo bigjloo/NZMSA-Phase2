@@ -8,10 +8,9 @@ const vertical = "top"
 const horizontal = "center"
 
 const Notification = () => {
-  const [open, message] = useAppSelector<[boolean, string]>((state) => [
-    state.notification.open,
-    state.notification.message,
-  ])
+  console.log("inside notification")
+  const open = useAppSelector<boolean>((state) => state.notification.open)
+  const message = useAppSelector<string>((state) => state.notification.message)
 
   const dispatch = useAppDispatch()
 

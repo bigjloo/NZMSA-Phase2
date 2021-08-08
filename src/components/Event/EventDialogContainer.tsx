@@ -21,31 +21,39 @@ import { setTokenAndContainerName } from "../../store/azureStorageReducer"
 import BackdropContainer from "../UI/BackdropContainer"
 
 const EventDialogContainer = () => {
-  const [
-    nameInput,
-    descriptionInput,
-    openEventDialog,
-    cardImage,
-    token,
-    github,
-  ] = useAppSelector((state) => [
-    state.formInput.name,
-    state.formInput.description,
-    state.dialog.isEventDialogOpen,
-    state.camera.cardImage,
-    state.azureStorage.token,
-    state.azureStorage.containerName,
-  ])
+  const nameInput = useAppSelector<string>((state) => state.formInput.name)
+  const descriptionInput = useAppSelector<string>(
+    (state) => state.formInput.description
+  )
+  const openEventDialog = useAppSelector<boolean>(
+    (state) => state.dialog.isEventDialogOpen
+  )
+  const cardImage = useAppSelector<Blob | undefined>(
+    (state) => state.camera.cardImage
+  )
+  const token = useAppSelector<string | undefined>(
+    (state) => state.azureStorage.token
+  )
+  const github = useAppSelector<string | undefined>(
+    (state) => state.azureStorage.containerName
+  )
 
   const dispatch = useAppDispatch()
 
-  const { data, loading, error } = useQuery(GET_TOKEN_AND_GITHUB)
+  // Gets Share Access Storage(SaS) token and Github from backend
+  const {
+    data: tokenAndGithubData,
+    loading,
+    error,
+  } = useQuery(GET_TOKEN_AND_GITHUB)
 
+  // Close AddEvent dialog
   const toggleHandler = () => {
     dispatch(toggleEventDialog())
     dispatch(setCardImage(undefined))
   }
 
+  // Two way bind textfield input to state
   const onNameInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     dispatch(handleNameInputChange(event.target.value))
   }
@@ -53,10 +61,11 @@ const EventDialogContainer = () => {
     dispatch(handleDescriptionInputChange(event.target.value))
   }
 
-  console.log(cardImage)
-
+  // Removes individual event from events state
   const onRemoveEvent = (index: number) => dispatch(removeEvent(index))
-
+  console.log("inside eventDialogContainer")
+  // Uploads cardImage(user photo) to Azure Storage and
+  // adds event to events state
   const onAddEvent = async () => {
     console.log("inside onAddEvent")
     const fileName = new Date().toISOString()
@@ -75,16 +84,21 @@ const EventDialogContainer = () => {
     dispatch(addEvent(payload))
     dispatch(resetInputFields())
   }
-
+  console.log("inside eventDialogContainer again")
+  // Sets token and github state after data is fetch from backend
   useEffect(() => {
+    // runs twice, first when data is created, then when data is loaded
     console.log("inside useeffect for setTokenandContainerName")
-    console.log(data)
-    if (data) {
-      const { token, github } = data.accountSaSToken
+    console.log(tokenAndGithubData)
+    if (tokenAndGithubData) {
+      // this never runs???
+      console.log("data is returned for token and container")
+      console.log("data returned")
+      const { token, github } = tokenAndGithubData.accountSaSToken
       const payload = { token, github }
       dispatch(setTokenAndContainerName(payload))
     }
-  }, [data, dispatch])
+  }, [tokenAndGithubData, dispatch])
 
   if (loading) return <BackdropContainer loading={loading} />
 

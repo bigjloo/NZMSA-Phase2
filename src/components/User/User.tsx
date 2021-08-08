@@ -14,9 +14,10 @@ import EventDialogContainer from "../Event/EventDialogContainer"
 import ShareDialogContainer from "../Share/ShareDialogContainer"
 import UserCanvas from "./UserCanvas"
 
+// renders twice, once when data, another when data is returned
 const User = () => {
   // Gets events from backend where date == today
-  const { data, error } = useQuery(GET_EVENTS_BY_USER_TODAY)
+  const { data: eventsData, error } = useQuery(GET_EVENTS_BY_USER_TODAY)
 
   const dispatch = useAppDispatch()
 
@@ -29,14 +30,17 @@ const User = () => {
 
   console.log(localStorage.getItem("HYD_JWT"))
 
+  // After data is returned from backend,
+  // set events to local state
   useEffect(() => {
     console.log("inside USer.tsx useEffect")
-    if (data) {
-      dispatch(setEvents(data.todaysEvents))
+    if (eventsData) {
+      console.log(eventsData.todaysEvents)
+      // dispatch(setEvents(eventsData.todaysEvents))
     }
-  }, [data, dispatch])
+  }, [eventsData, dispatch])
 
-  if (error) return <h1>{error.message}</h1>
+  if (error) return <h1>Error: {error.message}</h1>
 
   return (
     <>

@@ -1,10 +1,12 @@
 import { gql } from "@apollo/client"
 
-// Gets JWT Token from backend with code from Github OAuth server
-export const LOGIN_WITH_GITHUB_CODE = gql`
-  mutation ($code: String!) {
-    login(input: { code: $code }) {
-      jwt
+console.log("inside query.tsx")
+// Gets Shared Access Storage token and Github from backend
+export const GET_TOKEN_AND_GITHUB = gql`
+  query {
+    accountSaSToken {
+      token
+      github
     }
   }
 `
@@ -43,12 +45,11 @@ export const SET_EVENTS = gql`
   }
 `
 
-// Gets Shared Access Storage token and Github from backend
-export const GET_TOKEN_AND_GITHUB = gql`
-  query {
-    accountSaSToken {
-      token
-      github
+// Gets JWT Token from backend with code from Github OAuth server
+export const LOGIN_WITH_GITHUB_CODE = gql`
+  mutation ($code: String!) {
+    login(input: { code: $code }) {
+      jwt
     }
   }
 `

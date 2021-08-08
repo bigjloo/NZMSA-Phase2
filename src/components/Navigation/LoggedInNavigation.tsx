@@ -12,6 +12,8 @@ type LoggedInNavigationProps = {
 const LoggedInNavigation = (props: LoggedInNavigationProps) => {
   const { openEventDialog, saveEventsHandler, openShareDialog } = props
 
+  console.log("inside LoggedInNavigationContainer.tsx")
+
   return (
     <>
       <BottomNavigationAction

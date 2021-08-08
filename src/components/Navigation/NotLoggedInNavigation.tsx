@@ -7,6 +7,7 @@ type NotLoggedInNavigationProps = {
 const NotLoggedInNavigation = ({
   openLoginDialog,
 }: NotLoggedInNavigationProps) => {
+  console.log("inside NotLoggedInContainer.tsx")
   return (
     <BottomNavigationAction
       label="Login/Sign Up"
