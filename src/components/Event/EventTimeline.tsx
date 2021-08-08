@@ -16,7 +16,7 @@ import { makeStyles } from "@material-ui/styles"
 export interface IEvent {
   name: string
   description: string
-  photo: string
+  photoURI: string
 }
 
 const useStyles = makeStyles({
@@ -44,7 +44,7 @@ const EventTimeline = () => {
             <Card>
               <CardMedia className={classes.media}>
                 <img
-                  src={event.photo}
+                  src={event.photoURI}
                   alt="user snaps"
                   style={{ height: "100%" }}
                 />

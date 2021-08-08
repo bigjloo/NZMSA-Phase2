@@ -69,7 +69,7 @@ const EventDialogContainer = () => {
     const payload = {
       name: nameInput,
       description: descriptionInput,
-      photo: fileURL,
+      photoURI: fileURL,
     }
     dispatch(addEvent(payload))
     dispatch(resetInputFields())
