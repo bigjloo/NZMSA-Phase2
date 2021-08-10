@@ -9,6 +9,7 @@ import cameraReducer from "./cameraReducer"
 import videoReducer from "./videoReducer"
 import azureStorageReducer from "./azureStorageReducer"
 import sharedReducer from "./sharedReducer"
+import userReducer from "./userReducer"
 
 const store = configureStore({
   reducer: {
@@ -21,6 +22,7 @@ const store = configureStore({
     video: videoReducer,
     azureStorage: azureStorageReducer,
     shared: sharedReducer,
+    user: userReducer,
   },
 })
 

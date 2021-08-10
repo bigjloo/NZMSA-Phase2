@@ -19,6 +19,7 @@ import uploadFileToBlob, {
 import { GET_SAS_TOKEN_AND_GITHUB } from "../../apollo-client/query"
 import { setTokenAndContainerName } from "../../store/azureStorageReducer"
 import BackdropContainer from "../UI/BackdropContainer"
+import { openNotification } from "../../store/notificationReducer"
 
 const EventDialogContainer = () => {
   const nameInput = useAppSelector<string>((state) => state.formInput.name)
@@ -68,32 +69,40 @@ const EventDialogContainer = () => {
   // Uploads cardImage(user photo) to Azure Storage and
   // adds event to events state
   const onAddEvent = async () => {
-    console.log("inside onAddEvent")
     let fileURL = null
     if (cardImage) {
+      // Creates fileName from current datetime
+      // and converts cardImage to File type
       const fileName = new Date().toISOString()
       const file = blobToFile(cardImage, fileName)
+
+      // Use name of newly created file for fileURL
       fileURL = `${azureBlobURL}/${github}/${file.name}`
-      await uploadFileToBlob(file!, token!, github!)
-      console.log("success upload")
+
+      try {
+        // Uploads to Azure Storage Blob
+        await uploadFileToBlob(file!, token!, github!)
+      } catch (err) {
+        console.error(err)
+      }
     }
-    const payload = {
+
+    // If cardImage != undefined, photoURI is set
+    // to stored blob URL, else photoURI == null
+    const eventsPayload = {
       name: nameInput,
       description: descriptionInput,
       photoURI: fileURL,
     }
-    dispatch(addEvent(payload))
+    dispatch(addEvent(eventsPayload))
+
+    dispatch(openNotification("Event succesfully added!"))
     dispatch(resetInputFields())
   }
+
   // Sets token and github state after data is fetch from backend
   useEffect(() => {
-    // runs twice, first when data is created, then when data is loaded
-    console.log("inside useeffect for setTokenandContainerName")
-    console.log(tokenAndGithubData)
     if (tokenAndGithubData) {
-      // this never runs???
-      console.log("data is returned for token and container")
-      console.log("data returned")
       const { token, github } = tokenAndGithubData.accountSaSToken
       const payload = { token, github }
       dispatch(setTokenAndContainerName(payload))

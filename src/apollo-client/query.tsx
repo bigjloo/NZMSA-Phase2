@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client"
 
-console.log("inside query.tsx")
-// Gets Shared Access Storage token and Github from backend
+// Gets Shared Access Storage token and github
+// name from backend
 export const GET_SAS_TOKEN_AND_GITHUB = gql`
   query {
     accountSaSToken {
@@ -12,8 +12,26 @@ export const GET_SAS_TOKEN_AND_GITHUB = gql`
 `
 
 // Gets todays events that belong to User
-export const GET_EVENTS_BY_USER_TODAY = gql`
+// export const GET_EVENTS_BY_USER_TODAY = gql`
+//   query {
+//     todaysEvents: eventsForToday {
+//       name
+//       description
+//       photoURI
+//     }
+//   }
+// `
+
+// When User page loads
+// Gets users github name + imageURI and
+// events for today
+export const GET_USER_DATA = gql`
   query {
+    userData: self {
+      github
+      imageURI
+    }
+
     todaysEvents: eventsForToday {
       name
       description

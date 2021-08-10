@@ -1,7 +1,7 @@
 import { Route, Switch } from "react-router-dom"
 import { useAppSelector } from "./store/storeHooks"
 import { GithubLoginProcessor } from "./api/api"
-import SharedContent from "./pages/SharedContent"
+import SharedContentContainer from "./pages/SharedContent/SharedContentContainer"
 import Onboard from "./pages/Onboard"
 import Layout from "./components/Layout/Layout"
 import User from "./components/User/User"
@@ -19,7 +19,7 @@ function App() {
           <GithubLoginProcessor />
         </Route>
         <Route path="/share/:publishKey">
-          <SharedContent />
+          <SharedContentContainer />
         </Route>
       </Switch>
     </Layout>

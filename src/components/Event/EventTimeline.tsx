@@ -1,5 +1,3 @@
-import { useAppSelector } from "../../store/storeHooks"
-
 import Timeline from "@material-ui/lab/Timeline"
 import TimelineItem from "@material-ui/lab/TimelineItem"
 import TimelineOppositeContent from "@material-ui/lab/TimelineOppositeContent"
@@ -29,8 +27,7 @@ const useStyles = makeStyles({
   },
 })
 
-const EventTimeline = () => {
-  const events = useAppSelector<IEvent[]>((store) => store.events.events)
+const EventTimeline = ({ events }: { events: IEvent[] }) => {
   const classes = useStyles()
 
   return (
@@ -46,7 +43,6 @@ const EventTimeline = () => {
           </TimelineSeparator>
           <TimelineContent>
             <Card className={classes.card}>
-              {console.log(events)}
               {event.photoURI && (
                 <CardMedia>
                   <img

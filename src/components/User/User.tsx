@@ -2,48 +2,50 @@ import { useEffect } from "react"
 import { useQuery } from "@apollo/client"
 import { useAppDispatch } from "../../store/storeHooks"
 
-import Button from "@material-ui/core/Button"
-
-import { logout } from "../../store/authReducer"
 import { setEvents } from "../../store/eventReducer"
-import { openNotification } from "../../store/notificationReducer"
 
-import { GET_EVENTS_BY_USER_TODAY } from "../../apollo-client/query"
+import { GET_USER_DATA } from "../../apollo-client/query"
 
 import EventDialogContainer from "../Event/EventDialogContainer"
 import ShareDialogContainer from "../Share/ShareDialogContainer"
 import UserCanvas from "./UserCanvas"
+import BackdropContainer from "../../components/UI/BackdropContainer"
+// import Typography from "@material-ui/core/Typography"
+import { setUserData } from "../../store/userReducer"
 
 const User = () => {
-  // Gets events from backend where event date == today
-  const { data: eventsData, error } = useQuery(GET_EVENTS_BY_USER_TODAY)
+  // Gets user initial data from backend
+  const { data, loading, error } = useQuery(GET_USER_DATA)
 
   const dispatch = useAppDispatch()
-
-  // Logouts user and removes JWT Token from local storage
-  const logoutHandler = () => {
-    dispatch(logout())
-    localStorage.removeItem("HYD_JWT")
-    dispatch(openNotification("Logged out"))
-  }
-
-  console.log(localStorage.getItem("HYD_JWT"))
 
   // After data is returned from backend,
   // set events to local state
   useEffect(() => {
-    console.log("inside USer.tsx useEffect")
-    if (eventsData) {
-      dispatch(setEvents(eventsData.todaysEvents))
+    if (data) {
+      // Sets user data to local state
+      const userDataPayload = {
+        githubName: data.userData.github,
+        githubImageURI: data.userData.imageURI,
+      }
+      dispatch(setUserData(userDataPayload))
+
+      // Sets fetched events to local state
+      dispatch(setEvents(data.todaysEvents))
     }
-  }, [eventsData, dispatch])
+  }, [data, dispatch])
+
+  if (loading) return <BackdropContainer loading={loading} />
 
   if (error) return <h1>Error: {error.message}</h1>
 
+  console.log(localStorage.getItem("HYD_JWT"))
+
   return (
     <>
-      <h1>App page</h1>
-      <Button onClick={logoutHandler}>Log Out</Button>
+      {/* <Typography variant="h1" component="h1">
+        App page
+      </Typography> */}
       <UserCanvas />
       <EventDialogContainer />
       <ShareDialogContainer />

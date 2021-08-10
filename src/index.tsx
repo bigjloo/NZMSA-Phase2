@@ -4,6 +4,8 @@ import { BrowserRouter } from "react-router-dom"
 import { ApolloProvider } from "@apollo/client"
 
 import CssBaseline from "@material-ui/core/CssBaseline"
+import { ThemeProvider } from "@material-ui/core/styles"
+import theme from "./theme"
 
 import store from "./store/store"
 import client from "../src/apollo-client/apollo"
@@ -13,8 +15,10 @@ ReactDOM.render(
   <ApolloProvider client={client}>
     <Provider store={store}>
       <BrowserRouter>
-        <CssBaseline />
-        <App />
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <App />
+        </ThemeProvider>
       </BrowserRouter>
     </Provider>
   </ApolloProvider>,
