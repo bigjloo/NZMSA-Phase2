@@ -1,6 +1,11 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
-const initialAzureStorageState = {
+interface IAzureStorageState {
+  token: string | undefined
+  containerName: string | undefined
+}
+
+const initialAzureStorageState: IAzureStorageState = {
   token: undefined,
   containerName: undefined,
 }
@@ -9,7 +14,10 @@ const azureStorageSlice = createSlice({
   name: "Azure Storage",
   initialState: initialAzureStorageState,
   reducers: {
-    setTokenAndContainerName(state, action) {
+    setTokenAndContainerName(
+      state,
+      action: PayloadAction<{ token: string; github: string }>
+    ) {
       state.token = action.payload.token
       state.containerName = action.payload.github
     },

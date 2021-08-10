@@ -16,7 +16,7 @@ import uploadFileToBlob, {
   blobToFile,
   azureBlobURL,
 } from "../../api/azure-storage-blob"
-import { GET_TOKEN_AND_GITHUB } from "../../apollo-client/query"
+import { GET_SAS_TOKEN_AND_GITHUB } from "../../apollo-client/query"
 import { setTokenAndContainerName } from "../../store/azureStorageReducer"
 import BackdropContainer from "../UI/BackdropContainer"
 
@@ -45,7 +45,7 @@ const EventDialogContainer = () => {
     data: tokenAndGithubData,
     loading,
     error,
-  } = useQuery(GET_TOKEN_AND_GITHUB)
+  } = useQuery(GET_SAS_TOKEN_AND_GITHUB)
 
   // Close AddEvent dialog
   const toggleHandler = () => {
@@ -64,18 +64,19 @@ const EventDialogContainer = () => {
   // Removes individual event from events state
   const onRemoveEvent = (index: number) => dispatch(removeEvent(index))
   console.log("inside eventDialogContainer")
+
   // Uploads cardImage(user photo) to Azure Storage and
   // adds event to events state
   const onAddEvent = async () => {
     console.log("inside onAddEvent")
-    const fileName = new Date().toISOString()
-    const file = blobToFile(cardImage, fileName)
-    console.log(file)
-    const fileURL = `${azureBlobURL}/${github}/${file?.name}`
-    console.log(fileURL)
-    // TODO fix undefined null issue later
-    await uploadFileToBlob(file!, token!, github!)
-    console.log("success upload")
+    let fileURL = null
+    if (cardImage) {
+      const fileName = new Date().toISOString()
+      const file = blobToFile(cardImage, fileName)
+      fileURL = `${azureBlobURL}/${github}/${file.name}`
+      await uploadFileToBlob(file!, token!, github!)
+      console.log("success upload")
+    }
     const payload = {
       name: nameInput,
       description: descriptionInput,
@@ -84,7 +85,6 @@ const EventDialogContainer = () => {
     dispatch(addEvent(payload))
     dispatch(resetInputFields())
   }
-  console.log("inside eventDialogContainer again")
   // Sets token and github state after data is fetch from backend
   useEffect(() => {
     // runs twice, first when data is created, then when data is loaded

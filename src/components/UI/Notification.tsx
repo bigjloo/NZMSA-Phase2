@@ -16,7 +16,7 @@ const Notification = () => {
 
   const closeHandler = () => dispatch(closeNotification)
 
-  // Closes notification Snackbar 3 seconds after message is set in reducer
+  // Closes notification Snackbar 3 seconds after displayed
   useEffect(() => {
     setTimeout(() => dispatch(closeNotification()), 3000)
   }, [message, dispatch])

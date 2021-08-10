@@ -2,7 +2,7 @@ import { gql } from "@apollo/client"
 
 console.log("inside query.tsx")
 // Gets Shared Access Storage token and Github from backend
-export const GET_TOKEN_AND_GITHUB = gql`
+export const GET_SAS_TOKEN_AND_GITHUB = gql`
   query {
     accountSaSToken {
       token
@@ -17,7 +17,7 @@ export const GET_EVENTS_BY_USER_TODAY = gql`
     todaysEvents: eventsForToday {
       name
       description
-      order
+      photoURI
     }
   }
 `
@@ -33,15 +33,18 @@ export const GET_EVENTS_BY_PUBLISH_KEY = gql`
       events {
         name
         description
+        photoURI
       }
     }
   }
 `
 
-// Sends events state to backend
+// Sends local events state to backend
 export const SET_EVENTS = gql`
   mutation ($events: [EventInput], $publishKey: String) {
-    addEvents(input: { events: $events, publishKey: $publishKey })
+    addEvents(input: { events: $events, publishKey: $publishKey }) {
+      date
+    }
   }
 `
 

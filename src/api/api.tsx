@@ -9,20 +9,25 @@ import { login } from "../store/authReducer"
 
 import BackdropContainer from "../components/UI/BackdropContainer"
 
+// Called after OAuth code is return from Github server after
+// authorized by User
 export const GithubLoginProcessor = () => {
   const dispatch = useAppDispatch()
   const isAuth = useAppSelector<boolean>((state) => state.auth.isAuth)
 
+  // Gets code from browser URL
   const search = useLocation().search
-  const code = search.slice(6, search.length)
+  const code = search.slice(6, search.length) // URL: ../?code=<code>
 
+  // Gets JWT Token from backend with code from Github
   const [getToken, { error, loading }] = useMutation(LOGIN_WITH_GITHUB_CODE, {
     variables: { code },
   })
-  console.log("inside github login process")
-  console.log(error)
-  console.log(loading)
-  console.log(isAuth)
+
+  // console.log("inside github login process")
+  // console.log(error)
+  // console.log(loading)
+  // console.log(isAuth)
 
   // 1st time error ==  undefined, loading == false
   // 2nd time loading == true, error == undefined
@@ -35,13 +40,17 @@ export const GithubLoginProcessor = () => {
   useEffect(() => {
     // ran once
     const loginWithGitHubOAuth = async () => {
+      // Gets JWT Token from backend
       const response = await getToken()
-      console.log("waiting promise")
+
       if (error) return
+
+      // Save token in localStorage
       const jwtToken = response.data.login.jwt
       localStorage.setItem("HYD_JWT", jwtToken)
+
+      // Logs in user
       dispatch(login())
-      console.log("login success")
     }
     loginWithGitHubOAuth()
   }, [getToken, dispatch, error])

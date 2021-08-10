@@ -8,7 +8,7 @@ export interface IEventsState {
 export interface IEvent {
   name: string
   description: string
-  photoURI: string
+  photoURI: string | null
 }
 
 const initialEventState: IEventsState = { events: [], publishKey: "" }
@@ -23,12 +23,12 @@ const eventsSlice = createSlice({
     removeEvent(state, action: PayloadAction<number>) {
       state.events.splice(action.payload, 1)
     },
-    editEvent(state, action) {},
+    // editEvent(state, action) {},
     // TODO
     // Edit event.name or event.description
-    setEvents(state, action: PayloadAction<any>) {
+    setEvents(state, action: PayloadAction<IEvent[]>) {
       let events: IEvent[] = []
-      for (let event of action.payload) {
+      for (const event of action.payload) {
         events = [
           ...events,
           {
@@ -40,7 +40,7 @@ const eventsSlice = createSlice({
       }
       state.events = [...events]
     },
-    setPublishKey(state, action) {
+    setPublishKey(state, action: PayloadAction<string>) {
       state.publishKey = action.payload
     },
   },

@@ -16,12 +16,16 @@ import { makeStyles } from "@material-ui/styles"
 export interface IEvent {
   name: string
   description: string
-  photoURI: string
+  photoURI: string | null
 }
 
 const useStyles = makeStyles({
-  media: {
-    height: 100,
+  card: {
+    maxWidth: window.innerWidth / 2,
+  },
+  cardImage: {
+    height: "100%",
+    width: "100%",
   },
 })
 
@@ -41,14 +45,18 @@ const EventTimeline = () => {
             <TimelineConnector />
           </TimelineSeparator>
           <TimelineContent>
-            <Card>
-              <CardMedia className={classes.media}>
-                <img
-                  src={event.photoURI}
-                  alt="user snaps"
-                  style={{ height: "100%" }}
-                />
-              </CardMedia>
+            <Card className={classes.card}>
+              {console.log(events)}
+              {event.photoURI && (
+                <CardMedia>
+                  <img
+                    src={event.photoURI}
+                    alt="user snaps"
+                    className={classes.cardImage}
+                  />
+                </CardMedia>
+              )}
+
               <CardContent>
                 <Typography variant="body2">{event.description}</Typography>
               </CardContent>

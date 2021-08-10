@@ -7,11 +7,9 @@ const STORAGE_ACCOUNT_NAME = "nzmsablob"
 
 export const azureBlobURL = `https://${STORAGE_ACCOUNT_NAME}.blob.core.windows.net`
 
-export const blobToFile = (blob: Blob | undefined, fileName: string) => {
-  if (blob) {
-    const file = new File([blob], fileName)
-    return file
-  }
+export const blobToFile = (blob: Blob, fileName: string) => {
+  const file = new File([blob], fileName)
+  return file
 }
 
 const createBlobInContainer = async (
@@ -29,7 +27,7 @@ const createBlobInContainer = async (
 }
 
 const uploadFileToBlob = async (
-  file: File | null,
+  file: File,
   token: string,
   containerName: string
 ) => {
@@ -42,20 +40,22 @@ const uploadFileToBlob = async (
   const blobService = new BlobServiceClient(
     `https://${STORAGE_ACCOUNT_NAME}.blob.core.windows.net/?${token}`
   )
-
+  console.log("start getContainerClient")
   // Get container
   const containerClient: ContainerClient =
     blobService.getContainerClient(containerName)
 
   // Creates container if doesnt exist in account
-  await containerClient.createIfNotExists({
-    access: "container",
-  })
+  try {
+    await containerClient.createIfNotExists({
+      access: "container",
+    })
+  } catch (err) {
+    console.error("container already exist. Will not create container")
+  }
 
   // Pass containerClient and file to upload data
   await createBlobInContainer(containerClient, file)
-
-  //   return getBlobsInContainer(containerClient)
 }
 
 export default uploadFileToBlob

@@ -14,9 +14,8 @@ import EventDialogContainer from "../Event/EventDialogContainer"
 import ShareDialogContainer from "../Share/ShareDialogContainer"
 import UserCanvas from "./UserCanvas"
 
-// renders twice, once when data, another when data is returned
 const User = () => {
-  // Gets events from backend where date == today
+  // Gets events from backend where event date == today
   const { data: eventsData, error } = useQuery(GET_EVENTS_BY_USER_TODAY)
 
   const dispatch = useAppDispatch()
@@ -35,8 +34,7 @@ const User = () => {
   useEffect(() => {
     console.log("inside USer.tsx useEffect")
     if (eventsData) {
-      console.log(eventsData.todaysEvents)
-      // dispatch(setEvents(eventsData.todaysEvents))
+      dispatch(setEvents(eventsData.todaysEvents))
     }
   }, [eventsData, dispatch])
 

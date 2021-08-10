@@ -3,7 +3,7 @@ import { setContext } from "@apollo/client/link/context"
 
 console.log("inside apollo.tsx")
 
-const isDevelopment = true
+const isDevelopment = false
 const CLIENT_ID = "b77f552e93db0e271256"
 
 // Sets frontend and backend url base on isDevelopment
@@ -17,8 +17,9 @@ export const CONFIGURATION = {
   GITHUB_AUTHORIZE_URL: `https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}`,
 }
 
-// from howtographql.com
+/* From www.howtographql.com */
 // Attaches JWT token to the authorization header
+// for ApolloClient to connect to GraphQL backend
 const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem("HYD_JWT")
   return {
@@ -28,8 +29,12 @@ const authLink = setContext((_, { headers }) => {
     },
   }
 })
+
+// remove later
 console.log("JWT TOKEN")
 console.log(localStorage.getItem("HYD_JWT"))
+
+// Creates a httpLink from URL provided
 const httpLink = new HttpLink({
   uri: CONFIGURATION.BACKEND,
 })

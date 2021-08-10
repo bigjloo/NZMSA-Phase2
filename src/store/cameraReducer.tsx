@@ -1,18 +1,18 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
-interface IInitialCameraState {
+interface ICameraState {
   cardImage: Blob | undefined
 }
 
-const initialCameraState: IInitialCameraState = {
+const initialCameraState: ICameraState = {
   cardImage: undefined,
 }
 
 const cameraSlice = createSlice({
-  name: "camera",
+  name: "Camera",
   initialState: initialCameraState,
   reducers: {
-    setCardImage(state, action) {
+    setCardImage(state, action: PayloadAction<Blob | undefined>) {
       state.cardImage = action.payload
     },
   },

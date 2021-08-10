@@ -1,4 +1,4 @@
-import { useMemo, useEffect } from "react"
+import { useMemo } from "react"
 import { useAppSelector, useAppDispatch } from "../../store/storeHooks"
 
 import { styled } from "@material-ui/core/styles"
@@ -15,7 +15,6 @@ import {
 } from "../../store/dialogReducer"
 import { setPublishKey } from "../../store/eventReducer"
 import { openNotification } from "../../store/notificationReducer"
-import { IEvent } from "../../common/types_interfaces"
 
 const StyledBottomNavigation = styled(BottomNavigation)({
   width: "100%",
@@ -46,14 +45,19 @@ const NavigationContainer = () => {
 
   const openLoginDialog = () => dispatch(toggleLoginDialog())
 
+  // Sets key to publish key in state
+  // and opens Share Dialog
   const openShareDialog = () => {
     dispatch(setPublishKey(key))
     dispatch(toggleShareDialog())
   }
 
-  const [saveEvents] = useMutation(SET_EVENTS, {
+  // Sends events from local state to backend
+  const [saveEvents, { error }] = useMutation(SET_EVENTS, {
     variables: { events, publishKey },
   })
+
+  if (error) console.log(error.message)
 
   // Save events without publishKey
   const saveEventsHandler = () => {

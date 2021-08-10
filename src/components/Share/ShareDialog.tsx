@@ -19,6 +19,7 @@ const ShareDialog = ({
   onCopyToClipboard,
   toggleHandler,
 }: ShareDialogProps) => {
+  // Rethink UX for copy
   return (
     <Dialog open={openShareDialog} onClose={toggleHandler}>
       <DialogTitle>Share</DialogTitle>

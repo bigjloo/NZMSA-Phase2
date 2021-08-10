@@ -1,7 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { IEvent } from "../common/types_interfaces"
 
-const initialFormInputState: IEvent = { name: "", description: "" }
+interface IFormInput {
+  name: string
+  description: string
+}
+
+const initialFormInputState: IFormInput = { name: "", description: "" }
 
 const formInputSlice = createSlice({
   name: "Form Input",
