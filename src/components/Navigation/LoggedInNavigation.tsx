@@ -10,8 +10,18 @@ import { toggleShareDialog, toggleEventDialog } from "../../store/dialogReducer"
 import { useMutation } from "@apollo/client"
 import { SET_EVENTS } from "../../apollo-client/query"
 import { IEvent } from "../../store/eventReducer"
+import { makeStyles, Theme, createStyles } from "@material-ui/core/styles"
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    navigationAction: {
+      color: theme.palette.background.default,
+    },
+  })
+)
 
 const LoggedInNavigation = () => {
+  const classes = useStyles()
   const events = useAppSelector<IEvent[]>((state) => state.events.events)
   const publishKey = useAppSelector<string>((state) => state.events.publishKey)
 
@@ -54,17 +64,20 @@ const LoggedInNavigation = () => {
   return (
     <>
       <BottomNavigationAction
+        className={classes.navigationAction}
         label="Add"
         icon={<AddCircleOutlineIcon onClick={openEventDialog} />}
         showLabel
       />
       <BottomNavigationAction
+        className={classes.navigationAction}
         label="Save"
         icon={<SaveAltIcon />}
         onClick={saveEventsHandler}
         showLabel
       />
       <BottomNavigationAction
+        className={classes.navigationAction}
         label="Share"
         icon={<ShareIcon />}
         onClick={openShareDialog}

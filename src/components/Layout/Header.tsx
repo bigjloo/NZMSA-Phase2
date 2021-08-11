@@ -11,8 +11,8 @@ import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     large: {
-      width: theme.spacing(7),
-      height: theme.spacing(7),
+      width: theme.spacing(6),
+      height: theme.spacing(6),
     },
 
     header: {
@@ -20,13 +20,19 @@ const useStyles = makeStyles((theme: Theme) =>
     },
 
     githubName: {
-      paddingLeft: "0.75rem",
+      paddingLeft: "0.5rem",
+    },
+
+    logoutButton: {
+      float: "right",
+      color: theme.palette.primary.main,
     },
   })
 )
 
 const Header = () => {
   const dispatch = useAppDispatch()
+
   const classes = useStyles()
 
   const avatarURI = useAppSelector<string>((state) => state.user.githubImageURI)
@@ -58,7 +64,11 @@ const Header = () => {
         </Grid>
       </Grid>
       <Grid item xs={4}>
-        <Button onClick={logoutHandler} style={{ float: "right" }}>
+        <Button
+          className={classes.logoutButton}
+          onClick={logoutHandler}
+          variant="outlined"
+        >
           Logout
         </Button>
       </Grid>

@@ -6,6 +6,21 @@ import DialogTitle from "@material-ui/core/DialogTitle"
 import CameraContainer from "../MediaCapture/CameraContainer"
 import TextFieldsContainer from "./TextFieldsContainer"
 
+import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    title: {
+      padding: "0",
+      color: theme.palette.primary.dark,
+    },
+
+    addEventButton: {
+      color: theme.palette.primary.dark,
+    },
+  })
+)
+
 type EventDialogContentProps = {
   title: string
   onAddEvent: () => void
@@ -17,13 +32,19 @@ const EventDialogContent = ({
   onAddEvent,
   toggleEventDialogHandler,
 }: EventDialogContentProps) => {
+  const classes = useStyles()
+
   return (
     <DialogContent>
-      <DialogTitle>{title}</DialogTitle>
+      <DialogTitle className={classes.title}>{title}</DialogTitle>
       <TextFieldsContainer />
       <CameraContainer />
       <DialogActions>
-        <Button variant="outlined" onClick={onAddEvent}>
+        <Button
+          className={classes.addEventButton}
+          variant="outlined"
+          onClick={onAddEvent}
+        >
           Add Event
         </Button>
         <Button onClick={toggleEventDialogHandler}>Close</Button>

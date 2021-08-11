@@ -9,36 +9,97 @@ import Typography from "@material-ui/core/Typography"
 import Card from "@material-ui/core/Card"
 import CardMedia from "@material-ui/core/CardMedia"
 import CardContent from "@material-ui/core/CardContent"
-import { makeStyles } from "@material-ui/styles"
+import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
+import { IEvent } from "../../store/eventReducer"
+import FavoriteIcon from "@material-ui/icons/Favorite"
+import Box from "@material-ui/core/Box"
 
-export interface IEvent {
-  name: string
-  description: string
-  photoURI: string | null
-}
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    card: {
+      maxWidth: window.innerWidth / 2,
+    },
+    cardImage: {
+      height: "100%",
+      width: "100%",
+    },
 
-const useStyles = makeStyles({
-  card: {
-    maxWidth: window.innerWidth / 2,
-  },
-  cardImage: {
-    height: "100%",
-    width: "100%",
-  },
-})
+    maxW: {
+      width: "100%",
+    },
+
+    eventDescription: {
+      fontSize: "0.75rem",
+    },
+
+    cardContent: {
+      padding: "0.2rem",
+      textAlign: "center",
+    },
+
+    favIcon: {
+      fontSize: "small",
+      margin: "0 0.5rem",
+      color: theme.palette.secondary.main,
+    },
+
+    // dot: {
+    //   color: theme.palette.primary.light,
+    // },
+  })
+)
 
 const EventTimeline = ({ events }: { events: IEvent[] }) => {
   const classes = useStyles()
 
   return (
+    // <Timeline align="alternate">
+    //   {events.map((event, index) => (
+    //     <TimelineItem key={index}>
+    //       <TimelineOppositeContent>
+    //         <Typography variant="h5" component="h5">
+    //           {event.name}
+    //         </Typography>
+    //       </TimelineOppositeContent>
+    //       <TimelineSeparator>
+    //         <TimelineDot />
+    //         <TimelineConnector />
+    //       </TimelineSeparator>
+    //       <TimelineContent>
+    //         <Card className={classes.card}>
+    //           {event.photoURI && (
+    //             <CardMedia>
+    //               <img
+    //                 src={event.photoURI}
+    //                 alt="user snaps"
+    //                 className={classes.cardImage}
+    //               />
+    //             </CardMedia>
+    //           )}
+
+    //           <CardContent className={classes.cardContent}>
+    //             <Typography
+    //               // className={classes.eventDescription}
+    //               variant="body2"
+    //             >
+    //               {event.description}
+    //             </Typography>
+    //           </CardContent>
+    //         </Card>
+    //       </TimelineContent>
+    //     </TimelineItem>
+    //   ))}
+    // </Timeline>
     <Timeline align="alternate">
       {events.map((event, index) => (
         <TimelineItem key={index}>
           <TimelineOppositeContent>
-            <Typography variant="subtitle2">{event.name}</Typography>
+            <Typography variant="h6" component="h6">
+              {event.name}
+            </Typography>
           </TimelineOppositeContent>
           <TimelineSeparator>
-            <TimelineDot />
+            <TimelineDot color="primary" />
             <TimelineConnector />
           </TimelineSeparator>
           <TimelineContent>
@@ -53,9 +114,17 @@ const EventTimeline = ({ events }: { events: IEvent[] }) => {
                 </CardMedia>
               )}
 
-              <CardContent>
-                <Typography variant="body2">{event.description}</Typography>
+              <CardContent className={classes.cardContent}>
+                <Typography
+                  // className={classes.eventDescription}
+                  variant="body2"
+                >
+                  {event.description}
+                </Typography>
               </CardContent>
+              <Box>
+                <FavoriteIcon className={classes.favIcon} />
+              </Box>
             </Card>
           </TimelineContent>
         </TimelineItem>
