@@ -6,7 +6,7 @@ import { setEvents } from "../../store/eventReducer"
 
 import { GET_USER_DATA } from "../../apollo-client/query"
 
-import EventDialogContainer from "../Event/EventDialogContainer"
+import EventDialog from "../Event/EventDialog"
 import ShareDialogContainer from "../Share/ShareDialogContainer"
 import UserCanvas from "./UserCanvas"
 import BackdropContainer from "../../components/UI/BackdropContainer"
@@ -14,23 +14,25 @@ import BackdropContainer from "../../components/UI/BackdropContainer"
 import { setUserData } from "../../store/userReducer"
 
 const User = () => {
-  // Gets user initial data from backend
+  // Fetches initial User data from backend
   const { data, loading, error } = useQuery(GET_USER_DATA)
 
   const dispatch = useAppDispatch()
 
   // After data is returned from backend,
-  // set events to local state
+  // set fetched data to local state
   useEffect(() => {
     if (data) {
-      // Sets user data to local state
+      // Sets user data to local User state
+      console.log("setting user data")
       const userDataPayload = {
         githubName: data.userData.github,
         githubImageURI: data.userData.imageURI,
+        sasToken: data.sasToken.token,
       }
       dispatch(setUserData(userDataPayload))
 
-      // Sets fetched events to local state
+      // Sets fetched events to local Events state
       dispatch(setEvents(data.todaysEvents))
     }
   }, [data, dispatch])
@@ -47,7 +49,7 @@ const User = () => {
         App page
       </Typography> */}
       <UserCanvas />
-      <EventDialogContainer />
+      <EventDialog />
       <ShareDialogContainer />
     </>
   )

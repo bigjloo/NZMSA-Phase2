@@ -1,3 +1,4 @@
+// import { useEffect } from "react"
 import { Route, Switch } from "react-router-dom"
 import { useAppSelector } from "./store/storeHooks"
 import { GithubLoginProcessor } from "./api/api"
@@ -8,6 +9,14 @@ import User from "./components/User/User"
 
 function App() {
   const isAuth = useAppSelector<boolean>((store) => store.auth.isAuth)
+
+  // TODO: check if JWT token exist, auto login
+  // const [verifyUser] = useMutation(VERIFY_USER, {
+  //   variables: {
+  //     token
+  //   },
+  // })
+  // useEffect(() => {}, [])
 
   return (
     <Layout>

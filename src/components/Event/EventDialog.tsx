@@ -1,67 +1,38 @@
-import { ChangeEvent } from "react"
+import { useAppDispatch, useAppSelector } from "../../store/storeHooks"
+import { setCardImage, setIsCameraOpen } from "../../store/cameraReducer"
+import { toggleEventDialog } from "../../store/dialogReducer"
+import { removeEvent } from "../../store/eventReducer"
 
-import TextField from "@material-ui/core/TextField"
-import Button from "@material-ui/core/Button"
 import Dialog from "@material-ui/core/Dialog"
-import DialogContent from "@material-ui/core/DialogContent"
-import DialogActions from "@material-ui/core/DialogActions"
-import DialogTitle from "@material-ui/core/DialogTitle"
 
+import EventDialogContentContainer from "./EventDialogContentContainer"
 import EventList from "./EventList"
-import CameraContainer from "../MediaCapture/CameraContainer"
 
-export type EventDialogContentProps = {
-  nameInput: string
-  descriptionInput: string
-  openEventDialog: boolean
-  onAddEvent: () => void
-  toggleDialogHandler: () => void
-  toggleHandler: () => void
-  onNameInputChange: (event: ChangeEvent<HTMLInputElement>) => void
-  onDescriptionInputChange: (input: ChangeEvent<HTMLInputElement>) => void
-  onRemoveEvent: (index: number) => void
-}
+const EventDialogContainer = () => {
+  const openEventDialog = useAppSelector<boolean>(
+    (state) => state.dialog.isEventDialogOpen
+  )
 
-const EventDialog = ({
-  nameInput,
-  descriptionInput,
-  openEventDialog,
-  onNameInputChange,
-  onDescriptionInputChange,
-  onAddEvent,
-  toggleDialogHandler,
-  toggleHandler,
-  onRemoveEvent,
-}: EventDialogContentProps) => {
+  const dispatch = useAppDispatch()
+
+  // Toggles AddEvent dialog
+  const toggleEventDialogHandler = () => {
+    dispatch(toggleEventDialog())
+    dispatch(setCardImage(undefined))
+    dispatch(setIsCameraOpen(false))
+  }
+
+  // Removes individual event from events state
+  const onRemoveEvent = (index: number) => dispatch(removeEvent(index))
+
   return (
-    <Dialog open={openEventDialog} onClose={toggleHandler}>
+    <Dialog open={openEventDialog} onClose={toggleEventDialogHandler}>
       <EventList onRemoveEvent={onRemoveEvent} />
-      <DialogContent>
-        <DialogTitle>Add Event</DialogTitle>
-        <TextField
-          value={nameInput}
-          label="Event Name"
-          autoFocus
-          type="text"
-          fullWidth
-          onChange={onNameInputChange}
-        />
-        <TextField
-          value={descriptionInput}
-          label="Description"
-          fullWidth
-          onChange={onDescriptionInputChange}
-        />
-        <CameraContainer />
-        <DialogActions>
-          <Button variant="outlined" onClick={onAddEvent}>
-            Add Event
-          </Button>
-          <Button onClick={toggleDialogHandler}>Close</Button>
-        </DialogActions>
-      </DialogContent>
+      <EventDialogContentContainer
+        toggleEventDialogHandler={toggleEventDialogHandler}
+      />
     </Dialog>
   )
 }
 
-export default EventDialog
+export default EventDialogContainer

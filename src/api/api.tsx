@@ -9,6 +9,11 @@ import { login } from "../store/authReducer"
 
 import BackdropContainer from "../components/UI/BackdropContainer"
 
+// import uploadFileToBlob, {
+//   blobToFile,
+//   azureBlobURL,
+// } from "./azure-storage-blob"
+
 // Called after OAuth code is return from Github server after
 // authorized by User
 export const GithubLoginProcessor = () => {
@@ -24,21 +29,7 @@ export const GithubLoginProcessor = () => {
     variables: { code },
   })
 
-  // console.log("inside github login process")
-  // console.log(error)
-  // console.log(loading)
-  // console.log(isAuth)
-
-  // 1st time error ==  undefined, loading == false
-  // 2nd time loading == true, error == undefined
-  // 3rd time error ==  undefined, loading == false // data got back ??
-  // 4th time error ==  undefined, loading == false // isAuth == true ??
-  // renders User.tsx
-  // console log success here? useEffect in GHLoginProcessor only runs once
-  // data in User.tsx is returned, rerenders User.tsx. once when promise, another when isAuth = true
-
   useEffect(() => {
-    // ran once
     const loginWithGitHubOAuth = async () => {
       // Gets JWT Token from backend
       const response = await getToken()
@@ -62,3 +53,29 @@ export const GithubLoginProcessor = () => {
     </>
   )
 }
+
+// export const useUploadToAzure = () => {
+//   const cardImage = useAppSelector((state) => state.camera.cardImage)
+//   const githubName = useAppSelector((state) => state.user.githubName)
+//   const token = useAppSelector((state) => state.user.sasToken)
+
+//   const fileName = new Date().toISOString()
+//   const file = blobToFile(cardImage!, fileName)
+
+//   // Use name of newly created file for fileURL
+//   // const fileURL = `${azureBlobURL}/${githubName}/${file.name}`
+
+//   const azureUpload = async (file: File, token: string, containerName: string) => {
+//     const fileURL = await uploadFileToBlob(file!, token!, containerName!)
+//     return fileURL
+//   }
+
+//   // try {
+//   //   // Uploads to Azure Storage Blob
+
+//   //   return fileURL
+//   // } catch (err) {
+//   //   console.error(err)
+//   // }
+//   return azureUpload
+// }

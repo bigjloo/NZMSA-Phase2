@@ -8,8 +8,8 @@ import { toggleLoginDialog } from "../../store/dialogReducer"
 const NotLoggedInNavigation = () => {
   const dispatch = useAppDispatch()
 
+  // Opens Login Dialog
   const openLoginDialog = () => dispatch(toggleLoginDialog())
-  console.log("inside NotLoggedInContainer.tsx")
 
   return (
     <BottomNavigationAction

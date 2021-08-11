@@ -9,31 +9,27 @@ import { openNotification } from "../../store/notificationReducer"
 import { toggleShareDialog, toggleEventDialog } from "../../store/dialogReducer"
 import { useMutation } from "@apollo/client"
 import { SET_EVENTS } from "../../apollo-client/query"
+import { IEvent } from "../../store/eventReducer"
 
 const LoggedInNavigation = () => {
-  const events = useAppSelector((state) => state.events.events)
-  const publishKey = useAppSelector((state) => state.events.publishKey)
-
-  console.log("inside LoggedInNavigationContainer.tsx")
+  const events = useAppSelector<IEvent[]>((state) => state.events.events)
+  const publishKey = useAppSelector<string>((state) => state.events.publishKey)
 
   const dispatch = useAppDispatch()
 
-  const openEventDialog = () => dispatch(toggleEventDialog())
-
-  // Sends events from local state to backend
-  const [saveEvents, { error }] = useMutation(SET_EVENTS, {
+  const [saveEvents] = useMutation(SET_EVENTS, {
     variables: { events, publishKey },
   })
 
-  if (error) console.log(error.message)
+  const openEventDialog = () => dispatch(toggleEventDialog())
 
   // Save events without publishKey
-  const saveEventsHandler = () => {
-    saveEvents()
+  const saveEventsHandler = async () => {
+    await saveEvents()
     dispatch(openNotification("Events saved!!!"))
   }
 
-  // Sets key to publish key in state
+  // Sets key as publishKey in local state
   // and opens Share Dialog
   const openShareDialog = () => {
     dispatch(setPublishKey(key))
@@ -48,7 +44,7 @@ const LoggedInNavigation = () => {
   }, [])
 
   // Save events to backend when ShareDialog is toggled, after
-  // publishkey is set by redux
+  // publishkey is set by Redux
   useEffect(() => {
     if (publishKey) {
       saveEvents()

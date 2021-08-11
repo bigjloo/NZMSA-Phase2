@@ -4,17 +4,22 @@ import Snackbar from "@material-ui/core/Snackbar"
 import { closeNotification } from "../../store/notificationReducer"
 import { useAppDispatch, useAppSelector } from "../../store/storeHooks"
 
+// For Snackbar positioning on screen
 const vertical = "top"
 const horizontal = "center"
 
+// TODO - add better animation + color
+// use Alert component
 const Notification = () => {
-  console.log("inside notification")
-  const open = useAppSelector<boolean>((state) => state.notification.open)
+  const isNotificationOpen = useAppSelector<boolean>(
+    (state) => state.notification.open
+  )
   const message = useAppSelector<string>((state) => state.notification.message)
 
   const dispatch = useAppDispatch()
 
-  const closeHandler = () => dispatch(closeNotification())
+  // Closes Snackbar
+  const closeNotificationHandler = () => dispatch(closeNotification())
 
   // Closes notification Snackbar 3 seconds after displayed
   useEffect(() => {
@@ -24,8 +29,8 @@ const Notification = () => {
   return (
     <Snackbar
       anchorOrigin={{ vertical, horizontal }}
-      open={open}
-      onClose={closeHandler}
+      open={isNotificationOpen}
+      onClose={closeNotificationHandler}
       message={message}
     />
   )

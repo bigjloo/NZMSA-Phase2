@@ -1,9 +1,7 @@
 import { ApolloClient, InMemoryCache, HttpLink } from "@apollo/client"
 import { setContext } from "@apollo/client/link/context"
 
-console.log("inside apollo.tsx")
-
-const isDevelopment = false
+const isDevelopment = true
 const CLIENT_ID = "b77f552e93db0e271256"
 
 // Sets frontend and backend url base on isDevelopment

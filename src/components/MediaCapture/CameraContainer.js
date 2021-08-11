@@ -2,35 +2,46 @@ import {useState} from 'react'
 import { Camera } from "./Camera"
 import {Preview} from "./styles";
 import Button from "@material-ui/core/Button"
-import CameraAltIcon from '@material-ui/icons/CameraAlt';
+// import CameraAltIcon from '@material-ui/icons/CameraAlt';
 import { useAppDispatch, useAppSelector } from '../../store/storeHooks';
-import {setCardImage} from '../../store/cameraReducer'
+import {setCardImage, setIsCameraOpen} from '../../store/cameraReducer'
+
 
 // Credits to: https://blog.logrocket.com/responsive-camera-component-react-hooks/
 
 const CameraContainer = () => {
-    const [isCameraOpen, setIsCameraOpen] = useState(false);
-    // const [cardImage, setCardImage] = useState();
+    // const [isCameraOpen, setIsCameraOpen] = useState(false);
     const cardImage = useAppSelector(state => state.camera.cardImage)
+    const isCameraOpen = useAppSelector(state => state.camera.isCameraOpen)
 
     const dispatch = useAppDispatch()
 
-    const handleCameraClick = () => {
-        setIsCameraOpen(state => (!state))
+    const handleButtonClick = () => {
+      // maybe bug
+      dispatch(setIsCameraOpen(true))
+      dispatch(setCardImage(undefined))
+      // setIsCameraOpen(true)
     }
 
-    const onCapture = (blob) => dispatch(setCardImage(blob))
-    const onClear = () => dispatch(setCardImage(undefined))
+    const onCapture = (blob) => {
+      dispatch(setIsCameraOpen(false))
+      dispatch(setCardImage(blob))
+    }
+    const onClear = () => {
+      dispatch(setIsCameraOpen(false))
+      dispatch(setCardImage(undefined))
+    }
 
-    console.log(cardImage)
-    // cardImage  = true after first shot that why it is rendered
-
-    // if cardimage -> render preview
-
-    // if cameraisOpen render camera
-
-    // button 
-    // if cameraisopen Done else "Take Photo"
+    const buttonText = () => {
+      if (isCameraOpen) {
+        return "Done"
+      } else if (cardImage) {
+        return "Take Another Photo"
+      } else {
+        return "Take Photo"
+      }
+    }
+    
     return (
       <>
           {cardImage && (
@@ -43,24 +54,13 @@ const CameraContainer = () => {
             <Camera
               onCapture={onCapture}
               onClear={onClear}
-              handleCameraClick={handleCameraClick}
             />
           )}
   
             {/* <button onClick={() => setIsCameraOpen(true)}>Open Camera</button> */}
-            {<Button style={{width: "100%" }}variant="outlined" onClick={handleCameraClick}>
-                {isCameraOpen ? 
-                    "Done" : "Take photo" 
-                }
+            {!isCameraOpen && <Button style={{width: "100%" }}variant="outlined" onClick={handleButtonClick}>
+                {buttonText()}
             </Button>}
-            {/* <button
-              onClick={() => {
-                setIsCameraOpen(false);
-                setCardImage(undefined);
-              }}
-            >
-              Close Camera
-            </button> */}
       </>
     );
 }

@@ -6,17 +6,17 @@ import { CONFIGURATION } from "../../apollo-client/apollo"
 import { openNotification } from "../../store/notificationReducer"
 
 const ShareDialogContainer = () => {
-  console.log("inside sharedialog")
-  const openShareDialog = useAppSelector<boolean>(
+  const isShareDialogOpen = useAppSelector<boolean>(
     (state) => state.dialog.isShareDialogOpen
   )
   const publishKey = useAppSelector<string>((state) => state.events.publishKey)
 
-  // URL for user to copy to clipboard to share events
+  // Public URL to access User shared events
   const publishURL = `${CONFIGURATION.FRONTEND}share/${publishKey}`
 
   const dispatch = useAppDispatch()
 
+  // Opens Share Dialog
   const toggleHandler = () => dispatch(toggleShareDialog())
 
   // Copies publish URL to clipboard
@@ -28,7 +28,7 @@ const ShareDialogContainer = () => {
   return (
     <ShareDialog
       publishURL={publishURL}
-      openShareDialog={openShareDialog}
+      openShareDialog={isShareDialogOpen}
       onCopyToClipboard={onCopyToClipboard}
       toggleHandler={toggleHandler}
     />

@@ -3,10 +3,6 @@ import Backdrop from "@material-ui/core/Backdrop"
 import CircularProgress from "@material-ui/core/CircularProgress"
 import theme from "../../theme"
 
-type BackdropContainerProps = {
-  loading: boolean
-}
-
 const transitionProps = {
   appear: 300,
 }
@@ -18,6 +14,10 @@ const useStyles = makeStyles({
     opacity: 0.3,
   },
 })
+
+type BackdropContainerProps = {
+  loading: boolean
+}
 
 // No covering bottom navigation
 const BackdropContainer = ({ loading }: BackdropContainerProps) => {

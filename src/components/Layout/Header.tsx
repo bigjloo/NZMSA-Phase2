@@ -29,8 +29,8 @@ const Header = () => {
   const dispatch = useAppDispatch()
   const classes = useStyles()
 
-  const avatarURI = useAppSelector((state) => state.user.githubImageURI)
-  const githubName = useAppSelector((state) => state.user.githubName)
+  const avatarURI = useAppSelector<string>((state) => state.user.githubImageURI)
+  const githubName = useAppSelector<string>((state) => state.user.githubName)
 
   // Logouts user and removes JWT Token from local storage
   const logoutHandler = () => {

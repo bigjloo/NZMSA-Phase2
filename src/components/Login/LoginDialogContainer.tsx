@@ -6,15 +6,14 @@ import LoginDialog from "./LoginDialog"
 import { CONFIGURATION } from "../../apollo-client/apollo"
 
 const LoginDialogContainer = () => {
-  console.log("inside loginDialogContainer")
-  const openLoginDialog = useAppSelector<boolean>(
+  const isLoginDialogOpen = useAppSelector<boolean>(
     (state) => state.dialog.isLoginDialogOpen
   )
 
   const dispatch = useAppDispatch()
 
   // Opens login dialog
-  const toggleHandler = () => dispatch(toggleLoginDialog())
+  const toggleLoginDialogHandler = () => dispatch(toggleLoginDialog())
 
   // Login user
   const handleLogin = () => dispatch(login())
@@ -25,10 +24,10 @@ const LoginDialogContainer = () => {
   return (
     <LoginDialog
       githubAuthURL={CONFIGURATION.GITHUB_AUTHORIZE_URL}
-      openLoginDialog={openLoginDialog}
+      isLoginDialogOpen={isLoginDialogOpen}
       login={handleLogin}
       signup={handleSignUp}
-      toggleHandler={toggleHandler}
+      toggleLoginDialogHandler={toggleLoginDialogHandler}
     />
   )
 }

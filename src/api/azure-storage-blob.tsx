@@ -26,14 +26,19 @@ const createBlobInContainer = async (
   await blobClient.uploadData(file, options)
 }
 
-const uploadFileToBlob = async (
-  file: File,
-  token: string,
+interface IUploadFileToBlob {
+  file: File
+  token: string
   containerName: string
-) => {
+}
+
+const uploadFileToBlob = async ({
+  file,
+  token,
+  containerName,
+}: IUploadFileToBlob) => {
   // Return if no file
   if (!file) {
-    console.log("no file")
     return []
   }
 
@@ -41,7 +46,7 @@ const uploadFileToBlob = async (
   const blobService = new BlobServiceClient(
     `https://${STORAGE_ACCOUNT_NAME}.blob.core.windows.net/?${token}`
   )
-  console.log("start getContainerClient")
+
   // Get container
   const containerClient: ContainerClient =
     blobService.getContainerClient(containerName)
@@ -56,7 +61,11 @@ const uploadFileToBlob = async (
   }
 
   // Pass containerClient and file to upload data
-  await createBlobInContainer(containerClient, file)
+  try {
+    await createBlobInContainer(containerClient, file)
+  } catch (err) {
+    console.error("Failed to create blob in container")
+  }
 }
 
 export default uploadFileToBlob

@@ -19,7 +19,7 @@ const StyledContainer = styled(Container)({
 })
 
 const Layout = ({ children }: LayoutProps) => {
-  const isAuth = useAppSelector((state) => state.auth.isAuth)
+  const isAuth = useAppSelector<boolean>((state) => state.auth.isAuth)
 
   return (
     <StyledContainer>

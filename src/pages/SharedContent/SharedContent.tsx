@@ -1,31 +1,26 @@
 import Typography from "@material-ui/core/Typography"
-import { useAppSelector } from "../../store/storeHooks"
+
 import EventTimeline from "../../components/Event/EventTimeline"
 
 import LoginDialogContainer from "../../components/Login/LoginDialogContainer"
+import { IEvent } from "../../store/eventReducer"
 
-export interface IEvent {
-  name: string
-  description: string
-  photoURI: string | null
+type SharedContentProps = {
+  publisherName: string
+  publishDate: string
+  events: IEvent[]
 }
 
-const SharedContent = () => {
-  const publisherName = useAppSelector<string>(
-    (state) => state.shared.publisher
-  )
-  const publishDate = useAppSelector<string>((state) => state.shared.date)
+const SharedContent = (props: SharedContentProps) => {
+  const { publisherName, publishDate, events } = props
 
-  const events = useAppSelector<IEvent[]>((store) => store.events.events)
-
-  console.log("inside SHaredContent")
   return (
     <>
       <Typography variant="h1" component="h1">
         Published Content
       </Typography>
       <Typography variant="h3" component="h3">
-        By: {publisherName} on {publishDate.slice(0, 10)}
+        By: {publisherName} on {publishDate}
       </Typography>
       <EventTimeline events={events} />
       <LoginDialogContainer />

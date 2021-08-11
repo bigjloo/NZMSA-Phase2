@@ -6,21 +6,22 @@ import DialogActions from "@material-ui/core/DialogActions"
 
 export type LoginDialogContentProps = {
   githubAuthURL: string
-  openLoginDialog: boolean
+  isLoginDialogOpen: boolean
   login: () => void
   signup: () => void
-  toggleHandler: () => void
+  toggleLoginDialogHandler: () => void
 }
 
 const LoginDialog = ({
   githubAuthURL,
-  openLoginDialog,
+  isLoginDialogOpen,
   signup,
   login,
-  toggleHandler,
+  toggleLoginDialogHandler,
 }: LoginDialogContentProps) => {
+  // TODO gh login styling
   return (
-    <Dialog open={openLoginDialog} onClose={toggleHandler}>
+    <Dialog open={isLoginDialogOpen} onClose={toggleLoginDialogHandler}>
       <DialogContent>
         <a href={githubAuthURL}>GITHUB LOGIN</a>
         <br />
