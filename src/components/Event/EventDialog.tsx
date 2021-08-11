@@ -9,24 +9,25 @@ import EventDialogContentContainer from "./EventDialogContentContainer"
 import EventList from "./EventList"
 
 const EventDialogContainer = () => {
-  const openEventDialog = useAppSelector<boolean>(
+  const isEventDialogOpen = useAppSelector<boolean>(
     (state) => state.dialog.isEventDialogOpen
   )
 
   const dispatch = useAppDispatch()
 
-  // Toggles AddEvent dialog
+  // When addEvent nav icon is clicked
   const toggleEventDialogHandler = () => {
     dispatch(toggleEventDialog())
+    // Resets local camera state
     dispatch(setCardImage(undefined))
     dispatch(setIsCameraOpen(false))
   }
 
-  // Removes individual event from events state
+  // Removes individual event from local events state
   const onRemoveEvent = (index: number) => dispatch(removeEvent(index))
 
   return (
-    <Dialog open={openEventDialog} onClose={toggleEventDialogHandler}>
+    <Dialog open={isEventDialogOpen} onClose={toggleEventDialogHandler}>
       <EventList onRemoveEvent={onRemoveEvent} />
       <EventDialogContentContainer
         toggleEventDialogHandler={toggleEventDialogHandler}

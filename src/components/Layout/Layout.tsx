@@ -9,13 +9,6 @@ import Header from "./Header"
 import LoggedInNavigation from "../Navigation/LoggedInNavigation"
 import NotLoggedInNavigation from "../Navigation/NotLoggedInNavigation"
 
-type LayoutProps = {
-  children: ReactNode
-}
-
-// const StyledContainer = styled(Container)({})
-// // const theme = useTheme()
-
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -26,6 +19,10 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 )
+
+type LayoutProps = {
+  children: ReactNode
+}
 
 const Layout = ({ children }: LayoutProps) => {
   const classes = useStyles()

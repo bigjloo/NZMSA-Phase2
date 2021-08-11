@@ -23,8 +23,7 @@ const User = () => {
   // set fetched data to local state
   useEffect(() => {
     if (data) {
-      // Sets user data to local User state
-      console.log("setting user data")
+      // Sets fetched user data to local User state
       const userDataPayload = {
         githubName: data.userData.github,
         githubImageURI: data.userData.imageURI,
@@ -41,13 +40,11 @@ const User = () => {
 
   if (error) return <h1>Error: {error.message}</h1>
 
+  // Remove later
   console.log(localStorage.getItem("HYD_JWT"))
 
   return (
     <>
-      {/* <Typography variant="h1" component="h1">
-        App page
-      </Typography> */}
       <UserCanvas />
       <EventDialog />
       <ShareDialogContainer />

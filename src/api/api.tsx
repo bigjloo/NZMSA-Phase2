@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { useLocation, Redirect } from "react-router-dom"
-import { useMutation } from "@apollo/client"
-import { LOGIN_WITH_GITHUB_CODE } from "../apollo-client/query"
+import { useMutation, useQuery } from "@apollo/client"
+import { LOGIN_WITH_GITHUB_CODE, VERIFY_USER } from "../apollo-client/query"
 
 import { useAppSelector } from "../store/storeHooks"
 import { useAppDispatch } from "../store/storeHooks"
@@ -9,10 +9,7 @@ import { login } from "../store/authReducer"
 
 import BackdropContainer from "../components/UI/BackdropContainer"
 
-// import uploadFileToBlob, {
-//   blobToFile,
-//   azureBlobURL,
-// } from "./azure-storage-blob"
+// Store all helper APIs
 
 // Called after OAuth code is return from Github server after
 // authorized by User
@@ -53,29 +50,3 @@ export const GithubLoginProcessor = () => {
     </>
   )
 }
-
-// export const useUploadToAzure = () => {
-//   const cardImage = useAppSelector((state) => state.camera.cardImage)
-//   const githubName = useAppSelector((state) => state.user.githubName)
-//   const token = useAppSelector((state) => state.user.sasToken)
-
-//   const fileName = new Date().toISOString()
-//   const file = blobToFile(cardImage!, fileName)
-
-//   // Use name of newly created file for fileURL
-//   // const fileURL = `${azureBlobURL}/${githubName}/${file.name}`
-
-//   const azureUpload = async (file: File, token: string, containerName: string) => {
-//     const fileURL = await uploadFileToBlob(file!, token!, containerName!)
-//     return fileURL
-//   }
-
-//   // try {
-//   //   // Uploads to Azure Storage Blob
-
-//   //   return fileURL
-//   // } catch (err) {
-//   //   console.error(err)
-//   // }
-//   return azureUpload
-// }

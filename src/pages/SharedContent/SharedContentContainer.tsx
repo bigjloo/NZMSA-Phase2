@@ -13,7 +13,6 @@ type SharedContentParams = {
   publishKey: string
 }
 
-// Retrieves and sets data
 const SharedContentContainer = () => {
   // Extracts publish key from the URL params
   const { publishKey } = useParams<SharedContentParams>()
@@ -35,16 +34,16 @@ const SharedContentContainer = () => {
 
   const dispatch = useAppDispatch()
 
-  // When data is ready:
-  // 1) sets publisher name + date
-  // 2) sets events returned from data to events state
   useEffect(() => {
     if (sharedContentData) {
+      // Sets publisher name + date
       const shareContentPayload = {
         publisher: sharedContentData.day.user.name,
         date: sharedContentData.day.date,
       }
       dispatch(setSharedContentDetails(shareContentPayload))
+
+      // Sets events returned from data to events state
       dispatch(setEvents(sharedContentData.day.events))
     }
   }, [sharedContentData, dispatch])

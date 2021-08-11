@@ -1,7 +1,6 @@
 import { Camera } from "./Camera"
 import { Preview } from "./styles"
 import Button from "@material-ui/core/Button"
-// import CameraAltIcon from '@material-ui/icons/CameraAlt';
 import { useAppDispatch, useAppSelector } from "../../store/storeHooks"
 import { setCardImage, setIsCameraOpen } from "../../store/cameraReducer"
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
@@ -58,10 +57,7 @@ const CameraContainer = () => {
           <Preview src={cardImage && URL.createObjectURL(cardImage)} />
         </div>
       )}
-
       {isCameraOpen && <Camera onCapture={onCapture} onClear={onClear} />}
-
-      {/* <button onClick={() => setIsCameraOpen(true)}>Open Camera</button> */}
       {!isCameraOpen && (
         <Button
           className={classes.cameraButton}
@@ -76,14 +72,3 @@ const CameraContainer = () => {
 }
 
 export default CameraContainer
-
-/* 
-1)Take photo
-    - show preview
-    - set isCameraOpen = false
-    - set button - take another photo
-        -when clicked, set isCameraOpen = true, hide preview
-// Save photo from preview
-// 
-
-*/

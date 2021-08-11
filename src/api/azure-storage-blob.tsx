@@ -1,13 +1,16 @@
 import { BlobServiceClient, ContainerClient } from "@azure/storage-blob"
 
-// From  https://docs.microsoft.com/azure/developer/javascript/tutorial/browser-file-upload-azure-storage-blob
+/* From  https://docs.microsoft.com/azure/developer/javascript/tutorial/browser-file-upload-azure-storage-blob
+ *  Contains all api for application to interact with Azure Storage Blob
+ *  Key function: Upload file to Azure Storage Blob
+ */
 
 const STORAGE_ACCOUNT_NAME = "nzmsablob"
 
 export const azureBlobURL = `https://${STORAGE_ACCOUNT_NAME}.blob.core.windows.net`
 
 // Converts Blob object to File object
-export const blobToFile = (blob: Blob, fileName: string) => {
+export const convertBlobToFile = (blob: Blob, fileName: string) => {
   const file = new File([blob], fileName)
   return file
 }

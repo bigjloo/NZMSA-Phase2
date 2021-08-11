@@ -4,7 +4,7 @@ import DialogActions from "@material-ui/core/DialogActions"
 import DialogTitle from "@material-ui/core/DialogTitle"
 
 import CameraContainer from "../MediaCapture/CameraContainer"
-import TextFieldsContainer from "./TextFieldsContainer"
+import EventDialogTextFields from "./EventDialogTextFields"
 
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
 
@@ -37,7 +37,7 @@ const EventDialogContent = ({
   return (
     <DialogContent>
       <DialogTitle className={classes.title}>{title}</DialogTitle>
-      <TextFieldsContainer />
+      <EventDialogTextFields />
       <CameraContainer />
       <DialogActions>
         <Button

@@ -1,12 +1,8 @@
 import EventTimeline from "../Event/EventTimeline"
 import { useAppSelector } from "../../store/storeHooks"
+import { IEvent } from "../../store/eventReducer"
 
-export interface IEvent {
-  name: string
-  description: string
-  photoURI: string | null
-}
-
+// Style
 const UserCanvas = () => {
   const events = useAppSelector<IEvent[]>((store) => store.events.events)
 

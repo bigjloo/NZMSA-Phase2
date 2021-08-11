@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) =>
       height: "100%",
       width: "100%",
     },
-
+    // remove later
     maxW: {
       width: "100%",
     },
@@ -42,10 +42,6 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: "0 0.5rem",
       color: theme.palette.secondary.main,
     },
-
-    // dot: {
-    //   color: theme.palette.primary.light,
-    // },
   })
 )
 
@@ -53,43 +49,6 @@ const EventTimeline = ({ events }: { events: IEvent[] }) => {
   const classes = useStyles()
 
   return (
-    // <Timeline align="alternate">
-    //   {events.map((event, index) => (
-    //     <TimelineItem key={index}>
-    //       <TimelineOppositeContent>
-    //         <Typography variant="h5" component="h5">
-    //           {event.name}
-    //         </Typography>
-    //       </TimelineOppositeContent>
-    //       <TimelineSeparator>
-    //         <TimelineDot />
-    //         <TimelineConnector />
-    //       </TimelineSeparator>
-    //       <TimelineContent>
-    //         <Card className={classes.card}>
-    //           {event.photoURI && (
-    //             <CardMedia>
-    //               <img
-    //                 src={event.photoURI}
-    //                 alt="user snaps"
-    //                 className={classes.cardImage}
-    //               />
-    //             </CardMedia>
-    //           )}
-
-    //           <CardContent className={classes.cardContent}>
-    //             <Typography
-    //               // className={classes.eventDescription}
-    //               variant="body2"
-    //             >
-    //               {event.description}
-    //             </Typography>
-    //           </CardContent>
-    //         </Card>
-    //       </TimelineContent>
-    //     </TimelineItem>
-    //   ))}
-    // </Timeline>
     <Timeline align="alternate">
       {events.map((event, index) => (
         <TimelineItem key={index}>
@@ -115,12 +74,7 @@ const EventTimeline = ({ events }: { events: IEvent[] }) => {
               )}
 
               <CardContent className={classes.cardContent}>
-                <Typography
-                  // className={classes.eventDescription}
-                  variant="body2"
-                >
-                  {event.description}
-                </Typography>
+                <Typography variant="body2">{event.description}</Typography>
               </CardContent>
               <Box>
                 <FavoriteIcon className={classes.favIcon} />

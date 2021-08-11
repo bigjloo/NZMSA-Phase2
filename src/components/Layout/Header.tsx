@@ -31,12 +31,12 @@ const useStyles = makeStyles((theme: Theme) =>
 )
 
 const Header = () => {
-  const dispatch = useAppDispatch()
-
   const classes = useStyles()
 
   const avatarURI = useAppSelector<string>((state) => state.user.githubImageURI)
   const githubName = useAppSelector<string>((state) => state.user.githubName)
+
+  const dispatch = useAppDispatch()
 
   // Logouts user and removes JWT Token from local storage
   const logoutHandler = () => {
