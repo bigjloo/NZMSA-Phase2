@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme: Theme) =>
       background: theme.palette.background.default,
       height: "100vh",
       maxWidth: "xs",
-      padding: "1rem",
+      padding: "0",
     },
   })
 )

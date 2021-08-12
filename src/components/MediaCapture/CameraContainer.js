@@ -3,7 +3,7 @@ import { Preview } from "./styles"
 import Button from "@material-ui/core/Button"
 import { useAppDispatch, useAppSelector } from "../../store/storeHooks"
 import { setCardImage, setIsCameraOpen } from "../../store/cameraReducer"
-import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
+import { makeStyles, createStyles } from "@material-ui/core/styles"
 
 // Credits to: https://blog.logrocket.com/responsive-camera-component-react-hooks/
 

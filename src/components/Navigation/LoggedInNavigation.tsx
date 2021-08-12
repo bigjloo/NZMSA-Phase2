@@ -1,8 +1,8 @@
 import { useMemo, useEffect } from "react"
-import BottomNavigationAction from "@material-ui/core/BottomNavigationAction"
-import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline"
-import ShareIcon from "@material-ui/icons/Share"
-import SaveAltIcon from "@material-ui/icons/SaveAlt"
+// import BottomNavigationAction from "@material-ui/core/BottomNavigationAction"
+import AddIcon from "@material-ui/icons/Add"
+// import ShareIcon from "@material-ui/icons/Share"
+// import SaveAltIcon from "@material-ui/icons/SaveAlt"
 import { useAppSelector, useAppDispatch } from "../../store/storeHooks"
 import { setPublishKey } from "../../store/eventReducer"
 import { openNotification } from "../../store/notificationReducer"
@@ -11,11 +11,39 @@ import { useMutation } from "@apollo/client"
 import { SET_EVENTS } from "../../apollo-client/query"
 import { IEvent } from "../../store/eventReducer"
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles"
+import { IconButton, Toolbar, Fab } from "@material-ui/core"
+import BackdropContainer from "../UI/BackdropContainer"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     navigationAction: {
       color: theme.palette.background.default,
+    },
+
+    navigationAddEvent: {
+      position: "absolute",
+      top: "-200",
+      margin: "0 auto",
+    },
+
+    fabButton: {
+      position: "absolute",
+      top: -30,
+      left: 0,
+      right: 0,
+      margin: "0 auto",
+      backgroundColor: theme.palette.secondary.main,
+    },
+
+    toolbar: {
+      flex: "row",
+      justifyContent: "space-between",
+    },
+
+    iconButton: {
+      color: theme.palette.background.default,
+      fontSize: "1rem",
+      padding: "0 2rem",
     },
   })
 )
@@ -27,7 +55,7 @@ const LoggedInNavigation = () => {
 
   const dispatch = useAppDispatch()
 
-  const [saveEvents] = useMutation(SET_EVENTS, {
+  const [saveEvents, { loading }] = useMutation(SET_EVENTS, {
     variables: { events, publishKey },
   })
 
@@ -61,29 +89,38 @@ const LoggedInNavigation = () => {
     }
   }, [publishKey, saveEvents])
 
+  if (loading) return <BackdropContainer loading={loading} />
+
   return (
-    <>
-      <BottomNavigationAction
-        className={classes.navigationAction}
-        label="Add"
-        icon={<AddCircleOutlineIcon onClick={openEventDialog} />}
-        showLabel
-      />
-      <BottomNavigationAction
-        className={classes.navigationAction}
-        label="Save"
-        icon={<SaveAltIcon />}
+    <Toolbar className={classes.toolbar}>
+      <IconButton
+        className={classes.iconButton}
+        edge="start"
         onClick={saveEventsHandler}
-        showLabel
-      />
-      <BottomNavigationAction
-        className={classes.navigationAction}
-        label="Share"
-        icon={<ShareIcon />}
+        // className={classes.navigationAction}
+        // label="Save"
+        // icon={<SaveAltIcon />}
+        // onClick={saveEventsHandler}
+        // showLabel
+      >
+        SAVE
+      </IconButton>
+      <Fab className={classes.fabButton}>
+        {/* className={classes.navigationAddEvent}
+        icon={
+          <AddCircleOutlineIcon onClick={openEventDialog} fontSize="large" />
+        }
+        showLabel */}
+        <AddIcon onClick={openEventDialog} fontSize="large" />
+      </Fab>
+      <IconButton
+        className={classes.iconButton}
+        edge="end"
         onClick={openShareDialog}
-        showLabel
-      />
-    </>
+      >
+        PUBLISH
+      </IconButton>
+    </Toolbar>
   )
 }
 

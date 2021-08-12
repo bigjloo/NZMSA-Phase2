@@ -2,7 +2,7 @@ import Dialog from "@material-ui/core/Dialog"
 import DialogActions from "@material-ui/core/DialogActions"
 import DialogContent from "@material-ui/core/DialogContent"
 import DialogContentText from "@material-ui/core/DialogContentText"
-import DialogTitle from "@material-ui/core/DialogTitle"
+// import DialogTitle from "@material-ui/core/DialogTitle"
 import Button from "@material-ui/core/Button"
 import Typography from "@material-ui/core/Typography"
 
@@ -22,15 +22,19 @@ const ShareDialog = ({
   // Rethink UX for copy
   return (
     <Dialog open={openShareDialog} onClose={toggleHandler}>
-      <DialogTitle>Share</DialogTitle>
       <DialogContent>
-        <DialogContentText>
-          <Typography onDoubleClick={onCopyToClipboard}>
+        <DialogContentText style={{ margin: "1rem 0" }}>
+          <Typography
+            onDoubleClick={onCopyToClipboard}
+            style={{ color: "black" }}
+          >
             {publishURL}
           </Typography>
         </DialogContentText>
         <DialogActions>
-          <Button onClick={onCopyToClipboard}>Copy to clipboard</Button>
+          <Button variant="outlined" onClick={onCopyToClipboard}>
+            Copy{" "}
+          </Button>
         </DialogActions>
       </DialogContent>
     </Dialog>

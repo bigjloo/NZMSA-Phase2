@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { useLocation, Redirect } from "react-router-dom"
-import { useMutation, useQuery } from "@apollo/client"
-import { LOGIN_WITH_GITHUB_CODE, VERIFY_USER } from "../apollo-client/query"
+import { useMutation } from "@apollo/client"
+import { LOGIN_WITH_GITHUB_CODE } from "../apollo-client/query"
 
 import { useAppSelector } from "../store/storeHooks"
 import { useAppDispatch } from "../store/storeHooks"

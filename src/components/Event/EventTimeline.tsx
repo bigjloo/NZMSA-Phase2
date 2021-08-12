@@ -9,12 +9,10 @@ import Typography from "@material-ui/core/Typography"
 import Card from "@material-ui/core/Card"
 import CardMedia from "@material-ui/core/CardMedia"
 import CardContent from "@material-ui/core/CardContent"
-import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
+import { makeStyles, createStyles } from "@material-ui/core/styles"
 import { IEvent } from "../../store/eventReducer"
-import FavoriteIcon from "@material-ui/icons/Favorite"
-import Box from "@material-ui/core/Box"
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     card: {
       maxWidth: window.innerWidth / 2,
@@ -33,15 +31,15 @@ const useStyles = makeStyles((theme: Theme) =>
     },
 
     cardContent: {
-      padding: "0.2rem",
+      padding: "0.5rem",
       textAlign: "center",
     },
 
-    favIcon: {
-      fontSize: "small",
-      margin: "0 0.5rem",
-      color: theme.palette.secondary.main,
-    },
+    // favIcon: {
+    //   fontSize: "small",
+    //   margin: "0 0.5rem",
+    //   color: theme.palette.secondary.main,
+    // },
   })
 )
 
@@ -53,9 +51,7 @@ const EventTimeline = ({ events }: { events: IEvent[] }) => {
       {events.map((event, index) => (
         <TimelineItem key={index}>
           <TimelineOppositeContent>
-            <Typography variant="h6" component="h6">
-              {event.name}
-            </Typography>
+            <Typography variant="overline">{event.name}</Typography>
           </TimelineOppositeContent>
           <TimelineSeparator>
             <TimelineDot color="primary" />
@@ -74,11 +70,8 @@ const EventTimeline = ({ events }: { events: IEvent[] }) => {
               )}
 
               <CardContent className={classes.cardContent}>
-                <Typography variant="body2">{event.description}</Typography>
+                <Typography variant="caption">{event.description}</Typography>
               </CardContent>
-              <Box>
-                <FavoriteIcon className={classes.favIcon} />
-              </Box>
             </Card>
           </TimelineContent>
         </TimelineItem>

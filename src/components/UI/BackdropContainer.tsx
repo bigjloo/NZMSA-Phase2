@@ -5,7 +5,7 @@ import CircularProgress from "@material-ui/core/CircularProgress"
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     backdrop: {
-      position: "absolute",
+      // position: "absolute",
       zIndex: theme.zIndex.drawer - 1,
       opacity: 0.3,
     },

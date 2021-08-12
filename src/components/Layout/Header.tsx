@@ -16,11 +16,11 @@ const useStyles = makeStyles((theme: Theme) =>
     },
 
     header: {
-      marginTop: "1rem",
+      padding: "1rem 2rem",
     },
 
     githubName: {
-      paddingLeft: "0.5rem",
+      paddingLeft: "1.5rem",
     },
 
     logoutButton: {
@@ -57,14 +57,19 @@ const Header = () => {
       alignItems="center"
       justifyContent="space-between"
     >
-      <Grid container alignItems="center" item direction="row" xs={8}>
-        <Grid item xs={3}>
+      <Grid
+        container
+        alignItems="center"
+        item
+        direction="row"
+        justifyContent="flex-start"
+        xs={8}
+      >
+        <Grid item xs={2}>
           <Avatar className={classes.large} alt="user avatar" src={avatarURI} />
         </Grid>
-        <Grid className={classes.githubName} item xs={3}>
-          <Typography variant="h6" component="h6">
-            {githubName}
-          </Typography>
+        <Grid className={classes.githubName} item xs={2}>
+          <Typography>{githubName}</Typography>
         </Grid>
       </Grid>
       <Grid item xs={4}>

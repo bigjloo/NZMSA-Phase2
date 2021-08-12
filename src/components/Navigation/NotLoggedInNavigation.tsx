@@ -1,25 +1,36 @@
-import BottomNavigationAction from "@material-ui/core/BottomNavigationAction"
+import IconButton from "@material-ui/core/IconButton"
 import { useAppDispatch } from "../../store/storeHooks"
 import { toggleLoginDialog } from "../../store/dialogReducer"
-import { useTheme } from "@material-ui/core/styles"
+import { Toolbar } from "@material-ui/core"
+import { makeStyles, Theme, createStyles } from "@material-ui/core/styles"
+// import { useTheme } from "@material-ui/core/styles"
 // type NotLoggedInNavigationProps = {
 //   openLoginDialog: () => void
 // }
 
+const NotLoggedInNavigationStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    loginButton: {
+      color: theme.palette.background.default,
+      margin: "auto",
+      fontSize: "1rem",
+    },
+  })
+)
+
 const NotLoggedInNavigation = () => {
-  const theme = useTheme()
+  const classes = NotLoggedInNavigationStyles()
   const dispatch = useAppDispatch()
 
   // Opens Login Dialog
   const openLoginDialog = () => dispatch(toggleLoginDialog())
 
   return (
-    <BottomNavigationAction
-      label="Login/Sign Up"
-      showLabel
-      onClick={openLoginDialog}
-      style={{ color: theme.palette.background.default }}
-    />
+    <Toolbar>
+      <IconButton className={classes.loginButton} onClick={openLoginDialog}>
+        LOGIN
+      </IconButton>
+    </Toolbar>
   )
 }
 
