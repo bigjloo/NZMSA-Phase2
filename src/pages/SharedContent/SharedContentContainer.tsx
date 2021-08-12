@@ -29,7 +29,9 @@ const SharedContentContainer = () => {
   const publisherName = useAppSelector<string>(
     (state) => state.shared.publisher
   )
-  const publishDate = useAppSelector<string>((state) => state.shared.date)
+  const publishDate = useAppSelector<string>(
+    (state) => state.shared.date
+  )
   const events = useAppSelector<IEvent[]>((store) => store.events.events)
 
   const dispatch = useAppDispatch()

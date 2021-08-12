@@ -15,10 +15,8 @@ const EventDialogContainer = () => {
 
   const dispatch = useAppDispatch()
 
-  // When addEvent nav icon is clicked
   const toggleEventDialogHandler = () => {
     dispatch(toggleEventDialog())
-    // Resets local camera state
     dispatch(setCardImage(undefined))
     dispatch(setIsCameraOpen(false))
   }

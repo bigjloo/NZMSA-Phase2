@@ -26,37 +26,43 @@ const EventDialogContentContainer = (
   const cardImage = useAppSelector<Blob | undefined>(
     (state) => state.camera.cardImage
   )
-  const token = useAppSelector<string>((state) => state.user.sasToken)
-  const githubName = useAppSelector<string>((state) => state.user.githubName)
+  const token = useAppSelector<string | undefined>(
+    (state) => state.user.sasToken
+  )
+  const githubName = useAppSelector<string | undefined>(
+    (state) => state.user.githubName
+  )
 
   const dispatch = useAppDispatch()
 
-  // Uploads cardImage(user photo) to Azure Storage and
-  // adds event to local events state
+  // Uploads cardImage(user photo) to Azure Storage
+  // returns photo URI
+  const convertAndUploadFileToAzure = async () => {
+    const fileName = new Date().toISOString()
+    const file = convertBlobToFile(cardImage!, fileName)
+    const uploadToAzurePayload = {
+      file,
+      token: token!,
+      containerName: githubName!,
+    }
+    try {
+      await uploadFileToBlob(uploadToAzurePayload)
+      const photoURI = `${azureBlobURL}/${githubName}/${file.name}`
+      return photoURI
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
+  // Adds new event to local events state
   const onAddEvent = async () => {
     let photoURI = null
-    if (cardImage) {
-      // Creates fileName from current datetime
-      // and converts cardImage to File type
-      const fileName = new Date().toISOString()
-      const file = convertBlobToFile(cardImage, fileName)
 
-      const uploadToAzurePayload = {
-        file,
-        token,
-        containerName: githubName,
-      }
-      try {
-        // Uploads to Azure Storage Blob
-        await uploadFileToBlob(uploadToAzurePayload)
-        // Upload success. Sets fileURI to name of newly created file
-        photoURI = `${azureBlobURL}/${githubName}/${file.name}`
-      } catch (err) {
-        console.error(err)
-      }
+    // If user took photo for event
+    if (cardImage) {
+      photoURI = await convertAndUploadFileToAzure()
     }
 
-    // Adds new event to local events state
     const eventsPayload = {
       name: nameInput,
       description: descriptionInput,
@@ -64,12 +70,8 @@ const EventDialogContentContainer = (
     }
     dispatch(addEvent(eventsPayload))
 
-    // Reset cardImage
     dispatch(setCardImage(undefined))
-
-    // Resets form input fields after event is added
     dispatch(resetInputFields())
-
     dispatch(openNotification("Event succesfully added!"))
   }
 

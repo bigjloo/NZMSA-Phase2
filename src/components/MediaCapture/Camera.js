@@ -18,7 +18,7 @@ const CAPTURE_OPTIONS = {
   video: { facingMode: "environment" }
 };
 
-export function Camera({ onCapture, onClear, handleCameraClick }) {
+export function Camera({ onCapture, onClear}) {
   const canvasRef = useRef();
   const videoRef = useRef();
 
@@ -71,16 +71,12 @@ export function Camera({ onCapture, onClear, handleCameraClick }) {
     canvasRef.current.toBlob(blob => onCapture(blob), "image/jpeg", 1);
     setIsCanvasEmpty(false);
     setIsFlashing(true);
-    // handleCameraClick()
-    //
-    // setIsVideoPlaying(false)
   }
 
   function handleClear() {
     const context = canvasRef.current.getContext("2d");
     context.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
     setIsCanvasEmpty(true);
-    // handleCameraClick()
     onClear();
   }
 

@@ -6,7 +6,7 @@ import {
   handleDescriptionInputChange,
 } from "../../store/formInputReducer"
 
-const TextFieldsContainer = () => {
+const EventDialogTextFields = () => {
   const nameInput = useAppSelector<string>((state) => state.formInput.name)
   const descriptionInput = useAppSelector<string>(
     (state) => state.formInput.description
@@ -14,7 +14,7 @@ const TextFieldsContainer = () => {
 
   const dispatch = useAppDispatch()
 
-  // Two way bind textfield input to state
+  // Two way bind textfield input to local formInput state
   const onNameInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     dispatch(handleNameInputChange(event.target.value))
   }
@@ -41,4 +41,4 @@ const TextFieldsContainer = () => {
   )
 }
 
-export default TextFieldsContainer
+export default EventDialogTextFields

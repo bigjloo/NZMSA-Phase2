@@ -33,8 +33,12 @@ const useStyles = makeStyles((theme: Theme) =>
 const Header = () => {
   const classes = useStyles()
 
-  const avatarURI = useAppSelector<string>((state) => state.user.githubImageURI)
-  const githubName = useAppSelector<string>((state) => state.user.githubName)
+  const avatarURI = useAppSelector<string | undefined>(
+    (state) => state.user.githubImageURI
+  )
+  const githubName = useAppSelector<string | undefined>(
+    (state) => state.user.githubName
+  )
 
   const dispatch = useAppDispatch()
 

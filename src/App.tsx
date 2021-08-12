@@ -1,5 +1,3 @@
-// import { useEffect } from "react"
-// import { useEffect } from "react"
 import { Route, Switch } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "./store/storeHooks"
 import { GithubLoginProcessor } from "./api/api"
@@ -15,7 +13,7 @@ import { login } from "./store/authReducer"
 function App() {
   const isAuth = useAppSelector<boolean>((store) => store.auth.isAuth)
 
-  // Auto login user if token exist and verified
+  // Verify user if token exists in local storage and login
   const { loading, error } = useQuery(VERIFY_USER, {
     skip: !!localStorage.getItem("HYD_JWT"),
   })
@@ -25,16 +23,6 @@ function App() {
   if (!loading && !error) {
     dispatch(login())
   }
-
-  // Verify user if token exist in localStorage
-  // useEffect(() => {
-  //   const verify = async () => {
-  //     await verifyUser()
-  //     if (error) return
-  //     dispatch(login())
-  //   }
-  //   !!localStorage.getItem("HYD_JWT") && verify()
-  // }, [verifyUser, error, dispatch])
 
   return (
     <Layout>

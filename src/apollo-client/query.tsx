@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client"
 
 export const VERIFY_USER = gql`
-  query {
+  mutation {
     self {
       id
     }

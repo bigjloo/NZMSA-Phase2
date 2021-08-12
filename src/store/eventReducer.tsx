@@ -8,7 +8,7 @@ export interface IEventsState {
 export interface IEvent {
   name: string
   description: string
-  photoURI: string | null
+  photoURI: string | null | undefined
 }
 
 const initialEventState: IEventsState = { events: [], publishKey: "" }
