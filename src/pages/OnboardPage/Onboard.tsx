@@ -1,4 +1,4 @@
-import LoginDialogContainer from "../components/Login/LoginDialogContainer"
+import LoginDialogContainer from "../../components/LoginDialog/LoginDialogContainer"
 
 // Short tutorial or onboarding user front page
 const Onboard = () => {

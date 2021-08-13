@@ -17,6 +17,8 @@ const useStyles = makeStyles((theme: Theme) =>
 
     header: {
       padding: "1rem 2rem",
+      borderBottom: "1px solid green",
+      boxShadow: "0 0.2rem 1.5rem",
     },
 
     githubName: {
@@ -25,7 +27,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
     logoutButton: {
       float: "right",
-      color: theme.palette.primary.main,
+      color: theme.palette.secondary.contrastText,
     },
   })
 )

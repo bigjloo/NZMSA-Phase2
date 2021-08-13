@@ -3,11 +3,11 @@ import { useAppSelector } from "../../store/storeHooks"
 import Container from "@material-ui/core/Container"
 import Box from "@material-ui/core/Box"
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles"
-import NavigationContainer from "../Navigation/NavigationContainer"
+import NavigationContainer from "../Appbar/AppbarContainer"
 import Notification from "../UI/Notification"
 import Header from "./Header"
-import LoggedInNavigation from "../Navigation/LoggedInNavigation"
-import NotLoggedInNavigation from "../Navigation/NotLoggedInNavigation"
+import LoggedInNavigation from "../Appbar/Appbar__LoggedIn"
+import NotLoggedInNavigation from "../Appbar/Appbar__NotLoggedIn"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

@@ -1,13 +1,13 @@
 import { Route, Switch } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "./store/storeHooks"
 import { GithubLoginProcessor } from "./api/api"
-import SharedContentContainer from "./pages/SharedContent/SharedContentContainer"
-import Onboard from "./pages/Onboard"
+import SharedContentContainer from "./pages/SharedContentPage/SharedContentContainer"
+import Onboard from "./pages/OnboardPage/Onboard"
 import Layout from "./components/Layout/Layout"
-import User from "./components/User/User"
+import User from "./pages/UserPage/User"
 
 import { useQuery } from "@apollo/client"
-import { VERIFY_USER } from "./apollo-client/query"
+import { VERIFY_USER } from "./apollo-client/queries"
 import { login } from "./store/authReducer"
 
 function App() {

@@ -1,4 +1,4 @@
-import EventTimeline from "../Event/EventTimeline"
+import EventTimeline from "../../components/Event/EventTimeline"
 import { useAppSelector } from "../../store/storeHooks"
 import { IEvent } from "../../store/eventReducer"
 

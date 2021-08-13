@@ -4,6 +4,7 @@ import { ReactNode } from "react"
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
 // import BottomNavigation from "@material-ui/core/BottomNavigation"
 import { AppBar } from "@material-ui/core"
+// import AppbarStyles from "./AppbarStyles"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -22,6 +23,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const NavigationContainer = ({ children }: { children: ReactNode }) => {
   const classes = useStyles()
+  // const styles = AppbarStyles().appBarContainer
   return (
     <AppBar position="fixed" className={classes.appBar}>
       {children}

@@ -12,11 +12,11 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     title: {
       padding: "0",
-      color: theme.palette.primary.dark,
+      color: theme.palette.secondary.contrastText,
     },
 
     addEventButton: {
-      color: theme.palette.primary.dark,
+      color: theme.palette.secondary.contrastText,
     },
   })
 )

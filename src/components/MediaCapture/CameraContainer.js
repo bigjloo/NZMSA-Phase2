@@ -7,10 +7,10 @@ import { makeStyles, createStyles } from "@material-ui/core/styles"
 
 // Credits to: https://blog.logrocket.com/responsive-camera-component-react-hooks/
 
-const useStyles = makeStyles(() =>
+const useStyles = makeStyles((theme) =>
   createStyles({
     cameraButton: {
-      color: "#2c666e",
+      color: theme.palette.primary.contrastText,
       width: "100%",
       marginTop: "0.75rem",
     },

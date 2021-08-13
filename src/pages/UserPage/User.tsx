@@ -4,10 +4,10 @@ import { useAppDispatch } from "../../store/storeHooks"
 
 import { setEvents } from "../../store/eventReducer"
 
-import { GET_USER_DATA } from "../../apollo-client/query"
+import { GET_USER_DATA } from "../../apollo-client/queries"
 
-import EventDialog from "../Event/EventDialog"
-import ShareDialogContainer from "../Share/ShareDialogContainer"
+import EventDialog from "../../components/Event/EventDialog"
+import ShareDialogContainer from "../../components/ShareDialog/ShareDialogContainer"
 import UserCanvas from "./UserCanvas"
 import BackdropContainer from "../../components/UI/BackdropContainer"
 // import Typography from "@material-ui/core/Typography"

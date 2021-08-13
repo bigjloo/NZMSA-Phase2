@@ -8,7 +8,7 @@ import { setPublishKey } from "../../store/eventReducer"
 import { openNotification } from "../../store/notificationReducer"
 import { toggleShareDialog, toggleEventDialog } from "../../store/dialogReducer"
 import { useMutation } from "@apollo/client"
-import { SET_EVENTS } from "../../apollo-client/query"
+import { SET_EVENTS } from "../../apollo-client/mutations"
 import { IEvent } from "../../store/eventReducer"
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles"
 import { IconButton, Toolbar, Fab } from "@material-ui/core"
@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
 
     iconButton: {
-      color: theme.palette.background.default,
+      color: theme.palette.secondary.contrastText,
       fontSize: "1rem",
       padding: "0 2rem",
     },
@@ -55,7 +55,7 @@ const LoggedInNavigation = () => {
 
   const dispatch = useAppDispatch()
 
-  const [saveEvents, { loading }] = useMutation(SET_EVENTS, {
+  const [saveEvents, { loading, error }] = useMutation(SET_EVENTS, {
     variables: { events, publishKey },
   })
 
@@ -90,6 +90,10 @@ const LoggedInNavigation = () => {
   }, [publishKey, saveEvents])
 
   if (loading) return <BackdropContainer loading={loading} />
+
+  if (error) {
+    dispatch(openNotification("Error when saving events! Please try again"))
+  }
 
   return (
     <Toolbar className={classes.toolbar}>
