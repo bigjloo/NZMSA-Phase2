@@ -29,12 +29,14 @@ const EventDialogTextFields = () => {
         autoFocus
         type="text"
         fullWidth
+        color="secondary"
         onChange={onNameInputChange}
       />
       <TextField
         value={descriptionInput}
         label="Description"
         fullWidth
+        color="secondary"
         onChange={onDescriptionInputChange}
       />
     </>

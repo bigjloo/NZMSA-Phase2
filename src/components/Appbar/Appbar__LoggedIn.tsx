@@ -13,6 +13,7 @@ import { IEvent } from "../../store/eventReducer"
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles"
 import { IconButton, Toolbar, Fab } from "@material-ui/core"
 import BackdropContainer from "../UI/BackdropContainer"
+import Button from "@material-ui/core/Button"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -32,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) =>
       left: 0,
       right: 0,
       margin: "0 auto",
-      backgroundColor: theme.palette.secondary.main,
+      backgroundColor: theme.palette.secondary.light,
     },
 
     toolbar: {
@@ -41,7 +42,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
 
     iconButton: {
-      color: theme.palette.secondary.contrastText,
+      // color: theme.palette.secondary.contrastText,
       fontSize: "1rem",
       padding: "0 2rem",
     },
@@ -107,7 +108,7 @@ const LoggedInNavigation = () => {
         // onClick={saveEventsHandler}
         // showLabel
       >
-        SAVE
+        <Button>SAVE</Button>
       </IconButton>
       <Fab className={classes.fabButton}>
         {/* className={classes.navigationAddEvent}
@@ -122,7 +123,7 @@ const LoggedInNavigation = () => {
         edge="end"
         onClick={openShareDialog}
       >
-        PUBLISH
+        <Button>PUBLISH</Button>
       </IconButton>
     </Toolbar>
   )

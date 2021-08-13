@@ -6,17 +6,27 @@ import DialogTitle from "@material-ui/core/DialogTitle"
 import CameraContainer from "../MediaCapture/CameraContainer"
 import EventDialogTextFields from "./EventDialogTextFields"
 
-import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
+import { makeStyles, createStyles } from "@material-ui/core/styles"
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     title: {
       padding: "0",
-      color: theme.palette.secondary.contrastText,
+      // color: theme.palette.secondary.contrastText,
     },
 
     addEventButton: {
-      color: theme.palette.secondary.contrastText,
+      // color: theme.palette.secondary.contrastText,
+    },
+
+    dialogContent: {
+      "& > *": {
+        padding: "0.5rem 0",
+      },
+    },
+
+    dialogActions: {
+      margin: "0.5rem 0",
     },
   })
 )
@@ -35,11 +45,11 @@ const EventDialogContent = ({
   const classes = useStyles()
 
   return (
-    <DialogContent>
+    <DialogContent className={classes.dialogContent}>
       <DialogTitle className={classes.title}>{title}</DialogTitle>
       <EventDialogTextFields />
       <CameraContainer />
-      <DialogActions>
+      <DialogActions className={classes.dialogActions}>
         <Button
           className={classes.addEventButton}
           variant="outlined"

@@ -26,7 +26,7 @@ const ShareDialog = ({
         <DialogContentText style={{ margin: "1rem 0" }}>
           <Typography
             onDoubleClick={onCopyToClipboard}
-            style={{ color: "black" }}
+            // style={{ color: "black" }}
           >
             {publishURL}
           </Typography>

@@ -8,6 +8,7 @@ import notificationReducer from "./notificationReducer"
 import cameraReducer from "./cameraReducer"
 import sharedReducer from "./sharedReducer"
 import userReducer from "./userReducer"
+import themeReducer from "./themeReducer"
 
 const store = configureStore({
   reducer: {
@@ -19,6 +20,7 @@ const store = configureStore({
     camera: cameraReducer,
     shared: sharedReducer,
     user: userReducer,
+    theme: themeReducer,
   },
 })
 

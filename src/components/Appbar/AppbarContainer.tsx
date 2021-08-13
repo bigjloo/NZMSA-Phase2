@@ -1,12 +1,12 @@
 import { ReactNode } from "react"
 // import { useAppSelector } from "../../store/storeHooks"
 
-import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
+import { makeStyles, createStyles } from "@material-ui/core/styles"
 // import BottomNavigation from "@material-ui/core/BottomNavigation"
 import { AppBar } from "@material-ui/core"
 // import AppbarStyles from "./AppbarStyles"
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     appBar: {
       // width: "100%",
@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) =>
       // borderRadius: "10px 10px 0 0",
       top: "auto",
       bottom: 0,
-      backgroundColor: theme.palette.primary.dark,
+      // backgroundColor: theme.palette.primary.dark,
     },
   })
 )
@@ -25,7 +25,7 @@ const NavigationContainer = ({ children }: { children: ReactNode }) => {
   const classes = useStyles()
   // const styles = AppbarStyles().appBarContainer
   return (
-    <AppBar position="fixed" className={classes.appBar}>
+    <AppBar position="fixed" color="inherit" className={classes.appBar}>
       {children}
     </AppBar>
   )

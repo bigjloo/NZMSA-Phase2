@@ -11,7 +11,7 @@ import { IEvent } from "../../store/eventReducer"
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     removeEventButton: {
-      color: theme.palette.secondary.main,
+      color: theme.palette.secondary.dark,
     },
   })
 )
@@ -35,7 +35,7 @@ const EventList = ({ onRemoveEvent }: EventListProps) => {
               className={classes.removeEventButton}
               onClick={() => onRemoveEvent(index)}
             >
-              x
+              X
             </Button>
           </ListItem>
           <Divider variant="middle" component="li" key={`d-${index}`} />

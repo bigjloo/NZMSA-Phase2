@@ -10,9 +10,9 @@ import { makeStyles, createStyles } from "@material-ui/core/styles"
 const useStyles = makeStyles((theme) =>
   createStyles({
     cameraButton: {
-      color: theme.palette.primary.contrastText,
+      // color: theme.palette.primary.contrastText,
       width: "100%",
-      marginTop: "0.75rem",
+      // marginTop: "0.75rem",
     },
   })
 )
@@ -61,7 +61,7 @@ const CameraContainer = () => {
       {!isCameraOpen && (
         <Button
           className={classes.cameraButton}
-          variant="outlined"
+          variant="contained"
           onClick={handleButtonClick}
         >
           {buttonText()}

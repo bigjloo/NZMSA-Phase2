@@ -72,7 +72,7 @@ export const default_palette = {
       dark: "#07393c",
     },
     secondary: {
-      main: "#90ddf0",
+      main: "#2c666e",
     },
     error: {
       main: red.A400,
@@ -83,6 +83,12 @@ export const default_palette = {
   },
 }
 
-const theme = createTheme(default_palette)
+export const darkTheme = createTheme({
+  palette: {
+    type: "dark",
+  },
+})
+
+export const theme = createTheme(default_palette)
 
 export default theme

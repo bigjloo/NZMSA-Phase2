@@ -54,7 +54,7 @@ const EventTimeline = ({ events }: { events: IEvent[] }) => {
             <Typography variant="overline">{event.name}</Typography>
           </TimelineOppositeContent>
           <TimelineSeparator>
-            <TimelineDot color="primary" />
+            <TimelineDot color="secondary" variant="outlined" />
             <TimelineConnector />
           </TimelineSeparator>
           <TimelineContent>
