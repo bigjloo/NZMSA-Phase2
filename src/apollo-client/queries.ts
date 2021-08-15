@@ -1,5 +1,6 @@
 import { gql } from "@apollo/client"
 
+// If no error is returned, user is verified
 export const VERIFY_USER = gql`
   query {
     self {

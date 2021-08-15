@@ -1,6 +1,6 @@
 import Typography from "@material-ui/core/Typography"
 import Box from "@material-ui/core/Box"
-import EventTimeline from "../../components/Event/EventTimeline"
+import EventTimeline from "../../components/EventTimeline/EventTimeline"
 
 import LoginDialogContainer from "../../components/LoginDialog/LoginDialogContainer"
 import { IEvent } from "../../store/eventReducer"
@@ -11,9 +11,11 @@ type SharedContentProps = {
   events: IEvent[]
 }
 
-const SharedContent = (props: SharedContentProps) => {
-  const { publisherName, publishDate, events } = props
-
+const SharedContent = ({
+  publisherName,
+  publishDate,
+  events,
+}: SharedContentProps) => {
   return (
     <>
       <Box style={{ margin: "1rem 2rem" }}>

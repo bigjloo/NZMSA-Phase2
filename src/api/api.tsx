@@ -7,7 +7,7 @@ import { useAppSelector } from "../store/storeHooks"
 import { useAppDispatch } from "../store/storeHooks"
 import { login } from "../store/authReducer"
 
-import BackdropContainer from "../components/UI/BackdropContainer"
+import BackdropContainer from "../components/Backdrop/BackdropContainer"
 
 // Store all helper APIs
 

@@ -1,16 +1,16 @@
 import { useEffect } from "react"
 
-import Snackbar from "@material-ui/core/Snackbar"
+import Notification from "./Notification"
 import { closeNotification } from "../../store/notificationReducer"
 import { useAppDispatch, useAppSelector } from "../../store/storeHooks"
 
 // For Snackbar positioning on screen
-const vertical = "top"
-const horizontal = "center"
+// const vertical = "top"
+// const horizontal = "center"
 
 // TODO - add better animation + color
 // use Alert component
-const Notification = () => {
+const NotificationContainer = () => {
   const isNotificationOpen = useAppSelector<boolean>(
     (state) => state.notification.open
   )
@@ -27,13 +27,13 @@ const Notification = () => {
   }, [message, dispatch])
 
   return (
-    <Snackbar
-      anchorOrigin={{ vertical, horizontal }}
-      open={isNotificationOpen}
-      onClose={closeNotificationHandler}
+    <Notification
+      anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      isNotificationOpen={isNotificationOpen}
+      closeNotificationHandler={closeNotificationHandler}
       message={message}
     />
   )
 }
 
-export default Notification
+export default NotificationContainer

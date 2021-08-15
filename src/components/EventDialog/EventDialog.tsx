@@ -6,7 +6,7 @@ import { removeEvent } from "../../store/eventReducer"
 import Dialog from "@material-ui/core/Dialog"
 
 import EventDialogContentContainer from "./EventDialogContentContainer"
-import EventList from "./EventList"
+import EventDialogList from "./EventDialogList"
 
 const EventDialogContainer = () => {
   const isEventDialogOpen = useAppSelector<boolean>(
@@ -26,7 +26,7 @@ const EventDialogContainer = () => {
 
   return (
     <Dialog open={isEventDialogOpen} onClose={toggleEventDialogHandler}>
-      <EventList onRemoveEvent={onRemoveEvent} />
+      <EventDialogList onRemoveEvent={onRemoveEvent} />
       <EventDialogContentContainer
         toggleEventDialogHandler={toggleEventDialogHandler}
       />

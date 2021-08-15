@@ -24,16 +24,13 @@ const ShareDialog = ({
     <Dialog open={openShareDialog} onClose={toggleHandler}>
       <DialogContent>
         <DialogContentText style={{ margin: "1rem 0" }}>
-          <Typography
-            onDoubleClick={onCopyToClipboard}
-            // style={{ color: "black" }}
-          >
+          <Typography onDoubleClick={onCopyToClipboard}>
             {publishURL}
           </Typography>
         </DialogContentText>
         <DialogActions>
           <Button variant="outlined" onClick={onCopyToClipboard}>
-            Copy{" "}
+            Copy
           </Button>
         </DialogActions>
       </DialogContent>

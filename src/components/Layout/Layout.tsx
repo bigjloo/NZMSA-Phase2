@@ -1,41 +1,30 @@
 import { ReactNode } from "react"
-import { useAppSelector } from "../../store/storeHooks"
 import Container from "@material-ui/core/Container"
 import Box from "@material-ui/core/Box"
-import { makeStyles, Theme, createStyles } from "@material-ui/core/styles"
-import NavigationContainer from "../Appbar/AppbarContainer"
-import Notification from "../UI/Notification"
-import Header from "./Header"
-import LoggedInNavigation from "../Appbar/Appbar__LoggedIn"
-import NotLoggedInNavigation from "../Appbar/Appbar__NotLoggedIn"
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      background: theme.palette.background.default,
-      height: "100vh",
-      maxWidth: "xs",
-      padding: "0",
-    },
-  })
-)
+// import AppbarContainer from "../Appbar/AppbarContainer"
+import NotificationContainer from "../Notification/NotificationContainer"
+import HeaderContainer from "../Header/HeaderContainer"
+import AppbarLoggedIn from "../Appbar/AppbarLoggedIn"
+import AppbarNotLoggedIn from "../Appbar/AppbarNotLoggedIn"
+import ThemeToggle from "../ThemeToggle/ThemeToggle"
+import LayoutStyles from "./LayoutStyles"
 
 type LayoutProps = {
   children: ReactNode
+  isAuth: boolean
+  isDark: boolean
 }
 
-const Layout = ({ children }: LayoutProps) => {
-  const classes = useStyles()
-  const isAuth = useAppSelector<boolean>((state) => state.auth.isAuth)
+const Layout = ({ children, isAuth, isDark }: LayoutProps) => {
+  const classes = LayoutStyles()
 
   return (
-    <Container className={classes.root}>
-      <Notification />
-      {isAuth && <Header />}
+    <Container className={classes.container}>
+      <NotificationContainer />
+      {isAuth && <HeaderContainer />}
+      <ThemeToggle isDark={isDark} />
       <Box component="main">{children}</Box>
-      <NavigationContainer>
-        {isAuth ? <LoggedInNavigation /> : <NotLoggedInNavigation />}
-      </NavigationContainer>
+      {isAuth ? <AppbarLoggedIn /> : <AppbarNotLoggedIn />}
     </Container>
   )
 }

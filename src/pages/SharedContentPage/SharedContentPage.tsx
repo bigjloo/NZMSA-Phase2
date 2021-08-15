@@ -6,14 +6,14 @@ import { GET_EVENTS_BY_PUBLISH_KEY } from "../../apollo-client/queries"
 import { setSharedContentDetails } from "../../store/sharedReducer"
 import { setEvents } from "../../store/eventReducer"
 import SharedContent from "./SharedContent"
-import BackdropContainer from "../../components/UI/BackdropContainer"
+import BackdropContainer from "../../components/Backdrop/BackdropContainer"
 import { IEvent } from "../../store/eventReducer"
 
 type SharedContentParams = {
   publishKey: string
 }
 
-const SharedContentContainer = () => {
+const SharedContentPage = () => {
   // Extracts publish key from the URL params
   const { publishKey } = useParams<SharedContentParams>()
 
@@ -61,4 +61,4 @@ const SharedContentContainer = () => {
   )
 }
 
-export default SharedContentContainer
+export default SharedContentPage

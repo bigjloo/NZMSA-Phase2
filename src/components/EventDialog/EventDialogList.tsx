@@ -20,7 +20,7 @@ export type EventListProps = {
   onRemoveEvent: (index: number) => void
 }
 
-const EventList = ({ onRemoveEvent }: EventListProps) => {
+const EventDialogList = ({ onRemoveEvent }: EventListProps) => {
   const classes = useStyles()
   const events = useAppSelector<IEvent[]>((state) => state.events.events)
 
@@ -45,4 +45,4 @@ const EventList = ({ onRemoveEvent }: EventListProps) => {
   )
 }
 
-export default EventList
+export default EventDialogList

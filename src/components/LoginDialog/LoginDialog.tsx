@@ -4,7 +4,7 @@ import TextField from "@material-ui/core/TextField"
 import Button from "@material-ui/core/Button"
 import DialogActions from "@material-ui/core/DialogActions"
 
-export type LoginDialogContentProps = {
+export type LoginDialogProps = {
   githubAuthURL: string
   isLoginDialogOpen: boolean
   login: () => void
@@ -18,7 +18,7 @@ const LoginDialog = ({
   signup,
   login,
   toggleLoginDialogHandler,
-}: LoginDialogContentProps) => {
+}: LoginDialogProps) => {
   // TODO gh login styling
   return (
     <Dialog open={isLoginDialogOpen} onClose={toggleLoginDialogHandler}>
