@@ -1,6 +1,6 @@
 import EventTimeline from "../../components/EventTimeline/EventTimeline"
-import EventDialog from "../../components/EventDialog/EventDialogContainer"
-import ShareDialogContainer from "../../components/ShareDialog/ShareDialogContainer"
+import EventDialogContainer from "../../components/Dialogs/EventDialog/EventDialogContainer"
+import ShareDialogContainer from "../../components/Dialogs/ShareDialog/ShareDialogContainer"
 import { IEvent } from "../../store/eventReducer"
 
 type UserProps = {
@@ -11,7 +11,7 @@ const User = ({ events }: UserProps) => {
   return (
     <>
       <EventTimeline events={events} />
-      <EventDialog />
+      <EventDialogContainer />
       <ShareDialogContainer />
     </>
   )

@@ -8,20 +8,20 @@ import Typography from "@material-ui/core/Typography"
 
 export type ShareDialogProps = {
   publishURL: string
-  openShareDialog: boolean
+  isShareDialogOpen: boolean
   onCopyToClipboard: () => void
   toggleHandler: () => void
 }
 
 const ShareDialog = ({
   publishURL,
-  openShareDialog,
+  isShareDialogOpen,
   onCopyToClipboard,
   toggleHandler,
 }: ShareDialogProps) => {
   // Rethink UX for copy
   return (
-    <Dialog open={openShareDialog} onClose={toggleHandler}>
+    <Dialog open={isShareDialogOpen} onClose={toggleHandler}>
       <DialogContent>
         <DialogContentText style={{ margin: "1rem 0" }}>
           <Typography onDoubleClick={onCopyToClipboard}>

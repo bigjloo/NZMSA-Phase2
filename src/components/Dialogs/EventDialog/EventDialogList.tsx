@@ -6,7 +6,7 @@ import ListItemText from "@material-ui/core/ListItemText"
 import Divider from "@material-ui/core/Divider"
 import Button from "@material-ui/core/Button"
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
-import { IEvent } from "../../store/eventReducer"
+import { IEvent } from "../../../store/eventReducer"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

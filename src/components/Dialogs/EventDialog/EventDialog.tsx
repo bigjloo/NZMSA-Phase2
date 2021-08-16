@@ -1,7 +1,7 @@
 import Dialog from "@material-ui/core/Dialog"
 import EventDialogContent from "./EventDialogContent"
 import EventDialogList from "./EventDialogList"
-import { IEvent } from "../../store/eventReducer"
+import { IEvent } from "../../../store/eventReducer"
 import { ChangeEvent } from "react"
 
 export type EventDialogProps = {

@@ -2,7 +2,7 @@ import Typography from "@material-ui/core/Typography"
 import Box from "@material-ui/core/Box"
 import EventTimeline from "../../components/EventTimeline/EventTimeline"
 
-import LoginDialogContainer from "../../components/LoginDialog/LoginDialogContainer"
+import LoginDialogContainer from "../../components/Dialogs/LoginDialog/LoginDialogContainer"
 import { IEvent } from "../../store/eventReducer"
 
 type SharedContentProps = {

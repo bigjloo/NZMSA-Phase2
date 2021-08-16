@@ -3,7 +3,7 @@ import DialogContent from "@material-ui/core/DialogContent"
 import DialogActions from "@material-ui/core/DialogActions"
 import DialogTitle from "@material-ui/core/DialogTitle"
 import { ChangeEvent } from "react"
-import CameraContainer from "../MediaCapture/CameraContainer"
+import CameraContainer from "../../MediaCapture/CameraContainer"
 // import EventDialogTextFields from "./EventDialogTextFields"
 import TextField from "@material-ui/core/TextField"
 

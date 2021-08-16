@@ -1,9 +1,9 @@
-import { useAppSelector, useAppDispatch } from "../../store/storeHooks"
+import { useAppSelector, useAppDispatch } from "../../../store/storeHooks"
 
-import { toggleShareDialog } from "../../store/dialogReducer"
+import { toggleShareDialog } from "../../../store/dialogReducer"
 import ShareDialog from "./ShareDialog"
-import { CONFIGURATION } from "../../apollo-client/apollo"
-import { openNotification } from "../../store/notificationReducer"
+import { CONFIGURATION } from "../../../apollo-client/apollo"
+import { openNotification } from "../../../store/notificationReducer"
 
 const ShareDialogContainer = () => {
   const isShareDialogOpen = useAppSelector<boolean>(
@@ -28,7 +28,7 @@ const ShareDialogContainer = () => {
   return (
     <ShareDialog
       publishURL={publishURL}
-      openShareDialog={isShareDialogOpen}
+      isShareDialogOpen={isShareDialogOpen}
       onCopyToClipboard={onCopyToClipboard}
       toggleHandler={toggleHandler}
     />

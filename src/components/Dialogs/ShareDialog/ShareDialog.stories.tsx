@@ -14,7 +14,7 @@ export const AppShareDialog: Story<ShareDialogProps> = (args) => (
 )
 AppShareDialog.args = {
   publishURL: "http://www.example.com/examp1e",
-  openShareDialog: true,
+  isShareDialogOpen: true,
   onCopyToClipboard: () => alert("copied to clipboard"),
 }
 

@@ -1,9 +1,9 @@
-import { useAppSelector, useAppDispatch } from "../../store/storeHooks"
+import { useAppSelector, useAppDispatch } from "../../../store/storeHooks"
 
-import { toggleLoginDialog } from "../../store/dialogReducer"
-import { login } from "../../store/authReducer"
+import { toggleLoginDialog } from "../../../store/dialogReducer"
+import { login } from "../../../store/authReducer"
 import LoginDialog from "./LoginDialog"
-import { CONFIGURATION } from "../../apollo-client/apollo"
+import { CONFIGURATION } from "../../../apollo-client/apollo"
 
 const LoginDialogContainer = () => {
   const isLoginDialogOpen = useAppSelector<boolean>(

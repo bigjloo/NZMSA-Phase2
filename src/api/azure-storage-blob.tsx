@@ -51,8 +51,9 @@ const uploadFileToBlob = async ({
   )
 
   // Get container
-  const containerClient: ContainerClient =
-    blobService.getContainerClient(containerName)
+  const containerClient: ContainerClient = blobService.getContainerClient(
+    containerName
+  )
 
   // Creates container if doesnt exist in account
   try {

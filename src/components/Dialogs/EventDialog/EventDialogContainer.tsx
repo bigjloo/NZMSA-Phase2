@@ -1,17 +1,17 @@
-import { useAppDispatch, useAppSelector } from "../../store/storeHooks"
-import { setCardImage, setIsCameraOpen } from "../../store/cameraReducer"
-import { toggleEventDialog } from "../../store/dialogReducer"
-import { removeEvent } from "../../store/eventReducer"
+import { useAppDispatch, useAppSelector } from "../../../store/storeHooks"
+import { setCardImage, setIsCameraOpen } from "../../../store/cameraReducer"
+import { toggleEventDialog } from "../../../store/dialogReducer"
+import { removeEvent } from "../../../store/eventReducer"
 import EventDialog from "./EventDialog"
-import { IEvent } from "../../store/eventReducer"
-import { openNotification } from "../../store/notificationReducer"
-import { resetInputFields } from "../../store/formInputReducer"
-import { addEvent } from "../../store/eventReducer"
-import { convertAndUploadFileToAzure } from "../../api/azure-storage-blob"
+import { IEvent } from "../../../store/eventReducer"
+import { openNotification } from "../../../store/notificationReducer"
+import { resetInputFields } from "../../../store/formInputReducer"
+import { addEvent } from "../../../store/eventReducer"
+import { convertAndUploadFileToAzure } from "../../../api/azure-storage-blob"
 import {
   handleNameInputChange,
   handleDescriptionInputChange,
-} from "../../store/formInputReducer"
+} from "../../../store/formInputReducer"
 import { ChangeEvent } from "react"
 
 const EventDialogContainer = () => {
