@@ -1,13 +1,15 @@
 import { useEffect } from "react"
 import { useLocation, Redirect } from "react-router-dom"
 import { useMutation } from "@apollo/client"
-import { LOGIN_WITH_GITHUB_CODE } from "../apollo-client/query"
+import { LOGIN_WITH_GITHUB_CODE } from "../apollo-client/mutations"
 
 import { useAppSelector } from "../store/storeHooks"
 import { useAppDispatch } from "../store/storeHooks"
 import { login } from "../store/authReducer"
 
-import BackdropContainer from "../components/UI/BackdropContainer"
+import BackdropContainer from "../components/Backdrop/BackdropContainer"
+
+// Store all helper APIs
 
 // Called after OAuth code is return from Github server after
 // authorized by User
@@ -24,21 +26,7 @@ export const GithubLoginProcessor = () => {
     variables: { code },
   })
 
-  // console.log("inside github login process")
-  // console.log(error)
-  // console.log(loading)
-  // console.log(isAuth)
-
-  // 1st time error ==  undefined, loading == false
-  // 2nd time loading == true, error == undefined
-  // 3rd time error ==  undefined, loading == false // data got back ??
-  // 4th time error ==  undefined, loading == false // isAuth == true ??
-  // renders User.tsx
-  // console log success here? useEffect in GHLoginProcessor only runs once
-  // data in User.tsx is returned, rerenders User.tsx. once when promise, another when isAuth = true
-
   useEffect(() => {
-    // ran once
     const loginWithGitHubOAuth = async () => {
       // Gets JWT Token from backend
       const response = await getToken()

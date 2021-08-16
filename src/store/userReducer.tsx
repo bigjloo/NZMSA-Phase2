@@ -1,13 +1,15 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 interface IUserState {
-  githubName: string
-  githubImageURI: string
+  sasToken: string | undefined
+  githubName: string | undefined
+  githubImageURI: string | undefined
 }
 
 const initialUserState: IUserState = {
-  githubName: "",
-  githubImageURI: "",
+  sasToken: undefined,
+  githubName: undefined,
+  githubImageURI: undefined,
 }
 
 const userSlice = createSlice({
@@ -17,6 +19,7 @@ const userSlice = createSlice({
     setUserData(state, action: PayloadAction<IUserState>) {
       state.githubName = action.payload.githubName
       state.githubImageURI = action.payload.githubImageURI
+      state.sasToken = action.payload.sasToken
     },
   },
 })

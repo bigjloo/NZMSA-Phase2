@@ -1,21 +1,26 @@
-import { createTheme } from "@material-ui/core/styles";
-import { red } from "@material-ui/core/colors";
+import { createTheme } from "@material-ui/core/styles"
+import { red } from "@material-ui/core/colors"
 
-const theme = createTheme({
+export const lightTheme = createTheme({
   palette: {
     primary: {
-      main: "#556cd6",
+      main: "#2c666e",
+      dark: "#07393c",
     },
     secondary: {
-      main: "#19857b",
+      main: "#2c666e",
     },
     error: {
       main: red.A400,
     },
     background: {
-      default: "#fff",
+      default: "#F0EDEE",
     },
   },
-});
+})
 
-export default theme;
+export const darkTheme = createTheme({
+  palette: {
+    type: "dark",
+  },
+})
