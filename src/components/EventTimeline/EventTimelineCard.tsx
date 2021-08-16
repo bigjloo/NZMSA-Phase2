@@ -3,14 +3,14 @@ import CardMedia from "@material-ui/core/CardMedia"
 import CardContent from "@material-ui/core/CardContent"
 import Typography from "@material-ui/core/Typography"
 import { IEvent } from "../../store/eventReducer"
-import EventTimelineCardStyles from "./EventTimelineCardStyles"
+import EventTimelineStyles from "./EventTimelineStyles"
 
 type EventTimelineCardProps = {
   event: IEvent
 }
 
 const EventTimelineCard = ({ event }: EventTimelineCardProps) => {
-  const classes = EventTimelineCardStyles()
+  const classes = EventTimelineStyles()
   return (
     <Card className={classes.card}>
       {event.photoURI && (

@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 )
 
-type BackdropContainerProps = {
+export type BackdropContainerProps = {
   loading: boolean
 }
 

@@ -71,4 +71,25 @@ const uploadFileToBlob = async ({
   }
 }
 
+export const convertAndUploadFileToAzure = async (
+  token: string,
+  githubName: string,
+  cardImage: Blob
+) => {
+  const fileName = new Date().toISOString()
+  const file = convertBlobToFile(cardImage!, fileName)
+  const uploadToAzurePayload = {
+    file,
+    token: token!,
+    containerName: githubName!,
+  }
+  try {
+    await uploadFileToBlob(uploadToAzurePayload)
+    const photoURI = `${azureBlobURL}/${githubName}/${file.name}`
+    return photoURI
+  } catch (err) {
+    console.error(err)
+  }
+}
+
 export default uploadFileToBlob

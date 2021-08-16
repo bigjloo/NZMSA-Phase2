@@ -1,5 +1,5 @@
 import EventTimeline from "../../components/EventTimeline/EventTimeline"
-import EventDialog from "../../components/EventDialog/EventDialog"
+import EventDialog from "../../components/EventDialog/EventDialogContainer"
 import ShareDialogContainer from "../../components/ShareDialog/ShareDialogContainer"
 import { IEvent } from "../../store/eventReducer"
 

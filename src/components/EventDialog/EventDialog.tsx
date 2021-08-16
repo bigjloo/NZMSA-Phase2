@@ -1,37 +1,46 @@
-import { useAppDispatch, useAppSelector } from "../../store/storeHooks"
-import { setCardImage, setIsCameraOpen } from "../../store/cameraReducer"
-import { toggleEventDialog } from "../../store/dialogReducer"
-import { removeEvent } from "../../store/eventReducer"
-
 import Dialog from "@material-ui/core/Dialog"
-
-import EventDialogContentContainer from "./EventDialogContentContainer"
+import EventDialogContent from "./EventDialogContent"
 import EventDialogList from "./EventDialogList"
+import { IEvent } from "../../store/eventReducer"
+import { ChangeEvent } from "react"
 
-const EventDialogContainer = () => {
-  const isEventDialogOpen = useAppSelector<boolean>(
-    (state) => state.dialog.isEventDialogOpen
-  )
+export type EventDialogProps = {
+  isEventDialogOpen: boolean
+  toggleEventDialogHandler: () => void
+  events: IEvent[]
+  onRemoveEvent: (index: number) => void
+  onAddEvent: () => void
+  nameInput: string
+  descriptionInput: string
+  onNameInputChange: (event: ChangeEvent<HTMLInputElement>) => void
+  onDescriptionInputChange: (event: ChangeEvent<HTMLInputElement>) => void
+}
 
-  const dispatch = useAppDispatch()
-
-  const toggleEventDialogHandler = () => {
-    dispatch(toggleEventDialog())
-    dispatch(setCardImage(undefined))
-    dispatch(setIsCameraOpen(false))
-  }
-
-  // Removes individual event from local events state
-  const onRemoveEvent = (index: number) => dispatch(removeEvent(index))
-
+const EventDialog = ({
+  isEventDialogOpen,
+  toggleEventDialogHandler,
+  events,
+  onRemoveEvent,
+  onAddEvent,
+  nameInput,
+  descriptionInput,
+  onNameInputChange,
+  onDescriptionInputChange,
+}: EventDialogProps) => {
   return (
     <Dialog open={isEventDialogOpen} onClose={toggleEventDialogHandler}>
-      <EventDialogList onRemoveEvent={onRemoveEvent} />
-      <EventDialogContentContainer
+      <EventDialogList events={events} onRemoveEvent={onRemoveEvent} />
+      <EventDialogContent
+        title="Add Event"
+        onAddEvent={onAddEvent}
         toggleEventDialogHandler={toggleEventDialogHandler}
+        nameInput={nameInput}
+        descriptionInput={descriptionInput}
+        onNameInputChange={onNameInputChange}
+        onDescriptionInputChange={onDescriptionInputChange}
       />
     </Dialog>
   )
 }
 
-export default EventDialogContainer
+export default EventDialog

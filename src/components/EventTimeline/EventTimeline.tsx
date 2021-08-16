@@ -12,7 +12,7 @@ import Typography from "@material-ui/core/Typography"
 // import { makeStyles, createStyles } from "@material-ui/core/styles"
 import { IEvent } from "../../store/eventReducer"
 // import EventTimelineStyles from "./EventTimelineStyles"
-import EventTimelineCard from "../EventTimelineCard/EventTimelineCard"
+import EventTimelineCard from "./EventTimelineCard"
 
 // const useStyles = makeStyles(() =>
 //   createStyles({

@@ -1,4 +1,4 @@
-import { useAppSelector } from "../../store/storeHooks"
+// import { useAppSelector } from "../../store/storeHooks"
 
 import List from "@material-ui/core/List"
 import ListItem from "@material-ui/core/ListItem"
@@ -17,12 +17,13 @@ const useStyles = makeStyles((theme: Theme) =>
 )
 
 export type EventListProps = {
+  events: IEvent[]
   onRemoveEvent: (index: number) => void
 }
 
-const EventDialogList = ({ onRemoveEvent }: EventListProps) => {
+const EventDialogList = ({ events, onRemoveEvent }: EventListProps) => {
   const classes = useStyles()
-  const events = useAppSelector<IEvent[]>((state) => state.events.events)
+  // const events = useAppSelector<IEvent[]>((state) => state.events.events)
 
   // TODO style
   return (

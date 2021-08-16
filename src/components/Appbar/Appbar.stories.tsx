@@ -2,7 +2,6 @@ import { Meta, Story } from "@storybook/react"
 // import Provider from "../../Provider"
 // import store from "../../store/store"
 
-import Appbar from "./AppbarContainer"
 import AppbarNotLoggedIn from "./AppbarNotLoggedIn"
 import AppbarLoggedIn from "./AppbarLoggedIn"
 // import { AppContainerProps } from "./AppbarContainer"
@@ -11,7 +10,7 @@ import AppbarLoggedIn from "./AppbarLoggedIn"
 
 export default {
   title: "AppBar",
-  component: Appbar,
+  component: AppbarLoggedIn,
   argTypes: {},
 } as Meta
 

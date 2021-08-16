@@ -6,7 +6,7 @@ import DialogContentText from "@material-ui/core/DialogContentText"
 import Button from "@material-ui/core/Button"
 import Typography from "@material-ui/core/Typography"
 
-type ShareDialogProps = {
+export type ShareDialogProps = {
   publishURL: string
   openShareDialog: boolean
   onCopyToClipboard: () => void

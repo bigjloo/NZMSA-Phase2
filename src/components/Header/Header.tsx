@@ -4,7 +4,7 @@ import Avatar from "@material-ui/core/Avatar"
 import Button from "@material-ui/core/Button"
 import HeaderStyles from "./HeaderStyles"
 
-type HeaderProps = {
+export type HeaderProps = {
   avatarURI: string
   githubName: string
   logoutHandler: () => void
