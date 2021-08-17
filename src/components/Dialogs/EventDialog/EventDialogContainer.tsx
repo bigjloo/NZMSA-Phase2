@@ -48,11 +48,11 @@ const EventDialogContainer = () => {
 
     // If user took photo for event
     if (cardImage) {
-      photoURI = await convertAndUploadFileToAzure(
-        token!,
-        githubName!,
-        cardImage
-      )
+      photoURI = await convertAndUploadFileToAzure({
+        token: token!,
+        githubName: githubName!,
+        cardImage,
+      })
     }
 
     const eventsPayload = {

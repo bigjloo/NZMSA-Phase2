@@ -5,7 +5,7 @@ import Typography from "@material-ui/core/Typography"
 import { IEvent } from "../../store/eventReducer"
 import EventTimelineStyles from "./EventTimelineStyles"
 
-type EventTimelineCardProps = {
+export type EventTimelineCardProps = {
   event: IEvent
 }
 

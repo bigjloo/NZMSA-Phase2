@@ -2,7 +2,7 @@ import IconButton from "@material-ui/core/IconButton"
 import { useAppDispatch } from "../../store/storeHooks"
 import { toggleLoginDialog } from "../../store/dialogReducer"
 import { Toolbar } from "@material-ui/core"
-import { AppbarNotLoggedInStyles } from "./AppbarStyles"
+import AppbarNotLoggedInStyles from "./AppbarNotLoggedInStyles"
 import { AppBar } from "@material-ui/core"
 
 const AppbarNotLoggedIn = () => {
@@ -13,7 +13,7 @@ const AppbarNotLoggedIn = () => {
   const openLoginDialog = () => dispatch(toggleLoginDialog())
 
   return (
-    <AppBar color="inherit" className={classes.appBar}>
+    <AppBar color="inherit" className={classes.mainAppbar}>
       <Toolbar>
         <IconButton className={classes.loginButton} onClick={openLoginDialog}>
           LOGIN

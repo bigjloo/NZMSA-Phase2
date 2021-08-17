@@ -5,7 +5,7 @@ import EventTimeline from "../../components/EventTimeline/EventTimeline"
 import LoginDialogContainer from "../../components/Dialogs/LoginDialog/LoginDialogContainer"
 import { IEvent } from "../../store/eventReducer"
 
-type SharedContentProps = {
+export type SharedContentProps = {
   publisherName: string
   publishDate: string
   events: IEvent[]

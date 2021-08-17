@@ -33,7 +33,6 @@ const useStyles = makeStyles(() =>
 )
 
 type EventDialogContentProps = {
-  title: string
   nameInput: string
   descriptionInput: string
   onAddEvent: () => void
@@ -43,7 +42,6 @@ type EventDialogContentProps = {
 }
 
 const EventDialogContent = ({
-  title,
   nameInput,
   descriptionInput,
   onAddEvent,
@@ -55,7 +53,7 @@ const EventDialogContent = ({
 
   return (
     <DialogContent className={classes.dialogContent}>
-      <DialogTitle className={classes.title}>{title}</DialogTitle>
+      <DialogTitle className={classes.title}>Add Event</DialogTitle>
       <TextField
         value={nameInput}
         label="Event Name"

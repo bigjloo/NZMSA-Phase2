@@ -31,7 +31,6 @@ const EventDialog = ({
     <Dialog open={isEventDialogOpen} onClose={toggleEventDialogHandler}>
       <EventDialogList events={events} onRemoveEvent={onRemoveEvent} />
       <EventDialogContent
-        title="Add Event"
         onAddEvent={onAddEvent}
         toggleEventDialogHandler={toggleEventDialogHandler}
         nameInput={nameInput}

@@ -3,7 +3,7 @@ import EventDialogContainer from "../../components/Dialogs/EventDialog/EventDial
 import ShareDialogContainer from "../../components/Dialogs/ShareDialog/ShareDialogContainer"
 import { IEvent } from "../../store/eventReducer"
 
-type UserProps = {
+export type UserProps = {
   events: IEvent[]
 }
 

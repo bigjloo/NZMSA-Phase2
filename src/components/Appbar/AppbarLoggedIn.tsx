@@ -10,7 +10,7 @@ import { IEvent } from "../../store/eventReducer"
 import { IconButton, Toolbar, Fab } from "@material-ui/core"
 import BackdropContainer from "../Backdrop/BackdropContainer"
 import Button from "@material-ui/core/Button"
-import { AppbarLoggedInStyles } from "./AppbarStyles"
+import AppbarLoggedInStyles from "./AppbarLoggedInStyles"
 import { AppBar } from "@material-ui/core"
 
 const AppbarLoggedIn = () => {
@@ -30,7 +30,7 @@ const AppbarLoggedIn = () => {
   // Save events without publishKey
   const onSaveEvents = async () => {
     await saveEvents()
-    dispatch(openNotification("Events saved!!!"))
+    dispatch(openNotification("Events saved!"))
   }
 
   // Sets key as publishKey in local state

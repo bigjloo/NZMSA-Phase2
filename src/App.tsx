@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import { Route, Switch } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "./store/storeHooks"
 import { GithubLoginProcessor } from "./api/api"
@@ -29,6 +30,9 @@ function App() {
   if (!loading && !error) {
     dispatch(login())
   }
+
+  // TODO CHeck user settings for dark mode
+  useEffect(() => {})
 
   return (
     <ThemeProvider theme={theme}>

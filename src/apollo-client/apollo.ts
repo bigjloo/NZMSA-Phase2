@@ -28,10 +28,6 @@ const authLink = setContext((_, { headers }) => {
   }
 })
 
-// remove later
-console.log("JWT TOKEN")
-console.log(localStorage.getItem("HYD_JWT"))
-
 // Creates a httpLink from URL provided
 const httpLink = new HttpLink({
   uri: CONFIGURATION.BACKEND,
