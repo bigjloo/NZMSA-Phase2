@@ -1,18 +1,16 @@
+import { ChangeEvent } from "react"
+import { convertAndUploadFileToAzure } from "../../../api/azure-storage-blob"
 import { useAppDispatch, useAppSelector } from "../../../store/storeHooks"
 import { setCardImage, setIsCameraOpen } from "../../../store/cameraReducer"
 import { toggleEventDialog } from "../../../store/dialogReducer"
-import { removeEvent } from "../../../store/eventReducer"
-import EventDialog from "./EventDialog"
-import { IEvent } from "../../../store/eventReducer"
+import { removeEvent, IEvent, addEvent } from "../../../store/eventReducer"
 import { openNotification } from "../../../store/notificationReducer"
 import { resetInputFields } from "../../../store/formInputReducer"
-import { addEvent } from "../../../store/eventReducer"
-import { convertAndUploadFileToAzure } from "../../../api/azure-storage-blob"
 import {
   handleNameInputChange,
   handleDescriptionInputChange,
 } from "../../../store/formInputReducer"
-import { ChangeEvent } from "react"
+import EventDialog from "./EventDialog"
 
 const EventDialogContainer = () => {
   const events = useAppSelector<IEvent[]>((state) => state.events.events)
@@ -43,16 +41,17 @@ const EventDialogContainer = () => {
     dispatch(setIsCameraOpen(false))
   }
 
+  // If user took photo for event
+  // convert and upload to Azure Storage Blob
   const onAddEvent = async () => {
     let photoURI = null
 
-    // If user took photo for event
     if (cardImage) {
-      photoURI = await convertAndUploadFileToAzure(
-        token!,
-        githubName!,
-        cardImage
-      )
+      photoURI = await convertAndUploadFileToAzure({
+        token: token!,
+        githubName: githubName!,
+        cardImage,
+      })
     }
 
     const eventsPayload = {
@@ -60,6 +59,7 @@ const EventDialogContainer = () => {
       description: descriptionInput,
       photoURI,
     }
+
     dispatch(addEvent(eventsPayload))
     dispatch(setCardImage(undefined))
     dispatch(resetInputFields())
@@ -69,6 +69,7 @@ const EventDialogContainer = () => {
   // Removes individual event from local events state
   const onRemoveEvent = (index: number) => dispatch(removeEvent(index))
 
+  // Two way bind for TextFields in EventDialog
   const onNameInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     dispatch(handleNameInputChange(event.target.value))
   }

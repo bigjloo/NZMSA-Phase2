@@ -7,6 +7,7 @@ const LayoutStyles = makeStyles((theme: Theme) =>
       height: "100vh",
       maxWidth: "md",
       padding: "0",
+      margin: "0",
     },
   })
 )

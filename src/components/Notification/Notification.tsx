@@ -1,6 +1,7 @@
 import Snackbar from "@material-ui/core/Snackbar"
+import MuiAlert from "@material-ui/lab/Alert"
 
-type NotificationProps = {
+export type NotificationProps = {
   anchorOrigin: {
     vertical: "top" | "bottom"
     horizontal: "left" | "center" | "right"
@@ -18,11 +19,13 @@ const Notification = ({
 }: NotificationProps) => {
   return (
     <Snackbar
+      autoHideDuration={3000}
       anchorOrigin={anchorOrigin}
       open={isNotificationOpen}
       onClose={closeNotificationHandler}
-      message={message}
-    />
+    >
+      <MuiAlert severity="success">{message}</MuiAlert>
+    </Snackbar>
   )
 }
 

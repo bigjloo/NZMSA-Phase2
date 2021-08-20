@@ -72,11 +72,17 @@ const uploadFileToBlob = async ({
   }
 }
 
-export const convertAndUploadFileToAzure = async (
-  token: string,
-  githubName: string,
+interface IConvertAndUpload {
   cardImage: Blob
-) => {
+  token: string
+  githubName: string
+}
+
+export const convertAndUploadFileToAzure = async ({
+  cardImage,
+  token,
+  githubName,
+}: IConvertAndUpload) => {
   const fileName = new Date().toISOString()
   const file = convertBlobToFile(cardImage!, fileName)
   const uploadToAzurePayload = {
@@ -92,5 +98,3 @@ export const convertAndUploadFileToAzure = async (
     console.error(err)
   }
 }
-
-export default uploadFileToBlob

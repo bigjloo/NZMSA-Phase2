@@ -8,10 +8,12 @@ const HeaderStyles = makeStyles((theme: Theme) =>
     },
 
     header: {
+      width:"100%",
       padding: "1rem 2rem",
-      borderBottom: "1px solid green",
       boxShadow: "0 0.2rem 1.5rem",
-      color: "inherit",
+      // border: "1px solid green",
+      // color: "inherit",
+      // margin: "0",
     },
 
     githubName: {
@@ -20,7 +22,7 @@ const HeaderStyles = makeStyles((theme: Theme) =>
 
     logoutButton: {
       float: "right",
-      // color: theme.palette.secondary.contrastText,
+      color: theme.palette.secondary.main,
     },
   })
 )

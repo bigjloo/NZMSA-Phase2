@@ -1,36 +1,14 @@
 import { Meta, Story } from "@storybook/react"
-// import Provider from "../../Provider"
-// import store from "../../store/store"
-
-import AppbarNotLoggedIn from "./AppbarNotLoggedIn"
+// import AppbarNotLoggedIn from "./AppbarNotLoggedIn"
 import AppbarLoggedIn from "./AppbarLoggedIn"
-// import { AppContainerProps } from "./AppbarContainer"
-// import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client"
-// import { decorators } from "../../../.storybook/preview"
 
 export default {
-  title: "AppBar",
+  title: "Components/AppBar",
   component: AppbarLoggedIn,
-  argTypes: {},
 } as Meta
 
-// const mockedClient = new ApolloClient({
-//   uri: "https://your-graphql-endpoint",
-//   cache: new InMemoryCache(),
-// })
-
-// const Template: Story<AppContainerProps> = (args) => <Appbar {...args} />
-
-// export const LoggedIn = Template.bind({})
-// LoggedIn.args = {
-//   children: <AppbarLoggedIn />,
-// }
-
 export const LoggedInAppbar: Story = () => <AppbarLoggedIn />
+LoggedInAppbar.storyName = "Logged In"
 
-export const LoggedOutAppbar: Story = () => <AppbarNotLoggedIn />
-
-// export const LoggedOut = Template.bind({})
-// LoggedOut.args = {
-//   children: <AppbarNotLoggedIn />,
-// }
+// export const LoggedOutAppbar: Story = () => <AppbarNotLoggedIn />
+// LoggedOutAppbar.storyName = "Logged Out"

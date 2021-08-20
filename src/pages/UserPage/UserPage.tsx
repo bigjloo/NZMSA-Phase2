@@ -3,9 +3,10 @@ import { useQuery } from "@apollo/client"
 import { useAppDispatch, useAppSelector } from "../../store/storeHooks"
 import { setEvents } from "../../store/eventReducer"
 import { GET_USER_DATA } from "../../apollo-client/queries"
-import BackdropContainer from "../../components/Backdrop/BackdropContainer"
+import { getRandomMoment } from "../../api/get-random-moment"
 import { setUserData } from "../../store/userReducer"
 import { IEvent } from "../../store/eventReducer"
+import BackdropContainer from "../../components/Backdrop/BackdropContainer"
 import User from "./User"
 
 const UserPage = () => {
@@ -29,7 +30,12 @@ const UserPage = () => {
       dispatch(setUserData(userDataPayload))
 
       // Sets fetched events to local Events state
-      dispatch(setEvents(data.todaysEvents))
+      if (data.todaysEvents) {
+        dispatch(setEvents(data.todaysEvents))
+      } else {
+        const randomMoment = getRandomMoment()
+        console.log(randomMoment)
+      }
     }
   }, [data, dispatch])
 

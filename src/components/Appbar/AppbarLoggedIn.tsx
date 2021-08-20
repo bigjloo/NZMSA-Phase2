@@ -1,17 +1,17 @@
 import { useMemo, useEffect } from "react"
-import AddIcon from "@material-ui/icons/Add"
-import { useAppSelector, useAppDispatch } from "../../store/storeHooks"
-import { setPublishKey } from "../../store/eventReducer"
-import { openNotification } from "../../store/notificationReducer"
-import { toggleShareDialog, toggleEventDialog } from "../../store/dialogReducer"
 import { useMutation } from "@apollo/client"
 import { SET_EVENTS } from "../../apollo-client/mutations"
-import { IEvent } from "../../store/eventReducer"
-import { IconButton, Toolbar, Fab } from "@material-ui/core"
+
+import AddIcon from "@material-ui/icons/Add"
+import { IconButton, Toolbar, Fab, AppBar, Button } from "@material-ui/core"
+
+import { useAppSelector, useAppDispatch } from "../../store/storeHooks"
+import { setPublishKey, IEvent } from "../../store/eventReducer"
+import { openNotification } from "../../store/notificationReducer"
+import { toggleShareDialog, toggleEventDialog } from "../../store/dialogReducer"
+
 import BackdropContainer from "../Backdrop/BackdropContainer"
-import Button from "@material-ui/core/Button"
-import { AppbarLoggedInStyles } from "./AppbarStyles"
-import { AppBar } from "@material-ui/core"
+import AppbarLoggedInStyles from "./AppbarLoggedInStyles"
 
 const AppbarLoggedIn = () => {
   const classes = AppbarLoggedInStyles()
@@ -30,7 +30,7 @@ const AppbarLoggedIn = () => {
   // Save events without publishKey
   const onSaveEvents = async () => {
     await saveEvents()
-    dispatch(openNotification("Events saved!!!"))
+    dispatch(openNotification("Events saved!"))
   }
 
   // Sets key as publishKey in local state
@@ -50,9 +50,7 @@ const AppbarLoggedIn = () => {
   // Save events to backend after
   // publishkey is set by toggling Share Dialog
   useEffect(() => {
-    if (publishKey) {
-      saveEvents()
-    }
+    publishKey && saveEvents()
   }, [publishKey, saveEvents])
 
   if (loading) return <BackdropContainer loading={loading} />

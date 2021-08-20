@@ -1,8 +1,9 @@
+import { ChangeEvent } from "react"
 import Dialog from "@material-ui/core/Dialog"
+import { IEvent } from "../../../store/eventReducer"
+
 import EventDialogContent from "./EventDialogContent"
 import EventDialogList from "./EventDialogList"
-import { IEvent } from "../../../store/eventReducer"
-import { ChangeEvent } from "react"
 
 export type EventDialogProps = {
   isEventDialogOpen: boolean
@@ -31,7 +32,6 @@ const EventDialog = ({
     <Dialog open={isEventDialogOpen} onClose={toggleEventDialogHandler}>
       <EventDialogList events={events} onRemoveEvent={onRemoveEvent} />
       <EventDialogContent
-        title="Add Event"
         onAddEvent={onAddEvent}
         toggleEventDialogHandler={toggleEventDialogHandler}
         nameInput={nameInput}
