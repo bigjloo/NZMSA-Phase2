@@ -1,9 +1,8 @@
-import IconButton from "@material-ui/core/IconButton"
+import { Toolbar, AppBar, IconButton } from "@material-ui/core"
+
 import { useAppDispatch } from "../../store/storeHooks"
 import { toggleLoginDialog } from "../../store/dialogReducer"
-import { Toolbar } from "@material-ui/core"
 import AppbarNotLoggedInStyles from "./AppbarNotLoggedInStyles"
-import { AppBar } from "@material-ui/core"
 
 const AppbarNotLoggedIn = () => {
   const classes = AppbarNotLoggedInStyles()

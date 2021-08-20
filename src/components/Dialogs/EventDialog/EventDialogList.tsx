@@ -3,6 +3,7 @@ import ListItem from "@material-ui/core/ListItem"
 import ListItemText from "@material-ui/core/ListItemText"
 import Divider from "@material-ui/core/Divider"
 import Button from "@material-ui/core/Button"
+
 import { IEvent } from "../../../store/eventReducer"
 
 export type EventListProps = {

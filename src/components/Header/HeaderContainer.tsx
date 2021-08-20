@@ -1,17 +1,12 @@
-// import Typography from "@material-ui/core/Typography"
-// import Grid from "@material-ui/core/Grid"
-// // import Box from "@material-ui/core/Box"
-// import Button from "@material-ui/core/Button"
-// import Avatar from "@material-ui/core/Avatar"
 import { useAppDispatch, useAppSelector } from "../../store/storeHooks"
 import { logout } from "../../store/authReducer"
 import { openNotification } from "../../store/notificationReducer"
-// import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
+
 import Header from "./Header"
-import HeaderStyles from "./HeaderStyles"
+// import HeaderStyles from "./HeaderStyles"
 
 const HeaderContainer = () => {
-  const classes = HeaderStyles()
+  // const classes = HeaderStyles()
   const avatarURI = useAppSelector<string | undefined>(
     (state) => state.user.githubImageURI
   )
@@ -23,8 +18,8 @@ const HeaderContainer = () => {
 
   // Logouts user and removes JWT Token from local storage
   const logoutHandler = () => {
-    dispatch(logout())
     localStorage.removeItem("HYD_JWT")
+    dispatch(logout())
     dispatch(openNotification("Logged out"))
   }
 
@@ -33,7 +28,7 @@ const HeaderContainer = () => {
       avatarURI={avatarURI!}
       githubName={githubName!}
       logoutHandler={logoutHandler}
-      classes={classes}
+      // classes={classes}
     />
   )
 }

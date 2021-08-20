@@ -4,31 +4,33 @@ import TextField from "@material-ui/core/TextField"
 import Button from "@material-ui/core/Button"
 import DialogActions from "@material-ui/core/DialogActions"
 import GitHubIcon from "@material-ui/icons/GitHub"
+
 import LoginDialogStyles from "./LoginDialogStyles"
 
 export type LoginDialogProps = {
-  githubAuthURL: string
   isLoginDialogOpen: boolean
-  login: () => void
-  signup: () => void
+  loginClickHandler: () => void
+  signUpClickHandler: () => void
   toggleLoginDialogHandler: () => void
+  gitHubClickHandler: () => void
 }
 
 const LoginDialog = ({
-  githubAuthURL,
   isLoginDialogOpen,
-  signup,
-  login,
+  signUpClickHandler,
+  loginClickHandler,
   toggleLoginDialogHandler,
+  gitHubClickHandler,
 }: LoginDialogProps) => {
   const classes = LoginDialogStyles()
+  // TODO add styling
   return (
     <Dialog open={isLoginDialogOpen} onClose={toggleLoginDialogHandler}>
       <DialogContent style={{ maxWidth: "300px" }}>
         <Button
           variant="text"
           startIcon={<GitHubIcon />}
-          onClick={() => (window.location.href = githubAuthURL)}
+          onClick={gitHubClickHandler}
         >
           GITHUB LOGIN
         </Button>
@@ -40,8 +42,8 @@ const LoginDialog = ({
           fullWidth
         />
         <DialogActions>
-          <Button onClick={signup}>Signup</Button>
-          <Button className={classes.loginButton} onClick={login}>
+          <Button onClick={signUpClickHandler}>Sign Up</Button>
+          <Button className={classes.loginButton} onClick={loginClickHandler}>
             Login
           </Button>
         </DialogActions>

@@ -2,23 +2,23 @@ import Typography from "@material-ui/core/Typography"
 import Grid from "@material-ui/core/Grid"
 import Avatar from "@material-ui/core/Avatar"
 import Button from "@material-ui/core/Button"
-// import HeaderStyles from "./HeaderStyles"
-import { ClassNameMap } from "@material-ui/styles"
+// import { ClassNameMap } from "@material-ui/styles"
+import HeaderStyles from "./HeaderStyles"
 
 export type HeaderProps = {
   avatarURI: string
   githubName: string
   logoutHandler: () => void
-  classes: ClassNameMap<"githubName" | "large" | "header" | "logoutButton">
+  // classes: ClassNameMap<"githubName" | "large" | "header" | "logoutButton">
 }
 
 const Header = ({
   avatarURI,
   githubName,
   logoutHandler,
-  classes,
-}: HeaderProps) => {
-  // const classes = HeaderStyles()
+}: // classes,
+HeaderProps) => {
+  const classes = HeaderStyles()
   return (
     <Grid
       className={classes.header}

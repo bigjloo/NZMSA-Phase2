@@ -1,18 +1,20 @@
-import { useEffect } from "react"
+import { useEffect, useMemo } from "react"
 import { Route, Switch } from "react-router-dom"
+
+import { useQuery } from "@apollo/client"
+import { VERIFY_USER } from "./apollo-client/queries"
+import { GithubLoginProcessor } from "./api/GithubLoginProcessor"
+
+import CssBaseline from "@material-ui/core/CssBaseline"
+import { ThemeProvider } from "@material-ui/core/styles"
+
+import { login } from "./store/authReducer"
 import { useAppDispatch, useAppSelector } from "./store/storeHooks"
-import { GithubLoginProcessor } from "./api/api"
 import SharedContentPage from "./pages/SharedContentPage/SharedContentPage"
 import OnboardPage from "./pages/OnboardPage/OnboardPage"
 import Layout from "./components/Layout/Layout"
 import UserPage from "./pages/UserPage/UserPage"
-import CssBaseline from "@material-ui/core/CssBaseline"
-import { ThemeProvider } from "@material-ui/core/styles"
 import { darkTheme, lightTheme } from "./theme"
-
-import { useQuery } from "@apollo/client"
-import { VERIFY_USER } from "./apollo-client/queries"
-import { login } from "./store/authReducer"
 
 function App() {
   const isAuth = useAppSelector<boolean>((state) => state.auth.isAuth)
@@ -20,7 +22,9 @@ function App() {
 
   const dispatch = useAppDispatch()
 
-  const theme = isDark ? darkTheme : lightTheme
+  const theme = useMemo(() => {
+    return isDark ? darkTheme : lightTheme
+  }, [isDark])
 
   // Verify user if token exists in local storage and login
   const { loading, error } = useQuery(VERIFY_USER, {

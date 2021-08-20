@@ -36,6 +36,7 @@ export const GithubLoginProcessor = () => {
       // Save token in localStorage
       const jwtToken = response.data.login.jwt
       localStorage.setItem("HYD_JWT", jwtToken)
+      console.log(jwtToken)
 
       // Logs in user
       dispatch(login())
