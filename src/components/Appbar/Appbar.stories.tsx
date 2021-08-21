@@ -1,5 +1,5 @@
 import { Meta, Story } from "@storybook/react"
-// import AppbarNotLoggedIn from "./AppbarNotLoggedIn"
+import AppbarNotLoggedIn from "./AppbarNotLoggedIn"
 import AppbarLoggedIn from "./AppbarLoggedIn"
 
 export default {
@@ -10,5 +10,5 @@ export default {
 export const LoggedInAppbar: Story = () => <AppbarLoggedIn />
 LoggedInAppbar.storyName = "Logged In"
 
-// export const LoggedOutAppbar: Story = () => <AppbarNotLoggedIn />
-// LoggedOutAppbar.storyName = "Logged Out"
+export const LoggedOutAppbar: Story = () => <AppbarNotLoggedIn />
+LoggedOutAppbar.storyName = "Logged Out"
