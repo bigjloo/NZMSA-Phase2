@@ -20,6 +20,7 @@ const UserPage = () => {
   // After data is returned from backend,
   // set fetched data to local state
   useEffect(() => {
+    console.log("inside User -> UseEffect")
     if (data) {
       // Sets fetched user data to local User state
       const userDataPayload = {
@@ -30,9 +31,11 @@ const UserPage = () => {
       dispatch(setUserData(userDataPayload))
 
       // Sets fetched events to local Events state
+      console.log(data.todaysEvents)
       if (data.todaysEvents) {
         dispatch(setEvents(data.todaysEvents))
       } else {
+        // TODO
         const randomMoment = getRandomMoment()
         console.log(randomMoment)
       }

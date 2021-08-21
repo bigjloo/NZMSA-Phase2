@@ -9,8 +9,8 @@ export type UserProps = {
 }
 // TODO random moments quote if events is empty
 const User = ({ events }: UserProps) => {
-  const clickHandler = async () => {
-    const data = await getRandomMoment()
+  const clickHandler = () => {
+    const data = getRandomMoment()
     console.log(data)
   }
   return (

@@ -2,26 +2,22 @@ import { makeStyles, createStyles } from "@material-ui/core/styles"
 
 const OnboardStyles = makeStyles(() => createStyles({
     container: {
-        height: "100vh",
-        border: "25px solid blue",
-        padding: "0",
-    },
-
-    headline: {
-        border: "1px solid blue"
-    },
-
-    illustration: {
-        top: "50%",
-        bottom: "50%",
-        maxWidth: "100%",
-        border: "1px solid green"
+        height: "calc(100vh - 6rem)",
+        // border: "2px solid black",
+        padding: "1rem",
     },
 
     image: {
         width: "100%",
-        height: "100%",
-        border: "1px solid red"
+        maxWidth: "500px",
+        // border: "1px solid red",
+
+    },
+
+    img: {
+        height: "calc(100% - 5rem)",
+        // border: "1px solid blue",
+        textAlign: "center",
     }
 }))
 
