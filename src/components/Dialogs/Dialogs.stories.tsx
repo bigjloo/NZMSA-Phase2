@@ -4,6 +4,7 @@ import ShareDialog, { ShareDialogProps } from "./ShareDialog/ShareDialog"
 import EventDialog, { EventDialogProps } from "./EventDialog/EventDialog"
 import LoginDialog, { LoginDialogProps } from "./LoginDialog/LoginDialog"
 import { IEvent } from "../../store/eventReducer"
+import CardDialog, { CardDialogProps } from "./CardDialog/CardDialog"
 
 const mockEvents: IEvent[] = [
   {
@@ -51,4 +52,13 @@ AppShareDialog.args = {
   publishURL: "http://www.example.com/examp1e",
   isShareDialogOpen: true,
   onCopyToClipboard: () => alert("copied to clipboard"),
+}
+
+export const AppCardDialog: Story<CardDialogProps> = (args) => (
+  <CardDialog {...args} />
+)
+AppCardDialog.storyName = "Card Dialog"
+AppCardDialog.args = {
+  event: mockEvents[0],
+  isCardDialogOpen: true,
 }

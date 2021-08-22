@@ -8,12 +8,15 @@ import EventTimelineStyles from "./EventTimelineStyles"
 
 export type EventTimelineCardProps = {
   event: IEvent
+  onCardClickHandler: (event: IEvent) => void
 }
 
-const EventTimelineCard = ({ event }: EventTimelineCardProps) => {
+const EventTimelineCard = (props: EventTimelineCardProps) => {
   const classes = EventTimelineStyles()
+  const { event, onCardClickHandler } = props
+
   return (
-    <Card className={classes.card}>
+    <Card className={classes.card} onClick={() => onCardClickHandler(event)}>
       {event.photoURI && (
         <CardMedia>
           <img

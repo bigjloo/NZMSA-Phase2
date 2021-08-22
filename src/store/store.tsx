@@ -9,6 +9,7 @@ import cameraReducer from "./cameraReducer"
 import sharedReducer from "./sharedReducer"
 import userReducer from "./userReducer"
 import themeReducer from "./themeReducer"
+import cardReducer from "./cardReducer"
 
 const store = configureStore({
   reducer: {
@@ -21,6 +22,7 @@ const store = configureStore({
     shared: sharedReducer,
     user: userReducer,
     theme: themeReducer,
+    card: cardReducer,
   },
 })
 

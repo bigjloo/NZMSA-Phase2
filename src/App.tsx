@@ -15,6 +15,7 @@ import OnboardPage from "./pages/OnboardPage/OnboardPage"
 import Layout from "./components/Layout/Layout"
 import UserPage from "./pages/UserPage/UserPage"
 import { darkTheme, lightTheme } from "./theme"
+// import useMediaQuery from "@material-ui/core/useMediaQuery"
 
 function App() {
   const isAuth = useAppSelector<boolean>((state) => state.auth.isAuth)
@@ -36,7 +37,7 @@ function App() {
   }
 
   // TODO CHeck user settings for dark mode
-  useEffect(() => {})
+  useEffect(() => {}, [])
 
   return (
     <ThemeProvider theme={theme}>
