@@ -11,7 +11,7 @@ import { IEvent } from "../../../store/eventReducer"
 import CardDialogStyles from "./CardDialogStyles"
 import FavoriteIcon from "@material-ui/icons/Favorite"
 
-type CardDialogProps = {
+export type CardDialogProps = {
   event: IEvent | undefined
   isCardDialogOpen: boolean
   cardDialogCloseHandler: () => void
