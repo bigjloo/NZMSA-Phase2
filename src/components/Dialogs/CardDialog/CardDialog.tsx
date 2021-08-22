@@ -11,7 +11,7 @@ import { IEvent } from "../../../store/eventReducer"
 import CardDialogStyles from "./CardDialogStyles"
 import FavoriteIcon from "@material-ui/icons/Favorite"
 
-type CardDialogProps = {
+export type CardDialogProps = {
   event: IEvent | undefined
   isCardDialogOpen: boolean
   cardDialogCloseHandler: () => void
@@ -30,7 +30,11 @@ const CardDialog = (props: CardDialogProps) => {
         <Card className={classes.card}>
           {event?.photoURI && (
             <CardMedia>
-              <img src={event?.photoURI} alt="card media" />
+              <img
+                className={classes.cardImage}
+                src={event?.photoURI}
+                alt="card media"
+              />
             </CardMedia>
           )}
           <CardContent>
