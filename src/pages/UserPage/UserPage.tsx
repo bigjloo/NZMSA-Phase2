@@ -3,7 +3,6 @@ import { useQuery } from "@apollo/client"
 import { useAppDispatch, useAppSelector } from "../../store/storeHooks"
 import { setEvents } from "../../store/eventReducer"
 import { GET_USER_DATA } from "../../apollo-client/queries"
-import { getRandomMoment } from "../../api/get-random-moment"
 import { setUserData } from "../../store/userReducer"
 import { IEvent } from "../../store/eventReducer"
 import BackdropContainer from "../../components/Backdrop/BackdropContainer"
@@ -21,6 +20,7 @@ const UserPage = () => {
   // set fetched data to local state
   useEffect(() => {
     console.log("inside User -> UseEffect")
+    console.log(data)
     if (data) {
       // Sets fetched user data to local User state
       const userDataPayload = {
@@ -31,13 +31,8 @@ const UserPage = () => {
       dispatch(setUserData(userDataPayload))
 
       // Sets fetched events to local Events state
-      console.log(data.todaysEvents)
-      if (data.todaysEvents) {
-        dispatch(setEvents(data.todaysEvents))
-      } else {
-        // TODO
-        const randomMoment = getRandomMoment()
-        console.log(randomMoment)
+      if (data.today) {
+        dispatch(setEvents(data.today.events))
       }
     }
   }, [data, dispatch])

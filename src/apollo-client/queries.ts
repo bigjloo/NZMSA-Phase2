@@ -23,10 +23,12 @@ export const GET_USER_DATA = gql`
       token
     }
 
-    todaysEvents: eventsForToday {
-      name
-      description
-      photoURI
+    today {
+      events {
+        name
+        description
+        photoURI
+      }
     }
   }
 `

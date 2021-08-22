@@ -1,6 +1,6 @@
 import Typography from "@material-ui/core/Typography"
 import Box from "@material-ui/core/Box"
-import EventTimeline from "../../components/EventTimeline/EventTimeline"
+import EventTimelineContainer from "../../components/EventTimeline/EventTimelineContainer"
 
 import LoginDialogContainer from "../../components/Dialogs/LoginDialog/LoginDialogContainer"
 import { IEvent } from "../../store/eventReducer"
@@ -24,7 +24,7 @@ const SharedContent = ({
         </Typography>
         <Typography variant="subtitle1">{publishDate}</Typography>
       </Box>
-      <EventTimeline events={events} />
+      <EventTimelineContainer events={events} />
       <LoginDialogContainer />
     </>
   )

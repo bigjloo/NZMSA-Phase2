@@ -1,5 +1,5 @@
 import { Meta, Story } from "@storybook/react"
-import EventTimeline from "./EventTimeline"
+import EventTimelineContainer from "./EventTimelineContainer"
 import { IEvent } from "../../store/eventReducer"
 
 export default {
@@ -21,9 +21,10 @@ const mockEvents: IEvent[] = [
   },
 ]
 
-export const Timeline: Story<{ events: IEvent[] }> = (args) => (
-  <EventTimeline {...args} />
+export const AppEventTimeline: Story<{ events: IEvent[] }> = (args) => (
+  <EventTimelineContainer {...args} />
 )
-Timeline.args = {
+AppEventTimeline.storyName = "Timeline"
+AppEventTimeline.args = {
   events: mockEvents,
 }
