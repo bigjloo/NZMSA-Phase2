@@ -3,10 +3,10 @@ import { ReactNode } from "react"
 import Container from "@material-ui/core/Container"
 import Box from "@material-ui/core/Box"
 
-import NotificationContainer from "../Notification/NotificationContainer"
-import HeaderContainer from "../Header/HeaderContainer"
-import AppbarLoggedIn from "../Appbar/AppbarLoggedIn"
-import AppbarNotLoggedIn from "../Appbar/AppbarNotLoggedIn"
+import Notification from "../Notification/NotificationContainer"
+import Header from "../Header/HeaderContainer"
+import AppbarLoggedIn from "../Appbar/LoggedIn/AppbarLoggedIn"
+import AppbarNotLoggedIn from "../Appbar/NotLoggedIn/AppbarNotLoggedIn"
 import ThemeToggle from "../ThemeToggle/ThemeToggle"
 import LayoutStyles from "./LayoutStyles"
 
@@ -21,8 +21,8 @@ const Layout = ({ children, isAuth, isDark }: LayoutProps) => {
 
   return (
     <Container className={classes.container}>
-      <NotificationContainer />
-      {isAuth && <HeaderContainer />}
+      <Notification />
+      {isAuth && <Header />}
       <ThemeToggle isDark={isDark} />
       <Box component="main">{children}</Box>
       {isAuth ? <AppbarLoggedIn /> : <AppbarNotLoggedIn />}

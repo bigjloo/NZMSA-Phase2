@@ -3,10 +3,8 @@ import { logout } from "../../store/authReducer"
 import { openNotification } from "../../store/notificationReducer"
 
 import Header from "./Header"
-// import HeaderStyles from "./HeaderStyles"
 
 const HeaderContainer = () => {
-  // const classes = HeaderStyles()
   const avatarURI = useAppSelector<string | undefined>(
     (state) => state.user.githubImageURI
   )
@@ -28,7 +26,6 @@ const HeaderContainer = () => {
       avatarURI={avatarURI!}
       githubName={githubName!}
       logoutHandler={logoutHandler}
-      // classes={classes}
     />
   )
 }

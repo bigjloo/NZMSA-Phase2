@@ -19,8 +19,6 @@ const UserPage = () => {
   // After data is returned from backend,
   // set fetched data to local state
   useEffect(() => {
-    console.log("inside User -> UseEffect")
-    console.log(data)
     if (data) {
       // Sets fetched user data to local User state
       const userDataPayload = {
@@ -30,10 +28,8 @@ const UserPage = () => {
       }
       dispatch(setUserData(userDataPayload))
 
-      // Sets fetched events to local Events state
-      if (data.today) {
-        dispatch(setEvents(data.today.events))
-      }
+      // Sets fetched events to local Events state if exist
+      data.today && dispatch(setEvents(data.today.events))
     }
   }, [data, dispatch])
 

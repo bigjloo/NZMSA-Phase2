@@ -2,7 +2,6 @@ import { CONFIGURATION } from "../../../apollo-client/apollo"
 
 import { useAppSelector, useAppDispatch } from "../../../store/storeHooks"
 import { toggleLoginDialog } from "../../../store/dialogReducer"
-import { login } from "../../../store/authReducer"
 
 import LoginDialog from "./LoginDialog"
 
@@ -17,10 +16,10 @@ const LoginDialogContainer = () => {
   const toggleLoginDialogHandler = () => dispatch(toggleLoginDialog())
 
   // Login user
-  const loginClickHandler = () => dispatch(login())
+  const loginClickHandler = () => alert("to be implemented")
 
   // TODO
-  const signUpClickHandler = () => {}
+  const signUpClickHandler = () => alert("to be implemented")
 
   // Redirects to GitHhub for OAuth
   const gitHubClickHandler = () =>

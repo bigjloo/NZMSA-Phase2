@@ -21,35 +21,35 @@ const CardDialog = (props: CardDialogProps) => {
   const { event, isCardDialogOpen, cardDialogCloseHandler } = props
   const classes = CardDialogStyles()
   return (
-    <Dialog
-      // className={classes.dialog}
-      open={isCardDialogOpen}
-      onClose={cardDialogCloseHandler}
-    >
-      <DialogContent className={classes.dialog}>
-        <Card className={classes.card}>
-          {event?.photoURI && (
-            <CardMedia>
-              <img
-                className={classes.cardImage}
-                src={event?.photoURI}
-                alt="card media"
-              />
-            </CardMedia>
-          )}
-          <CardContent>
-            <Typography variant="h6" component="h6">
-              {event?.name}
-            </Typography>
-            <Typography variant="body1" component="p">
-              {event?.description}
-            </Typography>
-          </CardContent>
-          <CardActions>
-            <Button startIcon={<FavoriteIcon />}>Like</Button>
-          </CardActions>
-        </Card>
-      </DialogContent>
+    <Dialog open={isCardDialogOpen} onClose={cardDialogCloseHandler}>
+      {event && (
+        <DialogContent className={classes.dialog}>
+          <Card className={classes.card}>
+            {event.photoURI && (
+              <CardMedia>
+                <img
+                  className={classes.cardImage}
+                  src={event.photoURI}
+                  alt="card media"
+                />
+              </CardMedia>
+            )}
+            <CardContent>
+              <Typography variant="h6" component="h6">
+                {event.name}
+              </Typography>
+              <Typography variant="body1" component="p">
+                {event.description}
+              </Typography>
+            </CardContent>
+            <CardActions>
+              <Button startIcon={<FavoriteIcon className={classes.likeIcon} />}>
+                Like
+              </Button>
+            </CardActions>
+          </Card>
+        </DialogContent>
+      )}
     </Dialog>
   )
 }

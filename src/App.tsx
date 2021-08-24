@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react"
+import { useMemo } from "react"
 import { Route, Switch } from "react-router-dom"
 
 import { useQuery } from "@apollo/client"
@@ -15,7 +15,6 @@ import OnboardPage from "./pages/OnboardPage/OnboardPage"
 import Layout from "./components/Layout/Layout"
 import UserPage from "./pages/UserPage/UserPage"
 import { darkTheme, lightTheme } from "./theme"
-// import useMediaQuery from "@material-ui/core/useMediaQuery"
 
 function App() {
   const isAuth = useAppSelector<boolean>((state) => state.auth.isAuth)
@@ -23,21 +22,21 @@ function App() {
 
   const dispatch = useAppDispatch()
 
+  // Sets dark/light theme
   const theme = useMemo(() => {
     return isDark ? darkTheme : lightTheme
   }, [isDark])
 
-  // Verify user if token exists in local storage and login
+  // Checks if token exist in localStorage and
+  // verifies token with backend and login if user exists
   const { loading, error } = useQuery(VERIFY_USER, {
     skip: !!localStorage.getItem("HYD_JWT"),
   })
 
+  // Login user
   if (!loading && !error) {
     dispatch(login())
   }
-
-  // TODO CHeck user settings for dark mode
-  useEffect(() => {}, [])
 
   return (
     <ThemeProvider theme={theme}>

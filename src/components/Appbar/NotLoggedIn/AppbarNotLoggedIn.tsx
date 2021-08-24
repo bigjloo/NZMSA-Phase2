@@ -1,7 +1,7 @@
 import { Toolbar, AppBar, IconButton } from "@material-ui/core"
 
-import { useAppDispatch } from "../../store/storeHooks"
-import { toggleLoginDialog } from "../../store/dialogReducer"
+import { useAppDispatch } from "../../../store/storeHooks"
+import { toggleLoginDialog } from "../../../store/dialogReducer"
 import AppbarNotLoggedInStyles from "./AppbarNotLoggedInStyles"
 
 const AppbarNotLoggedIn = () => {

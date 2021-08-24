@@ -1,6 +1,6 @@
-import { makeStyles, createStyles } from "@material-ui/core";
+import { makeStyles, createStyles, Theme } from "@material-ui/core";
 
-const CardDialogStyles = makeStyles(() => createStyles({
+const CardDialogStyles = makeStyles((theme: Theme) => createStyles({
     dialog: {
         padding: "0",
         "&:first-child": {
@@ -14,6 +14,10 @@ const CardDialogStyles = makeStyles(() => createStyles({
     },
     cardImage: {
         maxWidth: "100%",
+    },
+
+    likeIcon: {
+        color: theme.palette.secondary.light
     }
 }))
 

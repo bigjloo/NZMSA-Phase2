@@ -1,6 +1,6 @@
 import { Meta, Story } from "@storybook/react"
-import AppbarNotLoggedIn from "./AppbarNotLoggedIn"
-import AppbarLoggedIn from "./AppbarLoggedIn"
+import AppbarNotLoggedIn from "./NotLoggedIn/AppbarNotLoggedIn"
+import AppbarLoggedIn from "./LoggedIn/AppbarLoggedIn"
 
 export default {
   title: "Components/AppBar",

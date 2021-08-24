@@ -1,16 +1,19 @@
 import { useMemo, useEffect } from "react"
 import { useMutation } from "@apollo/client"
-import { SET_EVENTS } from "../../apollo-client/mutations"
+import { SET_EVENTS } from "../../../apollo-client/mutations"
 
 import AddIcon from "@material-ui/icons/Add"
 import { IconButton, Toolbar, Fab, AppBar, Button } from "@material-ui/core"
 
-import { useAppSelector, useAppDispatch } from "../../store/storeHooks"
-import { setPublishKey, IEvent } from "../../store/eventReducer"
-import { openNotification } from "../../store/notificationReducer"
-import { toggleShareDialog, toggleEventDialog } from "../../store/dialogReducer"
+import { useAppSelector, useAppDispatch } from "../../../store/storeHooks"
+import { setPublishKey, IEvent } from "../../../store/eventReducer"
+import { openNotification } from "../../../store/notificationReducer"
+import {
+  toggleShareDialog,
+  toggleEventDialog,
+} from "../../../store/dialogReducer"
 
-import BackdropContainer from "../Backdrop/BackdropContainer"
+import Backdrop from "../../Backdrop/BackdropContainer"
 import AppbarLoggedInStyles from "./AppbarLoggedInStyles"
 
 const AppbarLoggedIn = () => {
@@ -47,13 +50,13 @@ const AppbarLoggedIn = () => {
       .join("")
   }, [])
 
-  // Save events to backend after
-  // publishkey is set by toggling Share Dialog
+  // Save events to backend after publishkey
+  // is set by toggling Share Dialog
   useEffect(() => {
     publishKey && saveEvents()
   }, [publishKey, saveEvents])
 
-  if (loading) return <BackdropContainer loading={loading} />
+  if (loading) return <Backdrop loading={loading} />
 
   if (error) {
     dispatch(openNotification("Error when saving events! Please try again"))

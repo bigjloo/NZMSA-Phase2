@@ -5,6 +5,7 @@ import DialogContentText from "@material-ui/core/DialogContentText"
 // import DialogTitle from "@material-ui/core/DialogTitle"
 import Button from "@material-ui/core/Button"
 import Typography from "@material-ui/core/Typography"
+import ShareDialogStyles from "./ShareDialogStyles"
 
 export type ShareDialogProps = {
   publishURL: string
@@ -19,11 +20,11 @@ const ShareDialog = ({
   onCopyToClipboard,
   toggleHandler,
 }: ShareDialogProps) => {
-  // Rethink UX for copy
+  const classes = ShareDialogStyles()
   return (
     <Dialog open={isShareDialogOpen} onClose={toggleHandler}>
       <DialogContent>
-        <DialogContentText style={{ margin: "1rem 0" }}>
+        <DialogContentText className={classes.dialogContentText}>
           <Typography onDoubleClick={onCopyToClipboard}>
             {publishURL}
           </Typography>

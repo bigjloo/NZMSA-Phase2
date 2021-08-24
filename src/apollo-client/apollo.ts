@@ -1,7 +1,7 @@
 import { ApolloClient, InMemoryCache, HttpLink } from "@apollo/client"
 import { setContext } from "@apollo/client/link/context"
 
-const isDevelopment = false
+const isDevelopment = true
 const GITHUB_CLIENT_ID = "b77f552e93db0e271256"
 
 // Sets frontend and backend url base on isDevelopment
@@ -28,7 +28,7 @@ const authLink = setContext((_, { headers }) => {
   }
 })
 //remove later
-console.log(localStorage.getItem("HYD_JWT"))
+// console.log(localStorage.getItem("HYD_JWT"))
 
 // Creates a httpLink from URL provided
 const httpLink = new HttpLink({

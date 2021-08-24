@@ -2,11 +2,6 @@ import { createStyles, makeStyles } from "@material-ui/core/styles";
 
 const EventTimelineStyles = makeStyles(() =>
   createStyles({
-
-    maxW: {
-      width: "100%",
-    },
-
     eventDescription: {
       fontSize: "0.5rem",
     },

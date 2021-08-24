@@ -4,6 +4,7 @@ import EventTimelineContainer from "../../components/EventTimeline/EventTimeline
 
 import LoginDialogContainer from "../../components/Dialogs/LoginDialog/LoginDialogContainer"
 import { IEvent } from "../../store/eventReducer"
+import SharedContentStyles from "./SharedContentStyles"
 
 export type SharedContentProps = {
   publisherName: string
@@ -16,10 +17,11 @@ const SharedContent = ({
   publishDate,
   events,
 }: SharedContentProps) => {
+  const classes = SharedContentStyles()
   return (
     <>
-      <Box style={{ margin: "1rem 2rem" }}>
-        <Typography variant="h3" component="h3" gutterBottom>
+      <Box className={classes.header} component="div">
+        <Typography variant="h4" component="h4" gutterBottom>
           {publisherName}
         </Typography>
         <Typography variant="subtitle1">{publishDate}</Typography>
