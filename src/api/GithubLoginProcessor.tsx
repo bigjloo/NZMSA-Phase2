@@ -6,6 +6,7 @@ import { GET_JWT_WITH_GITHUB_CODE } from "../apollo-client/mutations"
 import { useAppSelector } from "../store/storeHooks"
 import { useAppDispatch } from "../store/storeHooks"
 import { login } from "../store/authReducer"
+import { openNotification } from "../store/notificationReducer"
 
 import BackdropContainer from "../components/Backdrop/BackdropContainer"
 
@@ -28,7 +29,6 @@ export const GithubLoginProcessor = () => {
     const loginWithGitHubOAuth = async () => {
       // Gets JWT Token from backend
       const response = await getToken()
-      if (error) return
 
       // Save token in localStorage and login user
       const jwtToken = response.data.login.jwt
@@ -37,6 +37,17 @@ export const GithubLoginProcessor = () => {
     }
     loginWithGitHubOAuth()
   }, [getToken, dispatch, error])
+
+  if (error) {
+    dispatch(
+      openNotification({
+        message: "Error! Please try again",
+        alertType: "error",
+      })
+    )
+  }
+
+  if (loading) return <BackdropContainer loading={loading} />
 
   return (
     <>

@@ -11,13 +11,13 @@ const Onboard = () => {
       <Box className={classes.container}>
         <Box>
           <Typography variant="h3" component="h3">
-            <span style={{ color: "#FF449F" }}>H</span>ows
+            <span className={classes.H}>H</span>ows
           </Typography>
           <Typography variant="h3" component="h3">
-            <span style={{ color: "#ED8E7C" }}>Y</span>our
+            <span className={classes.Y}>Y</span>our
           </Typography>
           <Typography variant="h3" component="h3">
-            <span style={{ color: "#AE00FB" }}>D</span>ay
+            <span className={classes.D}>D</span>ay
           </Typography>
           <Typography variant="h6" component="h6">
             Never a moment too dull to share

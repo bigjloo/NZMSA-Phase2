@@ -14,6 +14,18 @@ const OnboardStyles = makeStyles(() => createStyles({
     img: {
         height: "calc(100% - 5rem)",
         textAlign: "center",
+    },
+
+    H: {
+        color: "#FF449F" 
+    },
+
+    Y: {
+        color: "#ED8E7C" 
+    },
+
+    D: {
+        color: "#AE00FB"
     }
 }))
 

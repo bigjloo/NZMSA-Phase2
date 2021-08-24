@@ -18,7 +18,12 @@ const HeaderContainer = () => {
   const logoutHandler = () => {
     localStorage.removeItem("HYD_JWT")
     dispatch(logout())
-    dispatch(openNotification("Logged out"))
+    dispatch(
+      openNotification({
+        message: "Logged out",
+        alertType: "success",
+      })
+    )
   }
 
   return (

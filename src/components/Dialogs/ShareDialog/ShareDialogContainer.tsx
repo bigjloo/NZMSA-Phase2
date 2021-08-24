@@ -22,7 +22,12 @@ const ShareDialogContainer = () => {
   // Copies publish URL to clipboard
   const onCopyToClipboard = () => {
     navigator.clipboard.writeText(publishURL)
-    dispatch(openNotification("Copied to clipboard!"))
+    dispatch(
+      openNotification({
+        message: "Copied to clipboard!",
+        alertType: "info",
+      })
+    )
   }
 
   return (

@@ -18,17 +18,11 @@ const EventDialogContainer = () => {
   const descriptionInput = useAppSelector<string>(
     (state) => state.formInput.description
   )
-
   const cardImage = useAppSelector<Blob | undefined>(
     (state) => state.camera.cardImage
   )
-  const token = useAppSelector<string | undefined>(
-    (state) => state.user.sasToken
-  )
-  const githubName = useAppSelector<string | undefined>(
-    (state) => state.user.githubName
-  )
-
+  const token = useAppSelector<string>((state) => state.user.sasToken!)
+  const githubName = useAppSelector<string>((state) => state.user.githubName!)
   const isEventDialogOpen = useAppSelector<boolean>(
     (state) => state.dialog.isEventDialogOpen
   )
@@ -63,7 +57,12 @@ const EventDialogContainer = () => {
     dispatch(addEvent(eventsPayload))
     dispatch(setCardImage(undefined))
     dispatch(resetInputFields())
-    dispatch(openNotification("Event succesfully added!"))
+    dispatch(
+      openNotification({
+        message: "Event succesfully added!",
+        alertType: "success",
+      })
+    )
   }
 
   // Removes individual event from local events state

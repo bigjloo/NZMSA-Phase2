@@ -17,7 +17,6 @@ export default {
     layout: "centered",
   },
   argTypes: {},
-  //   decorators: decorators,
 } as Meta
 
 const Template: Story<ButtonProps> = (args) => <Button {...args} />

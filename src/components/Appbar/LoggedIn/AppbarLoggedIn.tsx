@@ -33,7 +33,14 @@ const AppbarLoggedIn = () => {
   // Save events without publishKey
   const onSaveEvents = async () => {
     await saveEvents()
-    dispatch(openNotification("Events saved!"))
+    if (!loading && !error) {
+      dispatch(
+        openNotification({
+          message: "Events saved!",
+          alertType: "success",
+        })
+      )
+    }
   }
 
   // Sets key as publishKey in local state
@@ -59,7 +66,12 @@ const AppbarLoggedIn = () => {
   if (loading) return <Backdrop loading={loading} />
 
   if (error) {
-    dispatch(openNotification("Error when saving events! Please try again"))
+    dispatch(
+      openNotification({
+        message: "Error when saving events! Please try again",
+        alertType: "error",
+      })
+    )
   }
 
   return (
@@ -70,7 +82,7 @@ const AppbarLoggedIn = () => {
           edge="start"
           onClick={onSaveEvents}
         >
-          <Button>SAVE</Button>
+          <Button>save</Button>
         </IconButton>
         <Fab className={classes.fabButton}>
           <AddIcon onClick={onOpenEventDialog} fontSize="large" />
@@ -80,7 +92,7 @@ const AppbarLoggedIn = () => {
           edge="end"
           onClick={onOpenShareDialog}
         >
-          <Button>PUBLISH</Button>
+          <Button>publish</Button>
         </IconButton>
       </Toolbar>
     </AppBar>
