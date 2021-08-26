@@ -10,27 +10,29 @@ import { openNotification } from "../store/notificationReducer"
 
 import BackdropContainer from "../components/Backdrop/BackdropContainer"
 
+const GITHUB_CLIENT_ID = "b77f552e93db0e271256"
+export const GITHUB_AUTHORIZE_URL = `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}`
+
 // Loaded after code is return from Github
 // server after authorized by user
 export const GithubLoginProcessor = () => {
   const dispatch = useAppDispatch()
   const isAuth = useAppSelector<boolean>((state) => state.auth.isAuth)
 
-  // Gets code from browser URL
-  const search = useLocation().search
-  const code = search.slice(6, search.length) // URL: ../?code=<code>
+  // Extract returned Github code from browser path URL
+  const browserURL = useLocation().search
+  const code = browserURL.slice(6, browserURL.length) // URL: ../?code=<code>
 
-  // Gets JWT Token from backend with code from Github
+  // Fetches JWT Token from backend using code from Github
   const [getToken, { error, loading }] = useMutation(GET_JWT_WITH_GITHUB_CODE, {
     variables: { code },
   })
 
   useEffect(() => {
     const loginWithGitHubOAuth = async () => {
-      // Gets JWT Token from backend
       const response = await getToken()
 
-      // Save token in localStorage and login user
+      // Saves token in localStorage and login user
       const jwtToken = response.data.login.jwt
       localStorage.setItem("HYD_JWT", jwtToken)
       dispatch(login())
@@ -46,8 +48,6 @@ export const GithubLoginProcessor = () => {
       })
     )
   }
-
-  if (loading) return <BackdropContainer loading={loading} />
 
   return (
     <>

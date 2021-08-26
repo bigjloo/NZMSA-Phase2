@@ -1,15 +1,15 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
-interface INotificationPayload {
+interface INotificationState {
+  open: boolean
   message: string
   alertType: "success" | "error" | "info"
 }
 
-interface INotification extends INotificationPayload {
-  open: boolean
-}
+interface IAlertPayload
+  extends Pick<INotificationState, "message" | "alertType"> {}
 
-const initialNotificationState: INotification = {
+const initialNotificationState: INotificationState = {
   open: false,
   message: "",
   alertType: "success",
@@ -19,7 +19,7 @@ const notificationSlice = createSlice({
   name: "Notification",
   initialState: initialNotificationState,
   reducers: {
-    openNotification(state, action: PayloadAction<INotificationPayload>) {
+    openNotification(state, action: PayloadAction<IAlertPayload>) {
       state.open = true
       state.message = action.payload.message
       state.alertType = action.payload.alertType

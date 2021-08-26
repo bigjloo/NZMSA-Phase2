@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client"
 
-// If no error is returned, user is verified
+// Verifies user exists in database
 export const VERIFY_USER = gql`
   query {
     self {
@@ -9,9 +9,8 @@ export const VERIFY_USER = gql`
   }
 `
 
-// When User page loads
-// Gets users github name + imageURI and
-// events for today
+// When User page loads, fetches user's
+// github name + imageURI and today's events
 export const GET_USER_DATA = gql`
   query {
     userData: self {
@@ -33,7 +32,7 @@ export const GET_USER_DATA = gql`
   }
 `
 
-// Gets events from backend with publish key
+// Fetches events from backend with publish key
 export const GET_EVENTS_BY_PUBLISH_KEY = gql`
   query ($publishKey: String!) {
     day(publishKey: $publishKey) {

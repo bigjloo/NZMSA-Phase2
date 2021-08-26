@@ -8,6 +8,7 @@ export type BackdropContainerProps = {
 
 const BackdropContainer = ({ loading }: BackdropContainerProps) => {
   const classes = BackdropStyles()
+
   return (
     <Backdrop className={classes.backdrop} open={loading}>
       <CircularProgress />

@@ -5,14 +5,14 @@ import { openNotification } from "../../store/notificationReducer"
 import Header from "./Header"
 
 const HeaderContainer = () => {
+  const dispatch = useAppDispatch()
+
   const avatarURI = useAppSelector<string | undefined>(
     (state) => state.user.githubImageURI
   )
   const githubName = useAppSelector<string | undefined>(
     (state) => state.user.githubName
   )
-
-  const dispatch = useAppDispatch()
 
   // Logouts user and removes JWT Token from local storage
   const logoutHandler = () => {

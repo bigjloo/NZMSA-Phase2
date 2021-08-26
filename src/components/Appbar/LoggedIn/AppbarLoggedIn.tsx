@@ -17,20 +17,29 @@ import Backdrop from "../../Backdrop/BackdropContainer"
 import AppbarLoggedInStyles from "./AppbarLoggedInStyles"
 
 const AppbarLoggedIn = () => {
+  const dispatch = useAppDispatch()
   const classes = AppbarLoggedInStyles()
+
   const events = useAppSelector<IEvent[]>((state) => state.events.events)
   const publishKey = useAppSelector<string>((state) => state.events.publishKey)
-
-  const dispatch = useAppDispatch()
 
   const [saveEvents, { loading, error }] = useMutation(SET_EVENTS, {
     variables: { events, publishKey },
   })
 
-  // Toggles Event Dialog
-  const onOpenEventDialog = () => dispatch(toggleEventDialog())
+  // Save events to backend after ShareDialog is toggled
+  useEffect(() => {
+    publishKey && saveEvents()
+  }, [publishKey, saveEvents])
 
-  // Save events without publishKey
+  // Generates 8 random alphanumeric char string
+  const key = useMemo(() => {
+    return [...Array(8)]
+      .map(() => Math.floor(Math.random() * 16).toString(16))
+      .join("")
+  }, [])
+
+  // Save user events to backend without publishKey
   const onSaveEvents = async () => {
     await saveEvents()
     if (!loading && !error) {
@@ -43,25 +52,15 @@ const AppbarLoggedIn = () => {
     }
   }
 
+  // Toggles Event Dialog
+  const onOpenEventDialog = () => dispatch(toggleEventDialog())
+
   // Sets key as publishKey in local state
   // and opens Share Dialog
   const onOpenShareDialog = () => {
     dispatch(setPublishKey(key))
     dispatch(toggleShareDialog())
   }
-
-  // Generates 8 random alphanumeric char string
-  const key = useMemo(() => {
-    return [...Array(8)]
-      .map(() => Math.floor(Math.random() * 16).toString(16))
-      .join("")
-  }, [])
-
-  // Save events to backend after publishkey
-  // is set by toggling Share Dialog
-  useEffect(() => {
-    publishKey && saveEvents()
-  }, [publishKey, saveEvents])
 
   if (loading) return <Backdrop loading={loading} />
 

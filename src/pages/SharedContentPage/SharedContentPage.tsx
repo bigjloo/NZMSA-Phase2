@@ -6,6 +6,7 @@ import { GET_EVENTS_BY_PUBLISH_KEY } from "../../apollo-client/queries"
 import { useAppDispatch, useAppSelector } from "../../store/storeHooks"
 import { setSharedContentDetails } from "../../store/sharedReducer"
 import { setEvents, IEvent } from "../../store/eventReducer"
+import { openNotification } from "../../store/notificationReducer"
 
 import SharedContent from "./SharedContent"
 import BackdropContainer from "../../components/Backdrop/BackdropContainer"
@@ -15,8 +16,16 @@ type SharedContentParams = {
 }
 
 const SharedContentPage = () => {
+  const dispatch = useAppDispatch()
+
   // Extracts publish key from the URL params
   const { publishKey } = useParams<SharedContentParams>()
+
+  const publisherName = useAppSelector<string>(
+    (state) => state.shared.publisher
+  )
+  const publishDate = useAppSelector<string>((state) => state.shared.date)
+  const events = useAppSelector<IEvent[]>((store) => store.events.events)
 
   // Retrieves events from backend with publish key
   const { data: sharedContentData, loading, error } = useQuery(
@@ -25,14 +34,6 @@ const SharedContentPage = () => {
       variables: { publishKey },
     }
   )
-
-  const publisherName = useAppSelector<string>(
-    (state) => state.shared.publisher
-  )
-  const publishDate = useAppSelector<string>((state) => state.shared.date)
-  const events = useAppSelector<IEvent[]>((store) => store.events.events)
-
-  const dispatch = useAppDispatch()
 
   // If sharedContentData is returned,
   // set publisher name and date + set fetched
@@ -48,9 +49,16 @@ const SharedContentPage = () => {
     }
   }, [sharedContentData, dispatch])
 
-  if (loading) return <BackdropContainer loading={loading} />
+  if (error) {
+    dispatch(
+      openNotification({
+        message: "Error fetching data. Please try again",
+        alertType: "error",
+      })
+    )
+  }
 
-  if (error) return <h1>{error.message}</h1>
+  if (loading) return <BackdropContainer loading={loading} />
 
   return (
     <SharedContent

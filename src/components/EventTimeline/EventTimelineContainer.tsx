@@ -9,14 +9,14 @@ import EventTimeline from "./EventTimeline"
 import CardDialog from "../Dialogs/CardDialog/CardDialog"
 
 const EventTimelineContainer = ({ events }: { events: IEvent[] }) => {
+  const dispatch = useAppDispatch()
+
   const isCardDialogOpen = useAppSelector<boolean>(
     (state) => state.card.isCardDialogOpen
   )
   const eventSelected = useAppSelector<IEvent>(
     (state) => state.card.eventSelected!
   )
-
-  const dispatch = useAppDispatch()
 
   // Set user selected event for Card Dialog
   const onCardClickHandler = (event: IEvent) => {

@@ -17,23 +17,23 @@ import UserPage from "./pages/UserPage/UserPage"
 import { darkTheme, lightTheme } from "./theme"
 
 function App() {
+  const dispatch = useAppDispatch()
+
   const isAuth = useAppSelector<boolean>((state) => state.auth.isAuth)
   const isDark = useAppSelector<boolean>((state) => state.theme.isDarkTheme)
-
-  const dispatch = useAppDispatch()
 
   // Sets dark/light theme
   const theme = useMemo(() => {
     return isDark ? darkTheme : lightTheme
   }, [isDark])
 
-  // Checks if token exist in localStorage and
-  // verifies token with backend and login if user exists
+  // Checks if token exist in localStorage
+  // and verifies token with backend
   const { loading, error } = useQuery(VERIFY_USER, {
     skip: !!localStorage.getItem("HYD_JWT"),
   })
 
-  // Login user
+  // Login user after token is verified
   if (!loading && !error) {
     dispatch(login())
   }
@@ -46,9 +46,9 @@ function App() {
           <Route exact path="/">
             {isAuth ? <UserPage /> : <OnboardPage />}
           </Route>
-          <Route path="/signin/callback/">
-            <GithubLoginProcessor />
-          </Route>
+          <Route path="/signin/callback/" component={GithubLoginProcessor} />
+          {/* <GithubLoginProcessor /> */}
+          {/* </Route> */}
           <Route path="/share/:publishKey">
             <SharedContentPage />
           </Route>
