@@ -1,11 +1,11 @@
 import { BlobServiceClient, ContainerClient } from "@azure/storage-blob"
 
 /* From  https://docs.microsoft.com/azure/developer/javascript/tutorial/browser-file-upload-azure-storage-blob
- *  Contains all api for application to interact with Azure Storage Blob
+ *  Contains api for application to interact with Azure Storage Blob
+ *
+ *  Each user are allocated their own container to store photos
+ *  Container's name is set using the user's Github name
  */
-
-// Each user are allocated their own container to store photos
-// Container's name is set using the user's Github name
 
 const STORAGE_ACCOUNT_NAME = "nzmsablob"
 const AZURE_STORAGE_BLOB_URL = `https://${STORAGE_ACCOUNT_NAME}.blob.core.windows.net`
@@ -17,7 +17,7 @@ type rawUploadData = {
 }
 
 // Converts photo to file object and uploads
-// to Azure Storage Blob with user's Github name as container.
+// to Azure Storage Blob.
 // Returns the URI of uploaded photo
 export const uploadFileToAzure = async ({
   cardImage,

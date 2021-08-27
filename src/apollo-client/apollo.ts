@@ -1,8 +1,7 @@
 import { ApolloClient, InMemoryCache, HttpLink } from "@apollo/client"
 import { setContext } from "@apollo/client/link/context"
 
-const isDevelopment = true
-const GITHUB_CLIENT_ID = "b77f552e93db0e271256"
+const isDevelopment = false
 
 // Sets frontend and backend url base on isDevelopment
 export const CONFIGURATION = {
@@ -12,7 +11,6 @@ export const CONFIGURATION = {
   BACKEND: isDevelopment
     ? "https://localhost:44342/graphql/"
     : "https://nzmsa-backend.azurewebsites.net/graphql/",
-  GITHUB_AUTHORIZE_URL: `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}`,
 }
 
 /* From www.howtographql.com */
@@ -27,15 +25,11 @@ const authLink = setContext((_, { headers }) => {
     },
   }
 })
-//remove later
-// console.log(localStorage.getItem("HYD_JWT"))
 
-// Creates a httpLink from URL provided
 const httpLink = new HttpLink({
   uri: CONFIGURATION.BACKEND,
 })
 
-// configures new ApolloClient
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),

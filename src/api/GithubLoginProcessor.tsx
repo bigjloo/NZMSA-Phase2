@@ -1,5 +1,6 @@
 import { useEffect } from "react"
 import { useLocation, Redirect } from "react-router-dom"
+
 import { useMutation } from "@apollo/client"
 import { GET_JWT_WITH_GITHUB_CODE } from "../apollo-client/mutations"
 
@@ -38,7 +39,7 @@ export const GithubLoginProcessor = () => {
       dispatch(login())
     }
     loginWithGitHubOAuth()
-  }, [getToken, dispatch, error])
+  }, [getToken, dispatch])
 
   if (error) {
     dispatch(

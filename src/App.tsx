@@ -10,11 +10,13 @@ import { ThemeProvider } from "@material-ui/core/styles"
 
 import { login } from "./store/authReducer"
 import { useAppDispatch, useAppSelector } from "./store/storeHooks"
+
+import { darkTheme, lightTheme } from "./theme"
+
 import SharedContentPage from "./pages/SharedContentPage/SharedContentPage"
 import OnboardPage from "./pages/OnboardPage/OnboardPage"
 import Layout from "./components/Layout/Layout"
 import UserPage from "./pages/UserPage/UserPage"
-import { darkTheme, lightTheme } from "./theme"
 
 function App() {
   const dispatch = useAppDispatch()

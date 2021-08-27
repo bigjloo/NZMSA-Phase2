@@ -1,5 +1,6 @@
 import Backdrop from "@material-ui/core/Backdrop"
 import CircularProgress from "@material-ui/core/CircularProgress"
+
 import BackdropStyles from "./BackdropStyles"
 
 export type BackdropContainerProps = {

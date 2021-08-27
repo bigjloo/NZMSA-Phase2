@@ -18,7 +18,7 @@ const EventTimelineContainer = ({ events }: { events: IEvent[] }) => {
     (state) => state.card.eventSelected!
   )
 
-  // Set user selected event for Card Dialog
+  // Sets user selected event for Card Dialog
   const onCardClickHandler = (event: IEvent) => {
     dispatch(setEventSelected(event))
   }
