@@ -1,7 +1,10 @@
 import { Meta, Story } from "@storybook/react"
-// import Dialog from "@material-ui/core/Dialog"
+import Dialog from "@material-ui/core/Dialog"
+import EventDialogContent, {
+  EventDialogContentProps,
+} from "./EventDialog/EventDialogContent"
 import ShareDialog, { ShareDialogProps } from "./ShareDialog/ShareDialog"
-import EventDialog, { EventDialogProps } from "./EventDialog/EventDialog"
+// import EventDialog, { EventDialogProps } from "./EventDialog/EventDialog"
 import LoginDialog, { LoginDialogProps } from "./LoginDialog/LoginDialog"
 import { IEvent } from "../../store/eventReducer"
 import CardDialog, { CardDialogProps } from "./CardDialog/CardDialog"
@@ -33,15 +36,16 @@ AppLoginDialog.args = {
   isLoginDialogOpen: true,
 }
 
-export const AppEventDialog: Story<EventDialogProps> = (args) => (
-  <EventDialog {...args} />
+export const AppEventDialog: Story<EventDialogContentProps> = (args) => (
+  <Dialog open>
+    <EventDialogContent {...args} />
+  </Dialog>
 )
 AppEventDialog.storyName = "Event Dialog"
 AppEventDialog.args = {
-  isEventDialogOpen: true,
-  events: mockEvents,
-  onRemoveEvent: () => alert("Removing event"),
-  onAddEvent: () => alert("Adding event"),
+  // events: mockEvents,
+  // onRemoveEvent: () => alert("Removing event"),
+  // onAddEvent: () => alert("Adding event"),
 }
 
 export const AppShareDialog: Story<ShareDialogProps> = (args) => (

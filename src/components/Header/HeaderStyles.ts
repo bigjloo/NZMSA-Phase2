@@ -11,9 +11,6 @@ const HeaderStyles = makeStyles((theme: Theme) =>
       width:"100%",
       padding: "1rem 2rem",
       boxShadow: "0 0.2rem 1.5rem",
-      // border: "1px solid green",
-      // color: "inherit",
-      // margin: "0",
     },
 
     githubName: {

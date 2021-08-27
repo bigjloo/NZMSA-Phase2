@@ -23,7 +23,6 @@ const LoginDialog = ({
   gitHubClickHandler,
 }: LoginDialogProps) => {
   const classes = LoginDialogStyles()
-  // TODO add styling
   return (
     <Dialog open={isLoginDialogOpen} onClose={toggleLoginDialogHandler}>
       <DialogContent style={{ maxWidth: "300px" }}>

@@ -1,5 +1,6 @@
 import Snackbar from "@material-ui/core/Snackbar"
-import MuiAlert from "@material-ui/lab/Alert"
+import Alert from "@material-ui/lab/Alert"
+import { Color } from "@material-ui/lab/Alert"
 
 export type NotificationProps = {
   anchorOrigin: {
@@ -9,6 +10,7 @@ export type NotificationProps = {
   isNotificationOpen: boolean
   closeNotificationHandler: () => void
   message: string
+  alertType: string
 }
 
 const Notification = ({
@@ -16,6 +18,7 @@ const Notification = ({
   isNotificationOpen,
   closeNotificationHandler,
   message,
+  alertType,
 }: NotificationProps) => {
   return (
     <Snackbar
@@ -24,7 +27,7 @@ const Notification = ({
       open={isNotificationOpen}
       onClose={closeNotificationHandler}
     >
-      <MuiAlert severity="success">{message}</MuiAlert>
+      <Alert severity={alertType as Color}>{message}</Alert>
     </Snackbar>
   )
 }

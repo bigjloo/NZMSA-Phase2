@@ -12,6 +12,7 @@ AddEvent.args = {
   anchorOrigin: { vertical: "top", horizontal: "center" },
   isNotificationOpen: true,
   message: "Event Successfully Added!",
+  alertType: "success",
 }
 
 export const CopyToClipboard = Template.bind({})
@@ -19,18 +20,13 @@ CopyToClipboard.args = {
   anchorOrigin: { vertical: "top", horizontal: "center" },
   isNotificationOpen: true,
   message: "Copied to clipboard!",
+  alertType: "info",
 }
 
-export const SaveEvents = Template.bind({})
-SaveEvents.args = {
+export const Error = Template.bind({})
+Error.args = {
   anchorOrigin: { vertical: "top", horizontal: "center" },
   isNotificationOpen: true,
-  message: "Events Saved!",
-}
-
-export const Logout = Template.bind({})
-Logout.args = {
-  anchorOrigin: { vertical: "top", horizontal: "center" },
-  isNotificationOpen: true,
-  message: "Logged Out",
+  message: "Error",
+  alertType: "error",
 }

@@ -1,100 +1,75 @@
 import { BlobServiceClient, ContainerClient } from "@azure/storage-blob"
 
 /* From  https://docs.microsoft.com/azure/developer/javascript/tutorial/browser-file-upload-azure-storage-blob
- *  Contains all api for application to interact with Azure Storage Blob
- *  Key function: Upload file to Azure Storage Blob
+ *  Contains api for application to interact with Azure Storage Blob
+ *
+ *  Each user are allocated their own container to store photos
+ *  Container's name is set using the user's Github name
  */
 
 const STORAGE_ACCOUNT_NAME = "nzmsablob"
+const AZURE_STORAGE_BLOB_URL = `https://${STORAGE_ACCOUNT_NAME}.blob.core.windows.net`
 
-export const azureBlobURL = `https://${STORAGE_ACCOUNT_NAME}.blob.core.windows.net`
-
-// Converts Blob object to File object
-export const convertBlobToFile = (blob: Blob, fileName: string) => {
-  const file = new File([blob], fileName)
-  return file
-}
-
-const createBlobInContainer = async (
-  containerClient: ContainerClient,
-  file: File
-) => {
-  // create blobClient for container
-  const blobClient = containerClient.getBlockBlobClient(file.name)
-
-  // set mimetype as determined from browser with file upload control
-  const options = { blobHTTPHeaders: { blobContentType: file.type } }
-
-  // upload file
-  await blobClient.uploadData(file, options)
-}
-
-interface IUploadFileToBlob {
-  file: File
-  token: string
-  containerName: string
-}
-
-const uploadFileToBlob = async ({
-  file,
-  token,
-  containerName,
-}: IUploadFileToBlob) => {
-  // Return if no file
-  if (!file) {
-    return []
-  }
-
-  // get blobService
-  const blobService = new BlobServiceClient(
-    `https://${STORAGE_ACCOUNT_NAME}.blob.core.windows.net/?${token}`
-  )
-
-  // Get container
-  const containerClient: ContainerClient = blobService.getContainerClient(
-    containerName
-  )
-
-  // Creates container if doesnt exist in account
-  try {
-    await containerClient.createIfNotExists({
-      access: "container",
-    })
-  } catch (err) {
-    console.error("container already exist. Will not create container")
-  }
-
-  // Pass containerClient and file to upload data
-  try {
-    await createBlobInContainer(containerClient, file)
-  } catch (err) {
-    console.error("Failed to create blob in container")
-  }
-}
-
-interface IConvertAndUpload {
+type rawUploadData = {
   cardImage: Blob
   token: string
   githubName: string
 }
 
-export const convertAndUploadFileToAzure = async ({
+// Converts photo to file object and uploads
+// to Azure Storage Blob.
+// Returns the URI of uploaded photo
+export const uploadFileToAzure = async ({
   cardImage,
   token,
   githubName,
-}: IConvertAndUpload) => {
-  const fileName = new Date().toISOString()
-  const file = convertBlobToFile(cardImage!, fileName)
-  const uploadToAzurePayload = {
-    file,
-    token: token!,
-    containerName: githubName!,
-  }
+}: rawUploadData) => {
+  const file = createFileFrom(cardImage)
+
+  const userContainerClient = getContainerClientFromAzure(
+    AZURE_STORAGE_BLOB_URL,
+    token,
+    githubName
+  )
+
   try {
-    await uploadFileToBlob(uploadToAzurePayload)
-    const photoURI = `${azureBlobURL}/${githubName}/${file.name}`
-    return photoURI
+    await userContainerClient.createIfNotExists({
+      access: "container",
+    })
+    createBlobInContainer(userContainerClient, file)
   } catch (err) {
     console.error(err)
+    return
   }
+  const photoURI: string = `${AZURE_STORAGE_BLOB_URL}/${githubName}/${file.name}`
+  return photoURI
+}
+
+// Returns file object from blob object using
+// current date time as file name
+const createFileFrom = (cardImage: Blob) => {
+  const fileName = new Date().toISOString()
+  const file = new File([cardImage], fileName)
+  return file
+}
+
+// Returns user's container client from Azure Storage Blob
+const getContainerClientFromAzure = (
+  storageAccountUrl: string,
+  token: string,
+  containerName: string
+) => {
+  const blobService = new BlobServiceClient(`${storageAccountUrl}/?${token}`)
+  const containerClient = blobService.getContainerClient(containerName)
+  return containerClient
+}
+
+// Upload file to Blob in user container
+const createBlobInContainer = (
+  containerClient: ContainerClient,
+  file: File
+) => {
+  const blobClient = containerClient.getBlockBlobClient(file.name)
+  const options = { blobHTTPHeaders: { blobContentType: file.type } }
+  blobClient.uploadData(file, options)
 }

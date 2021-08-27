@@ -1,44 +1,36 @@
 import { useMemo, useEffect } from "react"
 import { useMutation } from "@apollo/client"
-import { SET_EVENTS } from "../../apollo-client/mutations"
+import { SET_EVENTS } from "../../../apollo-client/mutations"
 
 import AddIcon from "@material-ui/icons/Add"
 import { IconButton, Toolbar, Fab, AppBar, Button } from "@material-ui/core"
 
-import { useAppSelector, useAppDispatch } from "../../store/storeHooks"
-import { setPublishKey, IEvent } from "../../store/eventReducer"
-import { openNotification } from "../../store/notificationReducer"
-import { toggleShareDialog, toggleEventDialog } from "../../store/dialogReducer"
+import { useAppSelector, useAppDispatch } from "../../../store/storeHooks"
+import { setPublishKey, IEvent } from "../../../store/eventReducer"
+import { openNotification } from "../../../store/notificationReducer"
+import {
+  toggleShareDialog,
+  toggleEventDialog,
+} from "../../../store/dialogReducer"
 
-import BackdropContainer from "../Backdrop/BackdropContainer"
+import Backdrop from "../../Backdrop/BackdropContainer"
 import AppbarLoggedInStyles from "./AppbarLoggedInStyles"
 
 const AppbarLoggedIn = () => {
+  const dispatch = useAppDispatch()
   const classes = AppbarLoggedInStyles()
+
   const events = useAppSelector<IEvent[]>((state) => state.events.events)
   const publishKey = useAppSelector<string>((state) => state.events.publishKey)
-
-  const dispatch = useAppDispatch()
 
   const [saveEvents, { loading, error }] = useMutation(SET_EVENTS, {
     variables: { events, publishKey },
   })
 
-  // Toggles Event Dialog
-  const onOpenEventDialog = () => dispatch(toggleEventDialog())
-
-  // Save events without publishKey
-  const onSaveEvents = async () => {
-    await saveEvents()
-    dispatch(openNotification("Events saved!"))
-  }
-
-  // Sets key as publishKey in local state
-  // and opens Share Dialog
-  const onOpenShareDialog = () => {
-    dispatch(setPublishKey(key))
-    dispatch(toggleShareDialog())
-  }
+  // Save events to backend after ShareDialog is toggled
+  useEffect(() => {
+    publishKey && saveEvents()
+  }, [publishKey, saveEvents])
 
   // Generates 8 random alphanumeric char string
   const key = useMemo(() => {
@@ -47,16 +39,38 @@ const AppbarLoggedIn = () => {
       .join("")
   }, [])
 
-  // Save events to backend after
-  // publishkey is set by toggling Share Dialog
-  useEffect(() => {
-    publishKey && saveEvents()
-  }, [publishKey, saveEvents])
+  // Save user events to backend without publishKey
+  const onSaveEvents = async () => {
+    await saveEvents()
+    if (!loading && !error) {
+      dispatch(
+        openNotification({
+          message: "Events saved!",
+          alertType: "success",
+        })
+      )
+    }
+  }
 
-  if (loading) return <BackdropContainer loading={loading} />
+  // Toggles Event Dialog
+  const onOpenEventDialog = () => dispatch(toggleEventDialog())
+
+  // Sets key as publishKey in local state
+  // and opens Share Dialog
+  const onOpenShareDialog = () => {
+    dispatch(setPublishKey(key))
+    dispatch(toggleShareDialog())
+  }
+
+  if (loading) return <Backdrop loading={loading} />
 
   if (error) {
-    dispatch(openNotification("Error when saving events! Please try again"))
+    dispatch(
+      openNotification({
+        message: "Error when saving events! Please try again",
+        alertType: "error",
+      })
+    )
   }
 
   return (
@@ -67,7 +81,7 @@ const AppbarLoggedIn = () => {
           edge="start"
           onClick={onSaveEvents}
         >
-          <Button>SAVE</Button>
+          <Button>save</Button>
         </IconButton>
         <Fab className={classes.fabButton}>
           <AddIcon onClick={onOpenEventDialog} fontSize="large" />
@@ -77,7 +91,7 @@ const AppbarLoggedIn = () => {
           edge="end"
           onClick={onOpenShareDialog}
         >
-          <Button>PUBLISH</Button>
+          <Button>publish</Button>
         </IconButton>
       </Toolbar>
     </AppBar>

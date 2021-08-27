@@ -21,7 +21,7 @@ const EventTimelineCard = (props: EventTimelineCardProps) => {
         <CardMedia>
           <img
             src={event.photoURI}
-            alt="user snaps"
+            alt={event.name}
             className={classes.cardImage}
           />
         </CardMedia>

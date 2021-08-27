@@ -1,6 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
-const initialSharedState = {
+interface IShareState {
+  publisher: string
+  date: string
+}
+
+const initialSharedState: IShareState = {
   publisher: "",
   date: "",
 }
@@ -9,10 +14,7 @@ const sharedSlice = createSlice({
   name: "Shared Content",
   initialState: initialSharedState,
   reducers: {
-    setSharedContentDetails(
-      state,
-      action: PayloadAction<{ publisher: string; date: string }>
-    ) {
+    setSharedContentDetails(state, action: PayloadAction<IShareState>) {
       state.publisher = action.payload.publisher
       state.date = action.payload.date
     },

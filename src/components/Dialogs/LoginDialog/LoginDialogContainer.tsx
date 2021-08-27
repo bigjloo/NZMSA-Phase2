@@ -1,30 +1,28 @@
-import { CONFIGURATION } from "../../../apollo-client/apollo"
+import { GITHUB_AUTHORIZE_URL } from "../../../api/GithubLoginProcessor"
 
 import { useAppSelector, useAppDispatch } from "../../../store/storeHooks"
 import { toggleLoginDialog } from "../../../store/dialogReducer"
-import { login } from "../../../store/authReducer"
 
 import LoginDialog from "./LoginDialog"
 
 const LoginDialogContainer = () => {
+  const dispatch = useAppDispatch()
+
   const isLoginDialogOpen = useAppSelector<boolean>(
     (state) => state.dialog.isLoginDialogOpen
   )
 
-  const dispatch = useAppDispatch()
-
   // Opens login dialog
   const toggleLoginDialogHandler = () => dispatch(toggleLoginDialog())
 
-  // Login user
-  const loginClickHandler = () => dispatch(login())
+  // placeholder
+  const loginClickHandler = () => alert("to be implemented")
 
-  // TODO
-  const signUpClickHandler = () => {}
+  // placeholder
+  const signUpClickHandler = () => alert("to be implemented")
 
   // Redirects to GitHhub for OAuth
-  const gitHubClickHandler = () =>
-    (window.location.href = CONFIGURATION.GITHUB_AUTHORIZE_URL)
+  const gitHubClickHandler = () => (window.location.href = GITHUB_AUTHORIZE_URL)
 
   return (
     <LoginDialog

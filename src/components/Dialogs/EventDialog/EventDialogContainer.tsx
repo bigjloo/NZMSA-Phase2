@@ -1,5 +1,6 @@
 import { ChangeEvent } from "react"
-import { convertAndUploadFileToAzure } from "../../../api/azure-storage-blob"
+import { uploadFileToAzure } from "../../../api/azure-storage-blob"
+
 import { useAppDispatch, useAppSelector } from "../../../store/storeHooks"
 import { setCardImage, setIsCameraOpen } from "../../../store/cameraReducer"
 import { toggleEventDialog } from "../../../store/dialogReducer"
@@ -10,30 +11,28 @@ import {
   handleNameInputChange,
   handleDescriptionInputChange,
 } from "../../../store/formInputReducer"
-import EventDialog from "./EventDialog"
+
+import Dialog from "@material-ui/core/Dialog"
+
+import EventDialogContent from "./EventDialogContent"
+import EventDialogList from "./EventDialogList"
 
 const EventDialogContainer = () => {
+  const dispatch = useAppDispatch()
+
   const events = useAppSelector<IEvent[]>((state) => state.events.events)
   const nameInput = useAppSelector<string>((state) => state.formInput.name)
   const descriptionInput = useAppSelector<string>(
     (state) => state.formInput.description
   )
-
   const cardImage = useAppSelector<Blob | undefined>(
     (state) => state.camera.cardImage
   )
-  const token = useAppSelector<string | undefined>(
-    (state) => state.user.sasToken
-  )
-  const githubName = useAppSelector<string | undefined>(
-    (state) => state.user.githubName
-  )
-
+  const token = useAppSelector<string>((state) => state.user.sasToken!)
+  const githubName = useAppSelector<string>((state) => state.user.githubName!)
   const isEventDialogOpen = useAppSelector<boolean>(
     (state) => state.dialog.isEventDialogOpen
   )
-
-  const dispatch = useAppDispatch()
 
   const toggleEventDialogHandler = () => {
     dispatch(toggleEventDialog())
@@ -47,23 +46,28 @@ const EventDialogContainer = () => {
     let photoURI = null
 
     if (cardImage) {
-      photoURI = await convertAndUploadFileToAzure({
+      photoURI = await uploadFileToAzure({
         token: token!,
         githubName: githubName!,
         cardImage,
       })
     }
 
-    const eventsPayload = {
+    const eventPayload = {
       name: nameInput,
       description: descriptionInput,
       photoURI,
     }
 
-    dispatch(addEvent(eventsPayload))
+    dispatch(addEvent(eventPayload))
     dispatch(setCardImage(undefined))
     dispatch(resetInputFields())
-    dispatch(openNotification("Event succesfully added!"))
+    dispatch(
+      openNotification({
+        message: "Event succesfully added!",
+        alertType: "success",
+      })
+    )
   }
 
   // Removes individual event from local events state
@@ -78,17 +82,17 @@ const EventDialogContainer = () => {
   }
 
   return (
-    <EventDialog
-      isEventDialogOpen={isEventDialogOpen}
-      toggleEventDialogHandler={toggleEventDialogHandler}
-      events={events}
-      onRemoveEvent={onRemoveEvent}
-      onAddEvent={onAddEvent}
-      nameInput={nameInput}
-      descriptionInput={descriptionInput}
-      onNameInputChange={onNameInputChange}
-      onDescriptionInputChange={onDescriptionInputChange}
-    />
+    <Dialog open={isEventDialogOpen} onClose={toggleEventDialogHandler}>
+      <EventDialogList events={events} onRemoveEvent={onRemoveEvent} />
+      <EventDialogContent
+        onAddEvent={onAddEvent}
+        toggleEventDialogHandler={toggleEventDialogHandler}
+        nameInput={nameInput}
+        descriptionInput={descriptionInput}
+        onNameInputChange={onNameInputChange}
+        onDescriptionInputChange={onDescriptionInputChange}
+      />
+    </Dialog>
   )
 }
 

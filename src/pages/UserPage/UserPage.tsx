@@ -5,41 +5,45 @@ import { setEvents } from "../../store/eventReducer"
 import { GET_USER_DATA } from "../../apollo-client/queries"
 import { setUserData } from "../../store/userReducer"
 import { IEvent } from "../../store/eventReducer"
+import { openNotification } from "../../store/notificationReducer"
 import BackdropContainer from "../../components/Backdrop/BackdropContainer"
 import User from "./User"
 
 const UserPage = () => {
+  const dispatch = useAppDispatch()
+
   const events = useAppSelector<IEvent[]>((store) => store.events.events)
 
   // Fetches initial User data from backend
-  const { data, loading, error } = useQuery(GET_USER_DATA)
-
-  const dispatch = useAppDispatch()
+  const { data: userData, loading, error } = useQuery(GET_USER_DATA)
 
   // After data is returned from backend,
   // set fetched data to local state
   useEffect(() => {
-    console.log("inside User -> UseEffect")
-    console.log(data)
-    if (data) {
+    if (userData) {
       // Sets fetched user data to local User state
       const userDataPayload = {
-        githubName: data.userData.github,
-        githubImageURI: data.userData.imageURI,
-        sasToken: data.sasToken.token,
+        githubName: userData.userData.github,
+        githubImageURI: userData.userData.imageURI,
+        sasToken: userData.sasToken.token,
       }
       dispatch(setUserData(userDataPayload))
 
-      // Sets fetched events to local Events state
-      if (data.today) {
-        dispatch(setEvents(data.today.events))
-      }
+      // Sets fetched events to local Events state if exist
+      userData.today && dispatch(setEvents(userData.today.events))
     }
-  }, [data, dispatch])
+  }, [userData, dispatch])
+
+  if (error) {
+    dispatch(
+      openNotification({
+        message: "Error fetching data. Please try again",
+        alertType: "error",
+      })
+    )
+  }
 
   if (loading) return <BackdropContainer loading={loading} />
-
-  if (error) return <h1>Error: {error.message}</h1>
 
   return <User events={events} />
 }

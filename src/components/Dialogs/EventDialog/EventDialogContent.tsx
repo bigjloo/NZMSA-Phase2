@@ -1,38 +1,15 @@
+import { ChangeEvent } from "react"
+
 import Button from "@material-ui/core/Button"
 import DialogContent from "@material-ui/core/DialogContent"
 import DialogActions from "@material-ui/core/DialogActions"
 import DialogTitle from "@material-ui/core/DialogTitle"
-import { ChangeEvent } from "react"
-import CameraContainer from "../../MediaCapture/CameraContainer"
-// import EventDialogTextFields from "./EventDialogTextFields"
 import TextField from "@material-ui/core/TextField"
 
-import { makeStyles, createStyles } from "@material-ui/core/styles"
+import CameraContainer from "../../MediaCapture/CameraContainer"
+import EventDialogStyles from "./EventDialogStyles"
 
-const useStyles = makeStyles(() =>
-  createStyles({
-    title: {
-      padding: "0",
-      // color: theme.palette.secondary.contrastText,
-    },
-
-    addEventButton: {
-      // color: theme.palette.secondary.contrastText,
-    },
-
-    dialogContent: {
-      "& > *": {
-        padding: "0.5rem 0",
-      },
-    },
-
-    dialogActions: {
-      margin: "0.5rem 0",
-    },
-  })
-)
-
-type EventDialogContentProps = {
+export type EventDialogContentProps = {
   nameInput: string
   descriptionInput: string
   onAddEvent: () => void
@@ -49,7 +26,7 @@ const EventDialogContent = ({
   onNameInputChange,
   onDescriptionInputChange,
 }: EventDialogContentProps) => {
-  const classes = useStyles()
+  const classes = EventDialogStyles()
 
   return (
     <DialogContent className={classes.dialogContent}>
@@ -72,11 +49,7 @@ const EventDialogContent = ({
       />
       <CameraContainer />
       <DialogActions className={classes.dialogActions}>
-        <Button
-          className={classes.addEventButton}
-          variant="outlined"
-          onClick={onAddEvent}
-        >
+        <Button variant="outlined" onClick={onAddEvent}>
           Add Event
         </Button>
         <Button onClick={toggleEventDialogHandler}>Close</Button>

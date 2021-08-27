@@ -8,7 +8,7 @@ const AppbarNotLoggedInStyles = makeStyles((theme: Theme) =>
       bottom: "0px",
     },
     loginButton: {
-      color: theme.palette.secondary.main,
+      color: theme.palette.secondary.light,
       margin: "auto",
       fontSize: "1rem",
     },

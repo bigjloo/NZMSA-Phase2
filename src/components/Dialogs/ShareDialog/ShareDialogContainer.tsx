@@ -1,4 +1,6 @@
+import { useMemo } from "react"
 import { CONFIGURATION } from "../../../apollo-client/apollo"
+
 import { useAppSelector, useAppDispatch } from "../../../store/storeHooks"
 import { toggleShareDialog } from "../../../store/dialogReducer"
 import { openNotification } from "../../../store/notificationReducer"
@@ -6,15 +8,18 @@ import { openNotification } from "../../../store/notificationReducer"
 import ShareDialog from "./ShareDialog"
 
 const ShareDialogContainer = () => {
+  const dispatch = useAppDispatch()
+
   const isShareDialogOpen = useAppSelector<boolean>(
     (state) => state.dialog.isShareDialogOpen
   )
   const publishKey = useAppSelector<string>((state) => state.events.publishKey)
 
   // Public URL to access User shared events
-  const publishURL = `${CONFIGURATION.FRONTEND}share/${publishKey}`
-
-  const dispatch = useAppDispatch()
+  const publishURL = useMemo(
+    () => `${CONFIGURATION.FRONTEND}share/${publishKey}`,
+    [publishKey]
+  )
 
   // Opens Share Dialog
   const toggleHandler = () => dispatch(toggleShareDialog())
@@ -22,7 +27,12 @@ const ShareDialogContainer = () => {
   // Copies publish URL to clipboard
   const onCopyToClipboard = () => {
     navigator.clipboard.writeText(publishURL)
-    dispatch(openNotification("Copied to clipboard!"))
+    dispatch(
+      openNotification({
+        message: "Copied to clipboard!",
+        alertType: "info",
+      })
+    )
   }
 
   return (
