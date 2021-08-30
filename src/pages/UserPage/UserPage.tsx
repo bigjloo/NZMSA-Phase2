@@ -7,18 +7,39 @@ import { setUserData } from "../../store/userReducer"
 import { IEvent } from "../../store/eventReducer"
 import { openNotification } from "../../store/notificationReducer"
 import BackdropContainer from "../../components/Backdrop/BackdropContainer"
-import User from "./User"
+import EventTimelineContainer from "../../components/EventTimeline/EventTimelineContainer"
+import EventDialogContainer from "../../components/Dialogs/EventDialog/EventDialogContainer"
+import ShareDialogContainer from "../../components/Dialogs/ShareDialog/ShareDialogContainer"
 
 const UserPage = () => {
   const dispatch = useAppDispatch()
-
   const events = useAppSelector<IEvent[]>((store) => store.events.events)
+  const { loading, error } = useUserQuery()
 
-  // Fetches initial User data from backend
+  if (error) {
+    dispatch(
+      openNotification({
+        message: "Error fetching data. Please try again",
+        alertType: "error",
+      })
+    )
+  }
+
+  if (loading) return <BackdropContainer loading={loading} />
+
+  return (
+    <>
+      <EventTimelineContainer events={events} />
+      <EventDialogContainer />
+      <ShareDialogContainer />
+    </>
+  )
+}
+
+const useUserQuery = () => {
+  const dispatch = useAppDispatch()
   const { data: userData, loading, error } = useQuery(GET_USER_DATA)
 
-  // After data is returned from backend,
-  // set fetched data to local state
   useEffect(() => {
     if (userData) {
       // Sets fetched user data to local User state
@@ -34,18 +55,7 @@ const UserPage = () => {
     }
   }, [userData, dispatch])
 
-  if (error) {
-    dispatch(
-      openNotification({
-        message: "Error fetching data. Please try again",
-        alertType: "error",
-      })
-    )
-  }
-
-  if (loading) return <BackdropContainer loading={loading} />
-
-  return <User events={events} />
+  return { loading, error }
 }
 
 export default UserPage

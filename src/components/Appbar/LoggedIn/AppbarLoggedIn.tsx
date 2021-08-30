@@ -1,4 +1,5 @@
-import { useMemo, useEffect } from "react"
+import { useMemo, useEffect, MouseEventHandler } from "react"
+
 import { useMutation } from "@apollo/client"
 import { SET_EVENTS } from "../../../apollo-client/mutations"
 
@@ -32,12 +33,7 @@ const AppbarLoggedIn = () => {
     publishKey && saveEvents()
   }, [publishKey, saveEvents])
 
-  // Generates 8 random alphanumeric char string
-  const key = useMemo(() => {
-    return [...Array(8)]
-      .map(() => Math.floor(Math.random() * 16).toString(16))
-      .join("")
-  }, [])
+  const key = useMemo(() => generateKey(), [])
 
   // Save user events to backend without publishKey
   const onSaveEvents = async () => {
@@ -98,4 +94,24 @@ const AppbarLoggedIn = () => {
   )
 }
 
+// type ShareIconButtonProps = {
+//   buttonText: string
+//   edge: false | "start" | "end" | undefined
+//   clickHandler: MouseEventHandler<HTMLButtonElement>
+// }
+
+// export const ShareIconButton = (props: ShareIconButtonProps) => {
+//   const { buttonText, edge, clickHandler } = props
+
+//   return (
+//     <IconButton edge={edge} onClick={clickHandler} onClick={clickHandler}>
+//       <Button>{buttonText}</Button>
+//     </IconButton>
+//   )
+// }
+
 export default AppbarLoggedIn
+
+// Generates 8 random alphanumeric char string
+const generateKey = () =>
+  [...Array(8)].map(() => Math.floor(Math.random() * 16).toString(16)).join("")

@@ -15,31 +15,48 @@ type EventTimelineProps = {
   onCardClickHandler: (event: IEvent) => void
 }
 
+type EventTimelineItemProps = {
+  event: IEvent
+  index: number
+  onCardClickHandler: (event: IEvent) => void
+}
+
 const EventTimeline = (props: EventTimelineProps) => {
   const { events, onCardClickHandler } = props
 
+  const renderEventTimelineItems = () => {
+    return events.map((event, index) => {
+      return (
+        <EventTimelineItem
+          event={event}
+          index={index}
+          onCardClickHandler={onCardClickHandler}
+        />
+      )
+    })
+  }
+
+  return <Timeline align="alternate">{renderEventTimelineItems()}</Timeline>
+}
+
+const EventTimelineItem = (props: EventTimelineItemProps) => {
+  const { event, index, onCardClickHandler } = props
   return (
-    <>
-      <Timeline align="alternate">
-        {events.map((event, index) => (
-          <TimelineItem key={index}>
-            <TimelineOppositeContent>
-              <Typography variant="overline">{event.name}</Typography>
-            </TimelineOppositeContent>
-            <TimelineSeparator>
-              <TimelineDot color="secondary" variant="outlined" />
-              <TimelineConnector />
-            </TimelineSeparator>
-            <TimelineContent>
-              <EventTimelineCard
-                event={event}
-                onCardClickHandler={onCardClickHandler}
-              />
-            </TimelineContent>
-          </TimelineItem>
-        ))}
-      </Timeline>
-    </>
+    <TimelineItem key={index}>
+      <TimelineOppositeContent>
+        <Typography variant="overline">{event.name}</Typography>
+      </TimelineOppositeContent>
+      <TimelineSeparator>
+        <TimelineDot color="secondary" variant="outlined" />
+        <TimelineConnector />
+      </TimelineSeparator>
+      <TimelineContent>
+        <EventTimelineCard
+          event={event}
+          onCardClickHandler={onCardClickHandler}
+        />
+      </TimelineContent>
+    </TimelineItem>
   )
 }
 

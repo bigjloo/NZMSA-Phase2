@@ -1,71 +1,46 @@
-import { useEffect } from "react"
-import { useParams } from "react-router-dom"
-import { useQuery } from "@apollo/client"
-import { GET_EVENTS_BY_PUBLISH_KEY } from "../../apollo-client/queries"
+import Typography from "@material-ui/core/Typography"
+import Box from "@material-ui/core/Box"
+import EventTimelineContainer from "../../components/EventTimeline/EventTimelineContainer"
+import Container from "@material-ui/core/Container"
+// import LoginDialogContainer from "../../components/Dialogs/LoginDialog/LoginDialogContainer"
+import { IEvent } from "../../store/eventReducer"
+import SharedContentStyles from "./SharedContentStyles"
 
-import { useAppDispatch, useAppSelector } from "../../store/storeHooks"
-import { setSharedContentDetails } from "../../store/sharedReducer"
-import { setEvents, IEvent } from "../../store/eventReducer"
-import { openNotification } from "../../store/notificationReducer"
-
-import SharedContent from "./SharedContent"
-import BackdropContainer from "../../components/Backdrop/BackdropContainer"
-
-type SharedContentParams = {
-  publishKey: string
+export type SharedContentProps = {
+  publisherName: string
+  publishDate: string
+  events: IEvent[]
 }
 
-const SharedContentPage = () => {
-  const dispatch = useAppDispatch()
+type SharedContentHeaderProps = {
+  title: string
+  subtitle: string
+}
 
-  // Extracts publish key from the URL params
-  const { publishKey } = useParams<SharedContentParams>()
-
-  const publisherName = useAppSelector<string>(
-    (state) => state.shared.publisher
-  )
-  const publishDate = useAppSelector<string>((state) => state.shared.date)
-  const events = useAppSelector<IEvent[]>((store) => store.events.events)
-
-  // Retrieves events from backend with publish key
-  const { data: sharedContentData, loading, error } = useQuery(
-    GET_EVENTS_BY_PUBLISH_KEY,
-    {
-      variables: { publishKey },
-    }
-  )
-
-  // If sharedContentData is returned,
-  // set publisher name and date + set fetched
-  // events to local events state
-  useEffect(() => {
-    if (sharedContentData) {
-      const shareContentPayload = {
-        publisher: sharedContentData.day.user.name,
-        date: sharedContentData.day.date,
-      }
-      dispatch(setSharedContentDetails(shareContentPayload))
-      dispatch(setEvents(sharedContentData.day.events))
-    }
-  }, [sharedContentData, dispatch])
-
-  if (error) {
-    dispatch(
-      openNotification({
-        message: "Error fetching data. Please try again",
-        alertType: "error",
-      })
-    )
-  }
-
-  if (loading) return <BackdropContainer loading={loading} />
-
+const SharedContentPage = ({
+  publisherName,
+  publishDate,
+  events,
+}: SharedContentProps) => {
   return (
-    <SharedContent
-      publisherName={publisherName}
-      publishDate={publishDate.slice(0, 10)}
-      events={events}
-    />
+    <Container>
+      <SharedContentPageHeader title={publisherName} subtitle={publishDate} />
+      <EventTimelineContainer events={events} />
+      {/* <LoginDialogContainer /> */}
+    </Container>
+  )
+}
+
+const SharedContentPageHeader = (props: SharedContentHeaderProps) => {
+  const classes = SharedContentStyles()
+  const { title, subtitle } = props
+  return (
+    <Box className={classes.header} component="div">
+      <Typography variant="h4" component="h4" gutterBottom>
+        {title}
+      </Typography>
+      <Typography variant="subtitle1">{subtitle}</Typography>
+    </Box>
   )
 }
 

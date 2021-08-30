@@ -26,7 +26,6 @@ const EventTimelineCard = (props: EventTimelineCardProps) => {
           />
         </CardMedia>
       )}
-
       <CardContent className={classes.cardContent}>
         <Typography variant="caption">{event.description}</Typography>
       </CardContent>

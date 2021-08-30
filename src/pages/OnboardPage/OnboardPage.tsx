@@ -4,36 +4,50 @@ import OnboardStyles from "./OnboardStyles"
 import Box from "@material-ui/core/Box"
 import randomImage from "../../assets/randomImage"
 
-const Onboard = () => {
+const OnboardPage = () => {
+  const classes = OnboardStyles()
+  return (
+    <>
+      <Box className={classes.container}>
+        <OnboardPageHeading />
+        <OnboardPageImage />
+      </Box>
+      <LoginDialogContainer />
+    </>
+  )
+}
+
+const OnboardPageHeading = () => {
   const classes = OnboardStyles()
   return (
     <Box>
-      <Box className={classes.container}>
-        <Box>
-          <Typography variant="h3" component="h3">
-            <span className={classes.H}>H</span>ows
-          </Typography>
-          <Typography variant="h3" component="h3">
-            <span className={classes.Y}>Y</span>our
-          </Typography>
-          <Typography variant="h3" component="h3">
-            <span className={classes.D}>D</span>ay
-          </Typography>
-          <Typography variant="h6" component="h6">
-            Never a moment too dull to share
-          </Typography>
-        </Box>
-        <Box className={classes.img}>
-          <img
-            className={classes.image}
-            src={randomImage}
-            alt="cat with fishbowl"
-          />
-        </Box>
-      </Box>
-      <LoginDialogContainer />
+      <Typography variant="h3" component="h3">
+        <span className={classes.H}>H</span>ows
+      </Typography>
+      <Typography variant="h3" component="h3">
+        <span className={classes.Y}>Y</span>our
+      </Typography>
+      <Typography variant="h3" component="h3">
+        <span className={classes.D}>D</span>ay
+      </Typography>
+      <Typography variant="h6" component="h6">
+        Never a moment too dull to share
+      </Typography>
     </Box>
   )
 }
 
-export default Onboard
+const OnboardPageImage = () => {
+  const classes = OnboardStyles()
+  return (
+    <Box className={classes.img}>
+      <img
+        className={classes.image}
+        src={randomImage}
+        alt="cat with fishbowl"
+      />
+    </Box>
+  )
+}
+
+export default OnboardPage

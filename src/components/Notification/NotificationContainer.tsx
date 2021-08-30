@@ -4,7 +4,6 @@ import Notification from "./Notification"
 
 const NotificationContainer = () => {
   const dispatch = useAppDispatch()
-
   const isNotificationOpen = useAppSelector<boolean>(
     (state) => state.notification.open
   )
