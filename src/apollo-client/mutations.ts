@@ -1,4 +1,4 @@
-import {gql} from "@apollo/client"
+import { gql } from "@apollo/client"
 
 // Saves local events state to backend
 export const SET_EVENTS = gql`

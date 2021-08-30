@@ -16,20 +16,16 @@ const ThemeToggle = ({ isDark }: ThemeToggleProps) => {
   const dispatch = useAppDispatch()
   const switchHandler = () => dispatch(toggleTheme())
 
-  const renderThemeToggle = () => {
-    return (
-      <FormGroup>
-        <FormControlLabel
-          control={<Switch checked={isDark} onChange={switchHandler} />}
-          label="Dark"
-        />
-      </FormGroup>
-    )
-  }
-
   return (
     <Grid container direction="row" justifyContent="flex-end" xs={12}>
-      <Grid item>{renderThemeToggle()}</Grid>
+      <Grid item>
+        <FormGroup>
+          <FormControlLabel
+            control={<Switch checked={isDark} onChange={switchHandler} />}
+            label="Dark"
+          />
+        </FormGroup>
+      </Grid>
     </Grid>
   )
 }

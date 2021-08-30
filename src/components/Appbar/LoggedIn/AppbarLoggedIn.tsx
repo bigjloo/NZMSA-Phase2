@@ -1,4 +1,4 @@
-import { useMemo, useEffect, MouseEventHandler } from "react"
+import { useMemo, useEffect } from "react"
 
 import { useMutation } from "@apollo/client"
 import { SET_EVENTS } from "../../../apollo-client/mutations"
@@ -17,6 +17,18 @@ import {
 import Backdrop from "../../Backdrop/BackdropContainer"
 import AppbarLoggedInStyles from "./AppbarLoggedInStyles"
 
+type SaveButtonProps = {
+  onSaveEvents: () => void
+}
+
+type EventButtonProps = {
+  onOpenEventDialog: () => void
+}
+
+type ShareButtonProps = {
+  onOpenShareDialog: () => void
+}
+
 const AppbarLoggedIn = () => {
   const dispatch = useAppDispatch()
   const classes = AppbarLoggedInStyles()
@@ -32,8 +44,6 @@ const AppbarLoggedIn = () => {
   useEffect(() => {
     publishKey && saveEvents()
   }, [publishKey, saveEvents])
-
-  const key = useMemo(() => generateKey(), [])
 
   // Save user events to backend without publishKey
   const onSaveEvents = async () => {
@@ -51,12 +61,13 @@ const AppbarLoggedIn = () => {
   // Toggles Event Dialog
   const onOpenEventDialog = () => dispatch(toggleEventDialog())
 
-  // Sets key as publishKey in local state
-  // and opens Share Dialog
+  // Opens Share Dialog and sets key as publishKey in local state
   const onOpenShareDialog = () => {
-    dispatch(setPublishKey(key))
     dispatch(toggleShareDialog())
+    dispatch(setPublishKey(key))
   }
+
+  const key = useMemo(() => generateKey(), [])
 
   if (loading) return <Backdrop loading={loading} />
 
@@ -72,46 +83,55 @@ const AppbarLoggedIn = () => {
   return (
     <AppBar color="inherit" className={classes.appBar}>
       <Toolbar className={classes.toolbar}>
-        <IconButton
-          className={classes.iconButton}
-          edge="start"
-          onClick={onSaveEvents}
-        >
-          <Button>save</Button>
-        </IconButton>
-        <Fab className={classes.fabButton}>
-          <AddIcon onClick={onOpenEventDialog} fontSize="large" />
-        </Fab>
-        <IconButton
-          className={classes.iconButton}
-          edge="end"
-          onClick={onOpenShareDialog}
-        >
-          <Button>publish</Button>
-        </IconButton>
+        <SaveButton onSaveEvents={onSaveEvents} />
+        <EventButton onOpenEventDialog={onOpenEventDialog} />
+        <ShareButton onOpenShareDialog={onOpenShareDialog} />
       </Toolbar>
     </AppBar>
   )
 }
 
-// type ShareIconButtonProps = {
-//   buttonText: string
-//   edge: false | "start" | "end" | undefined
-//   clickHandler: MouseEventHandler<HTMLButtonElement>
-// }
-
-// export const ShareIconButton = (props: ShareIconButtonProps) => {
-//   const { buttonText, edge, clickHandler } = props
-
-//   return (
-//     <IconButton edge={edge} onClick={clickHandler} onClick={clickHandler}>
-//       <Button>{buttonText}</Button>
-//     </IconButton>
-//   )
-// }
-
-export default AppbarLoggedIn
-
 // Generates 8 random alphanumeric char string
 const generateKey = () =>
   [...Array(8)].map(() => Math.floor(Math.random() * 16).toString(16)).join("")
+
+const SaveButton = ({ onSaveEvents }: SaveButtonProps) => {
+  const classes = AppbarLoggedInStyles()
+  const saveButtonText = "Save"
+
+  return (
+    <IconButton
+      className={classes.iconButton}
+      edge="start"
+      onClick={onSaveEvents}
+    >
+      <Button>{saveButtonText}</Button>
+    </IconButton>
+  )
+}
+
+const EventButton = ({ onOpenEventDialog }: EventButtonProps) => {
+  const classes = AppbarLoggedInStyles()
+  return (
+    <Fab className={classes.fabButton}>
+      <AddIcon onClick={onOpenEventDialog} fontSize="large" />
+    </Fab>
+  )
+}
+
+const ShareButton = ({ onOpenShareDialog }: ShareButtonProps) => {
+  const classes = AppbarLoggedInStyles()
+  const shareButtonText = "Publish"
+
+  return (
+    <IconButton
+      className={classes.iconButton}
+      edge="end"
+      onClick={onOpenShareDialog}
+    >
+      <Button>{shareButtonText}</Button>
+    </IconButton>
+  )
+}
+
+export default AppbarLoggedIn

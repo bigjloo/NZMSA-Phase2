@@ -16,7 +16,7 @@ import { darkTheme, lightTheme } from "./theme"
 import SharedContentPage from "./pages/SharedContentPage/SharedContentPageContainer"
 import OnboardPage from "./pages/OnboardPage/OnboardPage"
 import Layout from "./components/Layout/Layout"
-import UserPage from "./pages/UserPage/UserPage"
+import UserPageContainer from "./pages/UserPage/UserPageContainer"
 
 function App() {
   const dispatch = useAppDispatch()
@@ -46,7 +46,7 @@ function App() {
         <CssBaseline />
         <Switch>
           <Route exact path="/">
-            {isAuth ? <UserPage /> : <OnboardPage />}
+            {isAuth ? <UserPageContainer /> : <OnboardPage />}
           </Route>
           <Route path="/signin/callback/">
             <GithubLoginProcessor />

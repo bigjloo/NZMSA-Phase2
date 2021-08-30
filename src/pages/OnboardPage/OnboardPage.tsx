@@ -19,6 +19,7 @@ const OnboardPage = () => {
 
 const OnboardPageHeading = () => {
   const classes = OnboardStyles()
+  const subtitle = "Never a moment too dull to share"
   return (
     <Box>
       <Typography variant="h3" component="h3">
@@ -31,7 +32,7 @@ const OnboardPageHeading = () => {
         <span className={classes.D}>D</span>ay
       </Typography>
       <Typography variant="h6" component="h6">
-        Never a moment too dull to share
+        {subtitle}
       </Typography>
     </Box>
   )
@@ -41,11 +42,7 @@ const OnboardPageImage = () => {
   const classes = OnboardStyles()
   return (
     <Box className={classes.img}>
-      <img
-        className={classes.image}
-        src={randomImage}
-        alt="cat with fishbowl"
-      />
+      <img className={classes.image} src={randomImage} alt="funny cat" />
     </Box>
   )
 }

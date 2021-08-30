@@ -7,11 +7,17 @@ import Button from "@material-ui/core/Button"
 import Typography from "@material-ui/core/Typography"
 import ShareDialogStyles from "./ShareDialogStyles"
 
-export type ShareDialogProps = {
-  publishURL: string
+export type ShareDialogProps = ShareDialogTextProps & {
   isShareDialogOpen: boolean
-  onCopyToClipboard: () => void
   toggleHandler: () => void
+}
+
+type ShareDialogTextProps = ShareDialogActionProps & {
+  publishURL: string
+}
+
+type ShareDialogActionProps = {
+  onCopyToClipboard: () => void
 }
 
 const ShareDialog = ({
@@ -20,22 +26,37 @@ const ShareDialog = ({
   onCopyToClipboard,
   toggleHandler,
 }: ShareDialogProps) => {
-  const classes = ShareDialogStyles()
   return (
     <Dialog open={isShareDialogOpen} onClose={toggleHandler}>
       <DialogContent>
-        <DialogContentText className={classes.dialogContentText}>
-          <Typography onDoubleClick={onCopyToClipboard}>
-            {publishURL}
-          </Typography>
-        </DialogContentText>
-        <DialogActions>
-          <Button variant="outlined" onClick={onCopyToClipboard}>
-            Copy
-          </Button>
-        </DialogActions>
+        <ShareDialogText
+          publishURL={publishURL}
+          onCopyToClipboard={onCopyToClipboard}
+        />
+        <ShareDialogActions onCopyToClipboard={onCopyToClipboard} />
       </DialogContent>
     </Dialog>
+  )
+}
+
+const ShareDialogActions = ({ onCopyToClipboard }: ShareDialogActionProps) => {
+  const copyButtonText = "Copy"
+  return (
+    <DialogActions>
+      <Button variant="outlined" onClick={onCopyToClipboard}>
+        {copyButtonText}
+      </Button>
+    </DialogActions>
+  )
+}
+
+const ShareDialogText = (props: ShareDialogTextProps) => {
+  const classes = ShareDialogStyles()
+  const { publishURL, onCopyToClipboard } = props
+  return (
+    <DialogContentText className={classes.dialogContentText}>
+      <Typography onDoubleClick={onCopyToClipboard}>{publishURL}</Typography>
+    </DialogContentText>
   )
 }
 

@@ -7,7 +7,7 @@ import ShareDialog, { ShareDialogProps } from "./ShareDialog/ShareDialog"
 // import EventDialog, { EventDialogProps } from "./EventDialog/EventDialog"
 import LoginDialog, { LoginDialogProps } from "./LoginDialog/LoginDialog"
 import { IEvent } from "../../store/eventReducer"
-import CardDialog, { CardDialogProps } from "./CardDialog/CardDialog"
+import CardDialog, { CardDialogProps } from "./EventCardDialog/EventCardDialog"
 
 const mockEvents: IEvent[] = [
   {

@@ -35,16 +35,13 @@ const GithubLoginProcessor = () => {
     )
   }
 
-  return (
-    <>
-      {loading && <BackdropContainer loading={loading} />}
-      {isAuth && <Redirect to="/" />}
-    </>
-  )
+  if (loading) return <BackdropContainer loading={loading} />
+
+  return <>{isAuth && <Redirect to="/" />}</>
 }
 
 // Fetches JWT Token from backend using code
-// from Github and logins
+// from Github and logins user
 const useGithubCode = (code: string) => {
   const dispatch = useAppDispatch()
   const [getToken, { error, loading }] = useMutation(GET_JWT_WITH_GITHUB_CODE, {

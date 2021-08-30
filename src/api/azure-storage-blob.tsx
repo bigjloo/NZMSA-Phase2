@@ -16,9 +16,8 @@ type rawUploadData = {
   githubName: string
 }
 
-// Converts photo to file object and uploads
-// to Azure Storage Blob.
-// Returns the URI of uploaded photo
+// Converts photo to file object and uploads to Azure
+// Storage Blob. Returns the URI of uploaded photo
 export const uploadFileToAzure = async ({
   cardImage,
   token,
