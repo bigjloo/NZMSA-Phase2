@@ -1,51 +1,20 @@
-import { useEffect } from "react"
-import { useQuery } from "@apollo/client"
-import { useAppDispatch, useAppSelector } from "../../store/storeHooks"
-import { setEvents } from "../../store/eventReducer"
-import { GET_USER_DATA } from "../../apollo-client/queries"
-import { setUserData } from "../../store/userReducer"
 import { IEvent } from "../../store/eventReducer"
-import { openNotification } from "../../store/notificationReducer"
-import BackdropContainer from "../../components/Backdrop/BackdropContainer"
-import User from "./User"
+import EventTimelineContainer from "../../components/EventTimeline/EventTimelineContainer"
+import EventDialogContainer from "../../components/Dialogs/EventDialog/EventDialogContainer"
+import ShareDialogContainer from "../../components/Dialogs/ShareDialog/ShareDialogContainer"
 
-const UserPage = () => {
-  const dispatch = useAppDispatch()
-
-  const events = useAppSelector<IEvent[]>((store) => store.events.events)
-
-  // Fetches initial User data from backend
-  const { data: userData, loading, error } = useQuery(GET_USER_DATA)
-
-  // After data is returned from backend,
-  // set fetched data to local state
-  useEffect(() => {
-    if (userData) {
-      // Sets fetched user data to local User state
-      const userDataPayload = {
-        githubName: userData.userData.github,
-        githubImageURI: userData.userData.imageURI,
-        sasToken: userData.sasToken.token,
-      }
-      dispatch(setUserData(userDataPayload))
-
-      // Sets fetched events to local Events state if exist
-      userData.today && dispatch(setEvents(userData.today.events))
-    }
-  }, [userData, dispatch])
-
-  if (error) {
-    dispatch(
-      openNotification({
-        message: "Error fetching data. Please try again",
-        alertType: "error",
-      })
-    )
-  }
-
-  if (loading) return <BackdropContainer loading={loading} />
-
-  return <User events={events} />
+export type UserProps = {
+  events: IEvent[]
+}
+// TODO random moments quote if events is empty
+const UserPage = ({ events }: UserProps) => {
+  return (
+    <>
+      <EventTimelineContainer events={events} />
+      <EventDialogContainer />
+      <ShareDialogContainer />
+    </>
+  )
 }
 
 export default UserPage

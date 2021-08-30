@@ -7,12 +7,19 @@ import GitHubIcon from "@material-ui/icons/GitHub"
 
 import LoginDialogStyles from "./LoginDialogStyles"
 
-export type LoginDialogProps = {
-  isLoginDialogOpen: boolean
-  loginClickHandler: () => void
-  signUpClickHandler: () => void
-  toggleLoginDialogHandler: () => void
+export type LoginDialogProps = GithubLoginButtonProps &
+  LoginDialogActionsProps & {
+    isLoginDialogOpen: boolean
+    toggleLoginDialogHandler: () => void
+  }
+
+type GithubLoginButtonProps = {
   gitHubClickHandler: () => void
+}
+
+type LoginDialogActionsProps = {
+  signUpClickHandler: () => void
+  loginClickHandler: () => void
 }
 
 const LoginDialog = ({
@@ -23,31 +30,64 @@ const LoginDialog = ({
   gitHubClickHandler,
 }: LoginDialogProps) => {
   const classes = LoginDialogStyles()
+
   return (
     <Dialog open={isLoginDialogOpen} onClose={toggleLoginDialogHandler}>
-      <DialogContent style={{ maxWidth: "300px" }}>
-        <Button
-          variant="text"
-          startIcon={<GitHubIcon />}
-          onClick={gitHubClickHandler}
-        >
-          GITHUB LOGIN
-        </Button>
-        <TextField label="Login" type="text" color="secondary" fullWidth />
-        <TextField
-          label="Password"
-          type="password"
-          color="secondary"
-          fullWidth
+      <DialogContent className={classes.dialogContent}>
+        <GithubLoginButton gitHubClickHandler={gitHubClickHandler} />
+        <LoginForm />
+        <LoginDialogActions
+          signUpClickHandler={signUpClickHandler}
+          loginClickHandler={loginClickHandler}
         />
-        <DialogActions>
-          <Button onClick={signUpClickHandler}>Sign Up</Button>
-          <Button className={classes.loginButton} onClick={loginClickHandler}>
-            Login
-          </Button>
-        </DialogActions>
       </DialogContent>
     </Dialog>
+  )
+}
+
+const GithubLoginButton = ({ gitHubClickHandler }: GithubLoginButtonProps) => {
+  const githubButtonText = "Github Login"
+  return (
+    <Button
+      variant="text"
+      startIcon={<GitHubIcon />}
+      onClick={gitHubClickHandler}
+    >
+      {githubButtonText}
+    </Button>
+  )
+}
+
+const LoginForm = () => {
+  const loginLabel = "Login"
+  const passwordLabel = "Password"
+  return (
+    <>
+      <TextField label={loginLabel} type="text" color="secondary" fullWidth />
+      <TextField
+        label={passwordLabel}
+        type="password"
+        color="secondary"
+        fullWidth
+      />
+    </>
+  )
+}
+
+const LoginDialogActions = (props: LoginDialogActionsProps) => {
+  const classes = LoginDialogStyles()
+  const { signUpClickHandler, loginClickHandler } = props
+
+  const signUpButtonText = "Sign Up"
+  const loginButtonText = "Login"
+
+  return (
+    <DialogActions>
+      <Button onClick={signUpClickHandler}>{signUpButtonText}</Button>
+      <Button className={classes.loginButton} onClick={loginClickHandler}>
+        {loginButtonText}
+      </Button>
+    </DialogActions>
   )
 }
 

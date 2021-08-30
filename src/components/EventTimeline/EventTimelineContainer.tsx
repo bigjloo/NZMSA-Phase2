@@ -6,7 +6,7 @@ import {
 import { IEvent } from "../../store/eventReducer"
 
 import EventTimeline from "./EventTimeline"
-import CardDialog from "../Dialogs/CardDialog/CardDialog"
+import EventCardDialog from "../Dialogs/EventCardDialog/EventCardDialog"
 
 const EventTimelineContainer = ({ events }: { events: IEvent[] }) => {
   const dispatch = useAppDispatch()
@@ -28,7 +28,7 @@ const EventTimelineContainer = ({ events }: { events: IEvent[] }) => {
   return (
     <>
       <EventTimeline events={events} onCardClickHandler={onCardClickHandler} />
-      <CardDialog
+      <EventCardDialog
         event={eventSelected}
         isCardDialogOpen={isCardDialogOpen}
         cardDialogCloseHandler={cardDialogCloseHandler}

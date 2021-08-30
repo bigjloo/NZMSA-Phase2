@@ -1,7 +1,7 @@
 import { ApolloClient, InMemoryCache, HttpLink } from "@apollo/client"
 import { setContext } from "@apollo/client/link/context"
 
-const isDevelopment = false
+const isDevelopment = true
 
 // Sets frontend and backend url base on isDevelopment
 export const CONFIGURATION = {

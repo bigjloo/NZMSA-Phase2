@@ -16,7 +16,7 @@ export const GITHUB_AUTHORIZE_URL = `https://github.com/login/oauth/authorize?cl
 
 // Loaded after code is return from Github
 // server after authorized by user
-export const GithubLoginProcessor = () => {
+const GithubLoginProcessor = () => {
   const dispatch = useAppDispatch()
   const isAuth = useAppSelector<boolean>((state) => state.auth.isAuth)
 
@@ -24,22 +24,7 @@ export const GithubLoginProcessor = () => {
   const browserURL = useLocation().search
   const code = browserURL.slice(6, browserURL.length) // URL: ../?code=<code>
 
-  // Fetches JWT Token from backend using code from Github
-  const [getToken, { error, loading }] = useMutation(GET_JWT_WITH_GITHUB_CODE, {
-    variables: { code },
-  })
-
-  useEffect(() => {
-    const loginWithGitHubOAuth = async () => {
-      const response = await getToken()
-
-      // Saves token in localStorage and login user
-      const jwtToken = response.data.login.jwt
-      localStorage.setItem("HYD_JWT", jwtToken)
-      dispatch(login())
-    }
-    loginWithGitHubOAuth()
-  }, [getToken, dispatch])
+  const { loading, error } = useGithubCode(code)
 
   if (error) {
     dispatch(
@@ -50,10 +35,30 @@ export const GithubLoginProcessor = () => {
     )
   }
 
-  return (
-    <>
-      {loading && <BackdropContainer loading={loading} />}
-      {isAuth && <Redirect to="/" />}
-    </>
-  )
+  if (loading) return <BackdropContainer loading={loading} />
+
+  return <>{isAuth && <Redirect to="/" />}</>
 }
+
+// Fetches JWT Token from backend using code
+// from Github and logins user
+const useGithubCode = (code: string) => {
+  const dispatch = useAppDispatch()
+  const [getToken, { error, loading }] = useMutation(GET_JWT_WITH_GITHUB_CODE, {
+    variables: { code },
+  })
+
+  useEffect(() => {
+    const loginWithGitHubOAuth = async () => {
+      const response = await getToken()
+      const jwtToken = response.data.login.jwt
+      localStorage.setItem("HYD_JWT", jwtToken)
+      dispatch(login())
+    }
+    loginWithGitHubOAuth()
+  }, [getToken, dispatch])
+
+  return { loading, error }
+}
+
+export default GithubLoginProcessor

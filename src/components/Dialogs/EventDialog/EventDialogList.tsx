@@ -1,32 +1,30 @@
 import List from "@material-ui/core/List"
-import ListItem from "@material-ui/core/ListItem"
-import ListItemText from "@material-ui/core/ListItemText"
 import Divider from "@material-ui/core/Divider"
-import Button from "@material-ui/core/Button"
-
 import { IEvent } from "../../../store/eventReducer"
+import EventDialogListItem from "./EventDialogListItem"
 
-export type EventListProps = {
+export type EventDialogListProps = {
   events: IEvent[]
   onRemoveEvent: (index: number) => void
 }
 
-const EventDialogList = ({ events, onRemoveEvent }: EventListProps) => {
-  return (
-    <List>
-      {events.map((event, index) => (
+const EventDialogList = ({ events, onRemoveEvent }: EventDialogListProps) => {
+  const renderEventDialogListItems = () => {
+    return events.map((event, index) => {
+      return (
         <>
-          <ListItem key={index}>
-            <ListItemText primary={event.name} secondary={event.description} />
-            <Button color="secondary" onClick={() => onRemoveEvent(index)}>
-              X
-            </Button>
-          </ListItem>
+          <EventDialogListItem
+            event={event}
+            index={index}
+            onRemoveEvent={onRemoveEvent}
+          />
           <Divider variant="middle" component="li" key={`d-${index}`} />
         </>
-      ))}
-    </List>
-  )
+      )
+    })
+  }
+
+  return <List>{renderEventDialogListItems()}</List>
 }
 
 export default EventDialogList

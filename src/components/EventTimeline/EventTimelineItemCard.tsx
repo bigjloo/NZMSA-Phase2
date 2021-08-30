@@ -15,6 +15,9 @@ const EventTimelineCard = (props: EventTimelineCardProps) => {
   const classes = EventTimelineStyles()
   const { event, onCardClickHandler } = props
 
+  // const renderCardContent = () => {
+
+  // }
   return (
     <Card className={classes.card} onClick={() => onCardClickHandler(event)}>
       {event.photoURI && (
@@ -26,7 +29,6 @@ const EventTimelineCard = (props: EventTimelineCardProps) => {
           />
         </CardMedia>
       )}
-
       <CardContent className={classes.cardContent}>
         <Typography variant="caption">{event.description}</Typography>
       </CardContent>
