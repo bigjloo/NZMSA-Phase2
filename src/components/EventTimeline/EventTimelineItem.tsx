@@ -9,16 +9,10 @@ import Typography from "@material-ui/core/Typography"
 import { IEvent } from "../../store/eventReducer"
 import EventTimelineItemCard from "./EventTimelineItemCard"
 
-type TimelineEventProps = {
+type EventTimelineItemProps = {
   event: IEvent
-}
-
-type TimelineEventContentProps = TimelineEventProps & {
-  onCardClickHandler: (event: IEvent) => void
-}
-
-type EventTimelineItemProps = TimelineEventContentProps & {
   index: number
+  onCardClickHandler: (event: IEvent) => void
 }
 
 const EventTimelineItem = ({

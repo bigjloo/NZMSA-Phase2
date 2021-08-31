@@ -8,17 +8,17 @@ export type NotificationProps = {
     horizontal: "left" | "center" | "right"
   }
   isNotificationOpen: boolean
-  closeNotificationHandler: () => void
   message: string
   alertType: string
+  closeNotificationHandler: () => void
 }
 
 const Notification = ({
   anchorOrigin,
   isNotificationOpen,
-  closeNotificationHandler,
   message,
   alertType,
+  closeNotificationHandler,
 }: NotificationProps) => {
   return (
     <Snackbar

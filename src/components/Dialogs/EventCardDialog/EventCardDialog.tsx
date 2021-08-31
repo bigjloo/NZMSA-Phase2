@@ -12,12 +12,15 @@ import { IEvent } from "../../../store/eventReducer"
 import CardDialogStyles from "./EventCardDialogStyles"
 
 type EventCardContentProps = {
-  event: IEvent
+  name: string
+  description: string
 }
 
-type EventCardMediaProps = EventCardContentProps
+type EventCardMediaProps = {
+  photoURI: string
+}
 
-export type CardDialogProps = {
+export type EventCardDialogProps = {
   event: IEvent | undefined
   isCardDialogOpen: boolean
   cardDialogCloseHandler: () => void
@@ -27,14 +30,15 @@ const EventCardDialog = ({
   event,
   isCardDialogOpen,
   cardDialogCloseHandler,
-}: CardDialogProps) => {
+}: EventCardDialogProps) => {
   const classes = CardDialogStyles()
+
   const renderEventCard = (event: IEvent) => {
     return (
       <DialogContent className={classes.dialog}>
         <Card className={classes.card}>
-          {event.photoURI && <EventCardMedia event={event} />}
-          <EventCardContent event={event} />
+          {event.photoURI && <EventCardMedia photoURI={event.photoURI} />}
+          <EventCardContent name={event.name} description={event.description} />
           <EventCardActions />
         </Card>
       </DialogContent>
@@ -48,27 +52,23 @@ const EventCardDialog = ({
   )
 }
 
-const EventCardMedia = ({ event }: EventCardMediaProps) => {
+const EventCardMedia = ({ photoURI }: EventCardMediaProps) => {
   const classes = CardDialogStyles()
   return (
     <CardMedia>
-      <img
-        className={classes.cardImage}
-        src={event.photoURI!}
-        alt="card media"
-      />
+      <img className={classes.cardImage} src={photoURI} alt="card media" />
     </CardMedia>
   )
 }
 
-const EventCardContent = ({ event }: EventCardContentProps) => {
+const EventCardContent = ({ name, description }: EventCardContentProps) => {
   return (
     <CardContent>
       <Typography variant="h6" component="h6">
-        {event.name}
+        {name}
       </Typography>
       <Typography variant="body1" component="p">
-        {event.description}
+        {description}
       </Typography>
     </CardContent>
   )
