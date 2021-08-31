@@ -28,8 +28,13 @@ const EventTimelineItem = ({
 }: EventTimelineItemProps) => {
   return (
     <TimelineItem key={index}>
-      <EventTimelineName event={event} />
-      <EventTimelineSeparator />
+      <TimelineOppositeContent>
+        <Typography variant="overline">{event.name}</Typography>
+      </TimelineOppositeContent>
+      <TimelineSeparator>
+        <TimelineDot color="secondary" variant="outlined" />
+        <TimelineConnector />
+      </TimelineSeparator>
       <TimelineContent>
         <EventTimelineItemCard
           event={event}
@@ -37,23 +42,6 @@ const EventTimelineItem = ({
         />
       </TimelineContent>
     </TimelineItem>
-  )
-}
-
-const EventTimelineName = ({ event }: TimelineEventProps) => {
-  return (
-    <TimelineOppositeContent>
-      <Typography variant="overline">{event.name}</Typography>
-    </TimelineOppositeContent>
-  )
-}
-
-const EventTimelineSeparator = () => {
-  return (
-    <TimelineSeparator>
-      <TimelineDot color="secondary" variant="outlined" />
-      <TimelineConnector />
-    </TimelineSeparator>
   )
 }
 
