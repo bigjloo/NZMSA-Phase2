@@ -6,7 +6,7 @@ import ShareDialogContainer from "../../components/Dialogs/ShareDialog/ShareDial
 export type UserProps = {
   events: IEvent[]
 }
-// TODO random moments quote if events is empty
+
 const UserPage = ({ events }: UserProps) => {
   return (
     <>

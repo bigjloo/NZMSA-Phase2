@@ -24,6 +24,10 @@ type EventDialogActionsProps = {
   toggleEventDialogHandler: () => void
 }
 
+type ButtonProps = {
+  clickHandler: () => void
+}
+
 const EventDialogContent = ({
   nameInput,
   descriptionInput,
@@ -95,19 +99,27 @@ const EventDialogActions = ({
   toggleEventDialogHandler,
 }: EventDialogActionsProps) => {
   const classes = EventDialogStyles()
-  const addEventButtonText = "Add Event"
-  const closeEventDialogButtonText = "Close"
 
   return (
     <DialogActions className={classes.dialogActions}>
-      <Button variant="outlined" onClick={onAddEvent}>
-        {addEventButtonText}
-      </Button>
-      <Button onClick={toggleEventDialogHandler}>
-        {closeEventDialogButtonText}
-      </Button>
+      <AddEventButton clickHandler={onAddEvent} />
+      <CloseEventDialogButton clickHandler={toggleEventDialogHandler} />
     </DialogActions>
   )
+}
+
+const AddEventButton = ({ clickHandler }: ButtonProps) => {
+  const addEventButtonText = "Add Event"
+  return (
+    <Button variant="outlined" onClick={clickHandler}>
+      {addEventButtonText}
+    </Button>
+  )
+}
+
+const CloseEventDialogButton = ({ clickHandler }: ButtonProps) => {
+  const closeEventDialogButtonText = "Close"
+  return <Button onClick={clickHandler}>{closeEventDialogButtonText}</Button>
 }
 
 export default EventDialogContent

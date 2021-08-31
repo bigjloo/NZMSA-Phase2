@@ -44,7 +44,6 @@ const EventDialogContainer = () => {
   // convert and upload to Azure Storage Blob
   const onAddEvent = async () => {
     let photoURI = null
-
     if (cardImage) {
       photoURI = await uploadFileToAzure({
         token: token!,
@@ -52,16 +51,16 @@ const EventDialogContainer = () => {
         cardImage,
       })
     }
-
     const eventPayload = {
       name: nameInput,
       description: descriptionInput,
       photoURI,
     }
-
     dispatch(addEvent(eventPayload))
+
     dispatch(setCardImage(undefined))
     dispatch(resetInputFields())
+
     dispatch(
       openNotification({
         message: "Event succesfully added!",

@@ -1,9 +1,9 @@
 import Typography from "@material-ui/core/Typography"
 import Box from "@material-ui/core/Box"
-import EventTimelineContainer from "../../components/EventTimeline/EventTimelineContainer"
 import Container from "@material-ui/core/Container"
-// import LoginDialogContainer from "../../components/Dialogs/LoginDialog/LoginDialogContainer"
+
 import { IEvent } from "../../store/eventReducer"
+import EventTimelineContainer from "../../components/EventTimeline/EventTimelineContainer"
 import SharedContentStyles from "./SharedContentStyles"
 
 export type SharedContentProps = {
@@ -26,7 +26,6 @@ const SharedContentPage = ({
     <Container>
       <SharedContentPageHeader title={publisherName} subtitle={publishDate} />
       <EventTimelineContainer events={events} />
-      {/* <LoginDialogContainer /> */}
     </Container>
   )
 }

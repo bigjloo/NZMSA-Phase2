@@ -35,7 +35,7 @@ export const uploadFileToAzure = async ({
     await userContainerClient.createIfNotExists({
       access: "container",
     })
-    createBlobInContainer(userContainerClient, file)
+    await createBlobInContainer(userContainerClient, file)
   } catch (err) {
     console.error(err)
     return
@@ -64,11 +64,11 @@ const getContainerClientFromAzure = (
 }
 
 // Upload file to Blob in user container
-const createBlobInContainer = (
+const createBlobInContainer = async (
   containerClient: ContainerClient,
   file: File
 ) => {
   const blobClient = containerClient.getBlockBlobClient(file.name)
   const options = { blobHTTPHeaders: { blobContentType: file.type } }
-  blobClient.uploadData(file, options)
+  await blobClient.uploadData(file, options)
 }

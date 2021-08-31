@@ -9,17 +9,17 @@ const OnboardPage = () => {
   return (
     <>
       <Box className={classes.container}>
-        <OnboardPageHeading />
-        <OnboardPageImage />
+        <Heading />
+        <Image />
       </Box>
       <LoginDialogContainer />
     </>
   )
 }
 
-const OnboardPageHeading = () => {
+const Heading = () => {
   const classes = OnboardStyles()
-  const subtitle = "Never a moment too dull to share"
+  const subtitle = "Never a moment too dull"
   return (
     <Box>
       <Typography variant="h3" component="h3">
@@ -38,7 +38,7 @@ const OnboardPageHeading = () => {
   )
 }
 
-const OnboardPageImage = () => {
+const Image = () => {
   const classes = OnboardStyles()
   return (
     <Box className={classes.img}>

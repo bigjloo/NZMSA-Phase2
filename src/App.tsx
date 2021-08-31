@@ -1,4 +1,3 @@
-import { useMemo } from "react"
 import { Route, Switch } from "react-router-dom"
 
 import { useQuery } from "@apollo/client"
@@ -25,9 +24,7 @@ function App() {
   const isDark = useAppSelector<boolean>((state) => state.theme.isDarkTheme)
 
   // Sets dark/light theme
-  const theme = useMemo(() => {
-    return isDark ? darkTheme : lightTheme
-  }, [isDark])
+  const theme = isDark ? darkTheme : lightTheme
 
   // Checks if token exist in localStorage
   // and verifies token with backend
@@ -48,12 +45,8 @@ function App() {
           <Route exact path="/">
             {isAuth ? <UserPageContainer /> : <OnboardPage />}
           </Route>
-          <Route path="/signin/callback/">
-            <GithubLoginProcessor />
-          </Route>
-          <Route path="/share/:publishKey">
-            <SharedContentPage />
-          </Route>
+          <Route path="/signin/callback/" component={GithubLoginProcessor} />
+          <Route path="/share/:publishKey" component={SharedContentPage} />
         </Switch>
       </Layout>
     </ThemeProvider>
