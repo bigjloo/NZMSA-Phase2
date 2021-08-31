@@ -25,16 +25,7 @@ const Header = ({ avatarURI, githubName, logoutHandler }: HeaderProps) => {
       alignItems="center"
       justifyContent="space-between"
     >
-      <Grid
-        container
-        alignItems="center"
-        item
-        direction="row"
-        justifyContent="flex-start"
-        xs={8}
-      >
-        <UserDetails avatarURI={avatarURI} githubName={githubName} />
-      </Grid>
+      <UserDetails avatarURI={avatarURI} githubName={githubName} />
       <Grid item xs={4}>
         <LogoutButton logoutHandler={logoutHandler} />
       </Grid>
@@ -44,13 +35,14 @@ const Header = ({ avatarURI, githubName, logoutHandler }: HeaderProps) => {
 
 const LogoutButton = ({ logoutHandler }: LogoutButtonProps) => {
   const classes = HeaderStyles()
+  const logoutButtonText = "Logout"
   return (
     <Button
       className={classes.logoutButton}
       onClick={logoutHandler}
       variant="outlined"
     >
-      Logout
+      {logoutButtonText}
     </Button>
   )
 }
@@ -59,14 +51,21 @@ const UserDetails = (props: UserDetailsProps) => {
   const classes = HeaderStyles()
   const { avatarURI, githubName } = props
   return (
-    <>
+    <Grid
+      container
+      alignItems="center"
+      item
+      direction="row"
+      justifyContent="flex-start"
+      xs={8}
+    >
       <Grid item xs={2}>
         <Avatar className={classes.large} alt="user avatar" src={avatarURI} />
       </Grid>
       <Grid className={classes.githubName} item xs={2}>
         <Typography>{githubName}</Typography>
       </Grid>
-    </>
+    </Grid>
   )
 }
 

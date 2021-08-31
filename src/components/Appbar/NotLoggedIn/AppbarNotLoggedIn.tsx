@@ -1,23 +1,37 @@
-import { Toolbar, AppBar, IconButton } from "@material-ui/core"
+//import { Toolbar, AppBar, IconButton } from "@material-ui/core"
+import Toolbar from "@material-ui/core/Toolbar"
+import AppBar from "@material-ui/core/AppBar"
+import IconButton from "@material-ui/core/IconButton"
+
 import { useAppDispatch } from "../../../store/storeHooks"
 import { toggleLoginDialog } from "../../../store/dialogReducer"
 import AppbarNotLoggedInStyles from "./AppbarNotLoggedInStyles"
 
+type AppButtonProps = {
+  clickHandler: () => void
+}
+
 const AppbarNotLoggedIn = () => {
   const classes = AppbarNotLoggedInStyles()
   const dispatch = useAppDispatch()
-
-  // Opens Login Dialog
   const openLoginDialog = () => dispatch(toggleLoginDialog())
 
   return (
     <AppBar color="inherit" className={classes.mainAppbar}>
       <Toolbar>
-        <IconButton className={classes.loginButton} onClick={openLoginDialog}>
-          LOGIN
-        </IconButton>
+        <LoginButton clickHandler={openLoginDialog} />
       </Toolbar>
     </AppBar>
+  )
+}
+
+const LoginButton = ({ clickHandler }: AppButtonProps) => {
+  const classes = AppbarNotLoggedInStyles()
+  const loginButtonText = "LOGIN"
+  return (
+    <IconButton className={classes.loginButton} onClick={clickHandler}>
+      {loginButtonText}
+    </IconButton>
   )
 }
 

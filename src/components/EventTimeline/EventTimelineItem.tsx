@@ -9,23 +9,27 @@ import Typography from "@material-ui/core/Typography"
 import { IEvent } from "../../store/eventReducer"
 import EventTimelineItemCard from "./EventTimelineItemCard"
 
-type EventTimelineItemProps = {
+type TimelineEventProps = {
   event: IEvent
-  index: number
+}
+
+type TimelineEventContentProps = TimelineEventProps & {
   onCardClickHandler: (event: IEvent) => void
 }
 
-const EventTimelineItem = (props: EventTimelineItemProps) => {
-  const { event, index, onCardClickHandler } = props
+type EventTimelineItemProps = TimelineEventContentProps & {
+  index: number
+}
+
+const EventTimelineItem = ({
+  event,
+  index,
+  onCardClickHandler,
+}: EventTimelineItemProps) => {
   return (
     <TimelineItem key={index}>
-      <TimelineOppositeContent>
-        <Typography variant="overline">{event.name}</Typography>
-      </TimelineOppositeContent>
-      <TimelineSeparator>
-        <TimelineDot color="secondary" variant="outlined" />
-        <TimelineConnector />
-      </TimelineSeparator>
+      <EventTimelineName event={event} />
+      <EventTimelineSeparator />
       <TimelineContent>
         <EventTimelineItemCard
           event={event}
@@ -33,6 +37,23 @@ const EventTimelineItem = (props: EventTimelineItemProps) => {
         />
       </TimelineContent>
     </TimelineItem>
+  )
+}
+
+const EventTimelineName = ({ event }: TimelineEventProps) => {
+  return (
+    <TimelineOppositeContent>
+      <Typography variant="overline">{event.name}</Typography>
+    </TimelineOppositeContent>
+  )
+}
+
+const EventTimelineSeparator = () => {
+  return (
+    <TimelineSeparator>
+      <TimelineDot color="secondary" variant="outlined" />
+      <TimelineConnector />
+    </TimelineSeparator>
   )
 }
 

@@ -3,7 +3,7 @@ import { makeStyles, createStyles } from "@material-ui/core/styles"
 const OnboardStyles = makeStyles(() => createStyles({
     container: {
         height: "calc(100vh - 6rem)",
-        padding: "1rem",
+        padding: "3rem",
     },
 
     image: {

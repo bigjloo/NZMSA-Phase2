@@ -15,6 +15,8 @@ type EventCardContentProps = {
   event: IEvent
 }
 
+type EventCardMediaProps = EventCardContentProps
+
 export type CardDialogProps = {
   event: IEvent | undefined
   isCardDialogOpen: boolean
@@ -31,15 +33,7 @@ const EventCardDialog = ({
     return (
       <DialogContent className={classes.dialog}>
         <Card className={classes.card}>
-          {event.photoURI && (
-            <CardMedia>
-              <img
-                className={classes.cardImage}
-                src={event.photoURI}
-                alt="card media"
-              />
-            </CardMedia>
-          )}
+          {event.photoURI && <EventCardMedia event={event} />}
           <EventCardContent event={event} />
           <EventCardActions />
         </Card>
@@ -51,6 +45,19 @@ const EventCardDialog = ({
     <Dialog open={isCardDialogOpen} onClose={cardDialogCloseHandler}>
       {event && renderEventCard(event)}
     </Dialog>
+  )
+}
+
+const EventCardMedia = ({ event }: EventCardMediaProps) => {
+  const classes = CardDialogStyles()
+  return (
+    <CardMedia>
+      <img
+        className={classes.cardImage}
+        src={event.photoURI!}
+        alt="card media"
+      />
+    </CardMedia>
   )
 }
 
