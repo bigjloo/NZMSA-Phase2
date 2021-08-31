@@ -9,15 +9,15 @@ const OnboardPage = () => {
   return (
     <>
       <Box className={classes.container}>
-        <Heading />
-        <Image />
+        <PageHeading />
+        <PageImage />
       </Box>
       <LoginDialogContainer />
     </>
   )
 }
 
-const Heading = () => {
+const PageHeading = () => {
   const classes = OnboardStyles()
   const subtitle = "Never a moment too dull"
   return (
@@ -38,7 +38,7 @@ const Heading = () => {
   )
 }
 
-const Image = () => {
+const PageImage = () => {
   const classes = OnboardStyles()
   return (
     <Box className={classes.img}>

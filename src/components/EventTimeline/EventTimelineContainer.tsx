@@ -8,9 +8,12 @@ import { IEvent } from "../../store/eventReducer"
 import EventTimeline from "./EventTimeline"
 import EventCardDialog from "../Dialogs/EventCardDialog/EventCardDialog"
 
-const EventTimelineContainer = ({ events }: { events: IEvent[] }) => {
-  const dispatch = useAppDispatch()
+type EventTimelineContainerProps = {
+  events: IEvent[]
+}
 
+const EventTimelineContainer = ({ events }: EventTimelineContainerProps) => {
+  const dispatch = useAppDispatch()
   const isCardDialogOpen = useAppSelector<boolean>(
     (state) => state.card.isCardDialogOpen
   )

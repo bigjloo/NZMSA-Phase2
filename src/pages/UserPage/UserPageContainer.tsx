@@ -29,13 +29,13 @@ const UserPageContainer = () => {
   return <UserPage events={events} />
 }
 
+// Fetches user data and sets to local state
 const useUserQuery = () => {
   const dispatch = useAppDispatch()
   const { data: userData, loading, error } = useQuery(GET_USER_DATA)
 
   useEffect(() => {
     if (userData) {
-      // Sets fetched user data to local User state
       const userDataPayload = {
         githubName: userData.userData.github,
         githubImageURI: userData.userData.imageURI,
