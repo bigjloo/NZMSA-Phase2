@@ -11,9 +11,11 @@ export type EventTimelineCardProps = {
   onCardClickHandler: (event: IEvent) => void
 }
 
-const EventTimelineItemCard = (props: EventTimelineCardProps) => {
+const EventTimelineItemCard = ({
+  event,
+  onCardClickHandler,
+}: EventTimelineCardProps) => {
   const classes = EventTimelineStyles()
-  const { event, onCardClickHandler } = props
   return (
     <Card className={classes.card} onClick={() => onCardClickHandler(event)}>
       {event.photoURI && (

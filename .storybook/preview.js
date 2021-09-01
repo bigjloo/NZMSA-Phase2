@@ -40,7 +40,7 @@ export const parameters = {
   },
   options: {
     storySort: {
-      order: ['Introduction','Components', [ 'Header', 'AppBar','Dark Mode Toggler', 'Dialogs', 'Button', 'Backdrop', 'Notification', 'Event Timeline']]
+      order: ['Introduction','Components', [ 'Button','Dark Mode Toggler','Notification',  'Backdrop','Header', 'AppBar', 'Dialogs',   'Event Timeline']]
     }
   },
   viewport: {

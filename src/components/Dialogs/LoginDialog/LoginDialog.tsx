@@ -59,13 +59,18 @@ const GithubLoginButton = ({ gitHubClickHandler }: GithubLoginButtonProps) => {
 }
 
 const LoginForm = () => {
-  const loginLabel = "Login"
-  const passwordLabel = "Password"
+  const firstTextFieldLabel = "Login"
+  const secondTextFieldLabel = "Password"
   return (
     <>
-      <TextField label={loginLabel} type="text" color="secondary" fullWidth />
       <TextField
-        label={passwordLabel}
+        label={firstTextFieldLabel}
+        type="text"
+        color="secondary"
+        fullWidth
+      />
+      <TextField
+        label={secondTextFieldLabel}
         type="password"
         color="secondary"
         fullWidth
@@ -74,18 +79,20 @@ const LoginForm = () => {
   )
 }
 
-const LoginDialogActions = (props: LoginDialogActionsProps) => {
+const LoginDialogActions = ({
+  signUpClickHandler,
+  loginClickHandler,
+}: LoginDialogActionsProps) => {
   const classes = LoginDialogStyles()
-  const { signUpClickHandler, loginClickHandler } = props
 
-  const signUpButtonText = "Sign Up"
-  const loginButtonText = "Login"
+  const firstButtonText = "Sign Up"
+  const secondButtonText = "Login"
 
   return (
     <DialogActions>
-      <Button onClick={signUpClickHandler}>{signUpButtonText}</Button>
+      <Button onClick={signUpClickHandler}>{firstButtonText}</Button>
       <Button className={classes.loginButton} onClick={loginClickHandler}>
-        {loginButtonText}
+        {secondButtonText}
       </Button>
     </DialogActions>
   )

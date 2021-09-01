@@ -6,11 +6,11 @@ import AppbarLoggedInStyles from "./AppbarLoggedInStyles"
 import { toggleEventDialog } from "../../../store/dialogReducer"
 
 const EventButtonContainer = () => {
-  const classes = AppbarLoggedInStyles()
+  const fabButton = AppbarLoggedInStyles().fabButton
   const dispatch = useAppDispatch()
   const onOpenEventDialog = () => dispatch(toggleEventDialog())
   return (
-    <Fab className={classes.fabButton}>
+    <Fab className={fabButton}>
       <AddIcon onClick={onOpenEventDialog} fontSize="large" />
     </Fab>
   )

@@ -7,22 +7,20 @@ type EventTimelineProps = {
   onCardClickHandler: (event: IEvent) => void
 }
 
-const EventTimeline = (props: EventTimelineProps) => {
-  const { events, onCardClickHandler } = props
-
-  const renderEventTimelineItems = () => {
-    return events.map((event, index) => {
-      return (
-        <EventTimelineItem
-          event={event}
-          index={index}
-          onCardClickHandler={onCardClickHandler}
-        />
-      )
-    })
-  }
-
-  return <Timeline align="alternate">{renderEventTimelineItems()}</Timeline>
+const EventTimeline = ({ events, onCardClickHandler }: EventTimelineProps) => {
+  return (
+    <Timeline align="alternate">
+      {events.map((event, index) => {
+        return (
+          <EventTimelineItem
+            event={event}
+            index={index}
+            onCardClickHandler={onCardClickHandler}
+          />
+        )
+      })}
+    </Timeline>
+  )
 }
 
 export default EventTimeline

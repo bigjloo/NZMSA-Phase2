@@ -8,7 +8,7 @@ import { setSharedContentDetails } from "../../store/sharedReducer"
 import { setEvents, IEvent } from "../../store/eventReducer"
 import { openNotification } from "../../store/notificationReducer"
 
-import SharedContent from "./SharedContentPage"
+import SharedContentPage from "./SharedContentPage"
 import BackdropContainer from "../../components/Backdrop/BackdropContainer"
 
 type SharedContentParams = {
@@ -39,7 +39,7 @@ const SharedContentPageContainer = () => {
   if (loading) return <BackdropContainer loading={loading} />
 
   return (
-    <SharedContent
+    <SharedContentPage
       publisherName={publisherName}
       publishDate={publishDate.slice(0, 10)}
       events={events}
@@ -47,7 +47,8 @@ const SharedContentPageContainer = () => {
   )
 }
 
-// Retrieves events from backend using publish key
+// Retrieves events from backend using
+// publish key and sets to local state
 const useSharedContentQuery = (publishKey: string) => {
   const dispatch = useAppDispatch()
   const { data: sharedContentData, loading, error } = useQuery(
@@ -57,15 +58,13 @@ const useSharedContentQuery = (publishKey: string) => {
     }
   )
 
-  // If sharedContentData is returned, set publisher name
-  // and date + set fetched events to local events state
   useEffect(() => {
     if (sharedContentData) {
-      const shareContentPayload = {
+      const sharedContentPayload = {
         publisher: sharedContentData.day.user.name,
         date: sharedContentData.day.date,
       }
-      dispatch(setSharedContentDetails(shareContentPayload))
+      dispatch(setSharedContentDetails(sharedContentPayload))
       dispatch(setEvents(sharedContentData.day.events))
     }
   }, [sharedContentData, dispatch])

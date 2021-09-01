@@ -20,10 +20,12 @@ const EventTimelineItem = ({
   index,
   onCardClickHandler,
 }: EventTimelineItemProps) => {
+  const eventName = event.name
+
   return (
     <TimelineItem key={index}>
       <TimelineOppositeContent>
-        <Typography variant="overline">{event.name}</Typography>
+        <Typography variant="overline">{eventName}</Typography>
       </TimelineOppositeContent>
       <TimelineSeparator>
         <TimelineDot color="secondary" variant="outlined" />

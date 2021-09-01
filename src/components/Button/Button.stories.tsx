@@ -1,13 +1,15 @@
 import { Meta, Story } from "@storybook/react"
 import Button from "@material-ui/core/Button"
 import { ReactNode } from "react"
-// import { decorators } from "../../../.storybook/preview"
+import FileCopyIcon from "@material-ui/icons/FileCopy"
+import FavoriteIcon from "@material-ui/icons/Favorite"
 
 type ButtonProps = {
   variant: "outlined" | "contained" | "text"
   children: ReactNode
   color: "default" | "inherit" | "primary" | "secondary"
   className?: string
+  startIcon?: ReactNode
 }
 
 export default {
@@ -53,4 +55,17 @@ AppbarButton.storyName = "Appbar Buttons"
 AppbarButton.args = {
   variant: "text",
   children: "share/save",
+}
+
+export const CopyButton = Template.bind({})
+CopyButton.args = {
+  variant: "text",
+  startIcon: <FileCopyIcon />,
+  children: "Copy",
+}
+
+export const LikeButton = Template.bind({})
+LikeButton.args = {
+  startIcon: <FavoriteIcon />,
+  children: "like",
 }
