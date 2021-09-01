@@ -22,9 +22,9 @@ const GithubLoginProcessor = () => {
 
   // Extract returned Github code from browser path URL
   const browserURL = useLocation().search
-  const code = browserURL.slice(6, browserURL.length) // URL: ../?code=<code>
+  const githubCode = browserURL.slice(6, browserURL.length) // browserURL: .../?code=<code>
 
-  const { loading, error } = useGithubCode(code)
+  const { loading, error } = useGithubCode(githubCode)
 
   if (error) {
     dispatch(
@@ -40,23 +40,26 @@ const GithubLoginProcessor = () => {
   return <>{isAuth && <Redirect to="/" />}</>
 }
 
-// Fetches JWT Token from backend using code
-// from Github and logins user
+// Fetches JWT Token from backend using
+// code from Github and logins user
 const useGithubCode = (code: string) => {
   const dispatch = useAppDispatch()
-  const [getToken, { error, loading }] = useMutation(GET_JWT_WITH_GITHUB_CODE, {
-    variables: { code },
-  })
+  const [getJWTToken, { error, loading }] = useMutation(
+    GET_JWT_WITH_GITHUB_CODE,
+    {
+      variables: { code },
+    }
+  )
 
   useEffect(() => {
     const loginWithGitHubOAuth = async () => {
-      const response = await getToken()
+      const response = await getJWTToken()
       const jwtToken = response.data.login.jwt
       localStorage.setItem("HYD_JWT", jwtToken)
       dispatch(login())
     }
     loginWithGitHubOAuth()
-  }, [getToken, dispatch])
+  }, [getJWTToken, dispatch])
 
   return { loading, error }
 }

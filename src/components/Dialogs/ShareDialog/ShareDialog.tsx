@@ -5,6 +5,7 @@ import DialogContentText from "@material-ui/core/DialogContentText"
 import Button from "@material-ui/core/Button"
 import Typography from "@material-ui/core/Typography"
 import ShareDialogStyles from "./ShareDialogStyles"
+import FileCopyIcon from "@material-ui/icons/FileCopy"
 
 type ShareDialogActionProps = {
   onCopyToClipboard: () => void
@@ -39,11 +40,11 @@ const ShareDialog = ({
 }
 
 const ShareDialogActions = ({ onCopyToClipboard }: ShareDialogActionProps) => {
-  const copyButtonText = "Copy"
+  const buttonText = "Copy"
   return (
     <DialogActions>
-      <Button variant="outlined" onClick={onCopyToClipboard}>
-        {copyButtonText}
+      <Button onClick={onCopyToClipboard} startIcon={<FileCopyIcon />}>
+        {buttonText}
       </Button>
     </DialogActions>
   )

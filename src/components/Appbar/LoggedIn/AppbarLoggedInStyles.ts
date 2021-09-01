@@ -21,6 +21,7 @@ const AppbarLoggedInStyles = makeStyles((theme: Theme) =>
 
     iconButton: {
       padding: "0 2rem",
+      fontSize: "1.25rem"
     },
 }))
 

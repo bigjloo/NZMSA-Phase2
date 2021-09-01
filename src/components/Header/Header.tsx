@@ -26,30 +26,29 @@ const Header = ({ avatarURI, githubName, logoutHandler }: HeaderProps) => {
       justifyContent="space-between"
     >
       <UserDetails avatarURI={avatarURI} githubName={githubName} />
-      <Grid item xs={4}>
-        <LogoutButton logoutHandler={logoutHandler} />
-      </Grid>
+      <LogoutButton logoutHandler={logoutHandler} />
     </Grid>
   )
 }
 
 const LogoutButton = ({ logoutHandler }: LogoutButtonProps) => {
   const classes = HeaderStyles()
-  const logoutButtonText = "Logout"
+  const buttonText = "Logout"
   return (
-    <Button
-      className={classes.logoutButton}
-      onClick={logoutHandler}
-      variant="outlined"
-    >
-      {logoutButtonText}
-    </Button>
+    <Grid item xs={4}>
+      <Button
+        className={classes.logoutButton}
+        onClick={logoutHandler}
+        variant="outlined"
+      >
+        {buttonText}
+      </Button>
+    </Grid>
   )
 }
 
-const UserDetails = (props: UserDetailsProps) => {
+const UserDetails = ({ avatarURI, githubName }: UserDetailsProps) => {
   const classes = HeaderStyles()
-  const { avatarURI, githubName } = props
   return (
     <Grid
       container

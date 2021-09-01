@@ -30,9 +30,11 @@ const SharedContentPage = ({
   )
 }
 
-const SharedContentPageHeader = (props: SharedContentHeaderProps) => {
+const SharedContentPageHeader = ({
+  title,
+  subtitle,
+}: SharedContentHeaderProps) => {
   const classes = SharedContentStyles()
-  const { title, subtitle } = props
   return (
     <Box className={classes.header} component="div">
       <Typography variant="h4" component="h4" gutterBottom>

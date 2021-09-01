@@ -7,27 +7,28 @@ import { IEvent } from "../../store/eventReducer"
 import EventTimelineStyles from "./EventTimelineStyles"
 
 export type EventTimelineCardProps = {
-  // event: IEvent
-  photoURI?: string
-  eventDescription: string
+  event: IEvent
   onCardClickHandler: (event: IEvent) => void
 }
 
 const EventTimelineItemCard = ({
-  photoURI,
-  eventDescription,
+  event,
   onCardClickHandler,
 }: EventTimelineCardProps) => {
   const classes = EventTimelineStyles()
   return (
     <Card className={classes.card} onClick={() => onCardClickHandler(event)}>
-      {photoURI && (
+      {event.photoURI && (
         <CardMedia>
-          <img src={photoURI} alt={event.name} className={classes.cardImage} />
+          <img
+            src={event.photoURI}
+            alt={event.name}
+            className={classes.cardImage}
+          />
         </CardMedia>
       )}
       <CardContent className={classes.cardContent}>
-        <Typography variant="caption">{eventDescription}</Typography>
+        <Typography variant="caption">{event.description}</Typography>
       </CardContent>
     </Card>
   )

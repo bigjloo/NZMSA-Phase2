@@ -29,7 +29,8 @@ const UserPageContainer = () => {
   return <UserPage events={events} />
 }
 
-// Fetches user data and sets to local state
+// Fetches user data and sets to local state and sets
+// today's events to local Events state if exist
 const useUserQuery = () => {
   const dispatch = useAppDispatch()
   const { data: userData, loading, error } = useQuery(GET_USER_DATA)
@@ -43,7 +44,6 @@ const useUserQuery = () => {
       }
       dispatch(setUserData(userDataPayload))
 
-      // Sets fetched events to local Events state if exist
       userData.today && dispatch(setEvents(userData.today.events))
     }
   }, [userData, dispatch])

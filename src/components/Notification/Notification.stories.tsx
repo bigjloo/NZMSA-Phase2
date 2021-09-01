@@ -7,16 +7,16 @@ export default {
 
 const Template: Story<NotificationProps> = (args) => <Notification {...args} />
 
-export const AddEvent = Template.bind({})
-AddEvent.args = {
+export const Success = Template.bind({})
+Success.args = {
   anchorOrigin: { vertical: "top", horizontal: "center" },
   isNotificationOpen: true,
   message: "Event Successfully Added!",
   alertType: "success",
 }
 
-export const CopyToClipboard = Template.bind({})
-CopyToClipboard.args = {
+export const Info = Template.bind({})
+Info.args = {
   anchorOrigin: { vertical: "top", horizontal: "center" },
   isNotificationOpen: true,
   message: "Copied to clipboard!",

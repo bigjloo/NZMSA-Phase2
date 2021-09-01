@@ -14,6 +14,7 @@ import { darkTheme, lightTheme } from "./theme"
 
 import SharedContentPage from "./pages/SharedContentPage/SharedContentPageContainer"
 import OnboardPage from "./pages/OnboardPage/OnboardPage"
+import { useMemo } from "react"
 import Layout from "./components/Layout/Layout"
 import UserPageContainer from "./pages/UserPage/UserPageContainer"
 
@@ -24,7 +25,7 @@ function App() {
   const isDark = useAppSelector<boolean>((state) => state.theme.isDarkTheme)
 
   // Sets dark/light theme
-  const theme = isDark ? darkTheme : lightTheme
+  const theme = useMemo(() => (isDark ? darkTheme : lightTheme), [])
 
   // Checks if token exist in localStorage
   // and verifies token with backend
