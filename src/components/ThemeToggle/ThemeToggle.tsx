@@ -7,7 +7,6 @@ import { useAppDispatch } from "../../store/storeHooks"
 import { toggleTheme } from "../../store/themeReducer"
 
 // Credits to https://www.kindacode.com/article/react-material-ui-create-dark-light-theme-toggle/
-
 export type ThemeToggleProps = {
   isDark: boolean
 }

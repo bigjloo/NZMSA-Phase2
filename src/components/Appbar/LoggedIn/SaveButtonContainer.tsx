@@ -3,7 +3,7 @@ import IconButton from "@material-ui/core/IconButton"
 import { useAppDispatch } from "../../../store/storeHooks"
 import { openNotification } from "../../../store/notificationReducer"
 import AppbarLoggedInStyles from "./AppbarLoggedInStyles"
-import { useSaveEvents } from "./hooks"
+import useSaveEvents from "../../../utils/hooks/useSaveEvents"
 
 type AppButtonProps = {
   clickHandler: () => void

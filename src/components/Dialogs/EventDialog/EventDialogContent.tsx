@@ -9,20 +9,22 @@ import TextField from "@material-ui/core/TextField"
 import CameraContainer from "../../MediaCapture/CameraContainer"
 import EventDialogStyles from "./EventDialogStyles"
 
-export type EventDialogContentProps = EventDialogFormProps &
-  EventDialogActionsProps
-
-type EventDialogFormProps = {
+export type EventDialogContentProps = {
   nameInput: string
   descriptionInput: string
   onNameInputChange: (event: ChangeEvent<HTMLInputElement>) => void
   onDescriptionInputChange: (event: ChangeEvent<HTMLInputElement>) => void
-}
-
-type EventDialogActionsProps = {
   onAddEvent: () => void
   toggleEventDialogHandler: () => void
 }
+
+type EventDialogFormFieldsProps = Pick<
+  EventDialogContentProps,
+  | "nameInput"
+  | "descriptionInput"
+  | "onNameInputChange"
+  | "onDescriptionInputChange"
+>
 
 type ButtonProps = {
   clickHandler: () => void
@@ -41,34 +43,32 @@ const EventDialogContent = ({
   return (
     <DialogContent className={classes.dialogContent}>
       <EventDialogTitle />
-      <EventDialogForm
+      <EventDialogFormFields
         nameInput={nameInput}
         descriptionInput={descriptionInput}
         onNameInputChange={onNameInputChange}
         onDescriptionInputChange={onDescriptionInputChange}
       />
       <CameraContainer />
-      <EventDialogActions
-        onAddEvent={onAddEvent}
-        toggleEventDialogHandler={toggleEventDialogHandler}
-      />
+      <DialogActions className={classes.dialogActions}>
+        <AddEventButton clickHandler={onAddEvent} />
+        <CloseEventDialogButton clickHandler={toggleEventDialogHandler} />
+      </DialogActions>
     </DialogContent>
   )
 }
 
 const EventDialogTitle = () => {
   const classes = EventDialogStyles()
-  const title = "Add Event"
-
-  return <DialogTitle className={classes.title}>{title}</DialogTitle>
+  return <DialogTitle children="Add Event" className={classes.title} />
 }
 
-const EventDialogForm = ({
+const EventDialogFormFields = ({
   nameInput,
   descriptionInput,
   onNameInputChange,
   onDescriptionInputChange,
-}: EventDialogFormProps) => {
+}: EventDialogFormFieldsProps) => {
   const eventNameLabel = "Event Name"
   const eventDescriptionLabel = "Event Description"
 
@@ -77,49 +77,31 @@ const EventDialogForm = ({
       <TextField
         value={nameInput}
         label={eventNameLabel}
-        autoFocus
         type="text"
-        fullWidth
         color="secondary"
         onChange={onNameInputChange}
+        fullWidth
       />
       <TextField
         value={descriptionInput}
         label={eventDescriptionLabel}
-        fullWidth
+        type="text"
         color="secondary"
         onChange={onDescriptionInputChange}
+        fullWidth
       />
     </>
   )
 }
 
-const EventDialogActions = ({
-  onAddEvent,
-  toggleEventDialogHandler,
-}: EventDialogActionsProps) => {
-  const classes = EventDialogStyles()
-
-  return (
-    <DialogActions className={classes.dialogActions}>
-      <AddEventButton clickHandler={onAddEvent} />
-      <CloseEventDialogButton clickHandler={toggleEventDialogHandler} />
-    </DialogActions>
-  )
-}
-
 const AddEventButton = ({ clickHandler }: ButtonProps) => {
-  const addEventButtonText = "Add Event"
   return (
-    <Button variant="outlined" onClick={clickHandler}>
-      {addEventButtonText}
-    </Button>
+    <Button children="Add Event" variant="outlined" onClick={clickHandler} />
   )
 }
 
 const CloseEventDialogButton = ({ clickHandler }: ButtonProps) => {
-  const closeEventDialogButtonText = "Close"
-  return <Button onClick={clickHandler}>{closeEventDialogButtonText}</Button>
+  return <Button children="Close" onClick={clickHandler} />
 }
 
 export default EventDialogContent

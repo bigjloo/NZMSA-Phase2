@@ -25,7 +25,7 @@ function App() {
   const isDark = useAppSelector<boolean>((state) => state.theme.isDarkTheme)
 
   // Sets dark/light theme
-  const theme = useMemo(() => (isDark ? darkTheme : lightTheme), [])
+  const theme = useMemo(() => (isDark ? darkTheme : lightTheme), [isDark])
 
   // Checks if token exist in localStorage
   // and verifies token with backend

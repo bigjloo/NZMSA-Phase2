@@ -7,18 +7,16 @@ import Typography from "@material-ui/core/Typography"
 import ShareDialogStyles from "./ShareDialogStyles"
 import FileCopyIcon from "@material-ui/icons/FileCopy"
 
-type ShareDialogActionProps = {
-  onCopyToClipboard: () => void
-}
-
-type ShareDialogTextProps = ShareDialogActionProps & {
+export type ShareDialogProps = {
   publishURL: string
-}
-
-export type ShareDialogProps = ShareDialogTextProps & {
   isShareDialogOpen: boolean
+  onCopyToClipboard: () => void
   toggleHandler: () => void
 }
+
+type CopyButtonProps = Pick<ShareDialogProps, "onCopyToClipboard">
+
+type ShareableURLProps = Pick<ShareDialogProps, "publishURL">
 
 const ShareDialog = ({
   publishURL,
@@ -26,39 +24,32 @@ const ShareDialog = ({
   onCopyToClipboard,
   toggleHandler,
 }: ShareDialogProps) => {
+  const classes = ShareDialogStyles()
   return (
     <Dialog open={isShareDialogOpen} onClose={toggleHandler}>
       <DialogContent>
-        <ShareDialogText
-          publishURL={publishURL}
-          onCopyToClipboard={onCopyToClipboard}
-        />
-        <ShareDialogActions onCopyToClipboard={onCopyToClipboard} />
+        <DialogContentText className={classes.dialogContentText}>
+          <ShareableURL publishURL={publishURL} />
+        </DialogContentText>
+        <DialogActions>
+          <CopyButton onCopyToClipboard={onCopyToClipboard} />
+        </DialogActions>
       </DialogContent>
     </Dialog>
   )
 }
 
-const ShareDialogActions = ({ onCopyToClipboard }: ShareDialogActionProps) => {
-  const buttonText = "Copy"
-  return (
-    <DialogActions>
-      <Button onClick={onCopyToClipboard} startIcon={<FileCopyIcon />}>
-        {buttonText}
-      </Button>
-    </DialogActions>
-  )
+const ShareableURL = ({ publishURL }: ShareableURLProps) => {
+  return <Typography>{publishURL}</Typography>
 }
 
-const ShareDialogText = ({
-  publishURL,
-  onCopyToClipboard,
-}: ShareDialogTextProps) => {
-  const classes = ShareDialogStyles()
+const CopyButton = ({ onCopyToClipboard }: CopyButtonProps) => {
   return (
-    <DialogContentText className={classes.dialogContentText}>
-      <Typography onDoubleClick={onCopyToClipboard}>{publishURL}</Typography>
-    </DialogContentText>
+    <Button
+      children="Copy"
+      onClick={onCopyToClipboard}
+      startIcon={<FileCopyIcon />}
+    />
   )
 }
 

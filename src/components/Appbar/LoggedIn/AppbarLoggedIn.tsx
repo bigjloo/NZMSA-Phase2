@@ -8,12 +8,11 @@ import AppbarLoggedInStyles from "./AppbarLoggedInStyles"
 import SaveButtonContainer from "./SaveButtonContainer"
 import EventButtonContainer from "./EventButtonContainer"
 import ShareButtonContainer from "./ShareButtonContainer"
-import { useSaveEvents } from "./hooks"
+import useSaveEvents from "../../../utils/hooks/useSaveEvents"
 
 const AppbarLoggedIn = () => {
   const dispatch = useAppDispatch()
-  const appBarStyles = AppbarLoggedInStyles().appBar
-  const toolbarStyles = AppbarLoggedInStyles().toolbar
+  const classes = AppbarLoggedInStyles()
   const { loading, error } = useSaveEvents()
 
   if (loading) return <Backdrop loading={loading} />
@@ -28,8 +27,8 @@ const AppbarLoggedIn = () => {
   }
 
   return (
-    <AppBar color="inherit" className={appBarStyles}>
-      <Toolbar className={toolbarStyles}>
+    <AppBar color="inherit" className={classes.appBar}>
+      <Toolbar className={classes.toolbar}>
         <SaveButtonContainer />
         <EventButtonContainer />
         <ShareButtonContainer />

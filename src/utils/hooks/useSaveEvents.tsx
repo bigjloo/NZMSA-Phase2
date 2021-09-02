@@ -1,10 +1,10 @@
 import { useEffect } from "react"
-import { useAppSelector } from "../../../store/storeHooks"
-import { IEvent } from "../../../store/eventReducer"
+import { useAppSelector } from "../../store/storeHooks"
+import { IEvent } from "../../store/eventReducer"
 import { useMutation } from "@apollo/client"
-import { SET_EVENTS } from "../../../apollo-client/mutations"
+import { SET_EVENTS } from "../../apollo-client/mutations"
 
-export const useSaveEvents = () => {
+const useSaveEvents = () => {
   const events = useAppSelector<IEvent[]>((state) => state.events.events)
   const publishKey = useAppSelector<string>((state) => state.events.publishKey)
 
@@ -19,3 +19,5 @@ export const useSaveEvents = () => {
 
   return { saveEvents, loading, error }
 }
+
+export default useSaveEvents
