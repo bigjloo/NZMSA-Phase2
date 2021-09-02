@@ -24,15 +24,13 @@ const ShareButtonContainer = () => {
 
 const ShareButton = ({ clickHandler }: AppButtonProps) => {
   const classes = AppbarLoggedInStyles()
-  const shareButtonText = "Publish"
   return (
     <IconButton
       className={classes.iconButton}
+      children="Publish"
       edge="end"
       onClick={clickHandler}
-    >
-      {shareButtonText}
-    </IconButton>
+    />
   )
 }
 

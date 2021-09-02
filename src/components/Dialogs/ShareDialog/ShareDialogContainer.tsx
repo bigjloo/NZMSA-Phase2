@@ -1,14 +1,11 @@
 import { CONFIGURATION } from "../../../apollo-client/apollo"
-
 import { useAppSelector, useAppDispatch } from "../../../store/storeHooks"
 import { toggleShareDialog } from "../../../store/dialogReducer"
 import { openNotification } from "../../../store/notificationReducer"
-
 import ShareDialog from "./ShareDialog"
 
 const ShareDialogContainer = () => {
   const dispatch = useAppDispatch()
-
   const isShareDialogOpen = useAppSelector<boolean>(
     (state) => state.dialog.isShareDialogOpen
   )

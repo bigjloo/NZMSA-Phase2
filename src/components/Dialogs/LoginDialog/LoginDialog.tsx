@@ -4,7 +4,6 @@ import TextField from "@material-ui/core/TextField"
 import Button from "@material-ui/core/Button"
 import DialogActions from "@material-ui/core/DialogActions"
 import GitHubIcon from "@material-ui/icons/GitHub"
-
 import LoginDialogStyles from "./LoginDialogStyles"
 
 export type LoginDialogProps = {

@@ -50,7 +50,6 @@ const EventTimelineItem = ({
   onCardClickHandler,
 }: EventTimelineItemProps) => {
   const eventName = event.name
-
   return (
     <TimelineItem key={index}>
       <TimelineOppositeContent>
@@ -76,7 +75,6 @@ const EventTimelineItemCard = ({
 }: EventTimelineCardProps) => {
   const classes = EventTimelineStyles()
   const { name, description, photoURI } = event
-
   return (
     <Card className={classes.card} onClick={() => onCardClickHandler(event)}>
       {photoURI && (

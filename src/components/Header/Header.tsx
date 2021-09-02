@@ -14,9 +14,8 @@ type LogoutButtonProps = Pick<HeaderProps, "logoutHandler">
 
 type UserDetailsProps = Pick<HeaderProps, "githubName" | "avatarURI">
 
-const classes = HeaderStyles()
-
 const Header = ({ avatarURI, githubName, logoutHandler }: HeaderProps) => {
+  const classes = HeaderStyles()
   return (
     <Grid
       className={classes.header}
@@ -43,6 +42,7 @@ const Header = ({ avatarURI, githubName, logoutHandler }: HeaderProps) => {
 }
 
 const LogoutButton = ({ logoutHandler }: LogoutButtonProps) => {
+  const classes = HeaderStyles()
   return (
     <Button
       children="Logout"
@@ -54,6 +54,7 @@ const LogoutButton = ({ logoutHandler }: LogoutButtonProps) => {
 }
 
 const UserDetails = ({ avatarURI, githubName }: UserDetailsProps) => {
+  const classes = HeaderStyles()
   return (
     <>
       <Grid item xs={2}>

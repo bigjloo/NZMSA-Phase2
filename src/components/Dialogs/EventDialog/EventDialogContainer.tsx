@@ -1,6 +1,5 @@
 import { ChangeEvent } from "react"
-import { uploadFileToAzure } from "../../../api/azure-storage-blob"
-
+import { uploadFileToAzure } from "../../../api/azureStorageBlob"
 import { useAppDispatch, useAppSelector } from "../../../store/storeHooks"
 import { setCardImage, setIsCameraOpen } from "../../../store/cameraReducer"
 import { toggleEventDialog } from "../../../store/dialogReducer"
@@ -11,9 +10,7 @@ import {
   handleNameInputChange,
   handleDescriptionInputChange,
 } from "../../../store/formInputReducer"
-
 import Dialog from "@material-ui/core/Dialog"
-
 import EventDialogContent from "./EventDialogContent"
 import EventDialogList from "./EventDialogList"
 

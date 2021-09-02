@@ -1,19 +1,18 @@
 import Typography from "@material-ui/core/Typography"
 import LoginDialogContainer from "../../components/Dialogs/LoginDialog/LoginDialogContainer"
 import OnboardStyles from "./OnboardStyles"
+import Container from "@material-ui/core/Container"
 import Box from "@material-ui/core/Box"
 import randomImage from "../../assets/randomImage"
 
 const OnboardPage = () => {
   const classes = OnboardStyles()
   return (
-    <>
-      <Box className={classes.container}>
-        <PageHeading />
-        <PageImage />
-      </Box>
+    <Container className={classes.container}>
+      <PageHeading />
+      <PageImage />
       <LoginDialogContainer />
-    </>
+    </Container>
   )
 }
 

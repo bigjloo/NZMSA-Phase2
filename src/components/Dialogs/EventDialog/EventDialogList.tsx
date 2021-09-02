@@ -10,11 +10,10 @@ export type EventDialogListProps = {
   onRemoveEvent: (index: number) => void
 }
 
-type EventDialogListItemProps = {
+type EventDialogListItemProps = Pick<EventDialogListProps, "onRemoveEvent"> & {
   eventName: string
   eventDescription: string
   index: number
-  onRemoveEvent: (index: number) => void
 }
 
 type removeEventButtonProps = Pick<

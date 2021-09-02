@@ -1,13 +1,10 @@
 import { GITHUB_AUTHORIZE_URL } from "../../../api/GithubLoginProcessor"
-
 import { useAppSelector, useAppDispatch } from "../../../store/storeHooks"
 import { toggleLoginDialog } from "../../../store/dialogReducer"
-
 import LoginDialog from "./LoginDialog"
 
 const LoginDialogContainer = () => {
   const dispatch = useAppDispatch()
-
   const isLoginDialogOpen = useAppSelector<boolean>(
     (state) => state.dialog.isLoginDialogOpen
   )
