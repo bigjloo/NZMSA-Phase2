@@ -1,14 +1,8 @@
-import { useEffect } from "react"
 import { useLocation, Redirect } from "react-router-dom"
-
-import { useMutation } from "@apollo/client"
-import { GET_JWT_WITH_GITHUB_CODE } from "../apollo-client/mutations"
-
 import { useAppSelector } from "../store/storeHooks"
 import { useAppDispatch } from "../store/storeHooks"
-import { login } from "../store/authReducer"
 import { openNotification } from "../store/notificationReducer"
-
+import useGithubCode from "../utils/hooks/useGithubCode"
 import BackdropContainer from "../components/Backdrop/BackdropContainer"
 
 const GITHUB_CLIENT_ID = "b77f552e93db0e271256"
@@ -38,30 +32,6 @@ const GithubLoginProcessor = () => {
   if (loading) return <BackdropContainer loading={loading} />
 
   return <>{isAuth && <Redirect to="/" />}</>
-}
-
-// Fetches JWT Token from backend using
-// code from Github and logins user
-const useGithubCode = (code: string) => {
-  const dispatch = useAppDispatch()
-  const [getJWTToken, { error, loading }] = useMutation(
-    GET_JWT_WITH_GITHUB_CODE,
-    {
-      variables: { code },
-    }
-  )
-
-  useEffect(() => {
-    const loginWithGitHubOAuth = async () => {
-      const response = await getJWTToken()
-      const jwtToken = response.data.login.jwt
-      localStorage.setItem("HYD_JWT", jwtToken)
-      dispatch(login())
-    }
-    loginWithGitHubOAuth()
-  }, [getJWTToken, dispatch])
-
-  return { loading, error }
 }
 
 export default GithubLoginProcessor

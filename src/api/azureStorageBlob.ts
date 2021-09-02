@@ -10,7 +10,7 @@ import { BlobServiceClient, ContainerClient } from "@azure/storage-blob"
 const STORAGE_ACCOUNT_NAME = "nzmsablob"
 const AZURE_STORAGE_BLOB_URL = `https://${STORAGE_ACCOUNT_NAME}.blob.core.windows.net`
 
-type rawUploadData = {
+type uploadData = {
   cardImage: Blob
   token: string
   githubName: string
@@ -22,7 +22,7 @@ export const uploadFileToAzure = async ({
   cardImage,
   token,
   githubName,
-}: rawUploadData) => {
+}: uploadData) => {
   const file = createFileFrom(cardImage)
 
   const userContainerClient = getContainerClientFromAzure(

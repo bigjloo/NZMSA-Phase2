@@ -4,19 +4,19 @@ import Avatar from "@material-ui/core/Avatar"
 import Button from "@material-ui/core/Button"
 import HeaderStyles from "./HeaderStyles"
 
-type LogoutButtonProps = {
+export type HeaderProps = {
+  avatarURI: string
+  githubName: string
   logoutHandler: () => void
 }
 
-type UserDetailsProps = {
-  avatarURI: string
-  githubName: string
-}
+type LogoutButtonProps = Pick<HeaderProps, "logoutHandler">
 
-export type HeaderProps = UserDetailsProps & LogoutButtonProps
+type UserDetailsProps = Pick<HeaderProps, "githubName" | "avatarURI">
+
+const classes = HeaderStyles()
 
 const Header = ({ avatarURI, githubName, logoutHandler }: HeaderProps) => {
-  const classes = HeaderStyles()
   return (
     <Grid
       className={classes.header}
@@ -25,46 +25,44 @@ const Header = ({ avatarURI, githubName, logoutHandler }: HeaderProps) => {
       alignItems="center"
       justifyContent="space-between"
     >
-      <UserDetails avatarURI={avatarURI} githubName={githubName} />
-      <LogoutButton logoutHandler={logoutHandler} />
+      <Grid
+        container
+        alignItems="center"
+        item
+        direction="row"
+        justifyContent="flex-start"
+        xs={8}
+      >
+        <UserDetails avatarURI={avatarURI} githubName={githubName} />
+      </Grid>
+      <Grid item xs={4}>
+        <LogoutButton logoutHandler={logoutHandler} />
+      </Grid>
     </Grid>
   )
 }
 
 const LogoutButton = ({ logoutHandler }: LogoutButtonProps) => {
-  const classes = HeaderStyles()
-  const buttonText = "Logout"
   return (
-    <Grid item xs={4}>
-      <Button
-        className={classes.logoutButton}
-        onClick={logoutHandler}
-        variant="outlined"
-      >
-        {buttonText}
-      </Button>
-    </Grid>
+    <Button
+      children="Logout"
+      className={classes.logoutButton}
+      onClick={logoutHandler}
+      variant="outlined"
+    />
   )
 }
 
 const UserDetails = ({ avatarURI, githubName }: UserDetailsProps) => {
-  const classes = HeaderStyles()
   return (
-    <Grid
-      container
-      alignItems="center"
-      item
-      direction="row"
-      justifyContent="flex-start"
-      xs={8}
-    >
+    <>
       <Grid item xs={2}>
         <Avatar className={classes.large} alt="user avatar" src={avatarURI} />
       </Grid>
       <Grid className={classes.githubName} item xs={2}>
         <Typography>{githubName}</Typography>
       </Grid>
-    </Grid>
+    </>
   )
 }
 

@@ -32,14 +32,24 @@ const EventCardDialog = ({
   cardDialogCloseHandler,
 }: EventCardDialogProps) => {
   const classes = CardDialogStyles()
-
   const renderEventCard = (event: IEvent) => {
     return (
       <DialogContent className={classes.dialog}>
         <Card className={classes.card}>
-          {event.photoURI && <EventCardMedia photoURI={event.photoURI} />}
-          <EventCardContent name={event.name} description={event.description} />
-          <EventCardActions />
+          {event.photoURI && (
+            <CardMedia>
+              <EventCardMedia photoURI={event.photoURI} />
+            </CardMedia>
+          )}
+          <CardContent>
+            <EventCardContent
+              name={event.name}
+              description={event.description}
+            />
+          </CardContent>
+          <CardActions>
+            <LikeButton />
+          </CardActions>
         </Card>
       </DialogContent>
     )
@@ -55,34 +65,32 @@ const EventCardDialog = ({
 const EventCardMedia = ({ photoURI }: EventCardMediaProps) => {
   const classes = CardDialogStyles()
   return (
-    <CardMedia>
+    <>
       <img className={classes.cardImage} src={photoURI} alt="card media" />
-    </CardMedia>
+    </>
   )
 }
 
 const EventCardContent = ({ name, description }: EventCardContentProps) => {
   return (
-    <CardContent>
+    <>
       <Typography variant="h6" component="h6">
         {name}
       </Typography>
       <Typography variant="body1" component="p">
         {description}
       </Typography>
-    </CardContent>
+    </>
   )
 }
 
-const EventCardActions = () => {
+const LikeButton = () => {
   const classes = CardDialogStyles()
-  const likeButtonText = "Like"
   return (
-    <CardActions>
-      <Button startIcon={<FavoriteIcon className={classes.likeIcon} />}>
-        {likeButtonText}
-      </Button>
-    </CardActions>
+    <Button
+      children="Like"
+      startIcon={<FavoriteIcon className={classes.likeIcon} />}
+    />
   )
 }
 

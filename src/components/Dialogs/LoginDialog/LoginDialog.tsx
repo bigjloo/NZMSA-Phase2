@@ -7,20 +7,19 @@ import GitHubIcon from "@material-ui/icons/GitHub"
 
 import LoginDialogStyles from "./LoginDialogStyles"
 
-export type LoginDialogProps = GithubLoginButtonProps &
-  LoginDialogActionsProps & {
-    isLoginDialogOpen: boolean
-    toggleLoginDialogHandler: () => void
-  }
-
-type GithubLoginButtonProps = {
+export type LoginDialogProps = {
+  isLoginDialogOpen: boolean
+  toggleLoginDialogHandler: () => void
   gitHubClickHandler: () => void
-}
-
-type LoginDialogActionsProps = {
   signUpClickHandler: () => void
   loginClickHandler: () => void
 }
+
+type GithubLoginButtonProps = Pick<LoginDialogProps, "gitHubClickHandler">
+
+type SignUpButtonProps = Pick<LoginDialogProps, "signUpClickHandler">
+
+type LoginButtonProps = Pick<LoginDialogProps, "loginClickHandler">
 
 const LoginDialog = ({
   isLoginDialogOpen,
@@ -30,35 +29,32 @@ const LoginDialog = ({
   gitHubClickHandler,
 }: LoginDialogProps) => {
   const classes = LoginDialogStyles()
-
   return (
     <Dialog open={isLoginDialogOpen} onClose={toggleLoginDialogHandler}>
       <DialogContent className={classes.dialogContent}>
         <GithubLoginButton gitHubClickHandler={gitHubClickHandler} />
-        <LoginForm />
-        <LoginDialogActions
-          signUpClickHandler={signUpClickHandler}
-          loginClickHandler={loginClickHandler}
-        />
+        <LoginFormFields />
+        <DialogActions>
+          <SignUpButton signUpClickHandler={signUpClickHandler} />
+          <LoginButton loginClickHandler={loginClickHandler} />
+        </DialogActions>
       </DialogContent>
     </Dialog>
   )
 }
 
 const GithubLoginButton = ({ gitHubClickHandler }: GithubLoginButtonProps) => {
-  const githubButtonText = "Github Login"
   return (
     <Button
+      children="Github Login"
       variant="text"
       startIcon={<GitHubIcon />}
       onClick={gitHubClickHandler}
-    >
-      {githubButtonText}
-    </Button>
+    />
   )
 }
 
-const LoginForm = () => {
+const LoginFormFields = () => {
   const firstTextFieldLabel = "Login"
   const secondTextFieldLabel = "Password"
   return (
@@ -79,22 +75,18 @@ const LoginForm = () => {
   )
 }
 
-const LoginDialogActions = ({
-  signUpClickHandler,
-  loginClickHandler,
-}: LoginDialogActionsProps) => {
+const SignUpButton = ({ signUpClickHandler }: SignUpButtonProps) => {
+  return <Button children="Sign Up" onClick={signUpClickHandler} />
+}
+
+const LoginButton = ({ loginClickHandler }: LoginButtonProps) => {
   const classes = LoginDialogStyles()
-
-  const firstButtonText = "Sign Up"
-  const secondButtonText = "Login"
-
   return (
-    <DialogActions>
-      <Button onClick={signUpClickHandler}>{firstButtonText}</Button>
-      <Button className={classes.loginButton} onClick={loginClickHandler}>
-        {secondButtonText}
-      </Button>
-    </DialogActions>
+    <Button
+      className={classes.loginButton}
+      children="Login"
+      onClick={loginClickHandler}
+    />
   )
 }
 

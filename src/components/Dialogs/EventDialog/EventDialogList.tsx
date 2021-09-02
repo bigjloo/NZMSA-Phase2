@@ -17,24 +17,29 @@ type EventDialogListItemProps = {
   onRemoveEvent: (index: number) => void
 }
 
-const EventDialogList = ({ events, onRemoveEvent }: EventDialogListProps) => {
-  const renderEventDialogListItems = () => {
-    return events.map((event, index) => {
-      return (
-        <>
-          <EventDialogListItem
-            eventName={event.name}
-            eventDescription={event.description}
-            index={index}
-            onRemoveEvent={onRemoveEvent}
-          />
-          <Divider variant="middle" component="li" key={`d-${index}`} />
-        </>
-      )
-    })
-  }
+type removeEventButtonProps = Pick<
+  EventDialogListItemProps,
+  "onRemoveEvent" | "index"
+>
 
-  return <List>{renderEventDialogListItems()}</List>
+const EventDialogList = ({ events, onRemoveEvent }: EventDialogListProps) => {
+  return (
+    <List>
+      {events.map((event, index) => {
+        return (
+          <>
+            <EventDialogListItem
+              eventName={event.name}
+              eventDescription={event.description}
+              index={index}
+              onRemoveEvent={onRemoveEvent}
+            />
+            <Divider variant="middle" component="li" key={`d-${index}`} />
+          </>
+        )
+      })}
+    </List>
+  )
 }
 
 const EventDialogListItem = ({
@@ -43,15 +48,24 @@ const EventDialogListItem = ({
   index,
   onRemoveEvent,
 }: EventDialogListItemProps) => {
-  const removeEventButtonText = "X"
-
   return (
     <ListItem key={index}>
       <ListItemText primary={eventName} secondary={eventDescription} />
-      <Button color="secondary" onClick={() => onRemoveEvent(index)}>
-        {removeEventButtonText}
-      </Button>
+      <RemoveEventButton onRemoveEvent={onRemoveEvent} index={index} />
     </ListItem>
+  )
+}
+
+const RemoveEventButton = ({
+  onRemoveEvent,
+  index,
+}: removeEventButtonProps) => {
+  return (
+    <Button
+      children="X"
+      color="secondary"
+      onClick={() => onRemoveEvent(index)}
+    />
   )
 }
 

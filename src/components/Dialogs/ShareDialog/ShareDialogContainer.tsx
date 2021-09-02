@@ -14,11 +14,8 @@ const ShareDialogContainer = () => {
   )
   const publishKey = useAppSelector<string>((state) => state.events.publishKey)
 
-  // Public URL to access User shared events
+  // URL to access user shared events
   const publishURL = `${CONFIGURATION.FRONTEND}share/${publishKey}`
-
-  // Opens Share Dialog
-  const toggleHandler = () => dispatch(toggleShareDialog())
 
   // Copies publish URL to clipboard
   const onCopyToClipboard = () => {
@@ -30,6 +27,8 @@ const ShareDialogContainer = () => {
       })
     )
   }
+
+  const toggleHandler = () => dispatch(toggleShareDialog())
 
   return (
     <ShareDialog

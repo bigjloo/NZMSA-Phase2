@@ -5,6 +5,7 @@ import Container from "@material-ui/core/Container"
 import { IEvent } from "../../store/eventReducer"
 import EventTimelineContainer from "../../components/EventTimeline/EventTimelineContainer"
 import SharedContentStyles from "./SharedContentStyles"
+import LoginDialogContainer from "../../components/Dialogs/LoginDialog/LoginDialogContainer"
 
 export type SharedContentProps = {
   publisherName: string
@@ -26,6 +27,7 @@ const SharedContentPage = ({
     <Container>
       <SharedContentPageHeader title={publisherName} subtitle={publishDate} />
       <EventTimelineContainer events={events} />
+      <LoginDialogContainer />
     </Container>
   )
 }
