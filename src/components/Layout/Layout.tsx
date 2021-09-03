@@ -18,7 +18,6 @@ type LayoutProps = {
 
 const Layout = ({ children, isAuth, isDark }: LayoutProps) => {
   const classes = LayoutStyles()
-
   return (
     <Container className={classes.container}>
       <Notification />

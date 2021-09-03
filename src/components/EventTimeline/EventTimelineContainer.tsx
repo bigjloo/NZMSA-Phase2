@@ -4,7 +4,6 @@ import {
   toggleIsCardDialogOpen,
 } from "../../store/cardReducer"
 import { IEvent } from "../../store/eventReducer"
-
 import EventTimeline from "./EventTimeline"
 import EventCardDialog from "../Dialogs/EventCardDialog/EventCardDialog"
 

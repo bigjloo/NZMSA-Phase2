@@ -1,11 +1,9 @@
 import { ChangeEvent } from "react"
-
 import Button from "@material-ui/core/Button"
 import DialogContent from "@material-ui/core/DialogContent"
 import DialogActions from "@material-ui/core/DialogActions"
 import DialogTitle from "@material-ui/core/DialogTitle"
 import TextField from "@material-ui/core/TextField"
-
 import CameraContainer from "../../MediaCapture/CameraContainer"
 import EventDialogStyles from "./EventDialogStyles"
 
@@ -71,7 +69,6 @@ const EventDialogFormFields = ({
 }: EventDialogFormFieldsProps) => {
   const eventNameLabel = "Event Name"
   const eventDescriptionLabel = "Event Description"
-
   return (
     <>
       <TextField

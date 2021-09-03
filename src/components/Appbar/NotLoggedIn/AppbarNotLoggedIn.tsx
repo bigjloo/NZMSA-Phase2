@@ -12,8 +12,8 @@ type AppButtonProps = {
 }
 
 const AppbarNotLoggedIn = () => {
-  const classes = AppbarNotLoggedInStyles()
   const dispatch = useAppDispatch()
+  const classes = AppbarNotLoggedInStyles()
   const openLoginDialog = () => dispatch(toggleLoginDialog())
 
   return (
@@ -27,11 +27,12 @@ const AppbarNotLoggedIn = () => {
 
 const LoginButton = ({ clickHandler }: AppButtonProps) => {
   const classes = AppbarNotLoggedInStyles()
-  const loginButtonText = "LOGIN"
   return (
-    <IconButton className={classes.loginButton} onClick={clickHandler}>
-      {loginButtonText}
-    </IconButton>
+    <IconButton
+      className={classes.loginButton}
+      children="LOGIN"
+      onClick={clickHandler}
+    />
   )
 }
 

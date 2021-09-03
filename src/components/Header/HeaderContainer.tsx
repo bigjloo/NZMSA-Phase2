@@ -1,7 +1,6 @@
 import { useAppDispatch, useAppSelector } from "../../store/storeHooks"
 import { logout } from "../../store/authReducer"
 import { openNotification } from "../../store/notificationReducer"
-
 import Header from "./Header"
 
 const HeaderContainer = () => {

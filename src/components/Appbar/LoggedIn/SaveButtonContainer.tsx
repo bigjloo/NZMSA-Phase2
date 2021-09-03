@@ -30,15 +30,13 @@ const SaveButtonContainer = () => {
 
 const SaveButton = ({ clickHandler }: AppButtonProps) => {
   const classes = AppbarLoggedInStyles()
-  const saveButtonText = "Save"
   return (
     <IconButton
       className={classes.iconButton}
+      children="Save"
       edge="start"
       onClick={clickHandler}
-    >
-      {saveButtonText}
-    </IconButton>
+    />
   )
 }
 

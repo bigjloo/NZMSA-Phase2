@@ -23,7 +23,7 @@ type EventTimelineItemProps = Pick<EventTimelineProps, "onCardClickHandler"> & {
   index: number
 }
 
-export type EventTimelineCardProps = Pick<
+export type EventTimelineItemCardProps = Pick<
   EventTimelineItemProps,
   "event" | "onCardClickHandler"
 >
@@ -50,7 +50,6 @@ const EventTimelineItem = ({
   onCardClickHandler,
 }: EventTimelineItemProps) => {
   const eventName = event.name
-
   return (
     <TimelineItem key={index}>
       <TimelineOppositeContent>
@@ -73,10 +72,9 @@ const EventTimelineItem = ({
 const EventTimelineItemCard = ({
   event,
   onCardClickHandler,
-}: EventTimelineCardProps) => {
+}: EventTimelineItemCardProps) => {
   const classes = EventTimelineStyles()
   const { name, description, photoURI } = event
-
   return (
     <Card className={classes.card} onClick={() => onCardClickHandler(event)}>
       {photoURI && (
