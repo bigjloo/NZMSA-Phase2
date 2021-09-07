@@ -18,11 +18,11 @@ type uploadData = {
 
 // Converts photo to file object and uploads to Azure
 // Storage Blob. Returns the URI of uploaded photo
-export const uploadFileToAzure = async ({
+export async function uploadFileToAzure({
   cardImage,
   token,
   githubName,
-}: uploadData) => {
+}: uploadData) {
   const file = createFileFrom(cardImage)
 
   const userContainerClient = getContainerClientFromAzure(
@@ -46,28 +46,28 @@ export const uploadFileToAzure = async ({
 
 // Returns file object from blob object using
 // current date time as file name
-const createFileFrom = (cardImage: Blob) => {
+function createFileFrom(cardImage: Blob): File {
   const fileName = new Date().toISOString()
   const file = new File([cardImage], fileName)
   return file
 }
 
 // Returns user's container client from Azure Storage Blob
-const getContainerClientFromAzure = (
+function getContainerClientFromAzure(
   storageAccountUrl: string,
   token: string,
   containerName: string
-) => {
+): ContainerClient{
   const blobService = new BlobServiceClient(`${storageAccountUrl}/?${token}`)
   const containerClient = blobService.getContainerClient(containerName)
   return containerClient
 }
 
-// Upload file to Blob in user container
-const createBlobInContainer = async (
+// Create blob using blobClient in user container
+async function createBlobInContainer (
   containerClient: ContainerClient,
   file: File
-) => {
+){
   const blobClient = containerClient.getBlockBlobClient(file.name)
   const options = { blobHTTPHeaders: { blobContentType: file.type } }
   await blobClient.uploadData(file, options)

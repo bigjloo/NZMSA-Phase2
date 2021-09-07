@@ -67,13 +67,11 @@ const EventDialogFormFields = ({
   onNameInputChange,
   onDescriptionInputChange,
 }: EventDialogFormFieldsProps) => {
-  const eventNameLabel = "Event Name"
-  const eventDescriptionLabel = "Event Description"
   return (
     <>
       <TextField
         value={nameInput}
-        label={eventNameLabel}
+        label="Event Name"
         type="text"
         color="secondary"
         onChange={onNameInputChange}
@@ -81,7 +79,7 @@ const EventDialogFormFields = ({
       />
       <TextField
         value={descriptionInput}
-        label={eventDescriptionLabel}
+        label="Event Description"
         type="text"
         color="secondary"
         onChange={onDescriptionInputChange}

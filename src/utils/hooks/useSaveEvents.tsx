@@ -4,7 +4,8 @@ import { IEvent } from "../../store/eventReducer"
 import { useMutation } from "@apollo/client"
 import { SET_EVENTS } from "../../apollo-client/mutations"
 
-const useSaveEvents = () => {
+// Saves local events state to backend
+function useSaveEvents() {
   const events = useAppSelector<IEvent[]>((state) => state.events.events)
   const publishKey = useAppSelector<string>((state) => state.events.publishKey)
 

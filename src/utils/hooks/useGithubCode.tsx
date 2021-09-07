@@ -6,7 +6,7 @@ import { GET_JWT_WITH_GITHUB_CODE } from "../../apollo-client/mutations"
 
 // Fetches JWT Token from backend using
 // code from Github and logins user
-const useGithubCode = (code: string) => {
+function useGithubCode(code: string) {
   const dispatch = useAppDispatch()
   const [getJWTToken, { error, loading }] = useMutation(
     GET_JWT_WITH_GITHUB_CODE,
@@ -18,7 +18,7 @@ const useGithubCode = (code: string) => {
   useEffect(() => {
     const loginWithGitHubOAuth = async () => {
       const response = await getJWTToken()
-      const jwtToken = response.data.login.jwt
+      const jwtToken: string = response.data.login.jwt
       localStorage.setItem("HYD_JWT", jwtToken)
       dispatch(login())
     }

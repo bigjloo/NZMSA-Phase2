@@ -1,4 +1,5 @@
 import IconButton from "@material-ui/core/IconButton"
+import Backdrop from "../../Backdrop/BackdropContainer"
 
 import { useAppDispatch } from "../../../store/storeHooks"
 import { openNotification } from "../../../store/notificationReducer"
@@ -23,6 +24,17 @@ const SaveButtonContainer = () => {
         })
       )
     }
+  }
+
+  if (loading) return <Backdrop loading={loading} />
+
+  if (error) {
+    dispatch(
+      openNotification({
+        message: "Error when saving events! Please try again",
+        alertType: "error",
+      })
+    )
   }
 
   return <SaveButton clickHandler={onSaveEvents} />

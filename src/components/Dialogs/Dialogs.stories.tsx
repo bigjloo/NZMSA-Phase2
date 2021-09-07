@@ -10,6 +10,7 @@ import { IEvent } from "../../store/eventReducer"
 import EventCardDialog, {
   EventCardDialogProps,
 } from "./EventCardDialog/EventCardDialog"
+import EventDialogList from "./EventDialog/EventDialogList"
 
 const mockEvents: IEvent[] = [
   {
@@ -40,6 +41,10 @@ AppLoginDialog.args = {
 
 export const AppEventDialog: Story<EventDialogContentProps> = (args) => (
   <Dialog open>
+    <EventDialogList
+      events={mockEvents}
+      onRemoveEvent={() => alert("Removing event")}
+    />
     <EventDialogContent {...args} />
   </Dialog>
 )
