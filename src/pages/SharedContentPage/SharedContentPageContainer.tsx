@@ -5,7 +5,6 @@ import SharedContentPage from "./SharedContentPage"
 import BackdropContainer from "../../components/Backdrop/BackdropContainer"
 import useSharedContentQuery from "../../utils/hooks/useSharedContentQuery"
 import { IEvent } from "../../store/eventReducer"
-import isPublishKeyValidated from "../../utils/helpers/validatePublishKey"
 
 type SharedContentParams = {
   publishKey: string
@@ -23,9 +22,6 @@ const SharedContentPageContainer = () => {
 
   // Extracts publish key from the URL params
   const { publishKey } = useParams<SharedContentParams>()
-
-  if (!isPublishKeyValidated(publishKey)) return console.log("error")
-
   const { loading, error } = useSharedContentQuery(publishKey)
 
   if (error) {
