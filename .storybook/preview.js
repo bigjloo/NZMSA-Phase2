@@ -6,7 +6,7 @@ import {lightTheme, darkTheme} from "../src/theme"
 import store from "../src/store/store"
 import {INITIAL_VIEWPORTS} from "@storybook/addon-viewport"
 import Container from "@material-ui/core/Container"
-import {themes} from "@storybook/theming"
+//import {themes} from "@storybook/theming"
 import {useDarkMode} from 'storybook-dark-mode'
 
 const mockedClient = new ApolloClient({

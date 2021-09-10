@@ -16,12 +16,9 @@ export type EventDialogContentProps = {
   toggleEventDialogHandler: () => void
 }
 
-type EventDialogFormFieldsProps = Pick<
+type EventDialogFormFieldsProps = Omit<
   EventDialogContentProps,
-  | "nameInput"
-  | "descriptionInput"
-  | "onNameInputChange"
-  | "onDescriptionInputChange"
+  "onAddEvent" | "toggleEventDialogHandler"
 >
 
 type ButtonProps = {

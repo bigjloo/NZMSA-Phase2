@@ -24,16 +24,15 @@ function App() {
   const isAuth = useAppSelector<boolean>((state) => state.auth.isAuth)
   const isDark = useAppSelector<boolean>((state) => state.theme.isDarkTheme)
 
-  // Sets dark/light theme
   const theme = useMemo(() => (isDark ? darkTheme : lightTheme), [isDark])
 
-  // Checks if token exist in localStorage
-  // and verifies token with backend
+  // Verifies token with backend if
+  // token exists in local storage
   const { loading, error } = useQuery(VERIFY_USER, {
     skip: !!localStorage.getItem("HYD_JWT"),
   })
 
-  // Login user after token is verified
+  // Login user if token is verified
   if (!loading && !error) {
     dispatch(login())
   }

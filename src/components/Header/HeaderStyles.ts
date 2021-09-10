@@ -10,7 +10,8 @@ const HeaderStyles = makeStyles((theme: Theme) =>
     header: {
       width:"100%",
       padding: "1rem 2rem",
-      boxShadow: "0 0.2rem 1.5rem",
+      // boxShadow: "0 0.2rem 1.5rem",
+      // border: "1px solid green"
     },
 
     githubName: {
