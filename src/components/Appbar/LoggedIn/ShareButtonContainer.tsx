@@ -5,6 +5,7 @@ import { useAppDispatch } from "../../../store/storeHooks"
 import { toggleShareDialog } from "../../../store/dialogReducer"
 import { setPublishKey } from "../../../store/eventReducer"
 import AppbarLoggedInStyles from "./AppbarLoggedInStyles"
+import { generateKey } from "../../../utils/helpers/generator"
 
 type AppButtonProps = {
   clickHandler: () => void
@@ -12,7 +13,7 @@ type AppButtonProps = {
 
 const ShareButtonContainer = () => {
   const dispatch = useAppDispatch()
-  const key = useMemo(() => generateKey(), [])
+  const key = useMemo(() => generateKey(8), [])
 
   const onOpenShareDialog = () => {
     dispatch(toggleShareDialog())
@@ -33,9 +34,5 @@ const ShareButton = ({ clickHandler }: AppButtonProps) => {
     />
   )
 }
-
-// Generates 8 random alphanumeric char string
-const generateKey = () =>
-  [...Array(8)].map(() => Math.floor(Math.random() * 16).toString(16)).join("")
 
 export default ShareButtonContainer

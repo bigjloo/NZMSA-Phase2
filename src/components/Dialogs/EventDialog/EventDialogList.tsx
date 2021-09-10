@@ -61,9 +61,9 @@ const RemoveEventButton = ({
 }: removeEventButtonProps) => {
   return (
     <Button
-      children="X"
       color="secondary"
       onClick={() => onRemoveEvent(index)}
+      children="X"
     />
   )
 }

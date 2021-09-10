@@ -22,7 +22,7 @@ export async function uploadFileToAzure({
   cardImage,
   token,
   githubName,
-}: uploadData) {
+}: uploadData): Promise<string | undefined>{
   const file = createFileFrom(cardImage)
 
   const userContainerClient = getContainerClientFromAzure(

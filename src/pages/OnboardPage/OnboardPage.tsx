@@ -4,20 +4,27 @@ import OnboardStyles from "./OnboardStyles"
 import Container from "@material-ui/core/Container"
 import Box from "@material-ui/core/Box"
 import randomImage from "../../assets/randomImage"
+import { ClassNameMap } from "@material-ui/styles"
+
+type OnboardHeadingProps = {
+  classes: ClassNameMap
+}
+
+type OnboardImageProps = OnboardHeadingProps
 
 const OnboardPage = () => {
   const classes = OnboardStyles()
   return (
     <Container className={classes.container}>
-      <PageHeading />
-      <PageImage />
+      <OnboardHeading classes={classes} />
+      <OnboardImage classes={classes} />
       <LoginDialogContainer />
     </Container>
   )
 }
 
-const PageHeading = () => {
-  const classes = OnboardStyles()
+const OnboardHeading = ({ classes }: OnboardHeadingProps) => {
+  // const classes = OnboardStyles()
   const subtitle = "Never a moment too dull"
   return (
     <Box>
@@ -37,8 +44,8 @@ const PageHeading = () => {
   )
 }
 
-const PageImage = () => {
-  const classes = OnboardStyles()
+const OnboardImage = ({ classes }: OnboardImageProps) => {
+  // const classes = OnboardStyles()
   return (
     <Box className={classes.img}>
       <img className={classes.image} src={randomImage} alt="funny cat" />
