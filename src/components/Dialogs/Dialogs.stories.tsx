@@ -4,7 +4,6 @@ import EventDialogContent, {
   EventDialogContentProps,
 } from "./EventDialog/EventDialogContent"
 import ShareDialog, { ShareDialogProps } from "./ShareDialog/ShareDialog"
-// import EventDialog, { EventDialogProps } from "./EventDialog/EventDialog"
 import LoginDialog, { LoginDialogProps } from "./LoginDialog/LoginDialog"
 import { IEvent } from "../../store/eventReducer"
 import EventCardDialog, {
@@ -24,6 +23,12 @@ const mockEvents: IEvent[] = [
     description: "Some mock event description 2",
     photoURI:
       "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.womentriangle.com%2Fwp-content%2Fuploads%2F2020%2F04%2Fjn1-768x512.jpg&f=1&nofb=1",
+  },
+  {
+    name: "7PM",
+    description: "Some mock event description 3",
+    photoURI:
+      "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.flare.com%2Fwp-content%2Fuploads%2F2017%2F03%2FUltra.jpg&f=1&nofb=1",
   },
 ]
 
@@ -49,11 +54,6 @@ export const AppEventDialog: Story<EventDialogContentProps> = (args) => (
   </Dialog>
 )
 AppEventDialog.storyName = "Event Dialog"
-AppEventDialog.args = {
-  // events: mockEvents,
-  // onRemoveEvent: () => alert("Removing event"),
-  // onAddEvent: () => alert("Adding event"),
-}
 
 export const AppShareDialog: Story<ShareDialogProps> = (args) => (
   <ShareDialog {...args} />

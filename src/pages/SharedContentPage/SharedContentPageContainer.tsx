@@ -20,7 +20,6 @@ const SharedContentPageContainer = () => {
 
   const events = useAppSelector<IEvent[]>((store) => store.events.events)
 
-  // Extracts publish key from the URL params
   const { publishKey } = useParams<SharedContentParams>()
   const { loading, error } = useSharedContentQuery(publishKey)
 

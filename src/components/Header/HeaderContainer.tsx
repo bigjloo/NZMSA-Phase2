@@ -13,7 +13,6 @@ const HeaderContainer = () => {
     (state) => state.user.githubName
   )
 
-  // Logouts user and removes JWT Token from local storage
   const logoutHandler = () => {
     localStorage.removeItem("HYD_JWT")
     dispatch(logout())

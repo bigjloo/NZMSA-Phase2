@@ -3,7 +3,6 @@ import { setContext } from "@apollo/client/link/context"
 
 const isDevelopment = false
 
-// Sets frontend and backend url base on isDevelopment
 export const CONFIGURATION = {
   FRONTEND: isDevelopment
     ? "localhost:3000/"

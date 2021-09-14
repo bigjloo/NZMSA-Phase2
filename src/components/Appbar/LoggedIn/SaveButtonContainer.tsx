@@ -1,10 +1,9 @@
 import IconButton from "@material-ui/core/IconButton"
-import Backdrop from "../../Backdrop/BackdropContainer"
-
 import { useAppDispatch } from "../../../store/storeHooks"
 import { openNotification } from "../../../store/notificationReducer"
-import AppbarLoggedInStyles from "./AppbarLoggedInStyles"
+import Backdrop from "../../Backdrop/BackdropContainer"
 import useSaveEvents from "../../../utils/hooks/useSaveEvents"
+import AppbarLoggedInStyles from "./AppbarLoggedInStyles"
 
 type AppButtonProps = {
   clickHandler: () => void
@@ -26,7 +25,7 @@ const SaveButtonContainer = () => {
     }
   }
 
-  if (loading) return <Backdrop loading={loading} />
+  //if (loading) return <Backdrop loading={loading} />
 
   if (error) {
     dispatch(
@@ -37,7 +36,12 @@ const SaveButtonContainer = () => {
     )
   }
 
-  return <SaveButton clickHandler={onSaveEvents} />
+  return (
+    <>
+      <SaveButton clickHandler={onSaveEvents} />
+      {loading && <Backdrop loading={loading} />}
+    </>
+  )
 }
 
 const SaveButton = ({ clickHandler }: AppButtonProps) => {

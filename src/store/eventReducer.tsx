@@ -26,7 +26,6 @@ const eventsSlice = createSlice({
     },
 
     setEvents(state, action: PayloadAction<IEvent[]>) {
-      // let events: IEvent[] = []
       for (const event of action.payload) {
         state.events = [
           ...state.events,
@@ -37,7 +36,6 @@ const eventsSlice = createSlice({
           },
         ]
       }
-      // state.events = [...events]
     },
 
     setPublishKey(state, action: PayloadAction<string>) {

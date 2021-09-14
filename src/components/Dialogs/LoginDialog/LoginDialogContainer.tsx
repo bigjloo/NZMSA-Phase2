@@ -12,12 +12,10 @@ const LoginDialogContainer = () => {
   // Redirects user to GitHhub for OAuth
   const gitHubClickHandler = () => (window.location.href = GITHUB_AUTHORIZE_URL)
 
-  // Opens login dialog
   const toggleLoginDialogHandler = () => dispatch(toggleLoginDialog())
-  // TODO
-  const loginClickHandler = () => alert("to be implemented")
 
-  // TODO
+  // to be implemented
+  const loginClickHandler = () => alert("to be implemented")
   const signUpClickHandler = () => alert("to be implemented")
 
   return (

@@ -1,21 +1,19 @@
+import { useMemo } from "react"
 import { Route, Switch } from "react-router-dom"
-
 import { useQuery } from "@apollo/client"
-import { VERIFY_USER } from "./apollo-client/queries"
-import GithubLoginProcessor from "./api/GithubLoginProcessor"
 
 import CssBaseline from "@material-ui/core/CssBaseline"
 import { ThemeProvider } from "@material-ui/core/styles"
+import { darkTheme, lightTheme } from "./theme"
 
 import { login } from "./store/authReducer"
 import { useAppDispatch, useAppSelector } from "./store/storeHooks"
 
-import { darkTheme, lightTheme } from "./theme"
-
+import { VERIFY_USER } from "./apollo-client/queries"
+import GithubLoginProcessor from "./api/GithubLoginProcessor"
+import Layout from "./components/Layout/Layout"
 import SharedContentPage from "./pages/SharedContentPage/SharedContentPageContainer"
 import OnboardPage from "./pages/OnboardPage/OnboardPage"
-import { useMemo } from "react"
-import Layout from "./components/Layout/Layout"
 import UserPageContainer from "./pages/UserPage/UserPageContainer"
 
 function App() {
