@@ -10,9 +10,7 @@ import { makeStyles, createStyles } from "@material-ui/core/styles"
 const useStyles = makeStyles((theme) =>
   createStyles({
     cameraButton: {
-      // color: theme.palette.primary.contrastText,
       width: "100%",
-      // marginTop: "0.75rem",
     },
   })
 )
@@ -25,10 +23,8 @@ const CameraContainer = () => {
   const dispatch = useAppDispatch()
 
   const handleButtonClick = () => {
-    // maybe bug
     dispatch(setIsCameraOpen(true))
     dispatch(setCardImage(undefined))
-    // setIsCameraOpen(true)
   }
 
   const onCapture = (blob) => {

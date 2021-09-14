@@ -37,10 +37,10 @@ const EventDialogContainer = () => {
     dispatch(setIsCameraOpen(false))
   }
 
-  // If user took photo for event
-  // convert and upload to Azure Storage Blob
   const onAddEvent = async () => {
     let photoURI = null
+    // If user took photo for event
+    // convert and upload to Azure Storage Blob
     if (cardImage) {
       photoURI = await uploadFileToAzure({
         token: token!,
@@ -66,10 +66,8 @@ const EventDialogContainer = () => {
     )
   }
 
-  // Removes individual event from local events state
   const onRemoveEvent = (index: number) => dispatch(removeEvent(index))
 
-  // Two way bind for TextFields in EventDialog
   const onNameInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     dispatch(handleNameInputChange(event.target.value))
   }

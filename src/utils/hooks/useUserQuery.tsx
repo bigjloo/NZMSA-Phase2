@@ -19,7 +19,6 @@ function useUserQuery() {
 
   useEffect(() => {
     if (userData) {
-      // user data
       const userDataPayload: IUserData = {
         githubName: userData.userData.github,
         githubImageURI: userData.userData.imageURI,
@@ -27,7 +26,7 @@ function useUserQuery() {
       }
       dispatch(setUserData(userDataPayload))
 
-      // today's events
+      // If user have saved events from today
       userData.today && dispatch(setEvents(userData.today.events))
     }
   }, [userData, dispatch])

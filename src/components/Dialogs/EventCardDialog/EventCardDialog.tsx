@@ -83,6 +83,7 @@ const EventCardContent = ({ name, description }: EventCardContentProps) => {
   )
 }
 
+// onClick function to be implemented
 const LikeButton = () => {
   const classes = CardDialogStyles()
   return (

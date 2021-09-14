@@ -20,6 +20,8 @@ const GithubLoginProcessor = () => {
 
   const { loading, error } = useGithubCode(githubCode)
 
+  if (loading) return <BackdropContainer loading={loading} />
+
   if (error) {
     dispatch(
       openNotification({
@@ -28,8 +30,6 @@ const GithubLoginProcessor = () => {
       })
     )
   }
-
-  if (loading) return <BackdropContainer loading={loading} />
 
   return <>{isAuth && <Redirect to="/" />}</>
 }

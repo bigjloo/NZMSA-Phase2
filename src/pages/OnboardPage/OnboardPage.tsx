@@ -24,7 +24,6 @@ const OnboardPage = () => {
 }
 
 const OnboardHeading = ({ classes }: OnboardHeadingProps) => {
-  // const classes = OnboardStyles()
   const subtitle = "Never a moment too dull"
   return (
     <Box>
@@ -45,7 +44,6 @@ const OnboardHeading = ({ classes }: OnboardHeadingProps) => {
 }
 
 const OnboardImage = ({ classes }: OnboardImageProps) => {
-  // const classes = OnboardStyles()
   return (
     <Box className={classes.img}>
       <img className={classes.image} src={randomImage} alt="funny cat" />
