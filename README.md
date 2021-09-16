@@ -8,7 +8,7 @@ Send timeline styled daily updates to your friends and families
 
 <a href="https://youtu.be/ADWoIjL8SDE" target="_blank">YouTube Link</a>
 
-[Live App](http://nzmsa-react-2021.azurewebsites.net)
+<a href="http://nzmsa-react-2021.azurewebsites.net" target="_blank">Live App</a>
 
 - Camera API does not work for Google Chrome
 
