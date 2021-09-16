@@ -49,8 +49,10 @@ npm install
 
 Start storybook
 
+
 ```
 npm run storybook
 ```
+
 
 Open on browser with URL: [http://localhost:6006/](http://localhost:6006/)
