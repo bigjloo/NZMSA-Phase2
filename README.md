@@ -28,12 +28,12 @@ Backend:
 - Hot Chocolate GraphQL for .NET
 - Azure Storage Blob, Azure KeyVault
 
+[Backend repository](https://github.com/jloo87/NZMSA_Phase2_Backend)
 UI:
 
 - Material UI
 - Storybook
 
-[Backend](https://github.com/jloo87/NZMSA_Phase2_Backend)
 
 ## Storybook
 
