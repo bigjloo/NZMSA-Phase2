@@ -6,9 +6,9 @@ Send timeline styled daily updates to your friends and families
 
 ## Demo
 
-[![HYD Demo](http://img.youtube.com/vi/ADWoIjL8SDE/0.jpg)](https://youtu.be/ADWoIjL8SDE)
+[YouTube Link](https://youtu.be/ADWoIjL8SDE)
 
-[Hows Your Day](nzmsa-react-2021.azurewebsites.net)
+[App Link](nzmsa-react-2021.azurewebsites.net)
 
 \*\* Camera API does not work for Google Chrome
 
