@@ -39,7 +39,7 @@ const EventDialogContainer = () => {
 
   const onAddEvent = async () => {
     let photoURI = null
-    // If user took photo for event
+    // If user took photo for event:
     // convert and upload to Azure Storage Blob
     if (cardImage) {
       photoURI = await uploadFileToAzure({
