@@ -25,8 +25,6 @@ const SaveButtonContainer = () => {
     }
   }
 
-  //if (loading) return <Backdrop loading={loading} />
-
   if (error) {
     dispatch(
       openNotification({

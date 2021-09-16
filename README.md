@@ -2,7 +2,15 @@
 
 ## Introduction
 
-Send timeline styled updates to your friends and families
+Send timeline styled daily updates to your friends and families
+
+## Demo
+
+[![HYD Demo](http://img.youtube.com/vi/ADWoIjL8SDE/0.jpg)](https://youtu.be/ADWoIjL8SDE)
+
+[Hows Your Day](nzmsa-react-2021.azurewebsites.net)
+
+\*\* Camera API does not work for Google Chrome
 
 ## Created using:
 
@@ -11,6 +19,27 @@ Send timeline styled updates to your friends and families
 - GraphQL
 - Apollo Client
 - Material UI
+- Azure Storage Blob, Azure KeyVault
+- Storybook
 
+## Storybook
 
-### Notes:
+Clone repository
+
+```
+git clone https://github.com/jloo87/NZMSA-Phase2.git
+```
+
+Install dependencies
+
+```
+npm install
+```
+
+Start storybook
+
+```
+npm run storybook
+```
+
+Open on browser with URL: [http://localhost:6006/](http://localhost:6006/)
