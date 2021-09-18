@@ -4,6 +4,9 @@
 
 Send timeline styled daily updates to your friends and families
 
+## Initial Figma mockup 
+![HYD figma mockup](./figma_mockup.png)
+
 ## Demo
 
 <a href="https://youtu.be/ADWoIjL8SDE" target="_blank">YouTube Link</a>
