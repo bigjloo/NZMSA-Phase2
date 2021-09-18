@@ -4,9 +4,6 @@
 
 Send timeline styled daily updates to your friends and families
 
-## Initial Figma mockup 
-![HYD figma mockup](./figma_mockup.png)
-
 ## Demo
 
 <a href="https://youtu.be/ADWoIjL8SDE" target="_blank">YouTube Link</a>
@@ -16,6 +13,10 @@ Send timeline styled daily updates to your friends and families
 - Camera API does not work for Google Chrome
 
 - Backend SQL database will need few minutes to start up on first login. Retry after 1-2 minutes
+
+## Initial Figma mockup 
+
+<img src="./figma_mockup.png" alt="HYD app initial figma mockup" width="600" />
 
 ## Created using:
 
