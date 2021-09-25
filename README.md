@@ -11,6 +11,8 @@ Youtube demo:
 
 <a href="http://nzmsa-react-2021.azurewebsites.net" target="_blank">Live App</a> 👈 
 
+<a href="http://nzmsa-react-2021.azurewebsites.net/share/6a80beb3" target="_blank">Example for 'Shared Day'</a>
+
 - Camera API does not work for Google Chrome
 
 - Backend SQL database will need few minutes to start up on first login. Retry after 1-2 minutes
