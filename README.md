@@ -5,10 +5,11 @@
 Send timeline styled daily updates to your friends and families
 
 ## Demo
+Youtube demo:
 
-<a href="https://youtu.be/ADWoIjL8SDE" target="_blank">YouTube Link</a>
+[![HYD youtube demo](./thumbnail.jpg)](https://youtu.be/ADWoIjL8SDE) 👈 
 
-<a href="http://nzmsa-react-2021.azurewebsites.net" target="_blank">Live App</a>
+<a href="http://nzmsa-react-2021.azurewebsites.net" target="_blank">Live App</a> 👈 
 
 - Camera API does not work for Google Chrome
 
